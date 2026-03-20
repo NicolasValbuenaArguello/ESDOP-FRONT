@@ -1,0 +1,332 @@
+<app-menu></app-menu>
+
+<div class="cuerpo" ng-init="inicioAlgo()">
+    <div class="col-md-6">
+        <form class="form-group row tamanio" #documentos_pdf="ngForm" autocomplete="off">
+            <div class="row contenedor">
+                <div class="col-md-6 ">
+                    <h2 class="titulo">Situación de AETCR</h2>
+                    <div class="radios">
+                        <h3> Información </h3>
+                        <div class=" row col-md-12">
+                            <div class=" row col-md-4">
+                                <img [src]="img_atcr" alt="" width="50px" height="50px" class="foto_a" id="foto_a"
+                                    (click)="cargar_foto_aetcr()">
+
+                                <input type="file" name="foto_aetcr" id="foto_aetcr" ngModel hidden
+                                    (change)="leer_foto_aetcr($event)">
+                            </div>
+
+                            <div class=" row col-md-8">
+                                <div class="form-group col-md-11" style="margin: auto;">
+                                    <label for="">Numero de AETCR</label>
+                                    <input type="number" name="numero" id="numero" 
+                                        class="form-control" ngModel>
+                                </div>
+                                
+                                <div class="form-group col-md-11" style="margin: auto;">
+                                    <label for="">Nombre AETCR</label>
+                                    <input type="text" name="nombre_aetcr" id="nombre_aetcr" 
+                                        class="form-control" ngModel>
+                                </div>
+                                <div class=" row col-md-11">
+                                <div class="form-group col-md-7" style="margin: auto;">
+                                    <label for="">Nivel de Seguridad</label>
+                                    <select name="nivel_de_seguridad" id="nivel_de_seguridad" class="form-control"
+                                        ngModel (change)="cambio_color(documentos_pdf)">
+                                        <option value=""></option>
+                                        <option [value]="item" *ngFor="let item of clasificacion">{{item}}</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-4" style="margin: auto;">
+                                    <label for=""></label>
+                                    <div class="form-control" id="colores"><p></p></div>
+                                </div>
+                            </div>
+        
+                                <div class="form-group col-md-11" style="margin: auto;">
+                                    <label for="">Fecha de Inaguración AETCR</label>
+                                    <input type="date" name="fecha" id="fecha" class="form-control" ngModel>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <br>
+                        <hr>
+                        <h3>Ubicación AETCR </h3>
+
+                        <div class="form-group col-md-11" style="margin: auto;">
+                            <label for="">Departamento</label>
+                            <select name="departamento" id="departamento" class="form-control"
+                                [(ngModel)]="departamento" (change)="departamentos(4,5)">
+                                <option value=""></option>
+                                <option [value]="item" *ngFor="let item of departamentos_filtrados">{{item}}</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-11" style="margin: auto;">
+                            <label for="">Municipio</label>
+                            <select name="municipio" id="municipio" class="form-control" ngModel>
+                                <option value=""></option>
+                                <option [value]="item" *ngFor="let item of unidad_selecionada_municipios">{{item}}
+                                </option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-11" style="margin: auto;">
+                            <label for="">Sitio</label>
+                            <input type="text" name="sitio" id="sitio"  class="form-control" ngModel>
+                        </div>
+                        <br>
+                        <div class=" row col-md-11">
+                            <div class="form-group col-md-2" style="margin: auto;">
+                                <label for="">Latitud</label>
+                                <select name="latitud" id="latitud" class="form-control" [(ngModel)]="lati"
+                                    (ngModelChange)="coordenadas()">
+                                    <option value=""></option>
+                                    <option [value]="item" *ngFor="let item of lat">{{item}}
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-3" style="margin: auto;">
+                                <label for="">Grados</label>
+                                <input type="number" name="gr_n" id="gr_n" class="form-control"
+                                    [(ngModel)]="coodnadas_lat_gr" (ngModelChange)="coordenadas()">
+                            </div>
+                            <div class="form-group col-md-3" style="margin: auto;">
+                                <label for="">Minutos</label>
+                                <input type="number" name="m_n" id="m_n"  class="form-control"
+                                    [(ngModel)]="coodnadas_lat_min" (ngModelChange)="coordenadas()">
+                            </div>
+                            <div class="form-group col-md-3" style="margin: auto;">
+                                <label for="">Segundos</label>
+                                <input type="number" name="s_n" id="s_n"  class="form-control"
+                                    [(ngModel)]="coodnadas_lat_seg" (ngModelChange)="coordenadas()">
+                            </div>
+                        </div>
+                        <div class=" row col-md-11">
+                            <div class="form-group col-md-2" style="margin: auto;">
+                                <label for="">Longitud</label>
+                                <select name="longitud" id="longitud" class="form-control" [(ngModel)]="loti"
+                                    (ngModelChange)="coordenadas()">
+                                    <option value=""></option>
+                                    <option [value]="item" *ngFor="let item of lot">{{item}}
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-3" style="margin: auto;">
+                                <label for="">Grados</label>
+                                <input type="number" name="gr_l" id="gr_l"  class="form-control"
+                                    [(ngModel)]="coodnadas_lot_gr" (ngModelChange)="coordenadas()">
+                            </div>
+                            <div class="form-group col-md-3" style="margin: auto;">
+                                <label for="">Minutos</label>
+                                <input type="number" name="m_l" id="m_l"  class="form-control"
+                                    [(ngModel)]="coodnadas_lot_min" (ngModelChange)="coordenadas()">
+                            </div>
+                            <div class="form-group col-md-3" style="margin: auto;">
+                                <label for="">Segundos</label>
+                                <input type="number" name="s_l" id="s_l"  class="form-control"
+                                    [(ngModel)]="coodnadas_lot_seg" (ngModelChange)="coordenadas()">
+                            </div>
+
+                        </div>
+                        <br>
+                        <div class="form-group col-md-11" style="margin: auto;">
+                            <button class="btn btn-secondary form-control" (click)="graficar()">Graficar</button>
+                        </div>
+                        <br>
+                        <hr>
+
+                        <h3>Habitabilidad AETCR</h3>
+                        <div class=" row col-md-11">
+                            <div class="form-group col-md-3" style="margin: auto;">
+                                <label for="">Cantidad Hombres AETCR</label>
+                                <input type="number" name="cant_mujeres" id="cant_mujeres"
+                                     class="form-control" ngModel>
+                            </div>
+
+                            <div class="form-group col-md-3" style="margin: auto;">
+                                <label for="">Cantidad Mujeres AETCR</label>
+                                <input type="number" name="cant_hombres" id="cant_hombres"
+                                     class="form-control" ngModel>
+                            </div>
+
+                            <div class="form-group col-md-2" style="margin: auto;">
+                                <label for="">AÑO</label>
+                                <select name="anio" id="anio" class="form-control" [(ngModel)]="anio_f">
+                                    <option value=""></option>
+                                    <option [value]="item" *ngFor="let item of anios">{{item}}
+                                    </option>
+                                </select>
+                            </div>
+
+                            <div class="form-group col-md-2" style="margin: auto;">
+                                <label for="">Cantidad</label>
+                                <input type="number" name="cant_personas" id="cant_personas" 
+                                    class="form-control" [(ngModel)]="cantidad_f">
+                            </div>
+                            <div class="form-group col-md-1" style="margin: auto;">
+                                <label for="">Nuevo </label>
+                                <button class="btn btn-success form-control"
+                                    (click)="nuevo_cordinado(documentos_pdf)">+</button>
+                            </div>
+
+                        </div>
+
+                        <hr *ngIf="personal">
+                        <h3 *ngIf="personal">Habitabilidad por años en los AETCR </h3>
+                        <table class="table" *ngIf="personal">
+                            <thead class="thead-dark">
+                                <th scope="col">#</th>
+                                <th scope="col">AÑO</th>
+                                <th scope="col">CANTIDAD</th>
+                                <th scope="col" style="color: darkred;">{{ausencia}}</th>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let item of cantidad_per_anio index as i; first as isFirst">
+                                    <td scope="col">{{i}}</td>
+                                    <td>{{item[0]}}</td>
+                                    <td>{{item[1]}}</td>
+                                    <td><button class="btn btn-danger" (click)="eliminar_coordinador(i)">-</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+
+                        <hr>
+                        <h3>Encargado de la AETCR</h3>
+                        <div class=" row col-md-12">
+                            <div class=" row col-md-4">
+                                <img [src]="img" alt="" width="50px" height="50px" class="foto" id="foto"
+                                    (click)="cargar_foto()">
+
+                                <input type="file" name="foto_user" id="foto_user" ngModel hidden
+                                    (change)="leer_foto($event)">
+                            </div>
+
+                            <div class=" row col-md-8">
+                                <div class="form-group col-md-11" style="margin: auto;">
+                                    <label for="">Nombre </label>
+                                    <input type="text" name="nombre_aetcr_encargado" id="nombre_aetcr_encargado"
+                                         class="form-control" ngModel>
+                                </div>
+                                <div class="form-group col-md-11" style="margin: auto;">
+                                    <label for="">Seudónimo </label>
+                                    <input type="text" name="seudonimo_aetcr_encargado" id="seudonimo_aetcr_encargado"
+                                         class="form-control" ngModel>
+                                </div>
+
+                                <div class="form-group col-md-11" style="margin: auto;">
+                                    <label for="">Celular </label>
+                                    <input type="text" name="celular_aetcr_encargado" id="celular_aetcr_encargado"
+                                         class="form-control" ngModel>
+                                </div>
+                                <div class="form-group col-md-11" style="margin: auto;">
+                                    <label for="">Ubicación </label>
+                                    <input type="text" name="ubicacion_aetcr_encargado" id="ubicacion_aetcr_encargado"
+                                         class="form-control" ngModel>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <hr>
+                        <h3>Servicios Basicos</h3>
+
+                        <div class="form-group col-md-11" style="margin: auto;">
+                            <label for="">Servicio Básico </label>
+                            <select name="servicios_basicos" id="servicios_basicos" class="form-control"
+                                ngModel (change)="basicos(documentos_pdf)">
+                                <option value=""></option>
+                                <option [value]="item" *ngFor="let item of servicios_basicos">{{item}}</option>
+                            </select>
+                        </div>
+
+                        <div class=" row col-md-12">
+                        <div class="form-group col-md-5" style="margin: auto;">
+                            <label for="">Tipo de serviscio</label>
+                            <select name="servicios_basicos_selecionados" id="servicios_basicos_selecionados" class="form-control"
+                                ngModel (change)="basicos_selecionados(documentos_pdf)">
+                                <option value=""></option>
+                                <option [value]="item" *ngFor="let item of tipo_servicio">{{item}}</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-3" style="margin: auto;" *ngIf="elemento_oculto">
+                            <label for="">{{elemento}}</label>
+                            <input type="text" name="cantidad_tipo" id="cantidad_tipo"  class="form-control" [(ngModel)]="cantidad_s" >
+                        </div>
+                        <div class="form-group col-md-3" style="margin: auto;" *ngIf="elemento_oculto_p">
+                            <label for="">CANTIDAD</label>
+                            <input type="text" name="cantidad_infor_servicios" id="cantidad_infor_servicios"  class="form-control" [(ngModel)]="cantidad_s_s" >
+                        </div>
+                            <div class="form-group col-md-1" style="margin: auto;" *ngIf="elemento_oculto">
+                                <label for="">crear </label>
+                                <button class="btn btn-success form-control"
+                                    (click)="nuevo_servicio(documentos_pdf)">+</button>
+                            </div>
+
+                    </div>
+                    <hr *ngIf="elemento_oculto_tabla">
+                    <h3 *ngIf="elemento_oculto_tabla">Servicios Públicos Básicos de las AETCR </h3>
+                    <table class="table" *ngIf="elemento_oculto_tabla">
+                        <thead class="thead-dark">
+                            <th scope="col">#</th>
+                            <th scope="col">SERVICIO BÁSICO</th>
+                            <th scope="col">SERVICIO</th>
+                            <th scope="col">INFORMACION</th>
+                            <th scope="col">CANTIDAD</th>
+                            <th scope="col" style="color: darkred;">Editar</th>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of servicio_publico index as i; first as isFirst">
+                                <td scope="col">{{i}}</td>
+                                <td>{{item[0]}}</td>
+                                <td>{{item[1]}}</td>
+                                <td>{{item[2]}}</td>
+                                <td>{{item[3]}}</td>
+                                <td><button class="btn btn-danger" (click)="eliminar_servicio(i)">-</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+
+
+
+                        <hr>
+                        <br>
+                        <br>
+                        <hr>
+                        <div class="alert alert-success col-md-11" role="alert" *ngIf="inf_g"
+                            style="margin: auto !important;">
+                            {{inf_c_g}}!
+                        </div>
+
+                        <div class="alert alert-danger col-md-11" role="alert" *ngIf="inf_a"
+                            style="margin: auto !important;">
+                            {{inf_c_g}}!
+                        </div>
+                        <br *ngIf="inf_a">
+                        <br *ngIf="inf_g">
+                        <div class=" row col-md-10" style="margin: auto;">
+                            <button class="btn btn-primary" (click)="guardar_evento(documentos_pdf)"
+                                *ngIf="inf_btn">Cargar </button>
+                            <button class="btn btn-success" (click)="clear()" *ngIf="inf_btnuew">Nuevo Evento </button>
+                        </div>
+
+                        <br>
+
+
+                    </div>
+                </div>
+                <!-- mapa  -->
+                <div class="col-md-6 ">
+                    <h2 class="titulo">Ubicación AETCR</h2>
+                    <div class="radios">
+                        <app-mapa-digital></app-mapa-digital>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<app-spiner></app-spiner>

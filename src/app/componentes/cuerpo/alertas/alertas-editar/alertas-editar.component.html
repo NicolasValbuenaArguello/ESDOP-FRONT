@@ -1,0 +1,119 @@
+<app-menu></app-menu>
+<div class="cuerpo">
+    <div class="col-md-12 ">
+        <div class="row contenedor">
+            <div class="col-md-6 ">
+
+                <h2 class="titulo">Mapa</h2>
+                <div class="radios">
+                    <app-mapa-digital></app-mapa-digital>
+                </div>
+            </div>
+            <div class="col-md-6 ">
+                <div class="radios" style="height: 82vh!important;">
+                    <div class="jumbotron jumbotron-fluid">
+                        <div class="container">
+                            <h1>Alerta No. {{numero_alerta}}</h1>
+                            <p>pocible... {{accion_aelrta}} a {{amenazados}}</p>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="container">
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <th scope="col" style="display: flex; text-align: left;"><p>Fecha Alerta y Hora </p>
+                                    </th>
+                                    <td scope="col">
+                                        <p style="display: flex; text-align: justify;">{{fecha_alerta}} -
+                                            {{hora_alerta}}</p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="col" style="display: flex; text-align: left;"><p>Origen Alerta</p>
+                                    </th>
+                                    <td scope="col">
+                                        <p style="display: flex; text-align: justify;">{{origen}}</p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="col" style="display: flex; text-align: left;"><p>Destino División</p>
+                                    </th>
+                                    <td scope="col">
+                                        <p style="display: flex; text-align: justify;">{{destino}} - {{gr_recibe}}. {{quien_recibe}} - {{telefono_recibe}} ({{cargo_recibe}})</p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="col" style="display: flex; text-align: left;"><p>Informacion Criptografo</p>
+                                    </th>
+                                    <td scope="col">
+                                        <p style="display: flex; text-align: justify;">{{destino_criptografo}} - {{gr_recibe_criptografo}}. {{quien_recibe_criptografo}} - {{telefono_recibe_criptografo}} ({{cargo_recibe_criptografo}})</p>
+                                    </td>
+                                </tr>
+                                
+                                <tr>
+                                    <th scope="col" style="display: flex; text-align: left; "><p>Remitente Alerta</p>
+                                    </th>
+                                    <td scope="col">
+                                        <p style="display: flex; text-align: justify;"> {{gr_remitente}}.
+                                            {{quien_remitente}} - {{telefono_remitente}} ({{cargo_remitente}})</p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="col" style="display: flex; text-align: left; "><p>Lugar</p>
+                                    </th>
+                                    <td scope="col">
+                                        <p style="display: flex; text-align: justify;">{{departamento_alerta}} - {{municipio_alerta}} - {{sitio_alerta}}</p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="col" style="display: flex; text-align: left; "><p>coordenadas</p>
+                                    </th>
+                                    <td scope="col">
+                                        <p style="display: flex; text-align: justify;">{{coordenadas_alerta}}</p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="col" style="display: flex; text-align: left; "><p>Informacion Alerta</p>
+                                    </th>
+                                    <td scope="col">
+                                        <p style="display: flex; text-align: justify;">{{accion_aelrta}} POR PARTE DEL {{amenaza_alerta}} A {{amenazados}}</p>
+                                    </td>
+                                </tr>
+                                
+                                <tr>
+                                    <th scope="col" style="display: flex; text-align: left; "><p>Fecha Registro</p>
+                                    </th>
+                                    <td scope="col">
+                                        <p style="display: flex; text-align: justify;">{{fecha_registro_alerta}} - {{hora_registro_alerta}}</p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="col" style="display: flex; text-align: left;"><p>Registrado en el Folio</p>
+                                    </th>
+                                    <td scope="col">
+                                        <p style="display: flex; text-align: justify;">{{folio_libro}}</p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="col" style="display: flex; text-align: left;"><p>Acta Scaneada</p>
+                                    </th>
+                                    <td scope="col">
+
+                                        <p style="display: flex; text-align: justify;">{{numero_alerta}}</p>
+                                        <P *ngIf="doc =='---' || doc =='-//-' else ok">SIN ESCANEAR</P>
+                                        <ng-template #ok><P> <button class="btn btn-primary" (click)="ver_documento(doc)"> VER ALERTA </button> </P></ng-template>
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<app-ver-document [server]="server"></app-ver-document>

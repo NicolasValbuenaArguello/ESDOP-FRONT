@@ -1,0 +1,328 @@
+<app-menu></app-menu>
+<div class="cuerpo">
+    <div class="col-md-12 ">
+        <div class="row contenedor">
+            <div class="col-md-6 ">
+
+                <h2 class="titulo">Mapa</h2>
+                <div class="radios">
+                    <app-mapa-digital></app-mapa-digital>
+                </div>
+            </div>
+            <div class="col-md-6 ">
+                <div class="radios" style="height: 82vh!important;">
+
+                    <div class="jumbotron jumbotron-fluid">
+                        <div class="container">
+                            <h1>AETCR {{nombre_aetcr}}</h1>
+
+
+                        </div>
+                    </div>
+
+                    <hr>
+                    <div class="container">
+                        <div class=" row col-md-12">
+                            <div class=" row col-md-4"> <img src="http://172.22.2.36:5198{{foto_aetcr}}"
+                                    class="foto_aetcr" id="foto_aetcr" (click)="tamanio_foto_aetcr()"></div>
+                            <div class=" row col-md-8">
+
+
+                                <table class="table">
+                                    <tbody>
+                                        <tr>
+                                            <th scope="col" style="display: flex; text-align: left; ">
+                                                <p>Numero</p>
+                                            </th>
+                                            <td scope="col">
+                                                <p style="display: flex; text-align: justify; font-size: 20px;">
+                                                    {{numero}}</p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="col" style="display: flex; text-align: left; ">
+                                                <p>Nivel</p>
+                                            </th>
+                                            <td scope="col">
+                                                <p style="display: flex; text-align: justify; font-size: 20px;">
+                                                    {{nivel}}</p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="col" style="display: flex; text-align: left; ">
+                                                <p>Lugar</p>
+                                            </th>
+                                            <td scope="col">
+                                                <p style="display: flex; text-align: justify; font-size: 20px;">
+                                                    {{lugar}}</p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="col" style="display: flex; text-align: left; ">
+                                                <p>Coordenadas</p>
+                                            </th>
+                                            <td scope="col">
+                                                <p style="display: flex; text-align: justify; font-size: 20px;">
+                                                    {{cordenadas}}
+                                                </p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="col" style="display: flex; text-align: left; ">
+                                                <p>Fecha de Inguracion</p>
+                                            </th>
+                                            <td scope="col">
+                                                <p style="display: flex; text-align: justify; font-size: 20px;">
+                                                    {{fecha}}</p>
+                                            </td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class=" row col-md-12">
+                            <hr>
+                            <h3>REGISTRO DE PELOTONES</h3>
+                            <form class="form-group row tamanio" #documentos_pdf="ngForm">
+                                <div class=" row col-md-12">
+                                    <div class=" row col-md-12">
+                                        <div class="form-group col-md-6" style="margin: auto;">
+                                            <label for="">FECHA</label>
+                                            <input type="date" name="fecha_registro" id="fecha_registro"
+                                                class="form-control" ngModel>
+                                        </div>
+
+                                        <div class="form-group col-md-6" style="margin: auto;">
+                                            <label for="">NUMERO HR</label>
+                                            <input type="text" name="numero_hr" id="numero_hr" class="form-control"
+                                                ngModel>
+                                        </div>
+                                    </div>
+                                    <div class=" row col-md-12">
+                                        <div class="form-group col-md-3" style="margin: auto;">
+                                            <label for="">DIV</label>
+                                            <select name="divi_padre" id="divi_padre" class="form-control"
+                                                [(ngModel)]="divi_padre" (change)="div_hija(0,1)">
+                                                <option value=""></option>
+                                                <option [value]="item" *ngFor="let item of division">{{item}}</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group col-md-3" style="margin: auto;">
+                                            <label for="">DIV - FT</label>
+                                            <select name="divi_hija" id="divi_hija" class="form-control" [(ngModel)]="divi_hija"
+                                                (change)="brigadas(1,2)">
+                                                <option value="" selected></option>
+                                                <option [value]="item" *ngFor="let item of unidad_selecionada_div">
+                                                    {{item}}
+                                                </option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-md-3" style="margin: auto;">
+                                            <label for="">BR</label>
+                                            <select name="brigada" id="brigada" class="form-control" [(ngModel)]="brigada"
+                                                (change)="batallones(2,3)">
+                                                <option value="" selected></option>
+                                                <option [value]="item" *ngFor="let item of unidad_selecionada_brigada">
+                                                    {{item}}</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-md-3" style="margin: auto;">
+                                            <label for="">UT</label>
+                                            <select name="batallon" id="batallon" class="form-control" [(ngModel)]="batallon">
+                                                <option value="" selected></option>
+                                                <option [value]="item"
+                                                    *ngFor="let item of unidad_selecionada_batallones">
+                                                    {{item}}
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class=" row col-md-12">
+                                        <div class="form-group col-md-2" style="margin: auto;">
+                                            <label for="">COMP</label>
+                                            <input type="text" name="compania" id="compania" class="form-control"
+                                                ngModel>
+                                        </div>
+
+                                        <div class="form-group col-md-2" style="margin: auto;">
+                                            <label for="">PEL</label>
+                                            <input type="number" name="peloton" id="peloton" class="form-control"
+                                                ngModel>
+                                        </div>
+                                        <div class="form-group col-md-2" style="margin: auto;">
+                                            <label for="">GRD</label>
+
+                                            <select name="grd" id="grd" class="form-control" ngModel>
+                                                <option value="" selected></option>
+                                                <option [value]="item" *ngFor="let item of grados">
+                                                    {{item}}
+                                                </option>
+                                            </select>
+
+                                        </div>
+                                        <div class="form-group col-md-6" style="margin: auto;">
+                                            <label for="">NOMBRE CDTE</label>
+                                            <input type="text" name="nombre_cdte" id="nombre_cdte" class="form-control"
+                                                ngModel>
+                                        </div>
+                                    </div>
+
+
+                                    <div class=" row col-md-12">
+                                        <div class="form-group col-md-4" style="margin: auto;">
+                                            <label for="">TEL</label>
+                                            <input type="number" name="telefono_cdte" id="telefono_cdte"
+                                                class="form-control" ngModel>
+                                        </div>
+
+                                        <div class="form-group col-md-2" style="margin: auto;">
+                                            <label for="">OFI</label>
+                                            <input type="text" name="ofi" id="ofi" class="form-control" ngModel>
+                                        </div>
+                                        <div class="form-group col-md-2" style="margin: auto;">
+                                            <label for="">SUB</label>
+                                            <input type="text" name="sub" id="sub" class="form-control" ngModel>
+                                        </div>
+                                        <div class="form-group col-md-2" style="margin: auto;">
+                                            <label for="">SLP</label>
+                                            <input type="text" name="slp" id="slp" class="form-control" ngModel>
+                                        </div>
+                                        <div class="form-group col-md-2" style="margin: auto;">
+                                            <label for="">SL18</label>
+                                            <input type="text" name="sl_18" id="sl_18" class="form-control" ngModel>
+                                        </div>
+                                    </div>
+
+                                    <br>
+                                    <div class=" row col-md-12">
+                                        <div class="form-group col-md-3" style="margin: auto;">
+                                            <label for="">Latitud</label>
+                                            <select name="latitud" id="latitud" class="form-control" [(ngModel)]="lati"
+                                                (ngModelChange)="coordenadas()">
+                                                <option value=""></option>
+                                                <option [value]="item" *ngFor="let item of lat">{{item}}
+                                                </option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-md-3" style="margin: auto;">
+                                            <label for="">Grados</label>
+                                            <input type="number" name="gr_n" id="gr_n" class="form-control"
+                                                [(ngModel)]="coodnadas_lat_gr" (ngModelChange)="coordenadas()">
+                                        </div>
+                                        <div class="form-group col-md-3" style="margin: auto;">
+                                            <label for="">Minutos</label>
+                                            <input type="number" name="m_n" id="m_n" class="form-control"
+                                                [(ngModel)]="coodnadas_lat_min" (ngModelChange)="coordenadas()">
+                                        </div>
+                                        <div class="form-group col-md-3" style="margin: auto;">
+                                            <label for="">Segundos</label>
+                                            <input type="number" name="s_n" id="s_n" class="form-control"
+                                                [(ngModel)]="coodnadas_lat_seg" (ngModelChange)="coordenadas()">
+                                        </div>
+                                    </div>
+                                    <div class=" row col-md-12">
+                                        <div class="form-group col-md-3" style="margin: auto;">
+                                            <label for="">Longitud</label>
+                                            <select name="longitud" id="longitud" class="form-control"
+                                                [(ngModel)]="loti" (ngModelChange)="coordenadas()">
+                                                <option value=""></option>
+                                                <option [value]="item" *ngFor="let item of lot">{{item}}
+                                                </option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-md-3" style="margin: auto;">
+                                            <label for="">Grados</label>
+                                            <input type="number" name="gr_l" id="gr_l" class="form-control"
+                                                [(ngModel)]="coodnadas_lot_gr" (ngModelChange)="coordenadas()">
+                                        </div>
+                                        <div class="form-group col-md-3" style="margin: auto;">
+                                            <label for="">Minutos</label>
+                                            <input type="number" name="m_l" id="m_l" class="form-control"
+                                                [(ngModel)]="coodnadas_lot_min" (ngModelChange)="coordenadas()">
+                                        </div>
+                                        <div class="form-group col-md-3" style="margin: auto;">
+                                            <label for="">Segundos</label>
+                                            <input type="number" name="s_l" id="s_l" class="form-control"
+                                                [(ngModel)]="coodnadas_lot_seg" (ngModelChange)="coordenadas()">
+                                        </div>
+
+                                    </div>
+                                    <div class=" row col-md-12">
+                                        <div class="form-group col-md-12" style="margin: auto;">
+                                            <label for="">VEREDA</label>
+                                            <input type="text" name="vereda" id="vereda" class="form-control" ngModel>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                        <br>
+                        <hr>
+                        <div class="form-group col-md-11" style="margin: auto;">
+                            <button class="btn btn-secondary form-control" (click)="graficar(documentos_pdf)">Nuevo
+                                Pelotón</button>
+                        </div>
+                        <br>
+                        <hr *ngIf="elemento_oculto_tabla">
+                        <h3 *ngIf="elemento_oculto_tabla">PELOTONES</h3>
+                        <table class="table" *ngIf="elemento_oculto_tabla">
+                            <thead class="thead-dark">
+                                <th scope="col">#</th>
+                                <th scope="col">CP</th>
+                                <th scope="col">CDTE</th>
+                                <th scope="col">EFECTIVOS</th>
+                                <th scope="col" style="color: darkred;">Editar</th>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let item of servicio_publico index as i; first as isFirst">
+                                    <td scope="col">{{i}}</td>
+                                    <td>{{item[8]}} - {{item[9]}}</td>
+                                    <td>{{item[10]}}. {{item[11]}}</td>
+                                    <td>( {{item[13]}} - {{item[14]}} - {{item[15]}} - {{item[16]}} )</td>
+
+                                    <td><button class="btn btn-danger" (click)="eliminar_servicio(i)">-</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+
+
+                        <hr>
+                        <br>
+                        <br>
+                        <hr>
+                        <div class="alert alert-success col-md-11" role="alert" *ngIf="inf_g"
+                            style="margin: auto !important;">
+                            {{inf_c_g}}!
+                        </div>
+
+                        <div class="alert alert-danger col-md-11" role="alert" *ngIf="inf_a"
+                            style="margin: auto !important;">
+                            {{inf_c_g}}!
+                        </div>
+                        <br *ngIf="inf_a">
+                        <br *ngIf="inf_g">
+                        <div class=" row col-md-10" style="margin: auto;">
+                            <button class="btn btn-primary" (click)="guardar_evento(documentos_pdf)"
+                                *ngIf="inf_btn">Cargar </button>
+                            <button class="btn btn-success" (click)="clear()" *ngIf="inf_btnuew">Nuevo Evento </button>
+                        </div>
+
+                        <br>
+
+
+
+
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

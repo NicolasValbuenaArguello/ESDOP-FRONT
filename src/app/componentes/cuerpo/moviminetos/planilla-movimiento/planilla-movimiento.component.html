@@ -1,0 +1,41 @@
+<app-menu></app-menu>
+
+<div class="cuerpo_insitop" id="cuerpo_insitop">
+  <div class="tamanio_proyectos">
+    <h2>Menú</h2>
+    <hr>
+    <button (click)="mostrar_menu(1)">Registro Movimiento</button>
+    <hr>
+    <button (click)="mostrar_menu(3)">Generar Planilla</button>
+    <hr>
+    <button (click)="mostrar_menu(2)">Editar Planilla</button>
+    <hr>
+    <button (click)="mostrar_menu(2)">Crear Unidad Solicitante</button>
+    <hr>
+    <button (click)="mostrar_menu(4)">Crear Firmas Planilla</button>
+  </div>
+
+  <div class="cuerpo">
+    <!-- Registro de movimientos -->
+    <div class="oculto_documentos" id="oculto_documentos">
+      <app-regsitro-planilla-movimiento></app-regsitro-planilla-movimiento>
+    </div>
+
+    <!-- Registro de unidades solicitantes -->
+    <div class="oculto_documentos_modificar" id="oculto_documentos_modificar">
+      <app-resgitro-unidad-solictante></app-resgitro-unidad-solictante>
+    </div>
+
+    <!-- Crear planilla -->
+    <div class="oculto_documentos_planilla_crear" id="oculto_documentos_planilla_crear">
+      <app-crear-planilla-movimiento></app-crear-planilla-movimiento>
+    </div>
+
+    <!-- Firmas -->
+    <div class="oculto_documentos_planilla_firmas" id="oculto_documentos_planilla_firmas">
+      <app-crear-firmas-plnailla-movimientos></app-crear-firmas-plnailla-movimientos>
+    </div>
+  </div>
+</div>
+
+<app-spiner></app-spiner>

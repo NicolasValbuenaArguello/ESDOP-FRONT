@@ -1,0 +1,438 @@
+<app-menu></app-menu>
+<!-- Contenedor general -->
+<div class="cuerpo_insitop" id="cuerpo_insitop">
+
+    <!-- Encabezado fijo dentro del panel -->
+    <div class="encabezado-insitop">
+        <h2 class="titulo">PERSONAL MEDALLAS</h2>
+        <div class="position_btn">
+            <button class="btn btn-success" (click)="mostrar_proyecto()">Opciones</button>
+        </div>
+    </div>
+
+    <!-- Contenido desplazable -->
+    <div class="tabla-scroll">
+        <table class="table table-hover table-dark">
+            <thead class="table-sticky">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">GRD</th>
+                    <th scope="col">Arma</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">C.C</th>
+                    <th scope="col">Medalla</th>
+                    <th scope="col">Operación</th>
+                    <th scope="col">Unidad</th>
+                    <th scope="col">Estado</th>
+                    <th scope="col">EDIT.</th>
+                </tr>
+            </thead>
+            <tbody *ngFor="let item of personal_listado_medallas; index as i">
+                <tr>
+                    <th scope="row">{{ i + 1 }}</th>
+                    <td>{{ item[10] }}</td>
+                    <td>{{ item[11] }}</td>
+                    <td>{{ item[13] }}</td>
+                    <td>{{ item[12] }}</td>
+                    <td>{{ item[2] }}</td>
+                    <td>{{ item[15] }}</td>
+                    <td>{{ item[7] }} - {{ item[8] }} - {{ item[9] }}</td>
+                    <td>{{ item[25] }}</td>
+                    <td><button class="btn btn-success" (click)="mostrar_proyecto_menu(i)">+</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+<div class="proyecto_nuevo oculto" id="proyecto_ingreso" (mousedown)="iniciarMovimiento($event, 'proyecto_ingreso')">
+
+    <!-- BOTÓN DE CIERRE SUPERIOR DERECHO -->
+    <div class="cerrar-proyecto-btn">
+        <button class="cerrar-btn rojo" (click)="mostrar_proyecto()">✖</button>
+    </div>
+
+    <!-- PANEL LATERAL DE MENÚ -->
+    <div class="tamanio_proyectos">
+        <h2 class="text-light mb-3 text-center">Menú</h2>
+        <hr class="linea-separadora" />
+        <div class="botones-menu">
+            <button class="btn btn-outline-light w-100 mb-2" (click)="mostrar_menu(1)">📄 Documentos</button>
+            <button class="btn btn-outline-light w-100 mb-2" (click)="mostrar_menu(2)">🛆 DIFAB</button>
+            <button class="btn btn-outline-light w-100 mb-2" (click)="mostrar_menu(6)">🏅 Estado Medalla</button>
+            <hr class="linea-separadora" />
+            <h4 class="text-light mt-3">Filtros</h4>
+            <button class="btn btn-outline-warning w-100 mb-2" (click)="mostrar_menu(3)">📍 División</button>
+            <button class="btn btn-outline-warning w-100 mb-2" (click)="mostrar_menu(4)">🎖️ Medalla</button>
+            <button class="btn btn-outline-warning w-100 mb-2" (click)="mostrar_menu(5)">🔍 Estado</button>
+        </div>
+    </div>
+    <!-- PANEL: DOCUMENTOS -->
+    <div class="card panel-funcional oculto_documentos" id="oculto_documentos">
+        <div class="card-logo">
+            <img src="../../../../../assets/logos/JEMOP-DIROP.png" class="card-img-top" alt="Logo">
+        </div>
+        <div class="card-body">
+            <h3 class="titulo-seccion">Documentos</h3>
+            <form class="form-group row" #medallas_proyecto_descargar="ngForm" autocomplete="off">
+                <div class="form-group col-md-12">
+                    <label class="color_label">Proyecto</label>
+                    <select name="proyecto" class="form-control" ngModel id="proyecto">
+                        <option value=""></option>
+                        <option *ngFor="let item of proyectos_listado" [value]="item">{{ item[1] }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group col-md-12">
+                    <label class="color_label">Listados y Conceptos</label>
+                    <select name="tipo" class="form-control" ngModel id="tipo" >
+                        <option value=""></option>
+                        <option value="LISTADO">LISTADO</option>
+                        <option value="CONCEPTOS">CONCEPTOS</option>
+                    </select>
+                </div>
+
+                <div class="form-group col-md-12">
+                    <label>Medalla</label>
+                    <select name="medalla" class="form-control" ngModel id="medalla">
+                        <option value=""></option>
+                        <option *ngFor="let tipo of medalla_label" [value]="tipo">{{ tipo }}</option>
+                    </select>
+                </div>
+
+                <div class="posicion_btn">
+                    <button class="btn btn-success" (click)="conceptos_medallas(medallas_proyecto_descargar)">
+                        Descargar
+                    </button>
+                </div>
+            </form>
+            <p class="card-text">Documentos soporte</p>
+        </div>
+    </div>
+
+    <!-- PANEL: DIFAB -->
+    <div class="card panel-funcional oculto_documentos_modificar" id="oculto_documentos_modificar">
+        <div class="card-logo">
+            <img src="../../../../../assets/logos/JEMOP-DIROP.png" class="card-img-top" alt="Logo">
+        </div>
+        <div class="card-body">
+            <h3 class="titulo-seccion">Actualización Proyecto</h3>
+            <form class="form-group row" #form_difab="ngForm" autocomplete="off">
+                <div class="form-group col-md-12">
+                    <label class="color_label">Proyecto</label>
+                    <select name="proyecto_difab" class="form-control" ngModel id="proyecto_difab">
+                        <option value=""></option>
+                        <option *ngFor="let item of proyectos_listado" [value]="item">{{ item[1] }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group col-md-12">
+                    <label class="color_label">Entrega a DIFAB</label>
+                    <input type="date" name="enrega_medalla_difab" class="form-control" ngModel id="enrega_medalla_difab">
+                </div>
+
+                <div class="posicion_btn">
+                    <button class="btn btn-success" (click)="proyecto_difab(form_difab)">
+                        Registrar
+                    </button>
+                </div>
+            </form>
+            <p class="card-text">Registro información DIFAB.</p>
+        </div>
+    </div>
+
+    <!-- PANEL: ESTADO MEDALLA -->
+    <div class="card panel-funcional oculto_documentos_modificar_estado_medalla"
+        id="oculto_documentos_modificar_estado_medalla">
+        <div class="card-logo">
+            <img src="../../../../../assets/logos/JEMOP-DIROP.png" class="card-img-top" alt="Logo">
+        </div>
+        <div class="card-body">
+            <h3 class="titulo-seccion">Estado Medalla</h3>
+            <form class="form-group row" #form_estado_proyecto="ngForm" autocomplete="off">
+                <div class="form-group col-md-12">
+                    <label class="color_label">Proyecto</label>
+                    <select name="proyecto_difab_estado" class="form-control" ngModel>
+                        <option value=""></option>
+                        <option *ngFor="let item of proyectos_listado" [value]="item">{{ item[1] }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group col-md-12">
+                    <label class="color_label">Estado Medalla</label>
+                    <select name="proyecto_estado_medalla" class="form-control" ngModel>
+                        <option *ngFor="let estado of estado_medalla_label" [value]="estado">{{ estado }}</option>
+                    </select>
+                </div>
+
+                <div class="posicion_btn">
+                    <button class="btn btn-success" (click)="proyecto_estado(form_estado_proyecto)">
+                        Registrar
+                    </button>
+                </div>
+            </form>
+            <p class="card-text">Registro de estado de medalla.</p>
+        </div>
+    </div>
+
+    <!-- PANEL: FILTRAR POR DIVISIÓN -->
+    <div class="card panel-funcional oculto_documentos_filtrar" id="oculto_documentos_filtrar">
+        <div class="card-logo">
+            <img src="../../../../../assets/logos/JEMOP-DIROP.png" class="card-img-top" alt="Logo">
+        </div>
+        <div class="card-body">
+            <h3 class="titulo-seccion">Filtrar por División</h3>
+            <div class="row">
+                <div class="col-sm-6" *ngFor="let item of unidades_label; index as i"
+                    (click)="divisiones_filtrar(item, i)">
+                    <div class="card card-filtro">
+                        <div class="card-body">
+                            <div class="che" id="{{i+item}}"></div>
+                            <h5 class="card-title">{{ item }}</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <button class="btn btn-warning mt-4" (click)="listado_informacion()">Descargar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PANEL: FILTRAR POR MEDALLA -->
+    <div class="card panel-funcional oculto_documentos_filtrar_medallas" id="oculto_documentos_filtrar_medallas">
+        <div class="card-logo">
+            <img src="../../../../../assets/logos/JEMOP-DIROP.png" class="card-img-top" alt="Logo">
+        </div>
+        <div class="card-body">
+            <h3 class="titulo-seccion">Filtrar por Medalla</h3>
+            <div class="row">
+                <div class="col-sm-6" *ngFor="let item of medalla_label; index as i"
+                    (click)="divisiones_filtrar_medallas(item, i)">
+                    <div class="card card-filtro">
+                        <div class="card-body">
+                            <div class="che" id="{{i+item}}"></div>
+                            <h6 class="card-title">{{ item }}</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <button class="btn btn-warning mt-4" (click)="listado_informacion()">Descargar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PANEL: FILTRAR POR ESTADO -->
+    <div class="card panel-funcional oculto_documentos_filtrar_estado" id="oculto_documentos_filtrar_estado">
+        <div class="card-logo">
+            <img src="../../../../../assets/logos/JEMOP-DIROP.png" class="card-img-top" alt="Logo">
+        </div>
+        <div class="card-body">
+            <h3 class="titulo-seccion">Filtrar por Estado</h3>
+            <div class="row">
+                <div class="col-sm-6" *ngFor="let item of estado_medalla_label; index as i"
+                    (click)="divisiones_filtrar_tipo(item, i)">
+                    <div class="card card-filtro">
+                        <div class="card-body">
+                            <div class="che" id="{{i+item}}"></div>
+                            <h6 class="card-title">{{ item }}</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <button class="btn btn-warning mt-4" (click)="listado_informacion()">Descargar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="proyecto_nuevo_2 oculto_2" id="proyecto_ingreso_2">
+
+    <!-- Panel lateral de menú -->
+    <aside class="menu_1">
+        <div class="menu_header">
+            <h2>Menú</h2>
+            <button class="btn btn-danger cerrar-btn" (click)="mostrar_proyecto_menu_2()">✖</button>
+        </div>
+        <hr />
+        <div class="menu_opciones">
+            <button class="btn btn-success mb-2 w-100" (click)="mostrar_informacion()">📄 Información</button>
+            <button class="btn btn-warning mb-2 w-100" (click)="mostrar_editar()">✏️ Editar</button>
+            <button class="btn btn-danger mb-2 w-100" (click)="mostrar_eliminar()">🗑️ Eliminar</button>
+        </div>
+    </aside>
+
+
+    <!-- Panel de visualización de información -->
+    <div class="medalla-panel" id="opciones_proyecto">
+        <div class="medalla-header-contenedor d-flex align-items-center mb-4">
+            <div class="medalla-imagen me-4">
+                <img [src]="img" alt="Medalla" id="foto" class="img-fluid rounded shadow">
+            </div>
+            <div class="medalla-header">
+                <h2 class="mb-2">{{ tipo_medalla }}</h2>
+                <p><strong>Grado:</strong> {{ grd_persona }} | <strong>Arma:</strong> {{ arma_persona }}</p>
+                <p><strong>Nombre:</strong> {{ nombre_persona }}</p>
+                <p><strong>Cédula:</strong> {{ cc_nombre_persona }}</p>
+            </div>
+        </div>
+
+        <div class="medalla-section">
+            <h4>Información Administrativa</h4>
+            <div class="medalla-grid">
+                <div><strong>Entrega a DIFAB:</strong> {{ entrega_difab }}</div>
+                <div><strong>Estado medalla:</strong> {{ estado_medalla }}</div>
+                <div><strong>Resolución:</strong> {{ resolucion }}</div>
+                <div><strong>Decreto:</strong> {{ decreto }}</div>
+                <div><strong>Fecha resolución:</strong> {{ fecha_resolucion }}</div>
+            </div>
+            <div class="medalla-observaciones mt-3">
+                <strong>Observaciones:</strong>
+                <p>{{ observaciones }}</p>
+            </div>
+        </div>
+
+        <div class="medalla-section">
+            <h4>Datos de la Operación</h4>
+            <div class="medalla-grid">
+                <div><strong>Nombre:</strong> {{ nombre_operacion }}</div>
+                <div><strong>Tipo:</strong> {{ tipo_operacion }}</div>
+                <div><strong>Fecha misión:</strong> {{ fecha_mision }}</div>
+                <div><strong>Fecha operación:</strong> {{ fecha_operacion }}</div>
+                <div><strong>Departamento:</strong> {{ departamento }}</div>
+                <div><strong>Municipio:</strong> {{ municipio }}</div>
+                <div><strong>Zona de operaciones:</strong> {{ zona_operaciones }}</div>
+                <div><strong>Actor involucrado:</strong> {{ actor }}</div>
+            </div>
+        </div>
+
+        <div class="medalla-section">
+            <h4>Resultado Operacional</h4>
+            <pre class="medalla-resultado">{{ resultado_operacional }}</pre>
+        </div>
+    </div>
+
+    <!-- Panel de confirmación para eliminar -->
+
+    <div class="panel-medalla-eliminar oculto_2" id="eliminar">
+        <header class="panel-medalla-eliminar-header">
+            <h2>¿Está seguro de eliminar la información de:</h2>
+        <div class="medalla-header-contenedor d-flex align-items-center mb-4">
+            <div class="medalla-imagen me-4">
+                <img [src]="img" alt="Medalla" id="foto" class="img-fluid rounded shadow">
+            </div>
+            <div class="medalla-header">
+                <h2 class="mb-2">{{ tipo_medalla }}</h2>
+                <p><strong>Grado:</strong> {{ grd_persona }} | <strong>Arma:</strong> {{ arma_persona }}</p>
+                <p><strong>Nombre:</strong> {{ nombre_persona }}</p>
+                <p><strong>Cédula:</strong> {{ cc_nombre_persona }}</p>
+            </div>
+        </div>
+            <div class="d-flex justify-content-around mt-3">
+                <button class="btn btn-warning" (click)="mostrar_proyecto_menu_2()">Cancelar</button>
+                <button class="btn btn-danger" (click)="eliminar_medalla()">Sí</button>
+            </div>
+        </header>
+    </div>
+
+
+    <div class="editar-panel shadow-sm oculto_2" id="opciones_editar">
+        <form #medallas_editar_info="ngForm" autocomplete="off" class="form-editar-medalla">
+
+            <!-- Cabecera con imagen y nombre -->
+        <div class="medalla-header-contenedor d-flex align-items-center mb-4">
+            <div class="medalla-imagen me-4">
+                <img [src]="img" alt="Medalla" id="foto" class="img-fluid rounded shadow">
+            </div>
+            <div class="medalla-header">
+                <h2 class="mb-2">{{ tipo_medalla }}</h2>
+                <p><strong>Grado:</strong> {{ grd_persona }} | <strong>Arma:</strong> {{ arma_persona }}</p>
+                <p><strong>Nombre:</strong> {{ nombre_persona }}</p>
+                <p><strong>Cédula:</strong> {{ cc_nombre_persona }}</p>
+            </div>
+        </div>
+
+            <!-- Sección: Datos personales -->
+            <div class="editar-seccion mb-4">
+                <h5 class="section-title">Datos Personales</h5>
+                <div class="row g-3">
+                    <div class="col-md-2">
+                        <label class="form-label">GRD:</label>
+                        <input type="text" class="form-control" name="grd_persona" [(ngModel)]="grd_persona">
+                    </div>
+                    <div class="col-md-2">
+                        <label class="form-label">Arma:</label>
+                        <input type="text" class="form-control" name="arma_persona" [(ngModel)]="arma_persona">
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">No. Cédula:</label>
+                        <input type="text" class="form-control" name="cc_nombre_persona"
+                            [(ngModel)]="cc_nombre_persona">
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Nombre y Apellidos:</label>
+                        <input type="text" class="form-control" name="nombre_persona_2" [(ngModel)]="nombre_persona_2">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sección: Información Medalla -->
+            <div class="editar-seccion mb-4">
+                <h5 class="section-title">Actualización de Información</h5>
+                <div class="row g-3">
+                    <div class="col-md-5">
+                        <label class="form-label">Entrega a DIFAB:</label>
+                        <input type="date" class="form-control" name="fecha_ingreso" [(ngModel)]="entrega_difab">
+                    </div>
+                    <div class="col-md-7">
+                        <label class="form-label">Estado Medalla:</label>
+                        <select class="form-control" name="proyecto_estado_medalla" [(ngModel)]="estado_medalla">
+                            <option *ngFor="let estado of estado_medalla_label" [value]="estado">{{ estado }}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sección: Resolución -->
+            <div class="editar-seccion mb-4">
+                <h5 class="section-title">Información Resolución</h5>
+                <div class="row g-3">
+                    <div class="col-md-4">
+                        <label class="form-label">Fecha Resolución:</label>
+                        <input type="date" class="form-control" name="fecha_resolucion" [(ngModel)]="fecha_resolucion">
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Resolución:</label>
+                        <input type="text" class="form-control" name="resolucion" [(ngModel)]="resolucion">
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Decreto:</label>
+                        <input type="text" class="form-control" name="decreto" [(ngModel)]="decreto">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sección: Observaciones -->
+            <div class="editar-seccion mb-4">
+                <h5 class="section-title">Información Adicional</h5>
+                <label class="form-label">Observaciones:</label>
+                <textarea class="form-control" rows="5" name="observaciones" [(ngModel)]="observaciones"></textarea>
+            </div>
+
+            <!-- Botón -->
+            <div class="text-end">
+                <button class="btn btn-warning" (click)="Editar_info(medallas_editar_info)">Editar Información</button>
+            </div>
+        </form>
+    </div>
+
+
+
+</div>
+
+
+<app-spiner></app-spiner>

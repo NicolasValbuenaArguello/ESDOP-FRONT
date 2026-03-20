@@ -1,0 +1,475 @@
+.cuerpo_insitop {
+    /* margin: 0;*/
+    /* background-image: url(assets/img/logo_2.png) !important;
+    background-repeat: no-repeat;
+    background-attachment: local;
+    background-size: contain;
+    background-position: center;*/
+    position: absolute;
+    top:12.5%;
+    margin-left: 11.5%;
+    width: 88%;
+    /* height: 42em;
+    border-left: 5px solid rgb(118, 26, 26); */
+    /* background-color: rgba(0, 0, 0, 0.644);
+    color: whitesmoke; */
+    border: 2px solid gray;
+    border-radius: 7px;
+
+    grid-column-gap: 10px;
+    grid-row-gap: 10px;
+    overflow: scroll;
+  
+    height: 87vh;
+
+  }
+
+  .cuerpo_insitop_2 {
+    /* margin: 0;*/
+    /* background-image: url(assets/img/logo_2.png) !important;
+    background-repeat: no-repeat;
+    background-attachment: local;
+    background-size: contain;
+    background-position: center;*/
+    position: absolute;
+    top:12.7%;
+    margin-left: 0.5%;
+    width: 99%;
+    /* height: 42em;
+    border-left: 5px solid rgb(118, 26, 26); */
+    /* background-color: rgba(0, 0, 0, 0.644);
+    color: whitesmoke; */
+    border: 2px solid gray;
+    border-radius: 7px;
+
+    grid-column-gap: 10px;
+    grid-row-gap: 10px;
+    overflow: scroll;
+  
+    height: 87vh;
+
+  }
+  .contenedor{
+    position: fixed;
+    margin-top: 1%;
+    display: flex;
+    text-align: center;
+    
+    padding: 15px;
+    /* border-right: 5px solid rgb(118, 26, 26); */
+    border-radius: 5px;
+    /* height: 42em; */
+    overflow: hidden;
+    width: 100%;
+    
+}
+
+.radios{
+    position: fixed;
+    border-radius: 5px;
+    width:43%;
+    height: 83%;
+    overflow: scroll;
+    right: 1%;
+    top: 14%;
+       
+}
+.posicion_boton{
+    position: fixed;
+    top: 12%;
+    right: 1%;
+    z-index: 100;
+    width: 50px;
+}
+.radios_mapa{
+    position: fixed;
+    margin-top: 0%;
+    border: 2px solid #707070;
+    border-radius: 5px;
+    width:53.5%;
+    height: 85%;
+    overflow: scroll;
+    left: 2%;
+    top:13.5%;
+    
+}
+.radios_mapa_2{
+    position: fixed;
+    margin-top: 0%;
+    border: 2px solid #707070;
+    border-radius: 5px;
+    width:43.5%;
+    height: 85%;
+    overflow: scroll;
+    left: 12%;
+    top:13.5%;
+    
+}
+
+.position_btn{
+    position: fixed;
+    right: 1%;
+    top: 13%;
+}
+.posicion_btn_cerrar{
+    position: absolute;
+    top: 0%;
+    left: 1%;
+    z-index: 100;
+}
+.posicion_btn_cerrar_2{
+    position: absolute;
+    top: 3%;
+    left: 1%;
+    z-index: 100;
+}
+.botones_documentos{
+    display: flex; 
+    align-items: center; 
+    justify-items: center; 
+    align-content: center; 
+    justify-content: center; 
+    gap: 5px; 
+    position: relative; 
+    left: 86%; 
+    width: 130px; 
+    border-radius: 5px 5px 0 0; 
+    padding: 5px;
+}
+.imagen_lamina{
+    position: absolute;
+    ;
+    margin: auto;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.363); 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    text-align: center;
+    /* border: solid 2px gray;*/
+    border-radius: 5px;
+    z-index: 1000;
+}
+.btn_archivo{
+    background-image: url("../../../../../assets/iconos-menu/file_pdf.svg");
+background-position: center;
+background-repeat: no-repeat;
+background-size: contain;
+content: '';
+height: 35px;
+width: 35px;
+}
+.tiutlo_boton{
+    position: absolute;
+    top: -0px;
+    left: -255px;
+    font-family: "Kanit", serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 30px;
+    visibility: hidden;
+    text-align: right;
+    width: 250px;
+}
+.btn_archivo:hover .tiutlo_boton {
+    color: rgb(80, 80, 80);
+    visibility: visible;
+}
+textarea#exampleTextarea{
+    background-color: transparent;
+    color: snow;
+    border: none;
+    font-family: "Kanit", serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 18px;
+    field-sizing: content;
+}
+.proyecto_nuevo{
+    width: 60%;
+    height: 90vh;
+    background-color: rgba(119, 119, 119, 0.63);
+    padding: 10px;
+    z-index: 100;
+    position: absolute;
+    left: 20%;
+    top: 0%;
+    border-radius: 7px;
+    display: flex;
+}
+.proyecto_nuevo_2{
+    width: 88%;
+    height: 90vh;
+    background-color: rgba(0, 0, 0, 0.747);
+    padding: 10px;
+    z-index: 100;
+    position: absolute;
+    top: 9%;
+    left: 11.5%;
+    border-radius: 10px;
+    grid-gap: 10px;
+    display: flex;
+}
+
+.menu_1{
+    background-color: rgb(38, 41, 44);
+    border: 1px solid snow;
+    border-radius: 7px;
+    width: 10%;
+    height: 100%;
+    
+}
+.opciones_proyecto{
+    width: 90%;
+    border: 1px solid snow;
+    border-radius: 7px;
+}
+
+.tamanio_proyectos{
+    width: 15%;
+    height: 100%;
+    border: solid 1px snow;
+    border-radius: 7px;
+    display: block;
+    padding: 20px;
+}
+.nombre_info{
+    width: 18%;
+    height: 20%;
+    border: solid 1px snow;
+    border-radius: 7px;
+    position: absolute;
+    right: 1%;
+    top: 2%;
+    background-color: snow;
+    display: inline-block;
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+}
+.foto_medalla{
+    width: 18%;
+    height: 74%;
+    border: solid 1px snow;
+    border-radius: 7px;
+    position: absolute;
+    right: 1%;
+    top: 24%;
+    background-color: snow;
+    display: inline-block;
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+}
+.imagen {
+    margin: auto;
+    width: 100%;
+    height: auto;
+    /* background-color: black; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    text-align: center;
+    /* border: solid 2px gray;*/
+    border-radius: 5px;
+}
+.foto {
+    /* background-image: url(../../../../assets/usurios/nicolas_valbuena.jpg); */
+    /* background-image: url(C:/Users/NICOLAS/Pictures/USUARIOS/nicolas_valbuena.jpg); */
+    width: 80%;
+    height: 90%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-attachment: local;
+    background-size: contain;
+    background-position: center;
+    /* border: solid 1px gray;/*  
+    border-radius: 5px; */
+}
+
+.modificacion{
+    width: 69.5%;
+    height: 55%;
+    border: solid 1px snow;
+    border-radius: 7px;
+    position: absolute;
+    left: 11%;
+    top: 2%;
+    background-color: rgb(255, 255, 255);
+    display: inline-block;
+    justify-content: center;
+    justify-items: center;
+}
+.bitacora{
+    width: 69.5%;
+    height: 40%;
+    border: solid 1px snow;
+    border-radius: 7px;
+    position: absolute;
+    left: 11%;
+    top: 58%;
+    background-color: rgb(175, 182, 196);
+    display: inline-block;
+    justify-content: center;
+    justify-items: center;
+}
+.eliminar{
+    width: 90%;
+    border: 1px solid snow;
+    border-radius: 7px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.inf_eliminar{
+ color: snow;
+}
+.unidades{
+    width: 40%;
+    height: 100%;
+    border: 1px solid snow;
+    border-radius: 7px;
+
+}
+.cont_btn{
+    display: flex;
+    justify-content: space-between;
+}
+.oculto{
+    display: none;
+}
+.oculto_documentos{
+    display: none;
+}
+.oculto_documentos_modificar{
+    display: none;
+}
+.oculto_documentos_modificar_cargar{
+    display: none;
+}
+.oculto_documentos_descargar{
+    display: none;
+}
+.oculto_documentos_descargar_unidades{
+    display: none;
+}
+.oculto_2{
+    display: none;
+}
+
+input[type="radio"] {
+    display: none;
+}
+
+input[type="radio"]+label {
+    font-weight: bold;
+    line-height: 3em;
+    color: #ccc;
+    cursor: pointer;
+    display: flex;
+    text-align: left;
+}
+
+input[type="radio"]:checked+label {
+    color: #0fbf12;
+    display: flex;
+    text-align: left;
+}
+
+input[type="radio"]+label:before {
+    content: "";
+    width: 26px;
+    height: 26px;
+    float: left;
+    margin: 0.5em 0.5em 0 0;
+    border: 2px solid #ccc;
+    background: #fff;
+    border-radius: 100%;
+}
+
+input[type="radio"]:checked+label:after {
+    content: "";
+    width: 0;
+    height: 0;
+    border: 8px solid #0fbf12;
+    float: left;
+    margin-left: -1.8em;
+    margin-top: 0.8em;
+    border-radius: 100%;
+    position: absolute;
+    margin-left: 5px;
+}
+
+.titulo_evento{
+    display: flex;
+    font-family: "Kanit", serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 30px;
+}
+.titulo_evento_2{
+    display: flex;
+    font-family: "Kanit", serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 20px;
+}
+.titulo_evento_3{
+    display: flex;
+    font-family: "Kanit", serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 14px;
+    color: red;
+}
+.verde{
+    color: rgb(28, 163, 132);
+}
+.rojo{
+    color: rgb(250, 0, 0);
+}
+.verde_bg{
+    background-color: rgb(33, 95, 81);
+}
+.rojo_bg{
+    background-color: rgb(125, 0, 0);
+}
+.crema{
+    color: rgb(34, 155, 7);
+}
+.numero{
+    position: absolute;
+    top: 0%;
+    left: -5%;
+    font-family: "Kanit", serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 20px;
+
+    width: 40px;
+    height: 40px;
+    
+    color: snow;
+ 
+    border-radius: 50%;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+
+    border: 2px solid snow;
+    -webkit-box-shadow: 0px 3px 4px 4px rgba(77, 74, 74, 0.548);
+    -moz-box-shadow: 0px 3px 4px 4px rgba(77, 74, 74, 0.548);
+    box-shadow: 0px 3px 4px 4px rgba(77, 74, 74, 0.548);
+
+}
+.parrafo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: justify;
+
+}

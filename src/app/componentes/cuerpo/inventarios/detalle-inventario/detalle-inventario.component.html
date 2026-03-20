@@ -1,0 +1,366 @@
+<app-menu></app-menu>
+<div class="cuerpo" ng-init="inicioAlgo()">
+    <div class="col-md-12">
+
+        <div class="row contenedor">
+            <div class="col-md-12" *ngIf="per_update_1; else per_update_2">
+                <form class="form-group row tamanio" #documentos_pdf="ngForm" autocomplete="off">
+                    <div class="col-md-9 ">
+                        <h2 class="titulo">Formulario de Inventarios</h2>
+                        <div class="radios_a">
+                            <br>
+                            <div class="form-group col-md-11" style="margin: auto;">
+                                <label for="">Fecha de Asignacion</label>
+                                <input type="date" name="fecha_asignacion" id="fecha_asignacion" class="form-control"
+                                    ngModel [(ngModel)]="fecha_asignacion">
+                            </div>
+
+                            <br>
+                            <hr>
+                            <h4>Responsables del Material </h4>
+                            <div class=" row col-md-12">
+                                <div class="form-group col-md-5" style="margin: auto;">
+                                    <label for=""(click)="cambio_editar_director()">Director DIROP </label>
+                                    <p *ngIf="per_update_3; else per_update_4"><b>{{director}}</b></p>
+                                    <ng-template #per_update_4>
+                                    <select name="director" id="director" class="form-control"ngModel
+                                            (change)="cargo_direcion(documentos_pdf)">
+                                            <option value=""></option>
+                                            <option [value]="i"
+                                                *ngFor="let item of listado_usurios; index as i; first as isFirst">{{item[1]}}.
+                                                {{item[2]}} {{item[3]}}
+                                            </option>
+                                        </select>
+                                    </ng-template>
+                                </div>
+                                <div class="form-group col-md-6" style="margin: auto;">
+                                    <label for="">Cargo</label>
+                                    <p>{{director_cargo}}</p>
+                                    <!-- <input type="text" name="nombre_recibe" id="nombre_recibe" class="form-control" ngModel> -->
+                                </div>
+                            </div>
+                            <br>
+                            <div class=" row col-md-12">
+                                <div class="form-group col-md-5" style="margin: auto;">
+                                    <label for="">Director SECCION {{seccion_cargo}}</label>
+                                
+                                    <select name="seccion" id="seccion" class="form-control" [(ngModel)]="seccion_cargo"
+                                            (change)="cargo_seccion(documentos_pdf)">
+                                            <option value=""></option>
+                                            <option [value]="i"
+                                                *ngFor="let item of listado_usurios; index as i; first as isFirst">{{item[1]}}.
+                                                {{item[2]}} {{item[3]}}
+                                            </option>
+                                        </select>
+                                </div>
+                                <div class="form-group col-md-6" style="margin: auto;">
+                                    <label for="">Cargo</label>
+                                    <p>{{seccion}}</p>
+                                    <!-- <input type="text" name="nombre_recibe" id="nombre_recibe" class="form-control" ngModel> -->
+                                </div>
+                            </div>
+                            <br>
+                            <div class=" row col-md-12">
+                                <div class="form-group col-md-5" style="margin: auto;">
+                                    <label for="">Respomsable Material </label>
+                                    <select name="responsable" id="responsable" class="form-control" [(ngModel)]="responsable"
+                                            (change)="cargo_respomsable(documentos_pdf)">
+                                            <option value="">{{responsable}}</option>
+                                            <option [value]="i"
+                                                *ngFor="let item of listado_usurios; index as i; first as isFirst">{{item[1]}}.
+                                                {{item[2]}} {{item[3]}}
+                                            </option>
+                                        </select>
+                                </div>
+                                <div class="form-group col-md-6" style="margin: auto;">
+                                    <label for="">Cargo</label>
+                                    <p>{{responsable_cargo}}</p>
+                                    <!-- <input type="text" name="nombre_recibe" id="nombre_recibe" class="form-control" ngModel> -->
+                                </div>
+                            </div>
+                            <br>
+                            <hr>
+                            <h4>Material Asignado </h4>
+                            <div class="row col-md-11" style="margin: auto;">
+                                <div class="col-md-4" style="margin: auto;">
+                                    <label for="">Activo fijo</label>
+                                    <!-- <input type="text" name="numero_activo" id="numero_activo" class="form-control" ngModel
+                                            [(ngModel)]="numero_activo"> -->
+                                </div>
+
+                                <div class="col-md-4" style="margin: auto;">
+                                    <label for="">Denominación</label>
+                                    <!-- <input type="text" name="denominacion" id="denominacion" class="form-control" ngModel
+                                            [(ngModel)]="denominacion"> -->
+                                </div>
+
+                                <div class="col-md-4" style="margin: auto;">
+                                    <label for="">Número de serie</label>
+                                    <!-- <input type="text" name="numero_de_serie" id="numero_de_serie" class="form-control"
+                                            ngModel [(ngModel)]="numero_de_serie"> -->
+                                </div>
+
+                            </div>
+                            <br>
+                            <div class="row col-md-11" style="margin: auto;">
+                                <div class="col-md-4" style="margin: auto;">
+                                    <label for="">Número de inventario</label>
+                                    <!-- <input type="text" name="numero_de_inventario" id="numero_de_inventario"
+                                            class="form-control" ngModel [(ngModel)]="numero_de_inventario"> -->
+                                </div>
+
+                                <div class="col-md-4" style="margin: auto;">
+                                    <label for="">Val.adq.</label>
+                                    <!-- <input type="text" name="valor" id="valor" class="form-control" ngModel
+                                            [(ngModel)]="valor"> -->
+                                </div>
+
+                                <div class="col-md-4" style="margin: auto;">
+                                    <label for="">Ubicación</label>
+                                    <!-- <input type="text" name="ubicacion_material" id="ubicacion_material"
+                                            class="form-control" ngModel [(ngModel)]="ubicacion"> -->
+                                </div>
+
+                            </div>
+                            <br>
+                            <div class="form-group col-md-2" style="margin: auto;">
+                                <label for="">Nuevo Material</label>
+                                <!-- <button class="btn btn-success form-control"
+                                        (click)="nuevo_vehiculo(documentos_pdf)">+</button> -->
+                            </div>
+                            <br>
+                            <hr>
+                            <table class="table table-hover" id="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">No.</th>
+
+                                        <th scope="col">Activo fijo</th>
+                                        <th scope="col">Denominación</th>
+                                        <th scope="col">Número de serie</th>
+
+                                        <th scope="col">Número de inventario</th>
+                                        <th scope="col">Ubicación</th>
+                                        <th scope="col">Nuevo Material</th>
+
+                                        <th scope="col">eliminar.</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody id="t_body">
+
+                                    <!-- <tr *ngFor="let item of array_accesorio; index as i; first as isFirst">
+        
+                                            <th scope="row">{{i+1}}</th>
+                                            <td>{{item[0]}}</td>
+                                            <td>{{item[1]}}</td>
+                                            <td>{{item[2]}}</td>
+                                            <td>{{item[3]}}</td>
+                                            <td>{{item[4]}}</td>
+                                            <td>{{item[5]}}</td>
+                                            <td><button class="btn btn-danger" (click)="eliminar(i)"></button></td>
+        
+                                        </tr> -->
+
+                                </tbody>
+                            </table>
+
+                            <hr>
+
+                            <h3>Observaciones </h3>
+                            <div class=" row col-md-12">
+                                <!-- <div class="form-group col-md-9" style="margin: auto;">
+                                        <label for="">Accesorios</label>
+                                        <input type="text" name="observaciones_elemento" id="observaciones_elemento"
+                                            class="form-control" [(ngModel)]="observaciones_ele" ngModel>
+                                    </div> -->
+
+                                <div class="form-group col-md-2" style="margin: auto;">
+                                    <label for="">Nuevo</label>
+                                    <!-- <button class="btn btn-success form-control"
+                                            (click)="nuevo_observaciones(documentos_pdf)">+</button> -->
+                                </div>
+                            </div>
+                            <hr>
+                            <ul class="list-group">
+                                <!-- <li *ngFor="let item of observaciones index as i; first as isFirst" class="list-group-item">
+                                        {{item}} <button class="btn btn-danger" (click)="eliminar_observaciones(i)"></button>
+                                    </li> -->
+                            </ul>
+                            <hr>
+
+                            <div class=" row col-md-12">
+
+                                <!-- <div class="alert alert-success col-md-11" role="alert" *ngIf="inf_g"
+                                        style="margin: auto !important;">
+                                        {{inf_c_g}}!
+                                    </div>
+                                    <br *ngIf="inf_g">
+                                    <div class="alert alert-danger col-md-11" role="alert" *ngIf="inf_a"
+                                        style="margin: auto !important;">
+                                        {{inf_c_g}}!
+                                    </div>
+        
+                                    <br *ngIf="inf_a">
+                                    <div class="posicion_btn">
+                                        <button class="btn btn-success" (click)="guardar(documentos_pdf)"
+                                            *ngIf="inf_btn">GUARDAR</button>
+                                        <button class="btn btn-success" (click)="clear()" *ngIf="inf_btnuew">Nuevo</button>
+                                    </div> -->
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <!-- fotos del elemento -->
+                    <div class="col-md-3 ">
+                        <h2 class="titulo">Documentos</h2>
+                        <div class="radios_2">
+                            <br>
+                            <br>
+                            <h2>Foto</h2>
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="img_2">
+                                        <img [src]="img_2" alt="" class="foto" id="foto" (click)="cargar_foto()">
+
+                                        <input type="file" name="foto_user" id="foto_user" ngModel hidden
+                                            (change)="leer_foto($event)">
+
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                            <hr>
+                            <br>
+                            <h2>Acta</h2>
+                            <div class="form-group col-md-11" style="margin: auto;">
+
+                                <div class="card">
+                                    <div class="card-body" (click)="cargar_boletin()" style="cursor: pointer;">
+                                        Boletin.
+                                    </div>
+                                    <input required id="boletin_fisico" ngModel name="boletin_fisico" type="file" hidden
+                                        (change)="leer_boletin($event)">
+                                    <div class="alert alert-success col-md-11" role="alert" *ngIf="inf_b"
+                                        style="margin: auto !important;">
+                                        {{inf_c_b}}!
+                                    </div>
+                                    <br *ngIf="inf_b">
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <ng-template #per_update_2>
+            <div class="col-md-12 ">
+                        <h2 class="titulo">Información del Material Asignado</h2>
+                        <div class="radios">
+                            <div class=" row col-md-12">
+
+                                <div class=" col-md-6">
+
+                                    <h4>Información Personal </h4>
+                                    <div class=" row col-md-12 aling" style="text-align: left;">
+                                        <div class="form-group col-md-12" style="margin: auto;">
+                                            <label for="">Fecha Asignación</label>
+                                            <p><b>{{fecha_asignacion}}</b></p>
+                                        </div>
+                                        <div class="form-group col-md-12" style="margin: auto;">
+                                            <label for="">Responsable Material</label>
+                                            <p><b>{{responsable}}</b></p>
+                                        </div>
+                                        <div class="form-group col-md-12" style="margin: auto;">
+                                            <label for="">Cargo</label>
+                                            <p><b>{{responsable_cargo}}</b></p>
+                                        </div>
+                                    
+
+                                    </div>
+                                </div>
+                                <div class=" row col-md-3">
+                                    <div class="img">
+
+                                        <div class="imagen">
+                                            <img [src]="img" alt="" width="50px" height="50px" class="foto" id="foto">
+                                            <br>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class=" row col-md-3">
+                                    <div class="img">
+
+                                        <div class="imagen">
+                                            <object type="application/pdf" [data]="doc | safe" width="100%" height="100%"></object>
+                                        </div>
+                                        <button class="btn btn-info" (click)="ver_documento()">ampliar</button>
+                                    </div>
+                                    
+                                </div>
+                                <hr>
+                                <h2>Material Asignado</h2>
+                                <div class="row col-md-12">
+
+                                    <table class="table table-hover tabla" id="table">
+                                        <thead>
+                                            <th>Numero</th>
+                                            <th>Activo Fijo</th>
+                                            <th>Denominación</th>
+                                            <th>Número de serie</th>
+                                            <th>Número de inventario</th>
+                                            <th>Val.adq.</th>
+                                            <th>Ubicación</th>
+
+                                        </thead>
+                                        <tbody id="t_body">
+                                            <tr *ngFor="let item of asesorios; index as i; first as isFirst">
+                                                <td>{{i+1}}</td>
+                                                <td>{{item[2]}}</td>
+                                                <td>{{item[3]}}</td>
+                                                <td>{{item[4]}}</td>
+                                                <td>{{item[5]}}</td>
+                                                <td>{{item[6]}}</td>
+                                                <td>{{item[7]}}</td>
+
+                                            </tr>
+        
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <hr>
+                                <h2>Observaciones</h2>
+                                <div class="row col-md-12">
+
+                                    <table class="table table-hover tabla" id="table">
+                                        <thead>
+                                            <th>Numero</th>
+                                            <th>Observación</th>
+                                        </thead>
+                                        <tbody id="t_body">
+                                            <tr *ngFor="let item of observacion; index as i; first as isFirst">
+                                                <td>{{i+1}}</td>
+                                                <td>{{item[2]}}</td>
+                                            </tr>
+        
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <br>
+                        </div>
+                    </div>
+            </ng-template>
+            <div class="boton">
+
+                <button class="btn btn-danger botones" (click)="cambio_editar()" *ngIf="per_update">EDITAR</button>
+
+    </div>
+        </div>
+    </div>
+</div>
+<app-ver-document [server]="server"></app-ver-document>

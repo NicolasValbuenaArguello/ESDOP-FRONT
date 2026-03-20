@@ -1,0 +1,223 @@
+<app-menu></app-menu>
+<div class="cuerpo">
+    <div class="col-md-12 ">
+        <div class="row contenedor">
+            <div class="col-md-6 ">
+
+                <h2 class="titulo">Mapa</h2>
+                <div class="radios">
+                    <app-mapa-digital></app-mapa-digital>
+                </div>
+            </div>
+            <div class="col-md-6 ">
+                <div class="radios" style="height: 82vh!important;">
+
+                    <div class="jumbotron jumbotron-fluid">
+                        <div class="container">
+                            <h1>AETCR {{nombre_aetcr}}</h1>
+
+
+                        </div>
+                    </div>
+
+
+                    <hr>
+
+                    <div class="container">
+                        <div class=" row col-md-12">
+                            <div class=" row col-md-4"><img src="http://172.22.2.36:5198{{foto_aetcr}}" class="foto_aetcr"  id="foto_aetcr" (click)="tamanio_foto_aetcr()"></div>
+                            <div class=" row col-md-8">
+
+                        
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <th scope="col" style="display: flex; text-align: left; ">
+                                        <h3>Numero</h3>
+                                    </th>
+                                    <td scope="col">
+                                        <h3 style="display: flex; text-align: justify; font-size: 20px;">{{numero}}</h3>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="col" style="display: flex; text-align: left; ">
+                                        <h3>Nivel</h3>
+                                    </th>
+                                    <td scope="col">
+                                        <h3 style="display: flex; text-align: justify; font-size: 20px;">{{nivel}}</h3>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="col" style="display: flex; text-align: left; ">
+                                        <h3>Lugar</h3>
+                                    </th>
+                                    <td scope="col">
+                                        <h3 style="display: flex; text-align: justify; font-size: 20px;">{{lugar}}</h3>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="col" style="display: flex; text-align: left; ">
+                                        <h3>Coordenadas</h3>
+                                    </th>
+                                    <td scope="col">
+                                        <h3 style="display: flex; text-align: justify; font-size: 20px;">{{cordenadas}}
+                                        </h3>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="col" style="display: flex; text-align: left; ">
+                                        <h3>Fecha de Inguracion</h3>
+                                    </th>
+                                    <td scope="col">
+                                        <h3 style="display: flex; text-align: justify; font-size: 20px;">{{fecha}}</h3>
+                                    </td>
+                                </tr>      
+
+                            </tbody>
+                        </table>
+                    </div>
+                    </div>
+                        <div class=" row col-md-12">
+                            <hr>
+                            <h1>ENCARGADO DE LA AECTR</h1>
+                            <div class=" row col-md-5">
+                                <img src="http://172.22.2.36:5198{{foto_user}}" class="foto_usurio_aetcr" id="foto_usurio_aetcr" (click)="tamanio_foto_aetcr_encargado()" >
+                            </div>
+                            <div class=" row col-md-7">
+                                <table class="table">
+                                    <tbody>
+                                        <tr>
+                                            <th scope="col" style="display: flex; text-align: left; ">
+                                                <h3>Nombre</h3>
+                                            </th>
+                                            <td scope="col">
+                                                <h3 style="display: flex; text-align: justify; font-size: 20px;">
+                                                    {{nombre_aectr}}</h3>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="col" style="display: flex; text-align: left; ">
+                                                <h3>seudonimo</h3>
+                                            </th>
+                                            <td scope="col">
+                                                <h3 style="display: flex; text-align: justify; font-size: 20px;">
+                                                    {{seudonimo}}</h3>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="col" style="display: flex; text-align: left; ">
+                                                <h3>Celular</h3>
+                                            </th>
+                                            <td scope="col">
+                                                <h3 style="display: flex; text-align: justify; font-size: 20px;">
+                                                    {{celular}}</h3>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="col" style="display: flex; text-align: left; ">
+                                                <h3>Ubicacion</h3>
+                                            </th>
+                                            <td scope="col">
+                                                <h3 style="display: flex; text-align: justify; font-size: 20px;">
+                                                    {{Ubicion_aetcr}}</h3>
+                                            </td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <hr>
+                        <h1>PERSONAL EN LA AECTR</h1>
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <th scope="col" style="display: flex; text-align: left; ">
+                                        <h3>Cant. Hombres</h3>
+                                    </th>
+                                    <td scope="col">
+                                        <h3 style="display: flex; text-align: justify; font-size: 20px;">
+                                            {{cant_hombres}}</h3>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="col" style="display: flex; text-align: left; ">
+                                        <h3>Cant. Mujeres</h3>
+                                    </th>
+                                    <td scope="col">
+                                        <h3 style="display: flex; text-align: justify; font-size: 20px;">
+                                            {{cant_mujeres}}</h3>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <th scope="col" style="display: flex; text-align: left; ">
+                                        <h3>Disminución</h3>
+                                    </th>
+                                    <td scope="col">
+                                        <h3 style="display: flex; text-align: justify; font-size: 20px;">{{disminucion}}
+                                        </h3>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <table class="table table-hover" id="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">No.</th>
+                                    <th scope="col">AÑO</th>
+                                    <th scope="col">CANTIDA DE PERSONAS</th>
+
+
+                                </tr>
+                            </thead>
+                            <tbody id="t_body">
+
+                                <tr *ngFor="let item of cantidad_personal; index as i; first as isFirst">
+
+                                    <th scope="row">{{i+1}}</th>
+                                    <td>{{item[3]}} </td>
+                                    <td>{{item[4]}} </td>
+
+                                </tr>
+
+                            </tbody>
+                        </table>
+                        <hr>
+                        <h1>SERVICIOAS BASICOS </h1>
+                        <table class="table table-hover" id="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">No.</th>
+                                    <th scope="col">SERVICIOAS BASICOS</th>
+                                    <th scope="col">TIPO</th>
+                                    <th scope="col">INFORMACION</th>
+                                    <th scope="col">CANTIDAD</th>
+
+
+                                </tr>
+                            </thead>
+                            <tbody id="t_body">
+
+                                <tr *ngFor="let item of servicios; index as i; first as isFirst">
+
+                                    <th scope="row">{{i+1}}</th>
+                                    <td>{{item[3]}} </td>
+                                    <td>{{item[4]}} </td>
+                                    <td>{{item[5]}} </td>
+                                    <td>{{item[6]}} </td>
+
+                                </tr>
+
+                            </tbody>
+                        </table>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

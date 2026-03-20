@@ -1,0 +1,143 @@
+<app-menu></app-menu>
+<div class="cuerpo">
+<div class="contenedor">
+
+  <!-- BOTÓN -->
+  <button class="btn-principal" (click)="abrirModal()">
+    ➕ Ingresar Q5
+  </button>
+
+  <!-- FILTRO -->
+  <input
+    type="text"
+    placeholder="🔍 Buscar..."
+    [(ngModel)]="filtro"
+    (input)="filtrar()"
+    class="buscador"
+  />
+
+  <!-- TABLA -->
+<div class="card shadow-lg tabla-container">
+
+  <div class="card-header d-flex justify-content-between align-items-center">
+    <h5 class="mb-0">📋 Registros Q5</h5>
+    <input 
+      type="text" 
+      class="form-control w-25" 
+      placeholder="🔍 Buscar..."
+      [(ngModel)]="filtro"
+      (input)="filtrar()"
+    >
+  </div>
+
+<div class="card shadow tabla-container">
+
+  <!-- HEADER -->
+  <div class="card-header d-flex justify-content-between">
+
+    <input 
+      type="text"
+      class="form-control w-25"
+      placeholder="Buscar..."
+      [(ngModel)]="filtro"
+      (input)="filtrar()"
+    >
+
+    <div>
+      <button class="btn btn-success me-2" (click)="exportarExcel()">📥 Excel</button>
+      <button class="btn btn-danger" (click)="exportarPDF()">📄 PDF</button>
+    </div>
+
+  </div>
+
+  <!-- TABLA -->
+  <table class="table table-dark table-hover">
+
+    <thead>
+      <tr>
+        <th (click)="ordenar('campo1')">Campo 1 🔽</th>
+        <th (click)="ordenar('campo2')">Campo 2 🔽</th>
+        <th (click)="ordenar('estado')">Estado 🔽</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+
+    <tbody>
+
+      <tr *ngFor="let item of datosPaginados; let i = index">
+
+        <td>{{item.campo1}}</td>
+        <td>{{item.campo2}}</td>
+
+        <!-- 🎯 BADGE -->
+        <td>
+          <span [class]="getClaseEstado(item.estado)">
+            {{item.estado}}
+          </span>
+        </td>
+
+        <td>
+          <button class="btn btn-warning btn-sm me-1" (click)="editar(i)">✏️</button>
+          <button class="btn btn-danger btn-sm" (click)="eliminar(i)">🗑️</button>
+        </td>
+
+      </tr>
+
+    </tbody>
+
+  </table>
+
+  <!-- PAGINACIÓN -->
+  <div class="paginacion text-center p-2">
+
+    <button 
+      class="btn btn-sm btn-light me-1"
+      *ngFor="let p of [].constructor(totalPaginas()); let i = index"
+      (click)="cambiarPagina(i+1)"
+      [class.btn-primary]="paginaActual === i+1">
+      {{i+1}}
+    </button>
+
+  </div>
+
+</div>
+</div>
+
+</div>
+
+<!-- MODAL -->
+<div class="modal" [class.activo]="mostrarModal">
+  <div class="modal-content">
+
+    <h3>Formulario Q5</h3>
+
+    <form [formGroup]="form">
+
+      <input formControlName="campo1" placeholder="Campo 1">
+      <input formControlName="campo2" placeholder="Campo 2">
+      <input formControlName="campo3" placeholder="Campo 3">
+      <input formControlName="campo4" placeholder="Campo 4">
+      <input formControlName="campo5" placeholder="Campo 5">
+      <input formControlName="campo6" placeholder="Campo 6">
+      <input formControlName="campo7" placeholder="Campo 7">
+      <input formControlName="campo8" placeholder="Campo 8">
+      <input formControlName="campo9" placeholder="Campo 9">
+      <input formControlName="campo10" placeholder="Campo 10">
+
+    </form>
+
+    <div class="botones">
+
+      <button (click)="guardar()" *ngIf="modo==='guardar'">💾 Guardar</button>
+
+      <button (click)="actualizar()" *ngIf="modo==='editar'">✏️ Editar</button>
+
+      <button (click)="confirmarEliminar()" *ngIf="modo==='eliminar'">🗑️ Eliminar</button>
+
+      <button (click)="cerrarModal()">❌ Cerrar</button>
+
+    </div>
+
+  </div>
+</div>
+</div>

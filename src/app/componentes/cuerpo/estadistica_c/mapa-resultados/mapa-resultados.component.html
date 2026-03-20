@@ -1,0 +1,273 @@
+<app-menu></app-menu>
+<div class="cuerpo" ng-init="inicioAlgo()">
+
+    <form class="form-group row " #documentos_pdf="ngForm">
+        <div class=" row col-md-6"> </div>
+        <div class=" row col-md-3"></div>
+        <div class=" row col-md-1"></div>
+        <div class=" row col-md-1">
+
+        </div>
+        <div class="posicion_resultados ">
+            <div class="posicion_btn_menu  " style="padding-inline: 10px;">
+                <button class="btn btn-success " (click)="filtar_division(documentos_pdf)">BUSCAR
+                </button>
+                <button class="btn btn-danger x " (click)="resultados_oculto()"></button>
+                <button class="btn btn-primary icono " (click)="menu_oculto()"></button>
+            </div>
+        </div>
+        <div class=" row col-md-1">
+
+
+        </div>
+
+    </form>
+    <div class="row contenedor">
+        <div class="col-md-12">
+
+            <div class="radios">
+
+                <app-mapa-digital></app-mapa-digital>
+            </div>
+            <div class="form-group resultados resultados_oculto " style="margin: auto;" id="resultados_oculto">
+                <h1 class="posicion">Resultados a Selecionar</h1>
+
+                <div class="posicion_resultados ">
+                    <br>
+                    <br>
+                    <div class="menu_oculto menu_oculto_hide" id="menu_oculto">
+                        <div class="listados">
+                            <div class="señal"></div>
+                            <h5 class="point" (click)="scroll(elemento)">Afectaciones a la Amenaza</h5>
+                        </div>
+                        <div class="listados">
+                            <div class="señal"></div>
+                            <h5 class="point" (click)="scroll(elemento_1)">Afectaciones a Propias Tropas</h5>
+                        </div>
+                        <div class="listados">
+                            <div class="señal"></div>
+                            <h5 class="point" (click)="scroll(elemento_2)">Material de Guerra</h5>
+                        </div>
+                        <div class="listados">
+                            <div class="señal"></div>
+                            <h5 class="point" (click)="scroll(elemento_3)">Combates</h5>
+                        </div>
+                        <div class="listados">
+                            <div class="señal"></div>
+                            <h5 class="point" (click)="scroll(elemento_4)">Ataque a la Fuerza Publica</h5>
+                        </div>
+                        <div class="listados">
+                            <div class="señal"></div>
+                            <h5 class="point" (click)="scroll(elemento_5)">Explosivos</h5>
+                        </div>
+                        <div class="listados">
+                            <div class="señal"></div>
+                            <h5 class="point" (click)="scroll(elemento_6)">Narcotrafico</h5>
+                        </div>
+                        <div class="listados">
+                            <div class="señal"></div>
+                            <h5 class="point" (click)="scroll(elemento_7)">Economias Ilícitas</h5>
+                        </div>
+                        <div class="listados">
+                            <div class="señal"></div>
+                            <h5 class="point" (click)="scroll(elemento_8)">Afectaciones al Oleoducto</h5>
+                        </div>
+                        <div class="listados">
+                            <div class="señal"></div>
+                            <h5 class="point" (click)="scroll(elemento_9)">Afectaciones a la Mineria</h5>
+                        </div>
+                        <div class="listados">
+                            <div class="señal"></div>
+                            <h5 class="point" (click)="scroll(elemento_10)">Afectaciones al Contrabando</h5>
+                        </div>
+                        <div class="listados">
+                            <div class="señal"></div>
+                            <h5 class="point" (click)="scroll(elemento_11)">Afectaciones LOE Amazonía</h5>
+                        </div>
+                        <div class="listados">
+                            <div class="señal"></div>
+                            <h5 class="point" (click)="scroll(elemento_12)">Otros Eventos</h5>
+                        </div>
+
+
+                    </div>
+                </div>
+
+
+                <div class="row cuerpo_card">
+                    <h3 #elemento id="elemento">Afectaciones a la Amenaza</h3>
+                    <div class="col-sm-3" *ngFor="let item of unidad_selecionada_resultados"
+                        (click)="resultados_selecionados(item)">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="che" [id]="item"></div>
+                                <h5 class="card-title form-check-label">
+                                    {{item}}
+                                </h5>
+
+                            </div>
+                        </div>
+                    </div>
+                    <br><br>
+                    <h3 #elemento_1 id="elemento_1">Afectaciones a Propias Tropas</h3>
+                    <div class="col-sm-3" *ngFor="let item of unidad_selecionada_resultados_tropas"
+                        (click)="resultados_selecionados(item)">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="che" [id]="item"></div>
+                                <h5 class="card-title form-check-label">
+                                    {{item}}
+                                </h5>
+
+                            </div>
+                        </div>
+                    </div>
+                    <br><br>
+                    <h3 #elemento_2 id="elemento_2">Material de Guerra</h3>
+                    <div class="col-sm-3" *ngFor="let item of unidad_selecionada_resultados_armamento"
+                        (click)="resultados_selecionados(item)">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="che" [id]="item"></div>
+                                <h5 class="card-title form-check-label">
+                                    {{item}}
+                                </h5>
+
+                            </div>
+                        </div>
+                    </div>
+                    <h3 #elemento_3 id="elemento_3">Combates</h3>
+                    <div class="col-sm-3" *ngFor="let item of comates_a_selecionar"
+                        (click)="resultados_selecionados(item)">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="che" [id]="item"></div>
+                                <h5 class="card-title form-check-label">
+                                    {{item}}
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+                    <h3 #elemento_4 id="elemento_4">Ataque a la Fuerza Publica</h3>
+                    <div class="col-sm-3" *ngFor="let item of ataque_fuerza_publica"
+                        (click)="resultados_selecionados(item)">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="che" [id]="item"></div>
+                                <h5 class="card-title form-check-label">
+                                    {{item}}
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+                    <h3 #elemento_5 id="elemento_5">Explosivos</h3>
+                    <div class="col-sm-3" *ngFor="let item of material_explosivos"
+                        (click)="resultados_selecionados(item)">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="che" [id]="item"></div>
+                                <h5 class="card-title form-check-label">
+                                    {{item}}
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+                    <h3 #elemento_6 id="elemento_6">Narcotrafico</h3>
+                    <div class="col-sm-3" *ngFor="let item of narcotrafico_lista"
+                        (click)="resultados_selecionados(item)">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="che" [id]="item"></div>
+                                <h5 class="card-title form-check-label">
+                                    {{item}}
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+                    <h3 #elemento_7 id="elemento_7">Economias Ilícitas</h3>
+                    <div class="col-sm-3" *ngFor="let item of economias_ilicitas"
+                        (click)="resultados_selecionados(item)">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="che" [id]="item"></div>
+                                <h5 class="card-title form-check-label">
+                                    {{item}}
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+                    <h3 #elemento_8 id="elemento_8">Afectaciones al Oleoducto</h3>
+                    <div class="col-sm-3" *ngFor="let item of afectaciones_oleoducto"
+                        (click)="resultados_selecionados(item)">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="che" [id]="item"></div>
+                                <h5 class="card-title form-check-label">
+                                    {{item}}
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+                    <h3 #elemento_9 id="elemento_9">Afectaciones a la Mineria</h3>
+                    <div class="col-sm-3" *ngFor="let item of afectaciones_a_la_mineria"
+                        (click)="resultados_selecionados(item)">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="che" [id]="item"></div>
+                                <h5 class="card-title form-check-label">
+                                    {{item}}
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+                    <h3 #elemento_10 id="elemento_10">Afectaciones al Contrabando</h3>
+                    <div class="col-sm-3" *ngFor="let item of afectaciones_al_contranando"
+                        (click)="resultados_selecionados(item)">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="che" [id]="item"></div>
+                                <h5 class="card-title form-check-label">
+                                    {{item}}
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+                    <h3 #elemento_11 id="elemento_11">Afectaciones LOE Amazonía</h3>
+                    <div class="col-sm-3" *ngFor="let item of loe_amazonia" (click)="resultados_selecionados(item)">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="che" [id]="item"></div>
+                                <h5 class="card-title form-check-label">
+                                    {{item}}
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+                    <h3 #elemento_12 id="elemento_12">Otros Eventos</h3>
+                    <div class="col-sm-3" *ngFor="let item of otro" (click)="resultados_selecionados(item)">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="che" [id]="item"></div>
+                                <h5 class="card-title form-check-label">
+                                    {{item}}
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <div class="alerta" style="margin-top: 15px;">
+                    <div class="alert alert-secondary" role="alert">
+                        <ul>
+                            <li *ngFor="let mun of datos_resultados">{{mun}}</li>
+                        </ul>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

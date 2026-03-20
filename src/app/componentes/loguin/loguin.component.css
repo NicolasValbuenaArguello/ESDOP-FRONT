@@ -1,0 +1,410 @@
+body{
+  margin:0;
+  font-family:'Segoe UI',Arial,sans-serif;
+  background:#f4f6f9;
+  }
+  
+  /* =========================
+  NAVBAR
+  ========================= */
+  
+  .navbar{
+  background:#1a1a1a !important;
+  border-bottom:2px solid #8b0000;
+  }
+  
+  .navbar-brand{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  }
+  
+  .navbar-brand b{
+  font-size:18px;
+  letter-spacing:1px;
+  }
+  
+  /* =========================
+  CONTENEDOR PRINCIPAL
+  ========================= */
+  
+  .main-container{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:calc(100vh - 60px);
+  padding:40px;
+  gap:60px;
+  }
+  
+  /* =========================
+  ESCUDO
+  ========================= */
+  
+  .escudo-container{
+  flex:1;
+  display:flex;
+  justify-content:center;
+  }
+  
+  .escudo{
+  width:420px;
+  max-width:100%;
+  cursor:pointer;
+  }
+  
+  /* =========================
+  TEXTO
+  ========================= */
+  
+  .texto-container{
+  flex:1;
+  text-align:center;
+  }
+  
+  .texto-container h1{
+  font-size:55px;
+  line-height:1.3;
+  color:#7a0000;
+  margin-bottom:20px;
+  }
+  
+  .texto-container h2{
+  font-size:45px;
+  color:#333;
+  }
+  
+  /* =========================
+  LOGIN
+  ========================= */
+  
+  .login-modal{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.4);
+  z-index:1000;
+  }
+  
+  .login-box{
+  position:absolute;
+  top:150px;
+  left:50%;
+  transform:translateX(-50%);
+  width:340px;
+  padding:30px;
+  background:white;
+  border-radius:8px;
+  box-shadow:0 10px 25px rgba(0,0,0,0.25);
+  cursor:move;
+  }
+  
+  .login-box h2{
+  text-align:center;
+  margin-bottom:20px;
+  color:#8b0000;
+  }
+  
+  /* =========================
+  INPUTS
+  ========================= */
+  
+  .login-box input{
+  width:100%;
+  padding:10px;
+  margin-bottom:15px;
+  border:1px solid #ccc;
+  border-radius:5px;
+  outline:none;
+  }
+  
+  .login-box input:focus{
+  border-color:#8b0000;
+  }
+  
+  /* =========================
+  BOTÓN LOGIN
+  ========================= */
+  
+  .login-box button[type="submit"]{
+  width:100%;
+  padding:10px;
+  background:#8b0000;
+  border:none;
+  border-radius:5px;
+  color:white;
+  font-weight:bold;
+  cursor:pointer;
+  }
+  
+  .login-box button[type="submit"]:hover{
+  background:#6b0000;
+  }
+  
+  /* =========================
+  BOTÓN RESERVA
+  ========================= */
+  
+  .btn-reserva{
+  width:100%;
+  margin-top:10px;
+  padding:10px;
+  background:white;
+  border:1px solid #8b0000;
+  color:#8b0000;
+  border-radius:5px;
+  cursor:pointer;
+  }
+  
+  .btn-reserva:hover{
+  background:#8b0000;
+  color:white;
+  }
+  
+  /* =========================
+  ALERTA
+  ========================= */
+  
+  .alerta-notificacion{
+  position:fixed;
+  top:20px;
+  right:20px;
+  background:#fff3cd;
+  color:#856404;
+  padding:15px 20px;
+  border-left:6px solid #ffc107;
+  border-radius:6px;
+  box-shadow:0 3px 10px rgba(0,0,0,0.2);
+  z-index:9999;
+  font-weight:bold;
+  }
+  
+  /* =========================
+  RESPONSIVE
+  ========================= */
+  
+  @media(max-width:900px){
+  
+  .main-container{
+  flex-direction:column;
+  gap:30px;
+  }
+  
+  .escudo{
+  width:300px;
+  }
+  
+  .texto-container h1{
+  font-size:35px;
+  }
+  
+  .texto-container h2{
+  font-size:30px;
+  }
+  
+  }
+  /* =========================
+MODAL RESERVA
+========================= */
+
+.reserva-panel{
+
+  position:fixed;
+  
+  top:0;
+  left:0;
+  
+  width:100%;
+  height:100%;
+  
+  background:rgba(0,0,0,0.75);
+  
+  display:flex;
+  
+  align-items:center;
+  justify-content:center;
+  
+  padding:40px;
+  
+  overflow-y:auto;
+  
+  z-index:2000;
+  
+  }
+  
+  /* =========================
+  CONTENIDO MODAL
+  ========================= */
+  
+  .reserva-contenido{
+  
+  background:white;
+  
+  color:#222;
+  
+  max-width:900px;
+  
+  width:100%;
+  
+  padding:35px;
+  
+  border-radius:8px;
+  
+  box-shadow:0 10px 30px rgba(0,0,0,0.4);
+  
+  line-height:1.6;
+  
+  position:relative;
+  
+  }
+  
+  /* =========================
+  TITULOS
+  ========================= */
+  
+  .reserva-contenido h3{
+  
+  color:#8b0000;
+  
+  margin-bottom:15px;
+  
+  }
+  
+  .reserva-contenido h4{
+  
+  color:#8b0000;
+  
+  margin-top:20px;
+  
+  }
+  
+  /* =========================
+  BOTON CERRAR
+  ========================= */
+  
+  .btn-cerrar-reserva{
+  
+  position:absolute;
+  
+  top:12px;
+  
+  right:15px;
+  
+  border:none;
+  
+  background:none;
+  
+  font-size:20px;
+  
+  cursor:pointer;
+  
+  color:#444;
+  
+  }
+  .seguridad-modal{
+
+    position:fixed;
+    
+    top:0;
+    left:0;
+    
+    width:100%;
+    height:100%;
+    
+    background:#111;
+    
+    display:flex;
+    
+    justify-content:center;
+    align-items:center;
+    
+    z-index:3000;
+    
+    color:white;
+    
+    }
+    
+    .seguridad-box{
+    
+    background:#1a1a1a;
+    
+    max-width:700px;
+    
+    padding:40px;
+    
+    border-radius:8px;
+    
+    border:2px solid #8b0000;
+    
+    text-align:center;
+    
+    line-height:1.6;
+    
+    box-shadow:0 0 30px rgba(0,0,0,0.6);
+    
+    }
+    
+    .seguridad-box h2{
+    
+    color:#ffcc00;
+    
+    margin-bottom:10px;
+    
+    }
+    
+    .seguridad-box h3{
+    
+    color:#ff4444;
+    
+    margin-bottom:20px;
+    
+    }
+    
+    .seguridad-box ul{
+    
+    text-align:left;
+    
+    margin-top:10px;
+    
+    margin-bottom:20px;
+    
+    }
+    
+    .advertencia{
+    
+    font-weight:bold;
+    
+    margin-top:20px;
+    
+    }
+    
+    .btn-aceptar{
+    
+    margin-top:25px;
+    
+    padding:12px 25px;
+    
+    background:#8b0000;
+    
+    border:none;
+    
+    color:white;
+    
+    font-weight:bold;
+    
+    border-radius:5px;
+    
+    cursor:pointer;
+    
+    font-size:16px;
+    
+    }
+    
+    .btn-aceptar:hover{
+    
+    background:#600000;
+    
+    }
+    

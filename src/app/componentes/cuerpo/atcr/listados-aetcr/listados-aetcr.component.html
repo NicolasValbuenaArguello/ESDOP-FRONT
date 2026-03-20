@@ -1,0 +1,55 @@
+<app-menu></app-menu>
+<div class="cuerpo">
+    <div class="col-md-12 ">
+        <div class="row contenedor">
+            <div class="col-md-12 ">
+                <h2 class="titulo"> {{listado_aetcr.length}} AETCR</h2>
+                <div class="radios">
+                    <table class="table table-hover" id = "table" >
+                        <thead>
+                            <tr>
+                                <th scope="col">No.</th>
+                                <th scope="col">NOMBRES AETCR</th>
+                                <th scope="col">NIVEL</th>
+                                <th scope="col">FOTO</th>
+                                <th scope="col">INFORMACIÓN</th>
+                                <th scope="col">PELOTONES</th>
+
+                            </tr>
+                        </thead>
+                        <tbody id="t_body">
+                            
+                            <tr *ngFor="let item of listado_aetcr; index as i; first as isFirst">
+
+                                <th scope="row">{{item[3]}}</th>
+                                <td>{{item[5]}} </td>
+                                <td>{{item[4]}} </td>
+                                <td><img src="http://172.22.2.36:5198{{item[1]}}" alt="FOTO"  width="30px" height="45px" style="border-radius: 5px;"></td>
+                                
+                                <td><button class="btn btn-info" (click)="informacion(item[3])">VER</button></td>
+                                <td><button class="btn btn-info" (click)="informacion_peloton(item[3])">PEL.</button></td>
+
+                            </tr>
+                                
+                                <!-- <td *ngIf="item[29]==falta else ok">{{item[29]}}</td>
+                                <ng-template #ok><td>ok.</td></ng-template>
+
+                                <td *ngIf="item[30]==falta else ok">{{item[30]}}</td>
+                                <ng-template #ok><td>ok.</td></ng-template>
+
+                                <td *ngIf="item[31]==falta else ok">{{item[31]}}</td>
+                                <ng-template #ok><td>ok.</td></ng-template>
+
+                                <td *ngIf="item[32]==falta else ok">{{item[32]}}</td>
+                                <ng-template #ok><td>ok.</td></ng-template> -->
+                                <!-- <td><button class="btn btn-info" (click)="info(i)">VER</button></td> -->
+                            
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

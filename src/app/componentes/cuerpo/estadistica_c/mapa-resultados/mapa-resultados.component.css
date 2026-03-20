@@ -1,0 +1,206 @@
+
+.contenedor{
+    position: fixed;
+    margin-top: 0%;
+    display: flex;
+    text-align: center;
+    /* background-color: rgba(188, 188, 188, 0.159); */
+    padding: 15px;
+    /* border-right: 5px solid rgb(118, 26, 26); */
+    border-radius: 5px;
+    /* height: 42em; */
+    overflow: hidden;
+    width: 88%;
+    
+}
+
+.radios{
+    position: fixed;
+    margin-top: 1%;
+    margin-left: 0%;
+    border: 2px solid #707070;
+    border-radius: 5px;
+    width: 88%;
+    height: 82vh;
+    overflow: scroll;
+    
+}
+
+
+
+
+.cuerpo_card{
+    padding: 5px;
+}
+.alerta{
+    
+    margin-bottom: 10px;
+    /* background-color: #d3dbd3; */
+    width: 100%;
+}
+
+.resultados{
+    position: fixed;
+    /* background-color: #fcfcfc; */
+    margin-top: 15%;
+    /* border: 2px solid #707070; */
+    border-radius: 5px;
+    width: 85%;
+    height: 80vh;
+    overflow: scroll;
+
+}
+.resultados_oculto{
+    display: none;
+}
+.posicion{
+    position: fixed;
+    top: 10%;
+    /* left: -0.5%; */
+    z-index: 1;
+    /* display: block; */
+}
+.posicion_resultados{
+    position: fixed;
+    top: 15%;
+
+    right: 2%;
+    z-index: 1;
+    padding: 5px;
+    
+
+}
+.posicion_btn_menu{
+    position: fixed;
+    top: 10%;
+
+    right: 2%;
+    z-index: 1;
+    padding: 5px;
+    background-color: #eeeeee;
+    width: 9%;
+    border-radius: 5px;
+    justify-content: space-around;
+
+}
+.icono{
+    background-image: url(../../../../../assets/iconos-menu/menu_2.svg);
+    background-position: 0 0;
+    
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: local;
+    background-position: center; 
+    
+    height: 39px;
+    width: 35px;
+}
+.x{
+    background-image: url(../../../../../assets/iconos-menu/x.svg);
+    background-position: 0 0;
+    
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: local;
+    background-position: center; 
+    
+    height: 39px;
+    width: 35px;
+}
+
+.menu_oculto{
+    padding: 5px;
+    background-color: #dbdbdb;
+    border: 2px solid darkred;
+    border-radius: 7px;
+}
+.menu_oculto_hide{
+display: none;
+}
+
+.listados {
+    display: flex;
+    cursor: pointer;
+
+}
+.señal{
+
+    
+    width: 20px;
+    height: 20px;
+}
+.listados:hover .señal{
+    background-image: url(../../../../../assets/iconos-menu/x.svg);
+    background-position: 0 0;
+    
+    background-color: #00ac0e;
+    box-shadow: #00ac0e 5px;
+
+    -webkit-box-shadow: 1px 6px 19px 5px rgba(49,245,0,0.78);
+    -moz-box-shadow: 1px 6px 19px 5px rgba(49,245,0,0.78);
+    box-shadow: 1px 6px 19px 5px rgba(49,245,0,0.78);
+    background-image: url(../../../../../assets/iconos-menu/check_1.svg);
+   
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: local;
+    background-position: center;
+    
+    width: 20px;
+    height: 20px;
+   
+}
+.titulo_filtro{
+    -webkit-box-shadow: 1px 6px 19px 5px rgba(49,245,0,0.78);
+    -moz-box-shadow: 1px 6px 19px 5px rgba(49,245,0,0.78);
+    box-shadow: 1px 6px 19px 5px rgba(49,245,0,0.78);
+}
+
+.listados:hover .point{
+
+    -webkit-box-shadow: 1px 6px 19px 5px rgba(49,245,0,0.78);
+    -moz-box-shadow: 1px 6px 19px 5px rgba(49,245,0,0.78);
+    box-shadow: 1px 6px 19px 5px rgba(49,245,0,0.78);
+}
+ select[multiple] > option{
+    cursor:pointer;
+    padding: 7px;
+    display: grid;
+    /* justify-content: center; */
+
+    /* position:relative; */
+    /* font:normal 11px/22px Arial, Sans-Serif; */
+    color:rgb(51, 51, 51);
+    border:1px solid #ccc;
+    border-radius: 5px;
+    
+ }
+ .che{
+    width: 35px;
+    height: 35px;
+    border: 2px solid gray;
+    border-radius: 5px;
+    background-color: #5a0101;
+ }
+ .che_1{
+    width: 40px;
+    height: 40px;
+    border: 2px solid gray;
+    border-radius: 5px;
+    background-color: #00ac0e;
+    box-shadow: #00ac0e 5px;
+
+    -webkit-box-shadow: 1px 6px 19px 5px rgba(49,245,0,0.78);
+    -moz-box-shadow: 1px 6px 19px 5px rgba(49,245,0,0.78);
+    box-shadow: 1px 6px 19px 5px rgba(49,245,0,0.78);
+    background-image: url(../../../../../assets/iconos-menu/check_1.svg);
+   
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: local;
+    background-position: center;
+    
+ }
+
+
+ 

@@ -1,0 +1,92 @@
+<app-menu></app-menu>
+<div class="cuerpo">
+    <div class="col-md-12 ">
+        <div class="row contenedor">
+            <div class="col-md-12 ">
+                <div class="titulo">
+                    <form class="form-group row tamanios" #documentos_pdf="ngForm">
+                        <div class="col-md-2">
+                            <h3>Tipo de Filtro</h3>
+                        </div>
+                        <div class="col-md-2">
+                            
+                            <select name="tipo_filtro" id="tipo_filtro" class="form-control" [ngModel]="tipo_filtro">
+                                <option value=""></option>
+                                <option value="numero">RADICADO</option>
+                                <option value="destino">DIVISION</option>
+                                <option value="origen">ORIGEN</option>
+                                <option value="enemigo">ENEMIGO</option>
+                                <option value="accion_enemiga">HECHO</option>
+                                <option value="departamento">DEPARTAMENTO</option>
+                                <option value="municipio">MUNICIPIO</option>
+
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <h3>Parametros</h3>
+                        </div>
+                        <div class="col-md-2">
+                            <input type="text" class="form-control" name="filtro" id="filtro" [ngModel]="filtro" autocomplete="off">
+                        </div>
+                        <div class="col-md-1">
+                             <button class="btn btn-primary" (click)="busca_alertas(documentos_pdf)">BUSCAR</button>
+                        </div>
+                        <div class="col-md-2" style="color: white; margin: auto;">
+                            <h2>{{alertas.length}} Alertas</h2>
+                        </div>
+                    </form>
+                </div>
+                <div class="radios">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">No.</th>
+                                <th scope="col">NUMERO ALERTA</th>
+                                <th scope="col">FECHA</th>
+                                <th scope="col">ORIGEN</th>
+                                <th scope="col">DESTINO</th>
+
+                                <th scope="col">DEPARTAMENTO</th>
+                                <th scope="col">FECHA REMISIÓN</th>
+                                <th scope="col">REMITENTE</th>
+                                <th scope="col">DOC</th>
+                                <th scope="col">DES</th>
+                                <th scope="col">INFOMACIÓN</th>
+                                <th scope="col" *ngIf="per_update">EDITAR</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of alertas; index as i; first as isFirst">
+                                <th scope="row">{{i+1}}</th>
+                                <td>{{item[1]}}</td>
+                                <td>{{item[2]}}</td>
+                                <td>{{item[4]}}</td>
+                                <td>{{item[5]}}</td>
+
+                                <td>{{item[14]}}</td>
+                                <td>{{item[27]}}</td>
+                                <td>{{item[10]}}. {{item[11]}}</td>
+                                <td *ngIf="item[38] =='---' || item[38] =='-//-' else ok">---</td>
+                                <ng-template #ok>
+                                    <td> <button class="btn btn-primary" (click)="ver_documento(item[38])"> PDF </button>
+                                    </td>
+                                </ng-template>
+                                <td *ngIf="item[38] =='---' || item[38] =='-//-' else ok_1">-/-</td>
+                                <ng-template #ok_1>
+                                    <td> <button class="btn btn-success icono" (click)="descarga_documento(item[38])"> </button>
+                                    </td>
+                                </ng-template>
+
+                                <td><button class="btn btn-info" (click)="info(i)">VER</button></td>
+                                <td><button class="btn btn-danger" (click)="editar(i)"
+                                        *ngIf="per_update">EDITAR</button></td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<app-ver-document [server]="server"></app-ver-document>

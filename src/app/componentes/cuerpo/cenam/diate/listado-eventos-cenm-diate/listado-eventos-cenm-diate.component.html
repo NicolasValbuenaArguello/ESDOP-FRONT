@@ -1,0 +1,109 @@
+<app-menu></app-menu>
+<div class="cuerpo">
+    <div class="contenedor">
+
+        <!-- 🔎 FILTROS -->
+        <div class="barra">
+            <!-- 📅 FILTRO FECHAS -->
+            <!-- 📅 FECHAS -->
+            <input type="date" [(ngModel)]="fechaInicio" />
+            <input type="date" [(ngModel)]="fechaFin" />
+
+            <button class="cargar" (click)="cargarDesdeBackend()">🔍 Cargar</button>
+
+
+            <input type="text" placeholder="Buscar..." [(ngModel)]="busqueda" (input)="aplicarFiltros()" />
+
+            <select [(ngModel)]="filtroDepartamento" (change)="aplicarFiltros()">
+                <option value="">Departamento</option>
+                <option *ngFor="let d of departamentos" [value]="d">
+                    {{d}}
+                </option>
+            </select>
+
+            <select [(ngModel)]="filtroMunicipio" (change)="aplicarFiltros()">
+                <option value="">Municipio</option>
+                <option *ngFor="let m of municipios" [value]="m">
+                    {{m}}
+                </option>
+            </select>
+
+            <!-- 📥 BOTÓN EXCEL -->
+            <button class="excel" (click)="exportarExcel()">⬇ Excel</button>
+
+        </div>
+
+        <!-- TABLA -->
+        <div class="tabla-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Boletín</th>
+                        <th>Departamento</th>
+                        <th>Municipio</th>
+                        <th>Acción</th>
+                        <th>Cantidad</th>
+
+                        <th>Fecha</th>
+                        <th>Hora</th>
+                        <th>Unidad</th>
+                        <th>Enemigo</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr *ngFor="let e of eventosFiltrados">
+                        <td>{{e.evento}}</td>
+                        <td>{{e.boletin}}</td>
+                        <td>{{e.departamento}}</td>
+                        <td>{{e.municipio}}</td>
+                        <td>{{e.tipo_explosivo}}</td>
+                        <td>{{e.cantidad}}</td>
+                        <td>{{e.fecha}}</td>
+                        <td>{{e.hora}}</td>
+                        <td>{{e.unidad}}</td>
+                        <td>{{e.enemigo}}</td>
+
+                        <td>
+                            <button (click)="editar(e)">✏️</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+    <!-- 🔥 MODAL -->
+    <div class="modal" *ngIf="mostrarModal">
+        <div class="modal-content">
+
+            <h3>Editar Evento</h3>
+
+            <label>Departamento</label>
+            <input [(ngModel)]="eventoSeleccionado.departamento" />
+
+            <label>Municipio</label>
+            <input [(ngModel)]="eventoSeleccionado.municipio" />
+
+            <label>Explosivo</label>
+            <input [(ngModel)]="eventoSeleccionado.tipo_explosivo" />
+
+            <label>Cantidad</label>
+            <input type="number" [(ngModel)]="eventoSeleccionado.cantidad" />
+
+            <div class="acciones">
+                <button (click)="guardarCambios()">💾 Guardar</button>
+                <button class="cancelar" (click)="cerrarModal()">❌ Cancelar</button>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<div *ngIf="cargando" class="overlay">
+    <div class="spinner"></div>
+    <p>Cargando datos...</p>
+</div>

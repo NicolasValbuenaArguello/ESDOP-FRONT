@@ -1,0 +1,58 @@
+.contenedor {
+  position: relative;
+  width: 90%;        /* 📌 Ancho del contenedor */
+  margin-top: 5%;   /* 📌 Separación desde arriba */
+  margin-left: auto; /* 📌 Lo empuja hacia la derecha */
+  margin-right: 0;   /* 📌 Asegura que quede a la derecha */
+  background: #fff;  /* Opcional: fondo blanco */
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Sombrado suave */
+}
+.titulo {
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.buscador {
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.buscador input {
+  border-radius: 8px;
+  padding: 10px 15px;
+  border: 1px solid #ccc;
+  transition: 0.3s;
+}
+
+.buscador input:focus {
+  border-color: #007bff;
+  box-shadow: 0px 0px 5px rgba(0, 123, 255, 0.3);
+}
+
+/* Tabla refinada */
+.tabla-plazos {
+  width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.tabla-plazos thead {
+  background-color: #007bff;
+  color: white;
+}
+
+.tabla-plazos tbody tr:hover {
+  background-color: #f1f5ff;
+  cursor: pointer;
+}
+
+.btn {
+  padding: 5px 10px;
+  font-size: 0.85rem;
+  border-radius: 6px;
+}

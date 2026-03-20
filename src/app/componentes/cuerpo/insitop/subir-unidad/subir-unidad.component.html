@@ -1,0 +1,31 @@
+<div class="container-subida">
+  <h2>📄 Subir archivo Excel</h2>
+
+  <label class="input-file-label">
+    <input type="file" (change)="onFileSelected($event)" hidden />
+    <span>📁 Seleccionar archivo Excel</span>
+  </label>
+
+  <div class="nombre-archivo" *ngIf="archivoNombre">
+    ✅ Archivo cargado: <strong>{{ archivoNombre }}</strong>
+  </div>
+
+  <button class="btn-enviar" (click)="enviarBackend()" [disabled]="!archivoExcel">
+    🚀 Enviar al Backend
+  </button>
+
+  <table *ngIf="uniqueKeys.length > 0">
+    <thead>
+      <tr>
+        <th>Columna</th>
+        <th>Cantidad de elementos únicos</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let key of uniqueKeys">
+        <td>{{ key }}</td>
+        <td>{{ uniqueCounts[key] }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

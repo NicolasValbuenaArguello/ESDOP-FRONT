@@ -1,0 +1,586 @@
+.subregiones-contenedor {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  padding: 1rem;
+  box-sizing: border-box;
+  margin-top: 4.5%;
+}
+
+.subregiones-wrapper {
+  width: 91%;
+  display: flex;
+  height: 85vh;
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+
+.columna-izquierda {
+  width: 30%;
+  background-color: #f8f9fa;
+  border-right: 2px solid #dee2e6;
+  padding: 1.5rem;
+  overflow-y: auto;
+}
+
+.columna-derecha {
+  width: 70%;
+  padding: 1.5rem;
+  overflow-y: auto;
+  background-color: #fff;
+}
+
+.subregiones-lista {
+  list-style: none;
+  padding: 0;
+}
+
+.subregiones-lista li {
+  padding: 0.8rem;
+  border-radius: 8px;
+  margin-bottom: 0.7rem;
+  cursor: pointer;
+  transition: background 0.3s;
+  border-left: 5px solid transparent;
+  background-color: #e9ecef;
+}
+
+.subregiones-lista li:hover {
+  background-color: #dee2e6;
+}
+
+.subregiones-lista li.activa {
+  background-color: #cdd2d8;
+  color: rgb(19, 19, 19);
+  font-weight: bold;
+  border-left-color: #0b5ed7;
+}
+
+.color-baja {
+  border-left-color: #6c757d; /* gris */
+}
+.color-media {
+  border-left-color: #ffc107; /* amarillo */
+}
+.color-alta {
+  border-left-color: #198754; /* verde */
+}
+
+.subregion-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.1rem;
+}
+
+.subregion-header i {
+  font-size: 1.2rem;
+  color: #0d6efd;
+}
+
+.subregiones-lista small {
+  font-size: 0.8rem;
+  color: #555;
+  margin-left: 1.6rem;
+}
+
+.crear-subregion {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.crear-subregion input {
+  flex: 1;
+  padding: 0.5rem;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+.crear-subregion button {
+  padding: 0.5rem 0.75rem;
+  background-color: #198754;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.departamento-bloque {
+  margin-bottom: 1rem;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 0.5rem;
+}
+
+.departamento-header {
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.1rem;
+  padding: 0.5rem 0;
+  font-weight: bold;
+}
+
+.municipios-lista {
+  padding-left: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-top: 0.5rem;
+}
+
+.municipios-lista label {
+  background: #f1f1f1;
+  padding: 0.3rem 0.6rem;
+  border-radius: 4px;
+}
+
+.subregion-empty {
+  font-style: italic;
+  color: #777;
+  margin-top: 2rem;
+}
+
+.subregion-descripcion {
+  color: #555;
+  margin-bottom: 1rem;
+}
+.editar-subregion {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.editar-subregion input {
+  flex: 1;
+  padding: 0.4rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.editar-subregion button {
+  padding: 0.4rem 0.7rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1.1rem;
+  transition: background 0.3s ease;
+}
+
+.editar-subregion button:hover {
+  background-color: #e2e6ea;
+}
+
+.btn-eliminar {
+  background-color: #dc3545;
+  color: white;
+}
+
+.btn-eliminar:hover {
+  background-color: #bb2d3b;
+}
+
+.columna-derecha {
+  width: 70%;
+  padding: 2rem;
+  background-color: #ffffff;
+  overflow-y: auto;
+  border-left: 1px solid #dee2e6;
+}
+
+/* Título */
+.columna-derecha h4 {
+  font-size: 1.6rem;
+  color: #0d6efd;
+  margin-bottom: 1rem;
+  border-bottom: 2px solid #0d6efd;
+  padding-bottom: 0.4rem;
+}
+
+/* Panel editar */
+.editar-subregion {
+  background-color: #e7f1ff;
+  border: 1px solid #0d6efd;
+  border-radius: 8px;
+  padding: 0.8rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-bottom: 1.2rem;
+}
+
+.editar-subregion input {
+  flex: 1;
+  padding: 0.5rem 0.8rem;
+  border: 1px solid #0d6efd;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+/* Botones */
+.editar-subregion button {
+  border: none;
+  padding: 0.5rem 0.8rem;
+  border-radius: 6px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  color: white;
+}
+
+.btn-guardar {
+  background-color: #0d6efd;
+}
+
+.btn-guardar:hover {
+  background-color: #084298;
+}
+
+.btn-eliminar {
+  background-color: #dc3545;
+}
+
+.btn-eliminar:hover {
+  background-color: #c82333;
+}
+
+/* Descripción */
+.subregion-descripcion {
+  font-size: 0.95rem;
+  font-style: italic;
+  color: #495057;
+  margin-bottom: 1.5rem;
+}
+
+/* Departamentos */
+.departamento-bloque {
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  transition: box-shadow 0.3s ease;
+}
+
+.departamento-bloque:hover {
+  box-shadow: 0 2px 6px rgba(13, 110, 253, 0.1);
+}
+
+.departamento-header {
+  font-weight: 600;
+  color: #0d6efd;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+
+.departamento-header i {
+  font-size: 1.1rem;
+  color: #084298;
+}
+
+/* Lista de municipios */
+.municipios-lista {
+  margin-top: 0.6rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.municipios-lista label {
+  background-color: #e7f1ff;
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  color: #084298;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  transition: background-color 0.2s;
+}
+
+.municipios-lista label:hover {
+  background-color: #d0e5ff;
+}
+
+/* Estado vacío */
+.subregion-empty {
+  font-style: italic;
+  color: #999;
+  text-align: center;
+  margin-top: 3rem;
+}
+input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #aaa;
+  border-radius: 4px;
+  outline: none;
+  cursor: pointer;
+  position: relative;
+  background-color: #1e1e1e;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+input[type="checkbox"]::before {
+  content: '';
+  position: absolute;
+  width: 6px;
+  height: 12px;
+  border: solid #fff;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+  top: 1px;
+  left: 6px;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+input[type="checkbox"]:checked {
+  background-color: #4caf50;
+  border-color: #4caf50;
+}
+
+input[type="checkbox"]:checked::before {
+  opacity: 1;
+}
+.btn-deseleccionar {
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  color: #333;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  margin-bottom: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.btn-deseleccionar:hover {
+  background-color: #ffe5e5;
+  color: #b20000;
+  border-color: #b20000;
+}
+
+
+/* nueva ventana */
+.ventana-subregion {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  backdrop-filter: blur(6px);
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.ventana-subregion-contenido {
+  background: white;
+  padding: 20px;
+  border-radius: 20px;
+  max-height: 90vh;
+  overflow-y: auto;
+  width: 600px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.4);
+}
+
+.subregion-card {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+}
+
+.subregion-nombre {
+  font-weight: bold;
+  color: #333;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.ventana-subregion-botones button {
+  margin-right: 10px;
+  margin-top: 10px;
+}
+.ventana-subregiones {
+  position: fixed;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+  width: 400px;
+  color: #1c1c1c;
+  padding: 20px;
+  z-index: 1000;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.ventana-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #2c2c2c;
+}
+
+.cerrar-btn {
+  background: transparent;
+  border: none;
+  font-size: 1.2em;
+  cursor: pointer;
+  color: #555;
+}
+
+.subregion-item {
+  margin-top: 10px;
+  padding: 8px;
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 8px;
+}
+
+.radio-opcion {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  cursor: pointer;
+}
+
+.nombre-sub {
+  font-weight: bold;
+  font-size: 1em;
+  color: #1a1a1a;
+}
+
+.detalle-sub {
+  font-size: 0.9em;
+  color: #444;
+}
+
+.detalle-muni {
+  margin-left: 15px;
+  font-size: 0.9em;
+  color: #333;
+}
+
+.ventana-footer {
+  margin-top: 15px;
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.btn-confirmar, .btn-toggle, .btn-quitar {
+  padding: 8px 10px;
+  font-size: 0.9em;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.btn-confirmar {
+  background-color: #00c292;
+  color: white;
+}
+
+.btn-toggle {
+  background-color: #4e73df;
+  color: white;
+}
+
+.btn-quitar {
+  background-color: #e74c3c;
+  color: white;
+}
+.btn-elegante {
+  background: #0077ff;
+  color: white;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: 0.3s ease;
+}
+
+.btn-elegante:hover {
+  background: #005ecc;
+}
+
+.btn-confirmar {
+  margin-top: 15px;
+  background: #00bb88;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+.ventana-subregion-botones {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.ventana-subregion-botones button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Botón confirmar */
+.btn-confirmar {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.btn-confirmar:hover {
+  background-color: #45a049;
+  transform: translateY(-1px);
+}
+
+/* Botón limpiar */
+.btn-limpiar {
+  background-color: #ff9800;
+  color: white;
+}
+
+.btn-limpiar:hover {
+  background-color: #e68900;
+  transform: translateY(-1px);
+}
+
+/* Botón cerrar */
+.btn-cerrar {
+  background-color: #f44336;
+  color: white;
+}
+
+.btn-cerrar:hover {
+  background-color: #d32f2f;
+  transform: translateY(-1px);
+}

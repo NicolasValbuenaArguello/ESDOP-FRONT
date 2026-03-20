@@ -1,0 +1,204 @@
+<app-menu></app-menu>
+<div class="cuerpo_insitop" id="cuerpo_insitop">
+    <div class="insitop">
+        <h3 style="display: flex; justify-content: center; justify-items: center; text-align: center;">
+            Control de Informacion de Pasos Fronterizos </h3>
+
+    </div>
+    <div class="cuerpo">
+        <div class="cargue_excel" id="cargue_excel" *ngIf="cargue_excel" style="position: fixed; width: 13%">
+            <h5 class="titulo"
+                style="display: flex; align-items: center; justify-content: center; position: fixed; width: 13%;">Cargue
+                de Informacion en EXCEL
+            </h5>
+            <br>
+            <br><br>
+
+            <div class="row col-md-9" style="margin: auto;">
+                <div class="centrar">
+                    <form action="" name="dataForm" #miformulario="ngForm" enctype="multipart/form-data">
+                        <div class="card" style="width: 12rem;">
+
+                            <div class="card-body">
+                                <h5 class="card-title">Fecha Información</h5>
+                                <p class="card-text"><input type="date" name="fecha_pasos" id="fecha_pasos"
+                                        class="form-control" ngModel></p>
+                            </div>
+
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item boton" (click)="hechos()">Archivo</li>
+                                <input required id="pazos_fronterizos" ngModel name="pazos_fronterizos" hidden
+                                    type="file" (change)="leer_hechos($event)">
+                                <li class="list-group-item" (click)="hechos()" *ngIf="inf_u">
+                                    <div class="alert alert-danger" role="alert">
+                                        {{inf_c}}!
+                                    </div>
+                                </li>
+                            </ul>
+                            <div class="card-body" *ngIf="inf_u">
+                                <button class="btn btn-primary" type="submit"
+                                    (click)="guardar(miformulario)">Guardar</button>
+                                <div *ngIf="inf_i">
+                                    <div class="alert alert-danger" role="alert">
+                                        {{inf_i_g}}!
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="reporte_excel" id="reporte_excel" *ngIf="reporte">
+            <h5 class="titulo"
+                style="display: flex; align-items: center; justify-content: center; position: fixed; width: 13%;">
+                Reporte
+            </h5>
+            <br>
+            <br><br>
+
+            <div class="row col-md-9" style="margin: auto;">
+                <div class="centrar">
+                    <form action="" name="dataForm" #miformulario_r="ngForm" enctype="multipart/form-data">
+                        <div class="card" style="width: 13rem;">
+
+                            <div class="card-body">
+                                <h5 class="card-title">Fecha Información</h5>
+                                <p class="card-text"><input type="date" name="fecha_reporte" id="fecha_reporte"
+                                        class="form-control" ngModel></p>
+                            </div>
+
+
+                            <div class="card-body">
+                                <button class="btn btn-primary" type="submit"
+                                    (click)="paso_fronterizos_reporte(miformulario_r)">Descargar</button>
+
+                            </div>
+
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="mapa_pazos" id="mapa_pazos" *ngIf="mapa_pazos">
+            <h5 class="titulo"
+                style="display: flex; align-items: center; justify-content: center; position: fixed; width: 13%;">
+                Pasos
+            </h5>
+            <br>
+            <br><br>
+
+            <div class="row col-md-9" style="margin: auto;">
+                <div class="centrar">
+                    <form action="" name="dataForm" #miformulario_pasos="ngForm" enctype="multipart/form-data">
+                        <div class="card" style="width: 13rem;">
+
+                            <div class="card-body">
+                                <h5 class="card-title">Fecha Información</h5>
+                                <p class="card-text"><input type="date" name="fecha_pasos_informacion"
+                                        id="fecha_pasos_informacion" class="form-control" ngModel></p>
+                            </div>
+
+                            <div class="card-body">
+                                <button class="btn btn-primary" type="submit"
+                                    (click)="paso_fronterizos(miformulario_pasos)">Graficar</button>
+
+                            </div>
+
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="actualizar_pazos" id="actualizar_pazos" *ngIf="mapa_pazos_actualizar">
+            <h5 class="titulo"
+                style="display: flex; align-items: center; justify-content: center; position: fixed; width: 13%;">
+                Pasos
+            </h5>
+            <br>
+            <br><br>
+
+            <div class="row col-md-9" style="margin: auto;">
+                <div class="centrar">
+                    <form action="" name="dataForm" #miformulario_pasosactulizar="ngForm" enctype="multipart/form-data">
+                        <div class="card" style="width: 13rem;">
+
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item boton" (click)="pasos()">Archivo</li>
+                                <input required id="pazos_fronterizos_actulizar" ngModel
+                                    name="pazos_fronterizos_actulizar" hidden type="file" (change)="leer_pasos($event)">
+                                <li class="list-group-item" (click)="hechos()" *ngIf="inf_u">
+                                    <div class="alert alert-danger" role="alert">
+                                        {{inf_c}}!
+                                    </div>
+                                </li>
+                            </ul>
+                            <div class="card-body" *ngIf="inf_u">
+                                <button class="btn btn-primary" type="submit"
+                                    (click)="guardar_pasos(miformulario_pasosactulizar)">Actualizar Pasos</button>
+
+                            </div>
+
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="actualizar_pazos_fronteras" id="actualizar_pazos_fronteras" *ngIf="actualizar_pazos_fronteras">
+            <h5 class="titulo"
+                style="display: flex; align-items: center; justify-content: center; position: fixed; width: 13%;">
+                Pasos
+            </h5>
+            <br>
+            <br><br>
+
+            <div class="row col-md-9" style="margin: auto;">
+                <div class="centrar">
+                    <form action="" name="dataForm" #miformulario_pasosactulizar="ngForm" enctype="multipart/form-data">
+                        <div class="card" style="width: 13rem;">
+
+                            <div class="card-body">
+                                <button class="btn btn-primary" type="submit" (click)="ver_fronterizos()">Ver
+                                    Pasos</button>
+
+                            </div>
+
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="mapa_dicte_2" id="mapa_dicte">
+
+            <app-mapa-digital></app-mapa-digital>
+        </div>
+        <div class="mapa_dicte_3 oculto" id="mapa_dash">
+            <app-pasos-fronterizos-cargue></app-pasos-fronterizos-cargue>
+        </div>
+
+
+<aside class="sidebar">
+  <div class="panel" (click)="mostrar_sub_menu(0)">🙈 <span>Ocultar</span></div>
+  <div class="panel" (click)="mostrar_sub_menu(3)">📌 <span>Pelotones</span></div>
+  <div class="panel" (click)="mostrar_sub_menu(1)">📥 <span>Cargar Excel</span></div>
+  <div class="panel" (click)="mostrar_sub_menu(2)">📈 <span>Reporte</span></div>
+  <div class="panel" (click)="mostrar_sub_menu(5)">📌 <span>Mostrar Pasos</span></div>
+  <div class="panel" (click)="mostrar_sub_menu(4)">♻️ <span>Actualizar Pasos</span></div>
+  
+  <div class="panel" (click)="descargar_imagen()">📄 <span>Descargar Planilla</span></div>
+  <div class="panel" (click)="dash()">📊 <span>DASH</span></div>
+  <div class="panel" (click)="dash_2()">🗺️ <span>Mapa</span></div>
+</aside>
+   
+        </div>
+    </div>
+    <app-spiner></app-spiner>

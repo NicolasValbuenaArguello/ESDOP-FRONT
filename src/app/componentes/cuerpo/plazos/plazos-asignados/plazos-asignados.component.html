@@ -1,0 +1,648 @@
+<app-menu></app-menu>
+<div class="cuerpo_2">
+    <div class="col-md-12 ">
+        <div class="row contenedor">
+            <div class="col-md-12 ">
+                <div class="container-fluid py-3">
+                    <div class="row align-items-center mb-3 g-2">
+                        <!-- 📋 Título -->
+                        <div class="col-md-4 col-12">
+                            <h2 class="titulo mb-0 text-md-start text-center">
+                                📋 {{ cambio_valor.length }} Plazos Asignados
+                            </h2>
+                        </div>
+
+                        <!-- 🔍 Buscador -->
+                        <div class="col-md-4 col-sm-6 col-12">
+                            <div class="d-flex align-items-center buscador-container">
+                                <input type="text" class="form-control buscador me-2"
+                                    placeholder="🔍 Buscar por funcionario, unidad o N° Orfeo..."
+                                    [(ngModel)]="busqueda" />
+                                <button *ngIf="busqueda" class="btn btn-outline-secondary limpiar-btn"
+                                    (click)="limpiarBusqueda()">
+                                    ✖
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- 🔘 Botones -->
+                        <div class="col-md-4 col-sm-6 col-12 text-md-end text-center">
+                            <div class="botones_filtro d-inline-flex flex-wrap gap-2">
+                                <button class="btn btn-primary" (click)="filtrar_2()">📊 Reporte</button>
+                                <button class="btn btn-primary" (click)="filtrar()">🔎 Filtrar</button>
+                                <button class="btn btn-danger" (click)="listado_asignados()">🔄 Actualizar</button>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <hr />
+
+ <div class="scroll-container">
+  <div class="row g-3">
+    <div class="col-sm-6 col-md-4 col-lg-3" *ngFor="let item of filtrarPlazos(); index as i">
+      <div class="card tarjeta_modern border-0 shadow-sm h-100" (click)="asignar_plazos(item[0])"
+          *ngIf="item[40] != 'SI'">
+        <div class="tarjeta_header {{ item[55] }}">
+          <div class="tarjeta_numero">{{ i + 1 }}</div>
+          <img class="tarjeta_icono"
+              [src]="'../../../../../assets/plazos/' + item[3] + '.png'" alt="icono" />
+        </div>
+
+        <div class="tarjeta_body p-3">
+          <p><strong>📄 N° Orfeo:</strong> {{ item[1] }}</p>
+          <p><strong>👤 Funcionario:</strong> {{ item[2] }}</p>
+          <p class="{{ item[55] }}"><strong>🏛 Unidad:</strong> {{ item[54] }}</p>
+          <hr />
+          <p><strong>📁 Tipo Unidad:</strong> {{ item[3] }}</p>
+          <p><strong>🕓 Asunto:</strong> {{ item[53] }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+                </div>
+
+
+            </div>
+        </div>
+
+    </div>
+
+    <div class="asignar oculto" id="view_dumentos_s">
+        <div class="row col-md-12 " style="height: 100%;">
+            <div class="col-md-7 " id="documento_pdf">
+                <div class="botones">
+                    <button class="btn btn-danger boton" (click)="cerrar()">✖</button>
+
+                    <button class="btn btn-primary boton" (click)="exppdir()" *ngIf="expandir">
+                        ➤
+                    </button>
+
+                    <button class="btn btn-primary boton" (click)="contraer()" *ngIf="contrae">
+                        ⬅
+                    </button>
+
+                    <button class="btn btn-secondary boton_letras" (click)="reasignar()" *ngIf="reasignacion_plazo">
+                        🔁 Reasignar
+                    </button>
+                </div>
+
+
+                <object type="application/pdf" [data]="doc_ver | safe" width="105%" height="100%" frameborder="0"
+                    allowfullscreen>
+                    <param name="view" value="fitH" />
+                </object>
+            </div>
+
+            <div class="col-md-5" id="documento_pdf_asignar">
+                <div class="plazos_s">
+                    <form class="form-group row tamanio" #plazos="ngForm">
+
+                        <div class="form-group col-md-11" style="margin: auto;">
+                            <label for="">NÚMERO ORFEO:</label>
+                            <h1>{{orfeo}}</h1>
+
+                        </div>
+
+                        <div class="form-group col-md-11" style="margin: auto;">
+                            <label for="">Funcionario:</label>
+
+                            <h2 *ngIf="resiacinacion_false">{{funcionario}}</h2>
+                            <select name="responsable" id="responsable" class="form-control" [ngModel]="funcionario"
+                                (change)="asignar_cargo(plazos)" *ngIf="ocultar_pla">
+                                <option value=""></option>
+                                <option [value]="item[0]"
+                                    *ngFor="let item of listado_usurios; index as i; first as isFirst">
+                                    {{item[1]}}. {{item[2]}} {{item[3]}}
+                                </option>
+                            </select>
+
+
+                        </div>
+                        <div class="form-group col-md-11" style="margin: auto;">
+                            <label for="">Cargo:</label>
+                            <h2 *ngIf="resiacinacion_false">{{cargo}}</h2>
+                            <input type="text" name="cargo" id="cargo" class="form-control" [ngModel]="cargo"
+                                *ngIf="ocultar_pla">
+                        </div>
+
+                        <div class="form-group col-md-11" style="margin: auto;">
+                            <label for="">Asunto:</label>
+                            <h3 *ngIf="asunto !=  null " style="color: snow;">{{asunto}}----</h3>
+
+                            <div *ngIf="reasignacion_plazo">
+                                <div *ngIf="asunto !=  null "><button class="btn btn-warning"
+                                        (click)="cambiar_asunto_ver_editar()"> Cambiar Asunto </button></div>
+                                <br>
+                                <div class="form-group col-md-11" style="margin: auto;" *ngIf="cambiar_asunto_ver">
+                                    <textarea class="form-control" rows="4" cols="" name="asunto" id="asunto"
+                                        [ngModel]="asunto"></textarea>
+                                </div>
+                                <br>
+                                <button class="btn btn-success" *ngIf="cambiar_asunto_ver"
+                                    (click)="actulizar_asunto(plazos)"> Guardar Asunto Nuevo</button>
+                            </div>
+                        </div>
+
+                        <label for="">NIVEL DE PRIORIDAD</label>
+                        <div class="row col-md-12" style="margin: auto;">
+
+                            <div class="col-md-6">
+
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" [ngModel]="op_inmedita"
+                                        name="op_inmedita" id="op_inmedita" value="OK" [disabled]="resiacinacion">
+                                    <label class="form-check-label" for="op_inmedita">
+                                        OPERACÓN INMEDIATA
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" [ngModel]="estrito_cumplimiento"
+                                        name="estrito_cumplimiento" id="estrito_cumplimiento" value="OK"
+                                        [disabled]="resiacinacion">
+                                    <label class="form-check-label" for="estrito_cumplimiento">
+                                        ESTRICTO CUMPLIMIENTO
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" [ngModel]="para_su_control"
+                                        name="para_su_control" id="para_su_control" value="OK"
+                                        [disabled]="resiacinacion">
+                                    <label class="form-check-label" for="para_su_control">
+                                        PARA SU CONTROL
+                                    </label>
+                                </div>
+
+                            </div>
+
+                            <div class="col-md-6">
+
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" [ngModel]="autorizado"
+                                        name="autorizado" id="autorizado" value="OK" [disabled]="resiacinacion">
+                                    <label class="form-check-label" for="autorizado">
+                                        AUTORIZADO
+                                    </label>
+                                </div>
+
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" [ngModel]="no_autorizado"
+                                        [disabled]="resiacinacion" name="no_autorizado" id="no_autorizado" value="OK">
+                                    <label class="form-check-label" for="no_autorizado">
+                                        NO AUTORIZADO
+                                    </label>
+                                </div>
+
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" [ngModel]="lo_de_su_cargo"
+                                        [disabled]="resiacinacion" name="lo_de_su_cargo" id="lo_de_su_cargo" value="OK">
+                                    <label class="form-check-label" for="lo_de_su_cargo">
+                                        LO DE SU CARGO
+                                    </label>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                        <label for="">NIVEL DE AUTORIDAD</label>
+                        <div class="row col-md-12" style="margin: auto;">
+
+                            <div class="col-md-6">
+
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" [ngModel]="firma_coejc"
+                                        [disabled]="resiacinacion" name="firma_coejc" id="exampleRadios_1_firma_coejc"
+                                        value="OK">
+                                    <label class="form-check-label" for="exampleRadios_1_firma_coejc">
+                                        RESPUESTA CON FIRMA COEJC
+                                    </label>
+                                </div>
+
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" [ngModel]="firma_secej"
+                                        [disabled]="resiacinacion" name="firma_secej" id="exampleRadios_1_firma_secej"
+                                        value="OK">
+                                    <label class="form-check-label" for="exampleRadios_1_firma_secej">
+                                        RESPUESTA CON FIRMA SECEJ
+                                    </label>
+                                </div>
+
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" [ngModel]="firma_jemop"
+                                        [disabled]="resiacinacion" name="firma_jemop" id="exampleRadios_1_firma_jemop"
+                                        value="OK">
+                                    <label class="form-check-label" for="exampleRadios_1_firma_jemop">
+                                        RESPUESTA CON FIRMA JEMOP
+                                    </label>
+                                </div>
+
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" [ngModel]="firma_dirop"
+                                        [disabled]="resiacinacion" name="firma_dirop" id="exampleRadios_1_firma_dirop"
+                                        value="OK">
+                                    <label class="form-check-label" for="exampleRadios_1_firma_dirop">
+                                        RESPUESTA CON FIRMA DIROP
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" [ngModel]="resuelva_informe"
+                                        [disabled]="resiacinacion" name="resuelva_informe"
+                                        id="exampleRadios_1_resuelva_informe" value="OK">
+                                    <label class="form-check-label" for="exampleRadios_1_resuelva_informe">
+                                        RESUELVA E INFORMA
+                                    </label>
+                                </div>
+
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" [ngModel]="seguimiento"
+                                        [disabled]="resiacinacion" name="seguimiento" id="exampleRadios_1_seguimiento"
+                                        value="OK">
+                                    <label class="form-check-label" for="exampleRadios_1_seguimiento">
+                                        SEGUIMIENTO
+                                    </label>
+                                </div>
+
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" [ngModel]="estudie_recomiende"
+                                        [disabled]="resiacinacion" name="estudie_recomiende"
+                                        id="exampleRadios_1_estudie_recomiende" value="OK">
+                                    <label class="form-check-label" for="exampleRadios_1_estudie_recomiende">
+                                        ESTUDIE Y RECOMIENDE
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <label for="">ACCION</label>
+                        <div class="row col-md-12" style="margin: auto;">
+
+                            <div class="col-md-6">
+
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" [ngModel]="trate_conmigo"
+                                        [disabled]="resiacinacion" name="trate_conmigo"
+                                        id="exampleRadios_1_trate_conmigo" value="OK">
+                                    <label class="form-check-label" for="exampleRadios_1_trate_conmigo">
+                                        TRATE CON DIROP
+                                    </label>
+                                </div>
+
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" [ngModel]="de_acuerdo_norma"
+                                        [disabled]="resiacinacion" name="de_acuerdo_norma"
+                                        id="exampleRadios_1_de_acuerdo_norma" value="OK">
+                                    <label class="form-check-label" for="exampleRadios_1_de_acuerdo_norma">
+                                        DE ACUEDO A NORMA
+                                    </label>
+                                </div>
+
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" [ngModel]="asistir"
+                                        [disabled]="resiacinacion" name="asistir" id="exampleRadios_1_asistir"
+                                        value="OK">
+                                    <label class="form-check-label" for="exampleRadios_1_asistir">
+                                        ASISTIR
+                                    </label>
+                                </div>
+
+                            </div>
+                            <div class="col-md-6">
+
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" [ngModel]="archivar"
+                                        [disabled]="resiacinacion" name="archivar" id="exampleRadios_1_archivar"
+                                        value="OK">
+                                    <label class="form-check-label" for="exampleRadios_1_archivar">
+                                        ARCHIVAR
+                                    </label>
+                                </div>
+
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" [ngModel]="agendar"
+                                        [disabled]="resiacinacion" name="agendar" id="exampleRadios_1_agendar"
+                                        value="OK">
+                                    <label class="form-check-label" for="exampleRadios_1_agendar">
+                                        AGENDAR
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" [ngModel]="devolver"
+                                        [disabled]="resiacinacion" name="devolver" id="exampleRadios_1_devolver"
+                                        value="OK">
+                                    <label class="form-check-label" for="exampleRadios_1_devolver">
+                                        DEVOLVER
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <label for="">ORDENES A DIVISIONES</label>
+                        <div class="row col-md-12" style="margin: auto;">
+
+                            <div class="col-md-6">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" [ngModel]="difundir"
+                                        [disabled]="resiacinacion" name="difundir" id="exampleRadios_1_difundir"
+                                        value="OK">
+                                    <label class="form-check-label" for="exampleRadios_1_difundir">
+                                        DIFUNDIR
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" [ngModel]="remitir"
+                                        [disabled]="resiacinacion" name="remitir" id="exampleRadios_1_remitir"
+                                        value="OK">
+                                    <label class="form-check-label" for="exampleRadios_1_remitir">
+                                        REMITIR
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <label for="">DIVISIONES</label>
+                        <div class="row col-md-12" style="margin: auto;">
+                            <div class="form-check" *ngIf="ocultar_pla">
+                                <input class="form-check-input" type="checkbox" ngModel name="todiv"
+                                    id="exampleRadios_1_todiv" value="OK">
+                                <label class="form-check-label" for="exampleRadios_1_todiv" (click)="divisiones_def()">
+                                    TODAS LAS DIVISIONES
+                                </label>
+                            </div>
+                            <div class="col-md-4">
+
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" ngModel name="div1"
+                                        id="exampleRadios_1_div1" value="OK" [ngModel]="div1"
+                                        [disabled]="resiacinacion">
+                                    <label class="form-check-label" for="exampleRadios_1_div1">
+                                        DIV01
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" ngModel name="div2"
+                                        id="exampleRadios_1_div2" value="OK" [ngModel]="div2"
+                                        [disabled]="resiacinacion">
+                                    <label class="form-check-label" for="exampleRadios_1_div2">
+                                        DIV02
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" ngModel name="div3"
+                                        id="exampleRadios_1_div3" value="OK" [ngModel]="div3"
+                                        [disabled]="resiacinacion">
+                                    <label class="form-check-label" for="exampleRadios_1_div3">
+                                        DIV03
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" ngModel name="div4"
+                                        id="exampleRadios_1_div4" value="OK" [ngModel]="div4"
+                                        [disabled]="resiacinacion">
+                                    <label class="form-check-label" for="exampleRadios_1_div4">
+                                        DIV04
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" ngModel name="div5"
+                                        id="exampleRadios_1_div5" value="OK" [ngModel]="div5"
+                                        [disabled]="resiacinacion">
+                                    <label class="form-check-label" for="exampleRadios_1_div5">
+                                        DIV05
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" ngModel name="div6"
+                                        id="exampleRadios_1_div6" value="OK" [ngModel]="div6"
+                                        [disabled]="resiacinacion">
+                                    <label class="form-check-label" for="exampleRadios_1_div6">
+                                        DIV06
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" ngModel name="div7"
+                                        id="exampleRadios_1_div7" value="OK" [ngModel]="div7"
+                                        [disabled]="resiacinacion">
+                                    <label class="form-check-label" for="exampleRadios_1_div7">
+                                        DIV07
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" ngModel name="div8"
+                                        id="exampleRadios_1_div8" value="OK" [ngModel]="div8"
+                                        [disabled]="resiacinacion">
+                                    <label class="form-check-label" for="exampleRadios_1_div8">
+                                        DIV08
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" ngModel name="davaa"
+                                        id="exampleRadios_1_davaa" value="OK" [ngModel]="davaa"
+                                        [disabled]="resiacinacion">
+                                    <label class="form-check-label" for="exampleRadios_1_davaa">
+                                        DAVAA
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" ngModel name="divfe"
+                                        id="exampleRadios_1_divfe" value="OK" [ngModel]="divfe"
+                                        [disabled]="resiacinacion">
+                                    <label class="form-check-label" for="exampleRadios_1_divfe">
+                                        DIVFE
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" ngModel name="futco"
+                                        id="exampleRadios_1_futco" value="OK" [ngModel]="futco"
+                                        [disabled]="resiacinacion">
+                                    <label class="form-check-label" for="exampleRadios_1_futco">
+                                        FUTOM
+                                    </label>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-11" style="margin: auto;">
+                            <label for="">OBSERVACIONES </label>
+                            <div class="form-group col-md-11" style="margin: auto;">
+                                <h2 *ngIf="resiacinacion_false">{{ordenes}}</h2>
+                                <div class="form-group col-md-11" style="margin: auto;" *ngIf="ocultar_pla">
+                                    <textarea class="form-control" rows="4" cols="" name="orden" id="orden"
+                                        [ngModel]="ordenes"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-11" style="margin: auto;">
+                            <label for="">FECHA DE CUMPLIMIENTO</label>
+                            <div class="form-group col-md-11" style="margin: auto;">
+                                <h2 *ngIf="resiacinacion_false">{{fecha_cumplimiento}}</h2>
+                                <input type="date" name="fecha_plazo" id="fecha_plazo" class="form-control"
+                                    [ngModel]="fecha_cumplimiento" *ngIf="ocultar_pla">
+
+                            </div>
+                        </div>
+                        <div class="form-group col-md-11" style="margin: auto;">
+                            <label for="">TRATAR CON JEMOP</label>
+                            <div class="form-group col-md-11" style="margin: auto;">
+                                <h2 *ngIf="resiacinacion_false">{{respuesta}}</h2>
+                                <select name="respuesta" id="respuesta" class="form-control" [ngModel]="respuesta"
+                                    *ngIf="ocultar_pla" (click)="mostrar_fecha(plazos)">
+                                    <option value=""></option>
+                                    <option value="SI">SI</option>
+                                    <option value="NO">NO</option>
+                                </select>
+
+                            </div>
+                        </div>
+                        <div class="form-group col-md-11" style="margin: auto;">
+                            <label for="">FECHA DE CUMPLIMIENTO</label>
+                            <div class="form-group col-md-11" style="margin: auto;">
+                                <h2 *ngIf="resiacinacion_false">{{fecha_respuesta}}</h2>
+                                <input type="date" name="fecha_plazo_respuesta" id="fecha_plazo_respuesta"
+                                    class="form-control" [ngModel]="fecha_respuesta" *ngIf="ocultar_pla">
+
+                            </div>
+                        </div>
+
+                        <br><br>
+
+                        <div class="form-group col-md-11" style="margin: auto;">
+                            <p for="">-----------------</p>
+                            <button class="btn btn-success" (click)="reasignar_plazo(plazos)"
+                                *ngIf="ocultar_pla">REASIGNAR</button>
+                        </div>
+                        <br><br>
+                        <div class="form-group col-md-11" style="margin: auto;">
+                            <p for=""></p>
+                            <button class="btn btn-danger" *ngIf="ocultar_pla"
+                                (click)="eliminar_plazo(plazos)">ELIMNAR</button>
+                        </div>
+
+                        <div class="form-group col-md-11" style="margin: auto;">
+                            <label for="">ACCIONES TOMADAS </label>
+                            <div class="form-group col-md-11" style="margin: auto;">
+
+                                <div class="form-group col-md-11" style="margin: auto;">
+                                    <textarea class="form-control" rows="4" cols="" name="observaciones"
+                                        id="observaciones" ngModel></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <hr style="color: transparent;">
+                        <div class="form-group col-md-11" style="margin: auto;">
+                            <div class="card">
+                                <div class="card-body" (click)="cargar_acta_alerta()" style="cursor: pointer;">
+                                    Soporte.
+                                </div>
+                                <input required id="cumplido_soporte" ngModel name="cumplido_soporte" type="file" hidden
+                                    (change)="leer_acta_alerta($event)">
+                                <div class="alert alert-success col-md-11" role="alert" *ngIf="inf_r"
+                                    style="margin: auto !important;">
+                                    {{inf_c_r}}!
+                                </div>
+                                <br *ngIf="inf_r">
+                            </div>
+                        </div>
+                        <div class="form-group col-md-11" style="margin: auto;">
+                            <p for=""></p>
+                            <button class="btn btn-success" (click)="actulizar_plazo(plazos)">CUMPLIR PLAZO</button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="asignar_2 oculto_2" id="view_dumentos_s_2">
+        <div class="filtros_unidades" *ngFor="let item of unidades; index as i; first as isFirst">
+            <div class="card filtro_card" style="width: 16rem;" (click)="filtrar_informacion(item)">
+                <div class="card-body">
+                    {{item}}
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="filtros_unidades" *ngFor="let item of estado_plazos; index as i; first as isFirst">
+            <div class="card filtro_card" style="width: 16rem;" (click)="filtrar_informacion_estado(item)">
+                <div class="card-body">
+                    {{item}}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="asignar_3 oculto_3" id="view_dumentos_s_3">
+
+        <button class="btn btn-danger posicion_btn_cerrar" (click)="filtrar_2()">
+            X
+        </button>
+
+        <div class="card" style="width: 20rem;">
+            <img src="../../../../../assets/logos/JEMOP-DIROP.png" class="card-img-top" alt="...">
+            <div class="card-body">
+
+                <div class="filtros_unidades">
+                    <div class="card filtro_card" style="width: 16rem;">
+                        <div class="card-body" (click)="reporte_pdf_balance()">
+                            Balance
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="card" style="width: 20rem;">
+            <img src="../../../../../assets/logos/JEMOP-DIROP.png" class="card-img-top" alt="...">
+            <div class="card-body">
+                <div class="filtros_unidades">
+                    <div class="card filtro_card" style="width: 16rem;">
+                        <div class="card-body" (click)="reporte_pdf()">
+                            Reporte PDF
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="card" style="width: 20rem;">
+            <img src="../../../../../assets/logos/JEMOP-DIROP.png" class="card-img-top" alt="...">
+            <div class="card-body">
+
+                <div class="filtros_unidades">
+                    <div class="card filtro_card" style="width: 16rem;">
+                        <div class="card-body" (click)="reporte_pdf_estadistica()">
+                            Estadistica PDF
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="card" style="width: 20rem;">
+            <img src="../../../../../assets/logos/JEMOP-DIROP.png" class="card-img-top" alt="...">
+            <div class="card-body">
+
+                <div class="filtros_unidades">
+                    <div class="card filtro_card" style="width: 16rem;">
+                        <div class="card-body" (click)="reporte_pdf_estadistica()">
+                            Estadistica EXCEL
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<app-spiner></app-spiner>

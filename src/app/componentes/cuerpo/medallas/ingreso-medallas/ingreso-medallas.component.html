@@ -1,0 +1,300 @@
+<app-menu></app-menu>
+<div class="cuerpo" ng-init="inicioAlgo()">
+    <div class="col-md-12">
+        <form class="form-group row tamanio" #medallas="ngForm" autocomplete="off">
+            <div class="row contenedor">
+
+                <div class="col-md-12 ">
+                    <div class="position_btn">
+                        <button class="btn btn-success" (click)="mostrar_proyecto()">+</button>
+                    </div>
+                    <h2 class="titulo">Registro de Medallas</h2>
+                    <div class="radios">
+                        <div class=" row col-md-12">
+                            <div class=" row col-md-2 imagen_query">
+                                <div class="imagen">
+                                    <img [src]="img" alt="" class="foto" id="foto">
+                                </div>
+                            </div>
+
+                            <div class=" col-md-10">
+                                <br>
+                                <h2>Datos de Llegada de la Documentación</h2>
+                                <div class=" row col-md-12">
+                                    <div class="form-group col-md-3" style="margin: auto;">
+                                        <label for="">Fecha Llegada</label>
+                                        <input type="date" name="fecha_mes" id="fecha_mes" class="form-control" ngModel>
+                                    </div>
+                                    <div class="form-group col-md-3" style="margin: auto;">
+                                        <label for="">No. Oficio Ingreso</label>
+                                        <input type="text" name="oficio" id="oficio" class="form-control" ngModel>
+                                    </div>
+                                    <div class="form-group col-md-6" style="margin: auto;">
+                                        <label for="">Quien Recibe la Documentacion</label>
+                                        <input type="text" name="recibidad_por" id="recibidad_por" class="form-control"
+                                        [ngModel]="usuario">
+                                    </div>
+                                </div>
+                                <br>
+                                <hr>
+                                <h2>Datos de Ingreso</h2>
+                                <div class=" row col-md-12">
+                                    <div class="form-group col-md-4" style="margin: auto;">
+                                        <label for="">Medalla: </label>
+                                        <select name="medalla" id="medalla" class="form-control" ngModel
+                                            (change)="cambio_img(medallas)">
+                                            <option value=""></option>
+                                            <option value="MEDALLA DESEMPEÑO OPERACIONAL">MEDALLA DESEMPEÑO OPERACIONAL
+                                            </option>
+                                            <option value="MEDALLA AL VALOR">MEDALLA AL VALOR</option>
+                                            <option value="MEDALLA HERIDOS EN ACCIÓN">MEDALLA HERIDOS EN ACCIÓN</option>
+                                            <option value="MEDALLA A LA BANDERA DE GUERRA">MEDALLA A LA BANDERA DE
+                                                GUERRA</option>
+
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-4" style="margin: auto;">
+                                        <label for="">Como</label>
+                                        <input type="text" name="como" id="como" class="form-control"
+                                            ngModel>
+                                    </div>
+                                    <div class="form-group col-md-2" style="margin: auto;">
+                                        <label for="">Proyecto</label>
+                                        <select name="proyecto" id="proyecto" class="form-control" ngModel>
+                                            <option value=""></option>
+                                            <option [value]="item" ngModel *ngFor="let item of proyectos_listado; index as i; first as isFirst">
+                                                {{item[1]}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-2" style="margin: auto;">
+                                        <label for="">Fecha Ingreso Sistema</label>
+                                        <input type="date" name="fecha_ingreso" id="fecha_ingreso" class="form-control"
+                                            ngModel>
+                                    </div>
+
+                                </div>
+                                <hr>
+                                <h2>Datos Generales</h2>
+                                <div class=" row col-md-12">
+                                    <div class="form-group col-md-3" style="margin: auto;">
+                                        <label for="">No. Radicado </label>
+                                        <input type="text" name="radicado" id="radicado" class="form-control"
+                                            [ngModel]="radicado">
+                                    </div>
+
+                                    <div class="form-group col-md-3" style="margin: auto;">
+                                        <label for="">Batallón</label>
+                                        <input type="text" name="batallon" id="batallon" class="form-control" ngModel>
+                                    </div>
+                                    <div class="form-group col-md-3" style="margin: auto;">
+                                        <label for="">Brigada</label>
+                                        <input type="text" name="brigada" id="brigada" class="form-control" ngModel>
+                                    </div>
+                                    <div class="form-group col-md-3" style="margin: auto;">
+                                        <label for="">Division</label>
+                                        <input type="text" name="division" id="division" class="form-control" ngModel>
+                                    </div>
+                                </div>
+
+                                <hr>
+                                <h2>Datos Personales</h2>
+                                <div class=" row col-md-12">
+                                    <div class="form-group col-md-1" style="margin: auto;">
+                                        <label for="">GRD: </label>
+                                        <select name="grd" id="grd" class="form-control" ngModel>
+                                            <option value=""></option>
+                                            <option [value]="item" *ngFor="let item of grd_recibe">{{item}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-1" style="margin: auto;">
+                                        <label for="">Arma: </label>
+                                        <select name="arma" id="arma" class="form-control" ngModel>
+                                            <option value=""></option>
+                                            <option [value]="item" *ngFor="let item of arma">{{item}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-4" style="margin: auto;">
+                                        <label for="">No. Cedula </label>
+                                        <input type="text" name="cedula" id="cedula" class="form-control" ngModel>
+                                    </div>
+                                    <div class="form-group col-md-6" style="margin: auto;">
+                                        <label for="">Nombre y Apellidos </label>
+                                        <input type="text" name="nombre_apellido" id="nombre_apellido"
+                                            class="form-control" ngModel>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class=" row col-md-2 imagen_query"></div>
+                            <div class=" col-md-10">
+                                <hr>
+                                <h2>Informacón del Ortogamiento</h2>
+                                <div class=" row col-md-12">
+                                    <div class="form-group col-md-2" style="margin: auto;">
+                                        <label for="">Categoria </label>
+                                        <select name="categoria" id="categoria" class="form-control" ngModel>
+                                            <option value=""></option>
+                                            <option value="Primera Vez">Primera Vez</option>
+                                            <option value="Segunda Vez">Segunda Vez</option>
+                                            <option value="Tercera Vez">Tercera Vez</option>
+                                            <option value="Cuarta Vez">Cuarta Vez</option>
+                                            <option value="Quinta Vez">Quinta Vez</option>
+                                            <option value="Sexta Vez">Sexta Vez</option>
+                                            <option value="Septima Vez">Septima Vez</option>
+                                            <option value="Octava Vez">Octava Vez</option>
+                                            <option value="Novena Vez">Novena Vez</option>
+                                            <option value="Decima Vez">Decima Vez</option>
+                                            <option value="Decima Primera Vez">Decima Primera Vez</option>
+                                            <option value="Decima Segunda Vez">Decima Segunda Vez</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group col-md-3" style="margin: auto;">
+                                        <label for="">Operación</label>
+                                        <input type="text" name="operacion" id="operacion" class="form-control" ngModel>
+                                    </div>
+                                    <div class="form-group col-md-3" style="margin: auto;">
+                                        <label for="">Motivo</label>
+                                        <select name="motivo" id="motivo" class="form-control" ngModel
+                                            (change)="dos_fecha(medallas)">
+                                            <option value=""></option>
+                                            <option value="Desempeño Operacional">Desempeño Operacional</option>
+                                            <option value="Gestion de Comando">Gestion de Comando</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-2" style="margin: auto;">
+                                        <label for="">Fecha del Hechos Inicio</label>
+                                        <input type="date" name="fecha_hecho" id="fecha_hecho" class="form-control"
+                                            ngModel>
+                                    </div>
+                                    <div class="form-group col-md-2" style="margin: auto;">
+                                        <label for="">Fecha del Hechos Final</label>
+                                        <input type="date" name="fecha_hecho_final" id="fecha_hecho_final"
+                                            class="form-control" ngModel>
+                                    </div>
+
+                                </div>
+                                <div class=" row col-md-12">
+
+                                    <div class="form-group col-md-6" style="margin: auto;">
+                                        <label for="">Departamento</label>
+                                        <select name="departamento" id="departamento" class="form-control"
+                                            [(ngModel)]="departamento" (change)="departamentos(4,5)">
+                                            <option value=""></option>
+                                            <option value="N/A">N/A</option>
+                                            <option [value]="item" *ngFor="let item of departamentos_filtrados">{{item}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-6" style="margin: auto;" *ngIf="final_2">
+                                        <label for="">Municipio</label>
+                                        <select name="municipio" id="municipio" class="form-control" ngModel>
+                                            <option value=""></option>
+                                            
+                                            <option value="AREA DE RESPONSABILIDAD">AREA DE RESPONSABILIDAD</option>
+                                            <option [value]="item" *ngFor="let item of unidad_selecionada_municipios">
+                                                {{item}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-6" style="margin: auto;" *ngIf="final">
+                                        <label for="">Area de Responsabilidad</label>
+                                        <input type="text" name="area_de_responsabilidad" id="area_de_responsabilidad" class="form-control" ngModel>
+                                    </div>
+                                </div>
+                                    <div class=" row col-md-12">
+                                    <div class="form-group col-md-6" style="margin: auto;">
+                                        <label for="">Vereda</label>
+                                        <input type="text" name="veredad" id="veredad" class="form-control" ngModel>
+                                    </div>
+                                    <div class="form-group col-md-6" style="margin: auto;">
+                                        <label for="">Amenaza</label>
+                                        <input type="text" name="amenaza" id="amenaza" class="form-control" ngModel>
+                                    </div>
+
+                                </div>
+                                <div class=" row col-md-12 ordenes">
+                                    <div class="form-group col-md-8" style="margin: auto;">
+                                        <label for="">Resumen</label>
+                                        <div class="form-group col-md-11">
+                                            <textarea rows="6" cols="100" name="resumen" id="resumen"
+                                                ngModel></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <hr>
+                        <br><br>
+                        <div class=" row col-md-12">
+
+                            <div class="alert alert-success col-md-11" role="alert" *ngIf="inf_g"
+                                style="margin: auto !important;">
+                                {{inf_c_g}}!
+                            </div>
+                            <br *ngIf="inf_g">
+                            <div class="alert alert-danger col-md-11" role="alert" *ngIf="inf_a"
+                                style="margin: auto !important;">
+                                {{inf_c_g}}!
+                            </div>
+
+                            <br *ngIf="inf_a">
+                            <div class="posicion_btn">
+                                <button class="btn btn-success" (click)="guardar(medallas)"
+                                    *ngIf="inf_btn">GUARDAR</button>
+                                <button class="btn btn-success" (click)="clear()" *ngIf="inf_btnuew">Nuevo</button>
+                            </div>
+                        </div>
+                        <hr>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="proyecto_nuevo oculto" id="proyecto_ingreso">
+        <button class="btn btn-danger posicion_btn_cerrar" (click)="mostrar_proyecto()">
+            X
+        </button>
+        <div class="card" style="width: 35rem;">
+            <img src="../../../../../assets/logos/JEMOP-DIROP.png" class="card-img-top" alt="...">
+            <div class="card-body">
+
+                <form class="form-group row tamanio" #medallas_proyecto="ngForm" autocomplete="off">
+                    <h1 style="color: snow;">Registro de Proyecto</h1>
+                    <div class="form-group col-md-12" style="margin: auto;">
+                        <label for="" class="color_label">No. Radicado </label>
+                        <input type="text" name="proyecto_registro" id="proyecto_registro" class="form-control" ngModel>
+                    </div>
+                    <br>
+                    <hr style="color: snow;">
+
+                    <div class="posicion_btn" (click)="guardar_proyecto(medallas_proyecto)">
+                        <button class="btn btn-success">
+                            Registrar
+                        </button>
+                    </div>
+                </form>
+
+                <p class="card-text">Registro de Proyectos .</p>
+            </div>
+        </div>
+
+
+        <div class="tamanio_proyectos">
+            <hr style="color: snow;">
+            <h2 style="color: snow;">Proyectos</h2>
+            <ul>
+                <li *ngFor="let item of proyectos_listado; index as i; first as isFirst"
+                    style="color: snow; font-size: x-large;">
+                    {{item[1]}}
+                </li>
+            </ul>
+        </div>
+
+
+    </div>
+</div>
+<app-spiner></app-spiner>

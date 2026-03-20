@@ -1,0 +1,43 @@
+<app-menu></app-menu>
+<div class="cuerpo" ng-init="inicioAlgo()">
+
+    <div class="row contenedor">
+        <div class="col-md-12">
+            <div class=" row col-md-12">
+                <form class="form-group row tamanio" #documentos_pdf="ngForm">
+                    <div class="form-group col-md-1" style="margin: auto;">
+                        <label for="">Fecha</label>
+                    </div>
+                    <div class="form-group col-md-2" style="margin: auto;">
+                        <input type="date" name="fecha" id="fecha" class="form-control" ngModel>
+                    </div>
+                    <div class=" row col-md-1" style="margin: auto;">
+                        <button class="btn btn-success" (click)="filtar_fecha(documentos_pdf)">BUSCAR</button>
+                    </div>
+                    <div class="form-group col-md-1" style="margin: auto;">
+                        <label for="">División</label>
+                    </div>
+                    <div class="form-group col-md-3" style="margin: auto;">
+                        <select name="sigla_unidad" id="sigla_unidad" class="form-control" ngModel
+                        (change)="div_hija(0,1)">
+                        <option value=""></option>
+                        <option [value]="item" *ngFor="let item of division">{{item}}</option>
+                    </select>
+                    </div>
+                    <div class=" row col-md-1" style="margin: auto;">
+                        <button class="btn btn-success" (click)="filtar_division(documentos_pdf)">BUSCAR
+                        </button>
+                    </div>
+                    <div class=" row col-md-2" style="margin: auto;">
+
+                    </div>
+                </form>
+                <!-- <button class="btn btn-success  btn_mas" (click)="nuevo_movimiento()">+</button> -->
+            </div>
+            <div class="radios">
+
+                <app-mapa-digital></app-mapa-digital>
+            </div>
+        </div>
+    </div>
+</div>

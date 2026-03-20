@@ -1,0 +1,143 @@
+/* ---------- TITULOS ---------- */
+.titulo_cambio {
+  background-color: black;
+  color: snow;
+}
+.titulo_cambio:hover {
+  background-color: rgb(128, 6, 6);
+  color: snow;
+  cursor: pointer;
+}
+
+/* ---------- CENTRADO ---------- */
+.centrar {
+  display: flex;
+  text-align: center;
+  justify-content: center;
+}
+
+/* ---------- CONTENEDOR GENERAL ---------- */
+.contenedor {
+  position: fixed;
+  margin-top: 1%;
+  display: flex;
+  text-align: center;
+  padding: 15px;
+  border-radius: 5px;
+  width: 86%;
+  overflow: hidden;
+}
+
+/* ---------- RADIOS ---------- */
+.radios {
+  position: fixed;
+  border: 2px solid #707070;
+  border-radius: 5px;
+  width: 83.8%;
+  height: 75vh;
+  overflow-y: scroll;
+  background-color: white;
+}
+
+.radios_e {
+  border: 2px solid #707070;
+  border-radius: 5px;
+  width: 100%;
+  height: 75vh;
+  overflow-y: scroll;
+}
+
+.radios_i {
+  position: fixed;
+  width: 19%;
+  height: 65vh;
+  overflow-y: scroll;
+}
+
+/* ---------- BOTÓN INFERIOR ---------- */
+.posicion_btn {
+  position: fixed;
+  bottom: 5%;
+  width: 19%;
+  height: 7%;
+  border-top: 2px solid gray;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ---------- INPUT RADIOS PERSONALIZADOS ---------- */
+input[type="radio"] {
+  display: none;
+}
+
+input[type="radio"] + label {
+  font-weight: bold;
+  line-height: 3em;
+  color: #ccc;
+  cursor: pointer;
+  display: flex;
+  text-align: left;
+}
+
+input[type="radio"]:checked + label {
+  color: #0fbf12;
+}
+
+input[type="radio"] + label:before {
+  content: "";
+  width: 26px;
+  height: 26px;
+  margin: 0.5em 0.5em 0 0;
+  border: 2px solid #ccc;
+  background: #fff;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+input[type="radio"]:checked + label:after {
+  content: "";
+  width: 8px;
+  height: 8px;
+  background: #0fbf12;
+  border-radius: 50%;
+  position: relative;
+  left: -20px;
+  top: 11px;
+}
+
+/* ---------- OCULTAR DESCARGAS ---------- */
+.descargue {
+  display: none;
+}
+
+/* ---------- LIMPIAR HR ---------- */
+hr {
+  color: transparent;
+}
+
+/* ---------- MEDIA QUERIES OPTIMIZADOS ---------- */
+
+/* Dispositivos pequeños (teléfonos) */
+@media only screen and (max-width: 600px) {
+  .contenedor {
+    flex-direction: column;
+    width: 100%;
+    padding: 5px;
+  }
+
+  .radios, .radios_i, .posicion_btn {
+    position: static;
+    width: 100%;
+    height: auto;
+  }
+}
+
+/* Dispositivos grandes */
+@media only screen and (min-width: 1450px) {
+  .contenedor {
+    background-color: black;
+    width: 86%;
+    position: fixed;
+  }
+}

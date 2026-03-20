@@ -1,0 +1,1630 @@
+/* Contenedor general */
+.dashboard-container {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  width: 89%;
+  top: 12%;
+  right: 0.5%;
+  height: 87vh;
+  font-family: Arial, sans-serif;
+  background-color: black;
+  border-radius: 7px;
+  color: white;
+  z-index: 10;
+}
+
+/* Submenú superior */
+.sub-menu {
+  display: flex;
+  gap: 10px;
+  padding: 10px;
+  background-color: #010a14;
+  color: white;
+  border-radius: 7px;
+}
+
+.sub-menu button {
+  background: white;
+  color: #080808;
+  border: none;
+  padding: 5px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.sub-menu button:hover {
+  background-color: #5a0b0b;
+  color: snow;
+}
+
+/* Contenedor de columnas */
+.columns-container {
+  display: flex;
+  flex: 1;
+  gap: 10px;
+  padding: 10px;
+}
+
+/* Columnas */
+.column {
+  flex: 1;
+  background-color: #f5f5f5;
+  padding: 10px;
+  border-radius: 8px;
+  overflow: auto;
+}
+
+
+/* Placeholder del mapa */
+.map-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  font-weight: bold;
+
+}
+.column-left { flex: 1; }
+.column-center { flex: 2; }
+.column-right { flex: 1; }
+.operaciones-container {
+  text-align: center;
+  color: #000;
+  font-family: 'Arial', sans-serif;
+  margin-top: 20px;
+}
+/*--------------------------------------*/
+/* configuacion de la columna exganos --*/
+/*--------------------------------------*/
+.anio {
+  background-color: #0f3e2e;
+  color: white;
+  display: inline-block;
+  padding: 6px 25px;
+  border-radius: 20px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  box-shadow: 2px 3px 6px rgba(0, 0, 0, 0.3);
+}
+
+.hex-grid {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.hex-row {
+  display: flex;
+  gap: 20px;
+}
+
+.hex {
+  position: relative;
+  width: 150px;
+  height: 168px;
+  background-color: transparent;
+  clip-path: polygon(50% 0%, 93% 25%, 93% 75%, 50% 100%, 7% 75%, 7% 25%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hex-content {
+  background-color: white;
+  width: 100%;
+  height: 100%;
+  clip-path: inherit;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+}
+
+.central {
+  width: 130px;
+  height: 150px;
+}
+
+.color-1 { background-color: #b0e0d0; }
+.color-2 { background-color: #f3e8c0; }
+.color-3 { background-color: #d7c2a3; }
+.color-4 { background-color: #d97171; color: white; }
+.color-5 { background-color: #9ab49c; }
+.color-6 { background-color: #0f3e2e; color: white; }
+
+.cantidad {
+  font-size: 22px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.titulo {
+  font-size: 12px;
+  font-weight: 600;
+  text-align: center;
+  margin: 0;
+}
+
+h4 {
+  margin: 5px 0 0;
+  font-size: 14px;
+}
+
+.central-content {
+  background-color: #f5f5f5;
+  color: #a51e1e;
+  font-weight: bold;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+.cantidad-central {
+  font-size: 30px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.titulo-central {
+  font-size: 14px;
+  font-weight: 700;
+  margin: 0;
+}
+
+/* Ajuste responsivo */
+@media (max-width: 768px) {
+  .hex {
+    width: 90px;
+    height: 100px;
+  }
+  .cantidad {
+    font-size: 18px;
+  }
+}
+.hex-icon {
+  font-size: 28px;
+  margin-top: 6px;
+  color: #333;
+  opacity: 0.8;
+}
+
+.color-4 .hex-icon,
+.color-6 .hex-icon {
+  color: #fff; /* íconos blancos para hexágonos oscuros */
+}
+/*--------------------------------------*/
+/* configuacion de la columna derecha --*/
+/*--------------------------------------*/
+.info-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: "Arial", sans-serif;
+  color: #000;
+  margin: 20px;
+}
+
+.info-box {
+  border: 2px solid #000;
+  padding: 20px 25px;
+  width: 320px;
+  background: #fff;
+  text-align: center;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.titulo {
+  font-size: 15px;
+  margin-bottom: 15px;
+}
+
+.monto {
+  font-size: 16px;
+  font-weight: bold;
+  margin: 10px 0;
+}
+
+.moneda {
+  font-weight: 700;
+  color: #000;
+}
+
+.valor {
+  color: #000;
+}
+
+.subtitulo {
+  font-size: 14px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-weight: normal;
+}
+
+.detalle {
+  font-size: 14px;
+  margin-top: 15px;
+  text-align: left;
+}
+
+.detalle p {
+  margin: 5px 0;
+}
+
+.unidad {
+  color: darkred;
+  font-weight: bold;
+}
+
+.trm-box {
+  border: 2px solid #000;
+  margin-top: 10px;
+  padding: 5px 15px;
+  background: #fff;
+  text-align: center;
+  width: fit-content;
+}
+/*--------------------------------------*/
+/* ventana filtros       --*/
+/*--------------------------------------*/
+/* Fondo semi-transparente */
+.overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-color: rgba(0, 0, 0, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Ventana emergente */
+.ventana_f {
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 25px 30px;
+  width: 700px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+  animation: slideUp 0.4s ease-out;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.titulo {
+  text-align: center;
+  color: #007bff;
+  margin: 0;
+  font-weight: 700;
+}
+
+/* Distribución en tres columnas */
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 20px;
+}
+
+.columna {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+label {
+  font-weight: 600;
+  margin-bottom: 3px;
+}
+
+input, select {
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  transition: 0.2s;
+}
+
+input:focus, select:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+/* Botones */
+.acciones {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+.btn-filtrar {
+  background: #007bff;
+  color: white;
+  padding: 10px 14px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.btn-filtrar:hover {
+  background: #0056b3;
+}
+
+.btn-cerrar {
+  background: #6c757d;
+  color: white;
+  padding: 10px 14px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.btn-cerrar:hover {
+  background: #5a6268;
+}
+
+.btn-open {
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-open:hover {
+  background: #0056b3;
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+  from { opacity: 0; } 
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(20px); opacity: 0; } 
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .ventana {
+    width: 95%;
+  }
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+}
+/*--------------------------------------*/
+/* ventana tablas       --*/
+/*--------------------------------------*/
+
+/* Ventana principal (padre) */
+.ventana {
+  background: #fff;
+  border-radius: 14px;
+  width: 100%;
+  height: 77vh;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; /* 🔹 evita que los hijos se salgan */
+  box-sizing: border-box; /* 🔹 incluye padding dentro del height */
+  animation: slideUp 0.4s ease-out;
+}
+
+/* Estructura principal (hijo) */
+.estructura {
+  flex: 1; /* 🔹 ocupa todo el espacio disponible dentro del padre */
+  display: grid;
+  grid-template-columns: 2fr 1.5fr;
+  gap: 10px;
+  overflow: hidden; /* 🔹 evita que el grid se desborde */
+  box-sizing: border-box;
+}
+
+/* Columnas */
+.columna-izquierda,
+.columna-derecha,
+.superior,
+.inferior {
+  border-radius: 6px;
+  overflow: hidden; /* 🔹 evita desbordes visuales dentro de cada bloque */
+}
+
+/* Columna izquierda */
+.columna-izquierda {
+  background-color: #5b9bd5;
+  border: 1px solid #2e75b6;
+}
+
+/* Columna derecha (contenedor de dos filas) */
+.columna-derecha {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  gap: 10px;
+}
+
+/* Derecha superior */
+.superior {
+  background-color: #7f8c8d;
+  border: 1px solid #555;
+    overflow-y: auto; /* ✅ scroll vertical */
+  overflow-x: auto; /* ✅ scroll horizontal si hace falta */
+}
+
+/* Derecha inferior */
+.inferior {
+  background-color: #c0504d;
+  border: 1px solid #a94442;
+    overflow-y: auto; /* ✅ scroll vertical */
+  overflow-x: auto; /* ✅ scroll horizontal si hace falta */
+}
+
+.titulo {
+  text-align: center;
+  color: #007bff;
+  font-weight: 700;
+  margin-bottom: 15px;
+}
+
+
+/* Botones */
+.btn-open {
+  background: #007bff;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-open:hover {
+  background: #0056b3;
+}
+
+.btn-cerrar {
+  background: #6c757d;
+  color: white;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  align-self: flex-end;
+}
+
+.btn-cerrar:hover {
+  background: #5a6268;
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+  from { opacity: 0; } to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .estructura {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+  }
+}
+/*--------------------------------------*/
+/* ventana tabla       --*/
+/*--------------------------------------*/
+.tabla-mineria-container {
+  width: 100%;
+  max-height: 70vh; /* 🔹 ajusta según tu diseño */
+  margin: 30px auto;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+  padding: 20px;
+  overflow-y: auto; /* ✅ scroll vertical */
+  overflow-x: auto; /* ✅ scroll horizontal si hace falta */
+  color: black;
+  box-sizing: border-box;
+}
+
+
+.encabezado-tabla {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.titulo-tabla {
+  color: #6b3e1e;
+  font-weight: bold;
+  margin: 0;
+}
+
+.formula {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.formula img {
+  height: 25px;
+}
+
+.tabla-mineria {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+}
+
+.tabla-mineria thead {
+  background-color: #7b3f00;
+  color: #fff;
+}
+
+.tabla-mineria th,
+.tabla-mineria td {
+  border: 1px solid #ccc;
+  padding: 10px 6px;
+  vertical-align: middle;
+}
+
+.tabla-mineria td:first-child {
+  text-align: center;
+}
+
+.tabla-mineria td:nth-child(2) {
+  text-align: left;
+  font-weight: bold;
+}
+
+/* Íconos */
+.icono {
+  font-size: 1.3rem;
+  color: #4d4d4d;
+}
+
+/* Flechas */
+.flecha {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin-left: 4px;
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+}
+.arriba { background-color: green; }
+.abajo { background-color: red; transform: rotate(180deg); }
+
+/* Filas alternas */
+.tabla-mineria tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+@media (max-width: 768px) {
+  .tabla-mineria th, .tabla-mineria td {
+    font-size: 12px;
+    padding: 6px 4px;
+  }
+}
+/*--------------------------------------*/
+/* ventana datos mineria       --*/
+/*--------------------------------------*/
+.card-afectacion {
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+  padding: 28px 36px;
+  max-width: 420px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  margin: 0 auto;
+}
+
+.card-afectacion:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.12);
+}
+
+.logo-afectacion {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 3px solid #ffd400;
+  background-color: #000;
+  padding: 5px;
+  object-fit: contain;
+  margin-bottom: 12px;
+}
+
+.titulo-afectacion {
+  font-size: 17px;
+  font-weight: 800;
+  color: #111827;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 24px;
+}
+
+.icono-afectacion {
+  font-size: 64px;
+  color: #000;
+  margin-bottom: 10px;
+}
+
+.data-afectacion {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  align-items: center;
+}
+
+.data-item {
+  text-align: center;
+}
+
+.data-item .year {
+  font-size: 14px;
+  font-weight: 700;
+  color: #374151;
+}
+
+.data-item .amount {
+  font-size: 19px;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.divider {
+  height: 1px;
+  width: 80%;
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.1), transparent);
+  margin: 10px 0;
+}
+
+.fecha {
+  margin-top: 18px;
+  border: 2px solid #000;
+  border-radius: 6px;
+  display: inline-block;
+  padding: 6px 18px;
+  font-weight: 700;
+  font-size: 14px;
+  background: #fff;
+}
+/*--------------------------------------*/
+/* ventana valores       --*/
+/*--------------------------------------*/
+@keyframes aparecer {
+  from {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Encabezado */
+.ventana-header {
+  background: linear-gradient(90deg, #e9f5ff, #0a530a);
+  padding: 0.8rem 1rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  animation: aparecer 0.5s ease;
+}
+
+/* Tarjetas */
+.card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 1rem;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
+}
+
+/* Formularios */
+.form-select,
+input.form-control {
+  border-radius: 50rem;
+  transition: all 0.3s ease;
+}
+
+input.form-control:focus,
+.form-select:focus {
+  border-color: #030f0a;
+  box-shadow: 0 0 0 0.25rem rgba(25, 135, 84, 0.15);
+}
+
+/* Botones */
+.btn-outline-danger {
+  border-color: #ff6b6b;
+  color: #ff6b6b;
+}
+
+.btn-outline-danger:hover {
+  background-color: #ff6b6b;
+  color: #fff;
+}
+
+/* Listas */
+.list-group-item {
+  border: none;
+  background: #fff;
+  transition: all 0.2s ease;
+  border-radius: 0.75rem !important;
+}
+
+.list-group-item:hover {
+  background-color: #f8f9fa;
+}
+
+
+
+.fondo-gradiente {
+  background: linear-gradient(135deg, #dfe1e2, #01302c);
+  min-height: 65vh;
+  border-radius: 7px;
+  overflow: scroll;
+}
+
+.tarjeta {
+  background-color: #fff;
+  border: none;
+  border-radius: 1.5rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+}
+
+.tarjeta:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.titulo-card i {
+  font-size: 1.4rem;
+}
+
+.dropdown-boton {
+  background-color: #f8f9fa;
+  border: 1px solid #ced4da;
+  border-radius: 50px;
+  padding: 0.6rem 1rem;
+  transition: all 0.2s ease;
+}
+
+.dropdown-boton:hover {
+  background-color: #e9f7ef;
+}
+
+.lista-dropdown {
+  border-radius: 1rem;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.boton-agregar {
+  border-radius: 50px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.boton-agregar:hover {
+  transform: scale(1.03);
+}
+
+.elemento-lista {
+  border: none;
+  border-radius: 1rem;
+  background-color: #f8f9fa;
+  margin-bottom: 0.5rem;
+  padding: 0.8rem 1rem;
+  transition: all 0.2s ease;
+}
+
+.elemento-lista:hover {
+  background-color: #e9f7ef;
+  transform: scale(1.01);
+}
+
+
+
+.lista-materiales {
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+  padding-bottom: 0.5rem;
+  height: 50%;
+  overflow: scroll;
+}
+
+.elemento-lista {
+  border: none;
+  border-radius: 1rem;
+  background-color: #ffffff;
+  margin-bottom: 0.8rem;
+  padding: 0.8rem 1.1rem;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+  transition: all 0.2s ease-in-out;
+}
+
+.elemento-lista:hover {
+  transform: scale(1.01);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+}
+
+.icono-lista {
+  width: 40px;
+  height: 40px;
+  font-size: 1.1rem;
+}
+
+.eliminar-btn {
+  transition: all 0.2s ease;
+  border-radius: 50%;
+  width: 34px;
+  height: 34px;
+}
+
+.eliminar-btn:hover {
+  background-color: #ffeaea;
+  transform: scale(1.1);
+}
+
+
+/* 🔹 Overlay de carga */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(15, 15, 30, 0.8);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  backdrop-filter: blur(4px);
+}
+
+/* 🔹 Spinner animado */
+.spinner {
+  width: 60px;
+  height: 60px;
+  border: 6px solid rgba(79, 195, 247, 0.3);
+  border-top: 6px solid #4fc3f7;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 10px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loading-text {
+  color: #4fc3f7;
+  font-size: 1.1em;
+  font-weight: 500;
+}
+/* 🔹 Overlay de carga con animación de entrada y salida */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(15, 15, 30, 0.8);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  backdrop-filter: blur(4px);
+  opacity: 0;
+  animation: fadeIn 0.3s ease forwards;
+}
+
+.overlay.ng-leave {
+  animation: fadeOut 0.3s ease forwards;
+}
+
+/* 🔹 Spinner animado */
+.spinner {
+  width: 65px;
+  height: 65px;
+  border: 6px solid rgba(79, 195, 247, 0.2);
+  border-top: 6px solid #4fc3f7;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 15px;
+  box-shadow: 0 0 15px rgba(79, 195, 247, 0.5);
+}
+
+/* 🔹 Texto del loader */
+.loading-text {
+  color: #4fc3f7;
+  font-size: 1.2em;
+  font-weight: 600;
+  letter-spacing: 1px;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+/* 🔹 Animaciones */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(1.05); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; transform: scale(1); }
+  to { opacity: 0; transform: scale(1.05); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.7; }
+  50% { opacity: 1; }
+}
+/* Contenedor de las columnas */
+.row {
+  align-items: flex-start;
+}
+
+/* Tarjetas fijas al hacer scroll */
+.tarjeta {
+  position: sticky;
+  top: 20px; /* Distancia desde la parte superior */
+  z-index: 10;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+}
+
+/* Efecto visual al hacer scroll */
+.tarjeta:hover {
+  transform: translateY(-3px);
+}
+
+/* Responsividad: en pantallas pequeñas las tarjetas no deben quedar fijas */
+@media (max-width: 768px) {
+  .tarjeta {
+    position: static;
+    top: auto;
+  }
+}
+/* Ajuste de hexágonos dentro del contenedor padre */
+.operaciones-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%; /* ocupa todo el alto disponible */
+  overflow: hidden; /* evita que los hexágonos se salgan */
+  box-sizing: border-box;
+}
+
+.hex-grid {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; /* centra el contenido verticalmente */
+  flex-wrap: wrap;
+  max-height: 100%;
+  gap: 10px;
+  overflow: auto; /* permite scroll interno si el espacio es limitado */
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.hex {
+  max-width: 100%;
+  max-height: calc(33vh); /* escala según el alto de pantalla */
+  transform: scale(0.95);
+  transition: transform 0.2s ease-in-out;
+}
+
+.hex:hover {
+  transform: scale(1);
+}
+
+.input-fecha.ng-invalid.ng-touched {
+  border: 2px solid #e74c3c;
+  background-color: #fff5f5;
+}
+
+.error {
+  color: #e74c3c;
+  font-size: 0.85em;
+  margin-top: 4px;
+  margin-bottom: 8px;
+}
+
+
+
+/* Fondo oscurecido elegante */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.45);
+  backdrop-filter: blur(3px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+/* Ocultar */
+.oculto {
+  display: none !important;
+}
+
+
+/* Caja modal mejorada */
+.listado-modal {
+  width: 90%;
+  max-width: 420px;
+  max-height: 85vh;
+  background: #ffffff;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;  /* ← importante */
+  animation: fadeIn .25s ease-in-out;
+}
+
+/* Header fijo arriba */
+#cabecera_dpto {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+/* La lista es quien scrollea */
+.lista-scroll {
+  overflow-y: auto;
+  max-height: calc(85vh - 60px);  /* ajusta si quieres */
+}
+
+/* Entrada suave */
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+/* Lista elegante */
+.stylish-list .list-group-item {
+  transition: background 0.2s ease;
+  cursor: pointer;
+}
+
+.stylish-list .list-group-item:hover {
+  background: #fff9e6;
+}
+
+/* Header movible */
+.cursor-move {
+  cursor: move;
+}
+/* Fondo tipo modal */
+.brigadas-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.45);
+  backdrop-filter: blur(3px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+/* Ocultar modal */
+.oculto { display: none !important; }
+
+/* Caja central */
+.brigadas-card {
+  width: 90%;
+  max-width: 580px;
+  max-height: 85vh;
+  background: #ffffff;
+  border-radius: 18px;
+  overflow-y: auto;
+  animation: fadeIn .25s ease-in-out;
+}
+
+/* Animación de entrada */
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+/* Estilo de cada tarjeta */
+.brigada-item {
+  border-radius: 14px;
+  transition: all 0.25s;
+  cursor: pointer;
+  background: #fafafa;
+}
+
+.brigada-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  background: #fff7e6;
+}
+
+/* Checkbox o icono personalizado */
+
+/* Scroll suave */
+.brigadas-card::-webkit-scrollbar {
+  width: 8px;
+}
+
+.brigadas-card::-webkit-scrollbar-thumb {
+  background: #c9c9c9;
+  border-radius: 8px;
+}
+
+/* Botón elegante principal */
+.btn-subregion {
+  background: linear-gradient(135deg, #ffcc00, #ffb300);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  color: #333;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all .25s ease;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.btn-subregion:hover {
+  background: linear-gradient(135deg, #ffda3a, #ffbf00);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+}
+
+/* Tarjeta */
+.card-subregion {
+  background: #ffffff;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid #f1f1f1;
+  animation: fadeIn .25s ease;
+}
+
+/* Header de la tarjeta */
+.card-subregion-header {
+  background: #fff8e3;
+  padding: 10px 15px;
+  font-size: 1rem;
+  border-bottom: 1px solid #ffe8a6;
+  display: flex;
+  align-items: center;
+}
+
+/* Icono */
+.icono-subregion {
+  font-size: 1.5rem;
+}
+
+/* Botón cerrar */
+.btn-cerrar {
+  background: transparent;
+  border: none;
+  font-size: 1.2rem;
+  color: #c0392b;
+  cursor: pointer;
+  transition: .2s;
+}
+
+.btn-cerrar:hover {
+  transform: scale(1.2);
+  color: #a83225;
+}
+
+/* Cuerpo de la tarjeta */
+.card-subregion-body {
+  padding: 15px;
+  font-size: 1rem;
+  color: #444;
+}
+
+/* Botón cambiar */
+.btn-cambiar-subregion {
+  background: #fff3c4;
+  border: 1px solid #f7d883;
+  color: #b77d00;
+  padding: 6px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: .2s;
+}
+
+.btn-cambiar-subregion:hover {
+  background: #ffe89a;
+  transform: scale(1.03);
+}
+
+/* Animación de entrada */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(5px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+/* Fondo difuminado */
+.ventana-subregion {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  backdrop-filter: blur(4px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  padding: 15px;
+}
+
+/* Ventana */
+.ventana-subregion-contenido {
+  background: #ffffff;
+  width: min(95%, 600px);
+  max-height: 90vh;
+  overflow-y: auto;
+  border-radius: 14px;
+  padding: 20px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+  animation: mostrarVentana .25s ease-out;
+}
+
+@keyframes mostrarVentana {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Título */
+.titulo-subregion {
+  text-align: center;
+  margin-bottom: 20px;
+  font-weight: 700;
+  font-size: 1.3rem;
+  color: #1f2937;
+}
+
+/* Lista */
+.subregiones-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Tarjeta de subregión */
+.subregion-item {
+  transition: transform 0.15s ease, box-shadow 0.2s;
+  border-radius: 12px;
+}
+
+.subregion-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+}
+
+/* Radio */
+.radio-opcion input[type="radio"] {
+  transform: scale(1.2);
+  cursor: pointer;
+}
+
+.nombre-sub {
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.nombre-sub:hover {
+  text-decoration: underline;
+}
+
+.detalle-sub {
+  font-size: 0.85rem;
+}
+
+/* Detalle municipios */
+.detalle-muni {
+  background: #f9fafb;
+  padding: 10px 15px;
+  border-radius: 10px;
+  font-size: 0.9rem;
+}
+
+/* Botones */
+.ventana-subregion-botones button {
+  font-weight: 600;
+  padding: 7px 14px;
+  border-radius: 8px;
+}
+/*---------------------------*/
+/* amaneza */
+/* Oculta el modal */
+
+
+/* Fondo */
+.brigadas-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  backdrop-filter: blur(6px);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+}
+
+/* Caja principal */
+.modal-contenido {
+  background: #ffffff;
+  width: 90%;
+  max-width: 900px;
+  max-height: 90vh;
+  overflow-y: auto;
+  border-radius: 15px;
+  padding: 25px;
+  position: relative;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+}
+
+/* TITULOS */
+.seccion h3 {
+  font-size: 20px;
+  font-weight: 600;
+  color: #0e4e88;
+  margin-bottom: 12px;
+  margin-top: 20px;
+}
+
+/* GRID ORGANIZADO, NO AMONTONADO */
+.grid-items {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 12px;
+}
+
+/* ITEM */
+.item {
+  background: #f6f6f6;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  text-align: center;
+  cursor: pointer;
+  transition: .2s;
+}
+.item_selecionado {
+  background: #f7d9d9;
+  padding: 15px;
+  border: 1px solid #460606;
+  border-radius: 12px;
+  text-align: center;
+  cursor: pointer;
+  transition: .2s;
+}
+.item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+
+/* Checkbox cuadrado elegante */
+.che {
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  border: 2px solid #0e4e88;
+  margin: 0 auto 8px;
+  transition: 0.2s;
+}
+
+/* Clase para seleccionado DESDE TU LÓGICA */
+.che.seleccionado {
+  background: #0e4e88;
+  box-shadow: 0 0 10px rgba(14,78,136,0.45);
+}
+
+/* Texto de cada item */
+.item span {
+  font-size: 15px;
+  color: #333;
+}
+
+/* Cerrar */
+.btn-cerrar {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: #d9534f;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  font-size: 17px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.btn-cerrar:hover {
+  transform: scale(1.15);
+}
+
+/* BLOQUES DE RESULTADOS */
+.resultados {
+  margin-top: 30px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 15px;
+}
+
+.resultado-card {
+  background: #f7f7f7;
+  border-radius: 12px;
+  padding: 15px;
+  border: 1px solid #ddd;
+}
+
+.resultado-card h4 {
+  margin-bottom: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #0e4e88;
+}
+.btn-elegante-apoyos {
+  background: linear-gradient(to right, #0066cc, #004080);
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 30px;
+  font-size: 1em;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.btn-elegante-apoyos:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.3);
+}
+
+.apoyo-seleccionado {
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 0.75rem 1rem;
+  background-color: #f0f4ff;
+  border-left: 4px solid #3f51b5;
+  border-radius: 8px;
+  color: #2c3e50;
+  margin-top: 1rem;
+}
+/* Fondo del modal */
+.ventana-emergente {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(15, 15, 15, 0.55);
+  backdrop-filter: blur(6px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  animation: fadeIn 0.25s ease-out;
+}
+
+/* Caja principal */
+.modal-contenido {
+  background: #ffffff;
+  width: 90%;
+  max-width: 650px;
+  padding: 25px 30px;
+  border-radius: 18px;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+  position: relative;
+  animation: slideUp 0.35s ease;
+  text-align: center;
+}
+
+/* Título */
+.subtitulo {
+  color: #0e4e88;
+  font-weight: 600;
+  font-size: 22px;
+  margin-bottom: 20px;
+}
+
+/* GRID en 1, 2 o 3 columnas según espacio */
+.radio-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+  margin-bottom: 25px;
+}
+
+/* Tarjeta por opción */
+.form-check {
+  background: #f8f8f8;
+  padding: 12px 15px;
+  border-radius: 12px;
+  border: 1px solid #ddd;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  transition: 0.2s ease;
+  text-align: left;
+  min-height: 50px;
+}
+
+.form-check:hover {
+  background: #eef6ff;
+  border-color: #0e4e88;
+}
+
+/* Radio personalizado */
+.form-check-input[type="radio"] {
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border: 2px solid #0e4e88;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+.form-check-input[type="radio"]:checked {
+  border-color: #0e4e88;
+  background: #0e4e88;
+  box-shadow: 0 0 0 4px rgba(14, 78, 136, 0.25);
+}
+
+.btn-cerrar:hover {
+  background: #c9302c;
+  transform: scale(1.03);
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(25px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}

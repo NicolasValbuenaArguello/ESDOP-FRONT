@@ -1,0 +1,60 @@
+<app-menu></app-menu>
+
+<div class="cuerpo">
+    <div class="col-md-12 ">
+        <div class="row contenedor">
+            <div class="col-md-12 ">
+
+                <h2 class="titulo"> {{eventos.length}} Eventos Divicionarios</h2>
+                <div class="radios">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">No.</th>
+                                <th scope="col">BOLETIN EJC</th>
+                                <th scope="col">FECHA</th>
+                                <th scope="col">DIV</th>
+                                <th scope="col">UT</th>
+                                
+                                <th scope="col">BOLETIN INT</th>
+
+                                <th scope="col">BOLETIN</th>
+                                <th scope="col">RADIOGRAMA</th>
+                                <th scope="col">DENUNCIA</th>
+                                <th scope="col">INF BATALLON</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of eventos; index as i; first as isFirst">
+                                <th scope="row">{{i+1}}</th>
+                                <td>{{item[0]}}</td>
+                                <td>{{item[2]}}</td>
+                                <td>{{item[4]}}</td>
+                                <td>{{item[5]}}</td>       
+                                <td>{{item[1]}}</td>
+
+                                
+                                <td *ngIf="item[29]!=falta else ok"><button class="btn btn-primary" (click)="ver_documento(item[29], item[33])"> OK </button></td>
+                                <ng-template #ok><td> falta </td></ng-template>
+
+                                <td *ngIf="item[30]!=falta else ok"><button class="btn btn-primary" (click)="ver_documento(item[30], item[33])"> OK</button></td>
+                                <ng-template #ok><td>Falta </td></ng-template>
+
+                                <td *ngIf="item[31]!=falta else ok"><button class="btn btn-primary" (click)="ver_documento(item[31], item[33])"> OK </button></td>
+                                <ng-template #ok><td> falta </td></ng-template>
+
+                                <td *ngIf="item[32]!=falta else ok"><button class="btn btn-primary" (click)="ver_documento(item[32], item[33])"> OK </button></td>
+                                <ng-template #ok><td>falta</td></ng-template>
+
+                                <td><button class="btn btn-info" (click)="info(i)">VER</button></td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div> 
+</div>
+<app-ver-document [server]="server"></app-ver-document>
+

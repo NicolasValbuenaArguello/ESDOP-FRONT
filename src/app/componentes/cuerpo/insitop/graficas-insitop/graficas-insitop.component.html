@@ -1,0 +1,80 @@
+<app-menu></app-menu>
+<div class="cuerpo_insitop" id="cuerpo_insitop">
+        <div class="insitop">
+                <div class="titulo" style="position: fixed; width: 78%;">
+                        <h3 style="display: flex; justify-content: center; justify-items: center; text-align: center;">
+                                Graficas INSITOP {{unidad_f}}</h3>
+                </div>
+                <div class="position_btn">
+                        <button class="btn btn-warning " (click)="actulizar()">Actulizar</button>
+                        <button class="btn btn-danger " (click)="mostrar_proyecto()">Filtrar</button>
+                        
+                </div>
+                <br><br><br>
+                <div class=" row col-md-12 ">
+                        <div class=" col-md-6 ejc">
+                                <canvas id="chart">{{ chart }}</canvas>
+                        </div>
+                        <div class=" col-md-6 ejc">
+                                <canvas id="chart_1">{{ chart_1 }}</canvas>
+                        </div>
+                </div>
+        </div>
+
+        <div class="proyecto_nuevo oculto" id="proyecto_ingreso">
+                <button class="btn btn-danger posicion_btn_cerrar" (click)="mostrar_proyecto()">
+                        X
+                </button>
+
+                <div class="tamanio_proyectos">
+                        <hr style="color: snow;">
+                        <h2 style="color: snow;">menú</h2>
+
+                        <button class="btn btn-danger " id="oculto_documentos_btn"
+                                (click)="mostrar_menu(1)">Buscar</button>
+                        <hr style="color: snow;">
+
+
+                </div>
+                <div class="card oculto_documentos" id="oculto_documentos" style="width: 30rem;">
+                        <div style="width: 100px;">
+                                <img src="../../../../../assets/logos/JEMOP-DIROP.png" class="card-img-top" alt="...">
+                        </div>
+                        <div class="card-body">
+                                <h3>Buscar</h3>
+
+                                <form class="form-group row tamanio" #medallas_proyecto_descargar="ngForm"
+                                        autocomplete="off">
+
+                                        <div class="form-group col-md-12" style="margin: auto;">
+                                                <label for="">Unidades: </label>
+                                                <select name="unidad" id="unidad" class="form-control" ngModel>
+                                                        <option value=""></option>
+
+                                                        <option value="{{item}}"
+                                                                *ngFor="let item of labe_unidades; index as i; first as isFirst">
+                                                                {{item}}</option>
+
+
+                                                </select>
+                                        </div>
+
+                                        <br>
+                                        <hr>
+                                        <div class="posicion_btn">
+                                                <button class="btn btn-success"
+                                                        (click)="grafica_listado_insitop_unidad(medallas_proyecto_descargar)">
+                                                        Buscar
+                                                </button>
+                                        </div>
+                                </form>
+
+                                <p class="card-text">Graficas</p>
+                        </div>
+                </div>
+
+
+        </div>
+</div>
+
+<app-spiner></app-spiner>

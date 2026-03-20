@@ -1,0 +1,757 @@
+<app-menu></app-menu>
+
+
+<div class="cuerpo">
+    <div class="col-md-6">
+        <form class="form-group row tamanio" #documentos_pdf="ngForm" autocomplete="off">
+            <div class="row contenedor">
+
+                <div class="col-md-12 ">
+                    <h2 class="titulo">Reporte de Incidentes, Accidentes de Trabajo y Otros Eventos</h2>
+                    <div class="radios">
+                        <br>
+                        <div class="form-group row" style="margin: auto;">
+                            <div class="form-group col-md-6" style="margin: auto;">
+                                <label for=""> NIT institución:</label>
+                                <select name="nit_ejc" id="nit_ejc" class="form-control" [(ngModel)]="nit_ejc">
+                                    <option value=""></option>
+                                    <option [value]="item" *ngFor="let item of nit_ejc">{{item}}</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-6" style="margin: auto;">
+                                <label for=""> NIT Contratista:</label>
+                                <input type="number" name="nit_contratista" id="nit_contratista"
+                                    placeholder=" NIT Contratista:" class="form-control" ngModel>
+                            </div>
+                        </div>
+                        <br>
+                        <hr>
+                        <br>
+                        <h3>1.INFORMACION GENERAL DEL INCIDENTE/ACCIDENTES U OTRO EVENTO</h3>
+                        <br>
+                        <div class="form-group row" style="margin: auto;">
+                            <div class="form-group col-md-3" style="margin: auto;">
+                                <label for="">1.1 Institución a la que pertenece</label>
+                                <select name="unidad_a_que_pertenece" id="unidad_a_que_pertenece" class="form-control"
+                                    [(ngModel)]="unidad_a_que_pertenece">
+                                    <option value=""></option>
+                                    <option [value]="item" *ngFor="let item of unidad_a_que_pertenece">{{item}}</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-3" style="margin: auto;">
+                                <label for="">1.2 Clasificación de la novedad</label>
+                                <select name="clasificacion_de_la_novedad" id="clasificacion_de_la_novedad"
+                                    class="form-control" [(ngModel)]="clasificacion_de_la_novedad">
+                                    <option value=""></option>
+                                    <option [value]="item" *ngFor="let item of clasificacion_de_la_novedad">{{item}}
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-3" style="margin: auto;">
+                                <label for="">1.2.1 Si eligio otro diga cual:</label>
+                                <select name="Si_eligio_otro_diga_cual" id="Si_eligio_otro_diga_cual"
+                                    class="form-control" [(ngModel)]="Si_eligio_otro_diga_cual">
+                                    <option value=""></option>
+                                    <option [value]="item" *ngFor="let item of Si_eligio_otro_diga_cual">{{item}}
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-3" style="margin: auto;">
+                                <label for="">1.3 Tipo de vinculación del Accidentado/Lesionado: </label>
+                                <select name="tipo_de_vincualcion" id="tipo_de_vincualcion" class="form-control"
+                                    [(ngModel)]="tipo_de_vincualcion">
+                                    <option value=""></option>
+                                    <option [value]="item" *ngFor="let item of tipo_de_vincualcion">{{item}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <br>
+                        <h5>1.4 UNIDAD ORGÁNICO:</h5>
+
+                        <div class="form-group row" style="margin: auto;">
+                            <div class="form-group col-md-3" style="margin: auto;">
+                                <label for="">Jefatura de Estado Mayor:</label>
+                                <select name="jefactura" id="jefactura" class="form-control" [(ngModel)]="jefactura">
+                                    <option value=""></option>
+                                    <option [value]="item" *ngFor="let item of jefactura">{{item}}</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-3" style="margin: auto;">
+                                <label for="">Division:</label>
+                                <select name="division" id="division" class="form-control" [(ngModel)]="division">
+                                    <option value=""></option>
+                                    <option [value]="item" *ngFor="let item of division">{{item}}</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-3" style="margin: auto;">
+                                <label for="">Comando:</label>
+                                <select name="comando" id="comando" class="form-control" [(ngModel)]="comando">
+                                    <option value=""></option>
+                                    <option [value]="item" *ngFor="let item of comando">{{item}}</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-3" style="margin: auto;">
+                                <label for="">Fuerza de tarea:</label>
+                                <select name="fuerza_tarea" id="fuerza_tarea" class="form-control"
+                                    [(ngModel)]="fuerza_tarea">
+                                    <option value=""></option>
+                                    <option [value]="item" *ngFor="let item of fuerza_tarea">{{item}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="form-group row" style="margin: auto;">
+                            <div class="form-group col-md-3" style="margin: auto;">
+                                <label for="">CEDE</label>
+                                <select name="cede" id="cede" class="form-control" [(ngModel)]="cede">
+                                    <option value=""></option>
+                                    <option [value]="item" *ngFor="let item of cede">{{item}}</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-3" style="margin: auto;">
+                                <label for="">Brigada/Dirección/Regimiento:</label>
+                                <select name="brigada" id="brigada" class="form-control" [(ngModel)]="brigada">
+                                    <option value=""></option>
+                                    <option [value]="item" *ngFor="let item of brigada">{{item}}</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-3" style="margin: auto;">
+                                <label for="">Unidad:</label>
+                                <select name="unidad_diper" id="unidad_diper" class="form-control"
+                                    [(ngModel)]="unidad_diper">
+                                    <option value=""></option>
+                                    <option [value]="item" *ngFor="let item of unidad_diper">{{item}}</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <br>
+                        <h5>1.5 UNIDAD ACTUAL:</h5>
+
+
+                        <div class="form-group row" style="margin: auto;">
+                            <div class="form-group col-md-3" style="margin: auto;">
+                                <label for="">Jefatura de Estado Mayor:</label>
+                                <select name="jefactura" id="jefactura" class="form-control" [(ngModel)]="jefactura">
+                                    <option value=""></option>
+                                    <option [value]="item" *ngFor="let item of jefactura">{{item}}</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-3" style="margin: auto;">
+                                <label for="">Division:</label>
+                                <select name="division" id="division" class="form-control" [(ngModel)]="division">
+                                    <option value=""></option>
+                                    <option [value]="item" *ngFor="let item of division">{{item}}</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-3" style="margin: auto;">
+                                <label for="">Comando:</label>
+                                <select name="comando" id="comando" class="form-control" [(ngModel)]="comando">
+                                    <option value=""></option>
+                                    <option [value]="item" *ngFor="let item of comando">{{item}}</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-3" style="margin: auto;">
+                                <label for="">Fuerza de tarea:</label>
+                                <select name="fuerza_tarea" id="fuerza_tarea" class="form-control"
+                                    [(ngModel)]="fuerza_tarea">
+                                    <option value=""></option>
+                                    <option [value]="item" *ngFor="let item of fuerza_tarea">{{item}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="form-group row" style="margin: auto;">
+                            <div class="form-group col-md-3" style="margin: auto;">
+                                <label for="">CEDE</label>
+                                <select name="cede" id="cede" class="form-control" [(ngModel)]="cede">
+                                    <option value=""></option>
+                                    <option [value]="item" *ngFor="let item of cede">{{item}}</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-3" style="margin: auto;">
+                                <label for="">Brigada/Dirección/Regimiento:</label>
+                                <select name="brigada" id="brigada" class="form-control" [(ngModel)]="brigada">
+                                    <option value=""></option>
+                                    <option [value]="item" *ngFor="let item of brigada">{{item}}</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-3" style="margin: auto;">
+                                <label for="">Unidad:</label>
+                                <select name="unidad_diper" id="unidad_diper" class="form-control"
+                                    [(ngModel)]="unidad_diper">
+                                    <option value=""></option>
+                                    <option [value]="item" *ngFor="let item of unidad_diper">{{item}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <br>
+                        <hr>
+                        <br>
+
+                        <div class="form-group row" style="margin: auto;">
+                            <div class="form-group col-md-6" style="margin: auto;">
+                                <label for="">1.6 EPS a la que pertenece::</label>
+                                <select name="eps_que_pertenece" id="eps_que_pertenece" class="form-control"
+                                    [(ngModel)]="eps_que_pertenece">
+                                    <option value=""></option>
+                                    <option [value]="item" *ngFor="let item of eps_que_pertenece">{{item}}</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-6" style="margin: auto;">
+                                <label for="">1.7 ARL a la que pertenece:</label>
+                                <select name="arl_que_pertenece" id="arl_que_pertenece" class="form-control"
+                                    [(ngModel)]="arl_que_pertenece">
+                                    <option value=""></option>
+                                    <option [value]="item" *ngFor="let item of arl_que_pertenece">{{item}}</option>
+                                </select>
+                            </div>
+
+                        </div>
+                        <br>
+                        <div class="form-group row" style="margin: auto;">
+                            <div class="form-group col-md-3" style="margin: auto;">
+                                <label for="">1.8 Fecha del evento: </label>
+                                <input type="date" name="fecha_evento" id="fecha_evento" class="form-control" ngModel>
+                            </div>
+                            <div class="form-group col-md-3" style="margin: auto;">
+                                <label for="">1.9 Hora: </label>
+                                <input type="time" name="hora_evento" id="hora_evento" class="form-control" ngModel>
+                            </div>
+                            <div class="form-group col-md-3" style="margin: auto;">
+                                <label for="">1.10 Ciudad/Municipio:</label>
+                                <select name="municipio_dipse" id="municipio_dipse" class="form-control"
+                                    [(ngModel)]="municipio_dipse">
+                                    <option value=""></option>
+                                    <option [value]="item" *ngFor="let item of municipio_dipse">{{item}}</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-3" style="margin: auto;">
+                                <label for="">1.11 Departamento:</label>
+                                <select name="departamento_dipser" id="departamento_dipser" class="form-control"
+                                    [(ngModel)]="departamento_dipser">
+                                    <option value=""></option>
+                                    <option [value]="item" *ngFor="let item of departamento_dipser">{{item}}</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <br>
+                        <div class="form-group row" style="margin: auto;">
+                            <div class="form-group col-md-4" style="margin: auto;">
+                                <label for="">1.12 Vereda, corregimiento o barrio: </label>
+                                <input type="text" name="vereda_corregemiento" id="vereda_corregemiento"
+                                    placeholder="1.12 Vereda, corregimiento o barrio:" class="form-control" ngModel>
+                            </div>
+
+                            <div class="form-group col-md-4" style="margin: auto;">
+                                <label for="">1.13 Coordenadas-Dirección: </label>
+                                <input type="text" name="direccion_coordenadas" id="direccion_coordenadas"
+                                    placeholder="1.13 Coordenadas-Dirección:" class="form-control" ngModel>
+                            </div>
+
+                            <div class="form-group col-md-4" style="margin: auto;">
+                                <label for="">1.14 Caracteristicas del lugar: </label>
+                                <select name="caracteristicas_del_lugar" id="caracteristicas_del_lugar"
+                                    class="form-control" [(ngModel)]="caracteristicas_del_lugar">
+                                    <option value=""></option>
+                                    <option [value]="item" *ngFor="let item of caracteristicas_del_lugar">{{item}}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <br>
+                        <hr>
+                        <br>
+                        <h5>1.16 Comandante directo (Primer nivel de mando)</h5>
+                        <br>
+                        <div class="form-group row" style="margin: auto;">
+
+                            <div class="form-group col-md-2" style="margin: auto;">
+                                <label for="">Grado: </label>
+                                <select name="gr_cdte" id="gr_cdte" class="form-control" [(ngModel)]="gr_cdte">
+                                    <option value=""></option>
+                                    <option [value]="item" *ngFor="let item of gr_cdte">{{item}}
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-5" style="margin: auto;">
+                                <label for="">Nombre:: </label>
+                                <input type="text" name="nombre_cdte_directo" id="nombre_cdte_directo"
+                                    placeholder="Nombre Comandante Directo" class="form-control" ngModel>
+                            </div>
+                            <div class="form-group col-md-5" style="margin: auto;">
+                                <label for="">Cargo: </label>
+                                <input type="text" name="cargo_cdte_directo" id="cargo_cdte_directo"
+                                    placeholder="Cargo Comandante Directo:" class="form-control" ngModel>
+                            </div>
+
+                        </div>
+                        <br>
+                        <h5>1.17 Comandante (Segundo nivel de mando)</h5>
+                        <br>
+                        <div class="form-group row" style="margin: auto;">
+
+                            <div class="form-group col-md-2" style="margin: auto;">
+                                <label for="">Grado: </label>
+                                <select name="gr_cdte" id="gr_cdte" class="form-control" [(ngModel)]="gr_cdte">
+                                    <option value=""></option>
+                                    <option [value]="item" *ngFor="let item of gr_cdte">{{item}}
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-5" style="margin: auto;">
+                                <label for="">Nombre:</label>
+                                <input type="text" name="nombre_cdte_directo" id="nombre_cdte_directo"
+                                    placeholder="Nombre Comandante Directo" class="form-control" ngModel>
+                            </div>
+                            <div class="form-group col-md-5" style="margin: auto;">
+                                <label for="">Cargo: </label>
+                                <input type="text" name="cargo_cdte_directo" id="cargo_cdte_directo"
+                                    placeholder="Cargo Comandante Directo:" class="form-control" ngModel>
+                            </div>
+                        </div>
+                        <br>
+                        <hr>
+                        <br>
+                        <h3>2. DATOS DEL AFECTADO</h3>
+                        <br>
+
+                        <div class="form-group row" style="margin: auto;">
+                            <div class="form-group col-md-3" style="margin: auto;">
+                                <label for="">2.1 Documento de identidad: </label>
+                                <input type="number" name="cargo_cdte_directo" id="cargo_cdte_directo"
+                                    placeholder="2.1 Documento de identidad:" class="form-control" ngModel>
+                            </div>
+                            <div class="form-group col-md-1" style="margin: auto;">
+                                <label for="">2.2 Grado: </label>
+                                <select name="gr_cdte" id="gr_cdte" class="form-control" [(ngModel)]="gr_cdte">
+                                    <option value=""></option>
+                                    <option [value]="item" *ngFor="let item of gr_cdte">{{item}}
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-4" style="margin: auto;">
+                                <label for="">2.3 Nombre y apellido: </label>
+                                <input type="text" name="nombre_cdte_directo" id="nombre_cdte_directo"
+                                    placeholder="2.3 Nombre y apellido:" class="form-control" ngModel>
+                            </div>
+                            <div class="form-group col-md-4" style="margin: auto;">
+                                <label for="">2.4 Ciudad:</label>
+                                <select name="municipio_dipse" id="municipio_dipse" class="form-control"
+                                    [(ngModel)]="municipio_dipse">
+                                    <option value=""></option>
+                                    <option [value]="item" *ngFor="let item of municipio_dipse">{{item}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="form-group row" style="margin: auto;">
+                            <div class="form-group col-md-2" style="margin: auto;">
+                                <label for="">2.5 Departamento:</label>
+                                <select name="departamento_dipser" id="departamento_dipser" class="form-control"
+                                    [(ngModel)]="departamento_dipser">
+                                    <option value=""></option>
+                                    <option [value]="item" *ngFor="let item of departamento_dipser">{{item}}</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-5" style="margin: auto;">
+                                <label for="">2.6 Dirección de la persona: </label>
+                                <input type="text" name="nombre_cdte_directo" id="nombre_cdte_directo"
+                                    placeholder="2.6 Dirección de la persona:" class="form-control" ngModel>
+                            </div>
+                            <div class="form-group col-md-3" style="margin: auto;">
+                                <label for="">2.7 Fecha de ingreso a la institución: </label>
+                                <input type="date" name="fecha_evento" id="fecha_evento" class="form-control" ngModel>
+                            </div>
+
+                            <div class="form-group col-md-2" style="margin: auto;">
+                                <label for="">2.8 Cargo: </label>
+                                <input type="text" name="nombre_cdte_directo" id="nombre_cdte_directo"
+                                    placeholder="2.8 Cargo:" class="form-control" ngModel>
+                            </div>
+
+                        </div>
+
+                        <br>
+                        <div class="form-group row" style="margin: auto;">
+                            <div class="form-group col-md-3" style="margin: auto;">
+                                <label for="">2.9 Tiempo total de servicio: </label>
+                                <select name="departamento_dipser" id="departamento_dipser" class="form-control"
+                                    [(ngModel)]="departamento_dipser">
+                                    <option value=""></option>
+                                    <option [value]="item" *ngFor="let item of meses_dipse">{{item}}</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-3" style="margin: auto;">
+                                <label for=""> </label>
+                                <select name="departamento_dipser" id="departamento_dipser" class="form-control"
+                                    [(ngModel)]="departamento_dipser">
+                                    <option value=""></option>
+                                    <option [value]="item" *ngFor="let item of meses_dipse">{{item}}</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group col-md-3" style="margin: auto;">
+                                <label for="">2.10 Teléfono de contacto lesionado: </label>
+                                <input type="text" name="nombre_cdte_directo" id="nombre_cdte_directo"
+                                    placeholder="2.10 Teléfono de contacto lesionado:" class="form-control" ngModel>
+                            </div>
+
+                            <div class="form-group col-md-3" style="margin: auto;">
+                                <label for="">2.11 Teléfono de contacto acudiente: </label>
+                                <input type="text" name="nombre_cdte_directo" id="nombre_cdte_directo"
+                                    placeholder="2.11 Teléfono de contacto acudiente:" class="form-control" ngModel>
+                            </div>
+
+                        </div>
+                        <br>
+                        <div class="form-group row" style="margin: auto;">
+                            <div class="form-group col-md-6" style="margin: auto;">
+                                <label for="">2.12 Salarios u Honorarios (Mensual) PERSONAL DE PLANTA: </label>
+                                <input type="number" name="nombre_cdte_directo" id="nombre_cdte_directo"
+                                    placeholder="2.12 Salarios u Honorarios (Mensual) PERSONAL DE PLANTA:"
+                                    class="form-control" ngModel>
+                            </div>
+                            <div class="form-group col-md-6" style="margin: auto;">
+                                <label for="">2.13 Atención inmediata que se dio al evento:</label>
+                                <select name="atencion_imediata" id="atencion_imediata" class="form-control"
+                                    [(ngModel)]="atencion_imediata">
+                                    <option value=""></option>
+                                    <option [value]="item" *ngFor="let item of atencion_imediata">{{item}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="form-group row" style="margin: auto;">
+                            <div class="form-group col-md-3" style="margin: auto;">
+                                <label for="">2.14 Sexo: </label>
+                                <select name="genero_dipse" id="genero_dipse" class="form-control"
+                                    [(ngModel)]="genero_dipse">
+                                    <option value=""></option>
+                                    <option [value]="item" *ngFor="let item of genero_dipse">{{item}}</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-3" style="margin: auto;">
+                                <label for="">2.15 Fecha de nacimiento:</label>
+                                <input type="date" name="fecha_de_nacimiento" id="fecha_de_nacimiento"
+                                    class="form-control" ngModel>
+                            </div>
+                            <div class="form-group col-md-3" style="margin: auto;">
+                                <label for="">2.16 Edad:</label>
+                                <input type="text" name="edad" id="edad" placeholder="2.16 Edad:" class="form-control"
+                                    ngModel>
+                            </div>
+                            <div class="form-group col-md-3" style="margin: auto;">
+                                <label for="">2.17 Parte del cuerpo aparentemente afectada: </label>
+                                <select name="lugar_afectacion" id="lugar_afectacion" class="form-control"
+                                    [(ngModel)]="lugar_afectacion">
+                                    <option value=""></option>
+                                    <option [value]="item" *ngFor="let item of lugar_afectacion">{{item}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="form-group row" style="margin: auto;">
+                            <div class="form-group col-md-4" style="margin: auto;">
+                                <label for="">2.18 Descipción parte del cuerpo afectada: </label>
+                                <select name="afectacion_espeficica" id="afectacion_espeficica" class="form-control"
+                                    [(ngModel)]="afectacion_espeficica">
+                                    <option value=""></option>
+                                    <option [value]="item" *ngFor="let item of afectacion_espeficica">{{item}}</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-4" style="margin: auto;">
+                                <label for="">2.19 Tiempo De Experiencia en el cargo: </label>
+                                <select name="departamento_dipser" id="departamento_dipser" class="form-control"
+                                    [(ngModel)]="departamento_dipser">
+                                    <option value=""></option>
+                                    <option [value]="item" *ngFor="let item of meses_dipse">{{item}}</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-4" style="margin: auto;">
+                                <label for=""> </label>
+                                <select name="departamento_dipser" id="departamento_dipser" class="form-control"
+                                    [(ngModel)]="departamento_dipser">
+                                    <option value=""></option>
+                                    <option [value]="item" *ngFor="let item of meses_dipse">{{item}}</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <br>
+                        <hr>
+                        <br>
+                        <h3>3. DESCRIPCION BREVE DEL EVENTO</h3>
+                        <br>
+                        <div class="form-group col-md-11" style="margin: auto;">
+                            <label for="">3.1 (QUÉ, CÓMO, CUÁNDO, DÓNDE, QUIEN)</label>
+                            <textarea name="resumen" id="resumen" cols="30" rows="10" class="form-control" ngModel
+                                placeholder="3.1 (QUÉ, CÓMO, CUÁNDO, DÓNDE, QUIEN)"></textarea>
+
+                        </div>
+
+                        <br>
+                        <div class="form-group col-md-11" style="margin: auto;">
+                            <label for="">3.2 Actividad realizada en el momento del evento:</label>
+                            <textarea name="resumen" id="resumen" cols="30" rows="5" class="form-control" ngModel
+                                placeholder="3.2 Actividad realizada en el momento del evento:"></textarea>
+
+                        </div>
+
+                        <br>
+                        <div class="form-group row" style="margin: auto;">
+                            <div class="form-group col-md-5" style="margin: auto;">
+                                <label for=""> 3.3 CLASE NOVEDAD: </label>
+                                <select name="clase_novedad" id="clase_novedad" class="form-control"
+                                    [(ngModel)]="clase_novedad">
+                                    <option value=""></option>
+                                    <option [value]="item" *ngFor="let item of clase_novedad">{{item}}</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group col-md-4" style="margin: auto;">
+                                <label for=""> 3.4 TIPO DE NOVEDAD: </label>
+                                <select name="tipo_novedad" id="tipo_novedad" class="form-control"
+                                    [(ngModel)]="tipo_novedad">
+                                    <option value=""></option>
+                                    <option [value]="item" *ngFor="let item of tipo_novedad">{{item}}</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-3" style="margin: auto;">
+                                <label for=""> 3.5 Estaba realizando su actividad habitual: </label>
+                                <select name="si_no" id="si_no" class="form-control" [(ngModel)]="si_no">
+                                    <option value=""></option>
+                                    <option [value]="item" *ngFor="let item of si_no">{{item}}</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <br>
+                        <div class="form-group col-md-11" style="margin: auto;">
+                            <label for="">3.6 Si eligio cual:</label>
+                            <textarea name="resumen" id="resumen" cols="30" rows="3" class="form-control" ngModel
+                                placeholder="3.6 Si eligio  cual:"></textarea>
+
+                        </div>
+
+                        <br>
+                        <div class="form-group row" style="margin: auto;">
+
+                            <div class="form-group col-md-3" style="margin: auto;">
+                                <label for="">3.7 Tiempo laborado el día de la novedad: </label>
+                                <input type="time" name="hora_evento" id="hora_evento" class="form-control" ngModel>
+                            </div>
+
+                            <div class="form-group col-md-3" style="margin: auto;">
+                                <label for=""> 3.8 Causo la muerte de la persona:</label>
+                                <select name="si_no" id="si_no" class="form-control" [(ngModel)]="si_no">
+                                    <option value=""></option>
+                                    <option [value]="item" *ngFor="let item of si_no">{{item}}</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group col-md-3" style="margin: auto;">
+                                <label for=""> 3.9 Identificación del peligro o amenaza:</label>
+                                <select name="identificacion_peligro" id="identificacion_peligro" class="form-control"
+                                    [(ngModel)]="si_no">
+                                    <option value=""></option>
+                                    <option [value]="item" *ngFor="let item of identificacion_peligro">{{item}}</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group col-md-3" style="margin: auto;">
+                                <label for=""> 3.10 Agente de la lesión:</label>
+                                <select name="agente_de_la_lesion" id="agente_de_la_lesion" class="form-control"
+                                    [(ngModel)]="si_no">
+                                    <option value=""></option>
+                                    <option [value]="item" *ngFor="let item of agente_de_la_lesion">{{item}}</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <br>
+                        <div class="form-group row" style="margin: auto;">
+                            <div class="form-group col-md-6" style="margin: auto;">
+                                <label for=""> 3.11 Mecanismo de la lesión:</label>
+                                <select name="mecanismo_de_la_lesion" id="mecanismo_de_la_lesion" class="form-control"
+                                    [(ngModel)]="si_no">
+                                    <option value=""></option>
+                                    <option [value]="item" *ngFor="let item of mecanismo_de_la_lesion">{{item}}</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-6" style="margin: auto;">
+                                <label for=""> 3.11.1 Otro cúal:</label>
+                                <input type="text" name="otro_mecanismo" id="otro_mecanismo"
+                                    placeholder="3.11.1 Otro cúal:" class="form-control" ngModel>
+                            </div>
+                        </div>
+
+                        <br>
+                        <hr>
+                        <br>
+                        <h3>4. EN CASO DE ACCIDENTE VIAL</h3>
+                        <br>
+
+                        <div class="form-group row" style="margin: auto;">
+
+                            <div class="form-group col-md-3" style="margin: auto;">
+                                <label for=""> 4.1 Información Vehículo</label>
+                                <select name="informacion_vehiculo" id="informacion_vehiculo" class="form-control"
+                                    [(ngModel)]="si_no">
+                                    <option value=""></option>
+                                    <option [value]="item" *ngFor="let item of informacion_vehiculo">{{item}}</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-3" style="margin: auto;">
+                                <label for=""> 4.2 Tipo de Vehiculo: </label>
+                                <select name="tipo_vehiculo" id="tipo_vehiculo" class="form-control"
+                                    [(ngModel)]="si_no">
+                                    <option value=""></option>
+                                    <option [value]="item" *ngFor="let item of tipo_vehiculo">{{item}}</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-3" style="margin: auto;">
+                                <label for=""> 4.3 Placas o sigla: </label>
+                                <input type="text" name="otro_mecanismo" id="otro_mecanismo"
+                                    placeholder="4.3 Placas o sigla: " class="form-control" ngModel>
+                            </div>
+                            <div class="form-group col-md-3" style="margin: auto;">
+                                <label for=""> 4.4 Marca: </label>
+                                <input type="text" name="otro_mecanismo" id="otro_mecanismo"
+                                    placeholder="4.4 Marca: " class="form-control" ngModel>
+                            </div>
+                        </div>
+                        <br>
+
+                        <div class="form-group row" style="margin: auto;">
+                            <div class="form-group col-md-8" style="margin: auto;">
+                                <label for=""> 4.5 Nombre testigo:</label>
+                                <input type="text" name="otro_mecanismo" id="otro_mecanismo"
+                                    placeholder="4.5 Nombre testigo:" class="form-control" ngModel>
+                            </div>
+                            <div class="form-group col-md-4" style="margin: auto;">
+                                <label for=""> 4.6 Teléfono testigo</label>
+                                <input type="text" name="otro_mecanismo" id="otro_mecanismo"
+                                    placeholder="4.6 Teléfono testigo" class="form-control" ngModel>
+                            </div>
+                        </div>
+
+                        <br>
+                        <hr>
+                        <br>
+                        <h3>5.DATOS DE QUIEN REPORTA</h3>
+                        <br>
+                        <div class="form-group row" style="margin: auto;">
+                            <div class="form-group col-md-5" style="margin: auto;">
+                                <label for=""> 5.1 Nombre de quien reporta a ARL:</label>
+                                <input type="text" name="otro_mecanismo" id="otro_mecanismo"
+                                    placeholder="5.1 Nombre de quien reporta a ARL:" class="form-control" ngModel>
+                            </div>
+                            <div class="form-group col-md-2" style="margin: auto;">
+                                <label for="">Grado: </label>
+                                <select name="gr_cdte" id="gr_cdte" class="form-control" [(ngModel)]="gr_cdte">
+                                    <option value=""></option>
+                                    <option [value]="item" *ngFor="let item of gr_cdte">{{item}}
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-5" style="margin: auto;">
+                                <label for="">Cargo: </label>
+                                <input type="text" name="cargo_cdte_directo" id="cargo_cdte_directo"
+                                    placeholder="Cargo:" class="form-control" ngModel>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="form-group row" style="margin: auto;">
+                            <div class="form-group col-md-5" style="margin: auto;">
+                                <label for=""> 5.2 Nombre de quien reporta:</label>
+                                <input type="text" name="otro_mecanismo" id="otro_mecanismo"
+                                    placeholder="5.2 Nombre de quien reporta:" class="form-control" ngModel>
+                            </div>
+                            <div class="form-group col-md-2" style="margin: auto;">
+                                <label for="">Grado: </label>
+                                <select name="gr_cdte" id="gr_cdte" class="form-control" [(ngModel)]="gr_cdte">
+                                    <option value=""></option>
+                                    <option [value]="item" *ngFor="let item of gr_cdte">{{item}}
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-5" style="margin: auto;">
+                                <label for="">Cargo: </label>
+                                <input type="text" name="cargo_cdte_directo" id="cargo_cdte_directo"
+                                    placeholder="Cargo:" class="form-control" ngModel>
+                            </div>
+                        </div>                        
+                        <br>
+                        <div class="form-group row" style="margin: auto;">
+                            <div class="form-group col-md-10" style="margin: auto;">
+                                <label for=""> 5.3 Nombre comandante Unidad:</label>
+                                <input type="text" name="otro_mecanismo" id="otro_mecanismo"
+                                    placeholder="5.3 Nombre comandante Unidad:" class="form-control" ngModel>
+                            </div>
+                            <div class="form-group col-md-2" style="margin: auto;">
+                                <label for="">Grado: </label>
+                                <select name="gr_cdte" id="gr_cdte" class="form-control" [(ngModel)]="gr_cdte">
+                                    <option value=""></option>
+                                    <option [value]="item" *ngFor="let item of gr_cdte">{{item}}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <br>
+                        <hr>
+                        <br>
+                        <h3>6. OBSERVACIONES</h3>
+                        <br>
+                        <div class="form-group col-md-11" style="margin: auto;">
+                            <label for=""></label>
+                            <textarea name="resumen" id="resumen" cols="30" rows="10" class="form-control" ngModel
+                                placeholder="OBSERVACIONES"></textarea>
+
+                        </div>
+                        <br>
+                        <div class="form-group row" style="margin: auto;">
+                            <div class="form-group col-md-6" style="margin: auto;">
+                                <label for=""> FECHA REPORTE:</label>
+                                <input type="date" name="otro_mecanismo" id="otro_mecanismo"
+                                     class="form-control" ngModel>
+                            </div>
+                            <div class="form-group col-md-6" style="margin: auto;">
+                                <label for=""> NÚMERO DE RADICADO ARL:</label>
+                                <input type="text" name="otro_mecanismo" id="otro_mecanismo"
+                                    placeholder="NÚMERO DE RADICADO ARL:" class="form-control" ngModel>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="alert alert-success col-md-11" role="alert"  style="margin: auto !important;">
+                            <b>NOTA:</b> En caso de lesiones a personas, se debe enviar copia del informe ATEL radicado en la ARL. Se debe anexar fotos, diagramas o esquemas necesarios para el entendimiento del evento.
+                        </div>
+                        
+                        <!-- <div class="alert alert-success col-md-11" role="alert" *ngIf="inf_g" style="margin: auto !important;">
+                            {{inf_c_g}}!
+                        </div>
+                        <br *ngIf="inf_g">
+                        <div class="alert alert-danger col-md-11" role="alert" *ngIf="inf_a" style="margin: auto !important;">
+                            {{inf_c_g}}!
+                        </div>
+                        
+                        <br *ngIf="inf_a">
+                        <div class=" row col-md-10" style="margin: auto;" >
+                            <button class="btn btn-primary" (click)="guardar_evento(documentos_pdf)" *ngIf="inf_btn">Cargar </button>
+                            <button class="btn btn-success" (click)="clear()" *ngIf="inf_btnuew">Nuevo Evento </button>
+                        </div> -->
+                        <br>
+                    </div>
+                </div>
+                <!-- <div class="col-md-6 ">
+                    <h2 class="titulo">Mapa</h2>
+                    <div class="radios">
+                        <app-mapa-digital></app-mapa-digital>
+                    </div>
+                </div> -->
+            </div>
+        </form>
+    </div>
+</div>
+<app-spiner></app-spiner>

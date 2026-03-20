@@ -1,0 +1,57 @@
+<div class="conatiner col-md-12" style="margin: auto;" *ngIf="registrado==true">
+    <div style="display: flex; justify-content: center;">
+        <h1>Cargar Informacion</h1>
+    </div>
+    <br>
+    <div class="col-md-12">
+        <form action="" class="form-group row tamanio" name="dataForm" id="dataForm" #miformulario="ngForm"
+            enctype="multipart/form-data">
+            <div class="col-md-4 ">
+                <button class="btn btn-primary" (click)="hechos()">Hechos</button>
+                <div class="form-group col-md-12" style="margin-top: 15px;" *ngIf="inf_u">
+                    <div class="alert alert-danger" role="alert">
+                        {{inf_c}}!
+                    </div>
+                </div>
+            </div>
+
+            <input required id="hechos_file"  ngModel  name="hechos_file" hidden type="file" (change)="leer_hechos($event)" >
+
+
+            <div class="col-md-4 ">
+                <button class="btn btn-primary" (click)="resultados()">Resultados</button>
+                <div class="form-group col-md-12" style="margin-top: 15px;" *ngIf="inf_r">
+                    <div class="alert alert-danger" role="alert">
+                        {{inf_c_r}}!
+                    </div>
+                </div>
+            </div>
+
+            <input required id="leer_resultados" ngModel name="leer_resultados" type="file" hidden (change)="leer_resultados_exel($event)">
+
+            <!-- <div class="col-md-3 "><button class="btn btn-primary" (click)="herracion()">Herradicacion</button>
+                <div class="form-group col-md-12" style="margin-top: 15px;" *ngIf="inf_h">
+                    <div class="alert alert-danger" role="alert">
+                        {{inf_c_h}}!
+                    </div>
+                </div>
+            </div> -->
+
+            <!-- <input #leer_herradicacion required id="leer_herradicacion"  type="file"
+                (change)="leer_herradicacion_exel($event)" hidden> -->
+
+            <div class="col-md-4 "><button class="btn btn-primary" type="submit" (click)="guardar(miformulario.value)">Cargar Resultados</button>
+                <div class="form-group col-md-12" style="margin-top: 15px;" *ngIf="inf_g">
+                    <div class="alert alert-danger" role="alert">
+                        {{inf_c_g}}!
+                    </div>
+                </div>
+            </div>
+            <div class="form-group col-md-12" style="margin-top: 15px;" *ngIf="inf_i">
+                <div class="alert alert-danger" role="alert">
+                    {{inf_i_g}}!
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

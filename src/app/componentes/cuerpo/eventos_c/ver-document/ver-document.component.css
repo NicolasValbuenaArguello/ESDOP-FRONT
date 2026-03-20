@@ -1,0 +1,29 @@
+.documento{
+    position: absolute;
+    top: 10%;
+    left: 0%;
+    margin: auto;
+    width: 80vw;
+    height: 80vh;
+    background-color: rgba(0, 0, 0, 0.404);
+    z-index: 1000;
+
+}
+
+.documento_oculto{
+    display: none;
+}
+
+.radios{
+    position: fixed;
+    /* margin-left: 5%;
+    top: 10%; */
+    border: 2px solid #707070;
+    border-radius: 5px;
+    width: 100vw;
+    height: 100vh;
+    overflow: scroll;
+    background-color: rgba(255, 255, 255, 0.575);
+    
+}
+

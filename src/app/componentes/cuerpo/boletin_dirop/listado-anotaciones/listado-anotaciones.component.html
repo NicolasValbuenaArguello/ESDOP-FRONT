@@ -1,0 +1,412 @@
+
+<div class="anotaciones" id="anotaciones">
+    <div class="posicion_boton">
+        <button class="btn btn-danger" [routerLink]="['/BoletinDirop']"><img src="../../../../../assets/iconos-menu/task.svg" alt=""></button>
+        <button class="btn btn-primary" (click)="mostrar_proyecto()"><img src="../../../../../assets/iconos-menu/filter.svg" alt=""></button>
+    </div>
+    <div class="posicion_boton_boletin">
+        <h2 (click)="mostrar_proyecto()">{{boletin}}</h2>
+        <h4>BOLETÍN</h4>
+    </div>
+    <div class="listado">
+        <div *ngFor="let item of istado_boletin_anotaciones; index as i; first as isFirst">
+
+            <div class="card " style="right: -5%; width: 94%; background: #000000; color: snow;">
+                <div class="card-body">
+
+                    <div class="card-title titulo_evento">
+                        <div class="verde">{{item[4]}}</div>
+                        <div class="{{item[27]}}" style="text-indent: 0.5em">{{item[21]}}</div>
+                    </div>
+                    <div class="numero pos {{item[25]}}">{{i+1}}</div>
+                    <div class="numero pos_1 amarillo_bg">RES</div>
+                    <div class="numero pos_2 rojo_bg">EDI</div>
+                    <div class="titulo_evento_2">
+                        {{item[6]}}-{{item[7]}}
+                    </div>
+                    <div class="titulo_evento_2">
+                        {{item[10]}}-{{item[9]}}-{{item[8]}}
+                    </div>
+                    <div class="titulo_evento_2">
+                        {{item[26]}}
+                    </div>
+                    <br>
+                    <div class="parrafo">
+                        <textarea name="" id="exampleTextarea" class="form-control" rows="auto" disabled>{{item[22]}}</textarea>
+
+                    </div>
+                    <br>
+                    <div class="titulo_evento_3">
+                        <h4>{{item[19]}}-{{item[20]}}</h4>
+                        <br>
+
+                    </div>
+                    <div class="titulo_evento_3">
+                        <h4>{{item[23]}}</h4>
+                    </div>
+                </div>
+
+                <br>
+            </div>
+            <hr>
+
+        </div>
+    </div>
+    <div class="listado_mapa">
+        <app-mapa-digital></app-mapa-digital>
+    </div>
+</div>
+<div class="proyecto_nuevo oculto " id="proyecto_ingreso">
+    <button class="btn btn-danger posicion_btn_cerrar" (click)="mostrar_proyecto()">
+        X
+    </button>
+
+    <div class="tamanio_proyectos">
+        <hr style="color: snow;">
+        <h2 style="color: snow;">menú</h2>
+        <hr style="color: snow;">
+        <button class="btn btn-danger " id="oculto_documentos_btn" (click)="mostrar_menu(1)"
+            style="width: 100px;">Actualizar</button>
+        <hr style="color: snow;">
+        <button class="btn btn-warning " id="oculto_documentos_btn" (click)="mostrar_menu(2)"
+            style="width: 100px;">Editar</button>
+        <hr style="color: snow;">
+        <button class="btn btn-warning " id="oculto_documentos_btn" (click)="mostrar_menu(4)"
+            style="width: 100px;">Edit. Doc.</button>
+        <hr style="color: snow;">
+        <button class="btn btn-success" id="oculto_documentos_btn" (click)="mostrar_menu(3)"
+            style="width: 100px;">Descargar</button>
+        <hr style="color: snow;">
+        <button class="btn btn-warning " style=" position:absolute; bottom: 10%; width: 100px;"
+            id="oculto_documentos_btn" (click)="mostrar_menu(0)">Cerrar</button>
+
+    </div>
+    <div class="card oculto_documentos" id="oculto_documentos" style="width: 40rem; overflow: scroll;">
+        <div style="width: 100px;">
+            <img src="../../../../../assets/logos/JEMOP-DIROP.png" class="card-img-top" alt="...">
+        </div>
+        <div class="card-body">
+            <h3>Filtro</h3>
+
+            <form class="form-group row tamanio" #filtro_eventos="ngForm" autocomplete="off">
+
+                <div class="form-group col-md-12" style="margin: auto;">
+                    <label for="" class="color_label">Fecha Inicial </label>
+                    <input type="date" name="fecha_evento" id="fecha_evento" class="form-control"
+                        [(ngModel)]="fecha_evento">
+                </div>
+                <hr>
+                <div class="form-group col-md-12" style="margin: auto;">
+                    <label for="" class="color_label">Fecha Inicial </label>
+                    <input type="date" name="fecha_evento_final" id="fecha_evento_final" class="form-control"
+                        [(ngModel)]="fecha_evento_final">
+                </div>
+                <hr>
+                <div class="form-group col-md-12" style="margin: auto;">
+                     <label for="">BOLETIN</label>
+                    <select name="boletin" id="boletin" class="form-control" [(ngModel)]="boletin">
+                        <option value="{{item[1]}}"
+                            *ngFor="let item of listado_boletin_ooperacional_registrado; index as i; first as isFirst">
+                            {{item[1]}}</option>
+
+
+                    </select>
+                </div>
+                <br>
+                <hr>
+
+
+                <br>
+                <div style="display: flex; gap: 5px;">
+                    <div class="posicion_btn">
+                        <button class="btn btn-success" (click)="listado_asignados(filtro_eventos)">
+                            Buscar
+                        </button>
+                    </div>
+                    <div class="posicion_btn">
+                        <button class="btn btn-warning" (click)="clear()">
+                            Borrar
+                        </button>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+    <!---
+    <div class="card oculto_documentos_modificar" id="oculto_documentos_modificar"
+        style="width: 70rem; overflow: scroll;">
+        <div style="width: 100px;">
+            <img src="../../../../../assets/logos/JEMOP-DIROP.png" class="card-img-top" alt="...">
+        </div>
+        <div class="card-body">
+            <h3>Editar Evento</h3>
+            <form class="form-group row tamanio" #form_editar_evento="ngForm" autocomplete="off">
+
+                <div class="form-group col-md-12" style="margin: auto;">
+                    <label for="" class="color_label">Evento </label>
+                    <select name="evento_a_selecionar" id="" class="form-control" ngModel
+                        (change)="selecionar_evento(form_editar_evento)">
+                        <option value=""></option>
+                        <option value="{{item[0]}}"
+                            *ngFor="let item of listado_eventos_app; index as i; first as isFirst">{{i+1}}.
+                            {{item[3]}} {{item[22]}}</option>
+                    </select>
+
+                </div>
+                <hr style="color: snow;">
+                <h3>Fecha - Hora </h3>
+                <div class="row col-md-12" style="margin: auto;">
+                    <div class="form-group col-md-4" style="margin: auto;">
+                        <label for="">Tipo Evento</label>
+                        <select name="tipo_evento" id="tipo_evento" class="form-control"
+                            [(ngModel)]="tipo_evento_f">tipo_evento
+                            <option value="POSITIVO">POSITIVO</option>
+                            <option value="NEGATIVO">NEGATIVO</option>
+
+                        </select>
+                    </div>
+                    <div class="row col-md-4" style="margin: auto;">
+                        <label for="">Fecha Evento</label>
+                        <input type="date" name="fecha_evento" id="fecha_evento" class="form-control"
+                            [(ngModel)]="fecha_evento_f">
+                    </div>
+
+                    <div class="row col-md-4" style="margin: auto;">
+                        <label for="">Hora</label>
+                        <input type="time" name="hora_evento" id="hora_evento" class="form-control"
+                            [(ngModel)]="hora_evento">
+                    </div>
+                </div>
+                <h3>Unidad</h3>
+                <div class="row col-md-12" style="margin: auto;">
+                    <div class="form-group col-md-2" style="margin: auto;">
+                        <label for="">Division</label>
+                        <input type="text" name="divi_padre" id="divi_padre" class="form-control"
+                            [(ngModel)]="divi_padre">
+                    </div>
+                    <div class="form-group col-md-2" style="margin: auto;">
+                        <label for="">Division FT</label>
+                        <input type="text" name="divi_hija" id="divi_hija" class="form-control"
+                            [(ngModel)]="divi_hija">
+                    </div>
+
+                    <div class="form-group col-md-2" style="margin: auto;">
+                        <label for="">Brigadas</label>
+                        <input type="text" name="brigada" id="brigada" class="form-control" [(ngModel)]="brigada">
+                    </div>
+                    <div class="form-group col-md-2" style="margin: auto;">
+                        <label for="">Batallones</label>
+                        <input type="text" name="batallon" id="batallon" class="form-control"
+                            [(ngModel)]="batallon">
+                    </div>
+                    <div class="form-group col-md-2" style="margin: auto;">
+                        <label for="">CP</label>
+                        <input type="text" name="cp" id="cp" class="form-control" [(ngModel)]="cp">
+                    </div>
+                    <div class="form-group col-md-2" style="margin: auto;">
+                        <label for="">PEL</label>
+                        <input type="text" name="pel" id="pel" class="form-control" [(ngModel)]="pel">
+                    </div>
+                </div>
+                <hr>
+                <h3>Lugar</h3>
+
+                <div class="form-group col-md-11" style="margin: auto;">
+                    <label for="">Departamento</label>
+                    <input type="text" name="departamento" id="departamento" class="form-control"
+                        [(ngModel)]="departamento">
+
+                </div>
+                <div class="form-group col-md-11" style="margin: auto;">
+                    <label for="">Municipio</label>
+                    <input type="text" name="municipio" id="municipio" class="form-control" [(ngModel)]="municipio">
+                </div>
+                <div class="form-group col-md-11" style="margin: auto;">
+                    <label for="">Sitio</label>
+                    <input type="text" name="sitio" id="sitio" placeholder="Sitio" class="form-control"
+                        [(ngModel)]="sitio">
+                </div>
+                <br>
+                <div class=" row col-md-12">
+                    <div class="form-group col-md-2" style="margin: auto;">
+                        <label for="">Latitud</label>
+                        <select name="latitud" id="latitud" class="form-control" [(ngModel)]="latitud"
+                            (ngModelChange)="coordenadas()">
+                            <option value=""></option>
+                            <option [value]="item" *ngFor="let item of lat">{{item}}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-3" style="margin: auto;">
+                        <label for="">Grados</label>
+                        <input type="number" name="gr_n" id="gr_n" placeholder="GRD" class="form-control"
+                            [(ngModel)]="gr_n" (ngModelChange)="coordenadas()">
+                    </div>
+                    <div class="form-group col-md-3" style="margin: auto;">
+                        <label for="">Minutos</label>
+                        <input type="number" name="m_n" id="m_n" placeholder="MIN" class="form-control"
+                            [(ngModel)]="m_n" (ngModelChange)="coordenadas()">
+                    </div>
+                    <div class="form-group col-md-3" style="margin: auto;">
+                        <label for="">Segundos</label>
+                        <input type="number" name="s_n" id="s_n" placeholder="SEG" class="form-control"
+                            [(ngModel)]="s_n" (ngModelChange)="coordenadas()">
+                    </div>
+                </div>
+                <div class=" row col-md-12">
+                    <div class="form-group col-md-2" style="margin: auto;">
+                        <label for="">Longitud</label>
+                        <select name="longitud" id="longitud" class="form-control" [(ngModel)]="longitud"
+                            (ngModelChange)="coordenadas()">
+                            <option value=""></option>
+                            <option [value]="item" *ngFor="let item of lot">{{item}}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-3" style="margin: auto;">
+                        <label for="">Grados</label>
+                        <input type="number" name="gr_l" id="gr_l" placeholder="GRD" class="form-control"
+                            [(ngModel)]="gr_l" (ngModelChange)="coordenadas()">
+                    </div>
+                    <div class="form-group col-md-3" style="margin: auto;">
+                        <label for="">Minutos</label>
+                        <input type="number" name="m_l" id="m_l" placeholder="MIN" class="form-control"
+                            [(ngModel)]="m_l" (ngModelChange)="coordenadas()">
+                    </div>
+                    <div class="form-group col-md-3" style="margin: auto;">
+                        <label for="">Segundos</label>
+                        <input type="number" name="s_l" id="s_l" placeholder="SEG" class="form-control"
+                            [(ngModel)]="s_l" (ngModelChange)="coordenadas()">
+                    </div>
+
+                </div>
+                <br>
+                <hr>
+                <div class="form-group col-md-11" style="margin: auto;">
+                    <label for="">Amenaza</label>
+                    <input type="text" name="enemigo" id="enemigo" class="form-control" [(ngModel)]="enemigo">
+                </div>
+                <div class="form-group col-md-11" style="margin: auto;">
+                    <label for="">Estructura</label>
+                    <input type="text" name="estructura" id="estructura" class="form-control"
+                        [(ngModel)]="estructura">
+                </div>
+                <div class="form-group col-md-11" style="margin: auto;">
+                    <label for="">Hechos</label>
+                    <input type="text" name="hecho" id="hecho" class="form-control" [(ngModel)]="hecho">
+                </div>
+                <hr>
+                <h3>Resumen</h3>
+                <div class="form-group col-md-12" style="margin: auto;">
+
+                    <textarea name="resumen" id="resumen" cols="30" rows="5" class="form-control"
+                        [(ngModel)]="resumen"></textarea>
+                </div>
+                <div class="form-group col-md-12" style="margin: auto;">
+                    <label for="">Estado del Evento</label>
+                    <select name="estado" id="estado" class="form-control" [(ngModel)]="estado">tipo_evento
+                        <option value="SIN CARGAR">SIN CARGAR</option>
+                        <option value="CARGADO">CARGADO</option>
+
+                    </select>
+                </div>
+
+                <div class="alert alert-success col-md-11" role="alert" *ngIf="inf_g"
+                    style="margin: auto !important;">
+                    {{inf_c_g}}!
+                </div>
+
+                <div class="alert alert-danger col-md-11" role="alert" *ngIf="inf_a"
+                    style="margin: auto !important;">
+                    {{inf_c_g}}!
+                </div>
+                <br *ngIf="inf_a">
+                <br *ngIf="inf_g">
+                <hr>
+                <div class=" row col-md-10" style="margin: auto;">
+                    <button class="btn btn-warning" (click)="guardar_evento(form_editar_evento)"
+                        *ngIf="inf_btn">Editar </button>
+                    <button class="btn btn-success" (click)="listado_eventos(filtro_eventos)"
+                        *ngIf="inf_btnuew">Nuevo Evento </button>
+                </div>
+            </form>
+
+            <p class="card-text">Editar Evento Relevante.</p>
+        </div>
+    </div>
+-->
+    <!---
+    <div class="card oculto_documentos_descargar" id="oculto_documentos_descargar"
+        style="width: 30rem; overflow: scroll;">
+        <div style="width: 100px;">
+            <img src="../../../../../assets/logos/JEMOP-DIROP.png" class="card-img-top" alt="...">
+        </div>
+        <div class="card-body">
+            <h3>Filtro</h3>
+
+            <form class="form-group row tamanio" #descargar_eventos_doc="ngForm" autocomplete="off">
+
+                <div class="form-group col-md-12" style="margin: auto;">
+                    <label for="" class="color_label">Fecha Inicial </label>
+                    <input type="date" name="fecha_evento" id="fecha_evento" class="form-control"
+                        [(ngModel)]="fecha_evento">
+                </div>
+                <hr>
+                <div class="form-group col-md-12" style="margin: auto;">
+                    <label for="" class="color_label">Fecha Inicial </label>
+                    <input type="date" name="fecha_evento_final" id="fecha_evento_final" class="form-control"
+                        [(ngModel)]="fecha_evento_final">
+                </div>
+                <div class="form-group col-md-12" style="margin: auto;">
+                    <label for="" class="color_label">Evento </label>
+                    <select name="id" class="form-control" ngModel (change)="selecionar_evento(form_editar_evento)">
+                        <option value=""></option>
+                        <option value="{{item[0]}}"
+                            *ngFor="let item of listado_eventos_app; index as i; first as isFirst">{{i+1}}.
+                            {{item[3]}} {{item[22]}}</option>
+                    </select>
+                </div>
+                <hr>
+                <div class="form-group col-md-12" style="margin: auto;">
+                    <label for="" class="color_label">Tipo Evento</label>
+
+                    <select name="tipo_evento" id="tipo_evento" class="form-control"
+                        [(ngModel)]="tipo_evento">tipo_evento
+                        <option value=""></option>
+                        <option value="POSITIVO">POSITIVO</option>
+                        <option value="NEGATIVO">NEGATIVO</option>
+
+                    </select>
+                </div>
+                <br>
+                <hr>
+                <br>
+                <div style="display: flex; gap: 5px;">
+                    <div class="posicion_btn">
+                        <button class="btn btn-success" (click)="descargar_eventos(descargar_eventos_doc)">
+                            Descargar Boletin
+                        </button>
+                    </div>
+                    <div class="posicion_btn">
+                        <button class="btn btn-warning" (click)="clear()">
+                            Borrar
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+-->
+      <!---
+    <div class="unidades oculto_documentos_descargar_unidades" id="oculto_documentos_descargar_unidades" style="width: 40rem; overflow: scroll;">
+        <div class="card"  *ngFor="let item of listado_eventos_app; index as i; first as isFirst"  (click)="celecionar_celda(item)">
+            <div class="card-body">
+                <img src="../../../../../assets/iconos-menu/check.svg" width="30px" class="oculto" id="{{item[0]}}"> 
+                {{item[3]}}  - {{item[22]}}
+                <img src="../../../../../assets/iconos-menu/{{item[25]}}.svg" width="30px" style=" position:absolute; right:  1%;">
+            </div>
+          </div>
+    </div>
+    -->
+</div>

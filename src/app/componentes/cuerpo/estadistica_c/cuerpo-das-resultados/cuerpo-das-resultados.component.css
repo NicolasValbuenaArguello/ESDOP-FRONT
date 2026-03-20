@@ -1,0 +1,51 @@
+.menu_cerrar {
+  position: absolute;
+  top: 0.5%;
+  right: 2%;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  background-color: #222;
+  padding: 5px 10px;
+  border-radius: 8px;
+  z-index: 20000;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+  transition: transform 0.3s ease;
+}
+
+.menu_cerrar:hover {
+  transform: scale(1.03);
+}
+
+.boton {
+  width: 35px;
+  height: 35px;
+  background-color: darkred;
+  background-image: url("../../../../../assets/iconos-menu/x.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 65%;
+  border-radius: 7px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.menu_interno {
+  color: snow;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+  font-size: 14px;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.menu_interno:hover {
+  color: gold;
+  text-decoration: underline;
+}
+
+.img_e {
+  filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.5));
+}

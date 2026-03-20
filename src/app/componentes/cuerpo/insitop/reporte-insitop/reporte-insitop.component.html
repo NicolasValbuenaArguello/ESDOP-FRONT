@@ -1,0 +1,248 @@
+<app-spiner></app-spiner>
+<div class="row col-md-12">
+
+    <!-- Título centrado -->
+    <div class="col-12 text-center mb-4">
+        <h1 class="titulo-insitop">Información del INSITOP</h1>
+    </div>
+
+    <!-- Menú lateral izquierdo fijo -->
+    <div class="col-md-3">
+        <div class="card position-fixed" style="width: 15rem; height: 87vh; overflow-y: auto; top: 20%;">
+            <ul class="list-group list-group-flush p-2">
+                <!-- UNIDAD -->
+                <li class="list-group-item">
+                    <h3>UNIDAD</h3>
+                    <div class="card listados mb-3">
+                        <button class="btn btn-warning w-100" (click)="mostrar_divisiones()">
+                            Divisiones <img src="../../../../../assets/iconos-menu/descargar.svg" />
+                        </button>
+                    </div>
+                    <div *ngIf="divisiones_filtrados.length" class="alert alert-secondary">
+                        <ul>
+                            <li *ngFor="let mun of divisiones_filtrados">{{ mun }}</li>
+                        </ul>
+                    </div>
+                </li>
+
+                <!-- LUGAR -->
+                <li class="list-group-item">
+                    <h3>Lugar</h3>
+
+                    <!-- Departamentos -->
+                    <div class="card listados mb-2">
+                        <button class="btn btn-warning w-100" (click)="mostrar_dpto()">
+                            Departamentos <img src="../../../../../assets/iconos-menu/descargar.svg" />
+                        </button>
+                    </div>
+                    <div *ngIf="departamentos_filtrado.length" class="alert alert-secondary">
+                        <ul>
+                            <li *ngFor="let mun of departamentos_filtrado">{{ mun }}</li>
+                        </ul>
+                    </div>
+
+                    <!-- Municipios -->
+                    <div class="card listados my-">
+                        <button class="btn btn-warning w-100" (click)="mostrar_mpio()">
+                            Municipios <img src="../../../../../assets/iconos-menu/descargar.svg" />
+                        </button>
+                    </div>
+                    <div *ngIf="datos_municipios.length" class="alert alert-secondary">
+                        <ul>
+                            <li *ngFor="let mun of datos_municipios">{{ mun }}</li>
+                        </ul>
+                    </div>
+                </li>
+
+                <!-- SUBREGIONES -->
+                <li class="list-group-item">
+                    <h3>Subregión</h3>
+                    <div class="card listados mb-3">
+                        <button class="btn-elegante w-100" (click)="abrirVentanaSubregiones()">📍 Ver
+                            subregiones</button>
+                    </div>
+
+                    <div *ngIf="subregionSeleccionadaNombre" class="card-subregion mt-2">
+                        <div class="card-subregion-header">
+                            <span class="icono-subregion">🧭</span>
+                            Subregión seleccionada
+                            <button class="btn-cerrar" (click)="limpiarSubregion()">✖</button>
+                        </div>
+                        <div class="card-subregion-body">
+                            <strong>{{ subregionSeleccionadaNombre }}</strong><br />
+                            <button type="button" (click)="abrirVentanaSubregiones()" class="enlace-cambiar btn-link">
+                                🔁 Cambiar subregión
+                            </button>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="contenedor_general">
+        <form #documentos_pdf="ngForm">
+            <div class="filtros_unificados">
+                <label>Fecha</label>
+                <input type="date" name="fecha_insitop" id="fecha_insitop" ngModel />
+                <label>CODE</label>
+                <select name="CODE" id="CODE" ngModel class="select-elegante">
+                    <option value="Operaciones">Operaciones</option>
+                    <option value="Descanso">Descanso</option>
+                    <option value="Entrenamiento">Entrenamiento</option>
+                    <option value="Novedades">Novedades</option>
+                </select>
+
+            </div>
+
+            <div class="tarjetas">
+                <div class="tarjeta">
+                    <h3>INSITOP</h3>
+                    <p>.....</p>
+                    <button class="btn-descargar" (click)="reporte_boletin(documentos_pdf)">Descargar</button>
+                </div>
+                <div class="tarjeta">
+                    <h3>PELOTONES DIVISIONES</h3>
+                    <p>.....</p>
+                    <button class="btn-descargar" (click)="pelotones_divisiones(documentos_pdf)">Descargar</button>
+                </div>
+                <div class="tarjeta">
+                    <h3>PELOTONES UNIDADES</h3>
+                    <p>.....</p>
+                    <button class="btn-descargar" (click)="pelotones_uni_rep(documentos_pdf)">Descargar</button>
+                </div>
+                <div class="tarjeta">
+                    <h3>Cantidad de comandantes</h3>
+                    <p>.....</p>
+                    <button class="btn-descargar" (click)="cantidad_cdte_unidades(documentos_pdf)">Descargar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+    <!-- Tarjeta ESTADO INSITOP -->
+    <div class="col-md-2 mb-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Estado INSITOP</h5>
+                <p class="card-text">Gráficas para el análisis del INSITOP</p>
+                <form #miformulario_estadoMayor="ngForm">
+                    <input type="date" name="fecha_insitop_estado" class="form-control mb-3" ngModel
+                        (change)="ocultar()" />
+                    <hr />
+                    <a *ngIf="oculto" class="btn btn-primary w-100"
+                        (click)="grafico_estado_m(miformulario_estadoMayor)">
+                        Gráficas
+                    </a>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- 🔹 Modal Selección Divisiones -->
+<div class="modal-backdrop" *ngIf="ventana_activa === 'divisiones'" (click)="cerrar_ventana()">
+    <div class="modal-contenido-estandar animate" (click)="$event.stopPropagation()">
+        <div class="modal-header">
+            <h5>Seleccionar Divisiones</h5>
+            <button class="btn-cerrar" (click)="cerrar_ventana()">✖</button>
+        </div>
+        <div class="modal-cuerpo-lista">
+            <ul>
+                <li *ngFor="let item of divisiones_filtrar; index as i">
+                    <label>
+                        <input type="checkbox" ngModel name="mpio" [id]="i + '. ' + item" value="OK"
+                            (click)="unidad_selecionados(item, i)">
+                        {{i + '. ' + item}}
+                    </label>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- 🔹 Modal Selección Departamentos -->
+<div class="modal-backdrop" *ngIf="ventana_activa === 'departamentos'" (click)="cerrar_ventana()">
+    <div class="modal-contenido-estandar animate" (click)="$event.stopPropagation()">
+        <div class="modal-header">
+            <h5>Seleccionar Departamentos</h5>
+            <button class="btn-cerrar" (click)="cerrar_ventana()">✖</button>
+        </div>
+        <div class="modal-cuerpo-lista">
+            <ul>
+                <li *ngFor="let item of departamentos_filtrados; index as i">
+                    <label>
+
+                        <input type="checkbox" ngModel name="boletin_diseo" [id]="item" value="OK"
+                            (click)="departamentos_selecionar(4,5,item)">
+                        {{item}}
+                    </label>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- 🔹 Modal Selección Municipios -->
+<div class="modal-backdrop" *ngIf="ventana_activa === 'municipios'" (click)="cerrar_ventana()">
+    <div class="modal-contenido-estandar animate" (click)="$event.stopPropagation()">
+        <div class="modal-header">
+            <h5>Seleccionar Municipios</h5>
+            <button class="btn-cerrar" (click)="cerrar_ventana()">✖</button>
+        </div>
+        <div class="modal-cuerpo-lista">
+            <ul>
+                <li *ngFor="let item of unidad_selecionada_municipios; index as i">
+                    <label>
+                        <input type="checkbox" ngModel name="mpio" [id]="i + '. ' + item" value="OK"
+                            (click)="municipios_selecionados(item, i)">
+                        {{i + '. ' + item}}
+                    </label>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="ventana-subregion" *ngIf="ventanaVisible">
+    <div class="ventana-subregion-contenido">
+        <h3>Seleccione una Subregión</h3>
+
+        <div class="subregiones-lista">
+            <div *ngFor="let subregion of subregiones" class="subregion-item">
+                <label class="radio-opcion">
+                    <input type="radio" class="radio-subregion" name="subregionEmergente" [value]="subregion.id"
+                        [(ngModel)]="subregionSeleccionadaId" />
+                    <span class="nombre-sub" (click)="toggleDetalleSubregion(subregion.id)">
+                        {{ subregion.nombre }}
+                    </span>
+                    <span class="detalle-sub">
+                        {{ subregion.departamentos.length }} deptos / {{ contarMunicipios(subregion) }} municipios
+                    </span>
+                </label>
+
+                <!-- Mostrar detalles solo si está expandida -->
+                <div *ngIf="subregionDetalleVisible === subregion.id" class="detalle-muni">
+                    <strong>Departamentos:</strong>
+                    <ul>
+                        <li *ngFor="let d of subregion.departamentos">
+                            {{ d.nombre }}:
+                            <ul>
+                                <li *ngFor="let m of d.municipios">- {{ m }}</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="ventana-subregion-botones">
+            <button class="btn-confirmar" (click)="confirmarSeleccion()">✅ Confirmar</button>
+            <button class="btn-limpiar" (click)="quitarSeleccion()">🧹 Quitar selección</button>
+            <button class="btn-cerrar" (click)="ventanaVisible = false">❌ Cerrar</button>
+        </div>
+    </div>
+</div>
+<app-spiner></app-spiner>

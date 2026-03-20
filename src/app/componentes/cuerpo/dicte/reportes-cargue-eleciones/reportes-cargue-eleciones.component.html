@@ -1,0 +1,224 @@
+<app-menu></app-menu>
+
+<div class="d-flex justify-content-end">
+  <!-- 🔘 BOTÓN PARA ABRIR PANEL -->
+  <button class="btn btn-outline-warning toggle-btn" (click)="togglePanel()">
+    <!-- 🇨🇴 Puedes cambiar entre bandera o escudo -->
+    <img src="../../../../../assets/img/colombia.png" alt="Colombia" class="icono-colombia">
+    <!-- <img src="assets/colombia-escudo.png" alt="Escudo" class="icono-colombia"> -->
+  </button>
+</div>
+
+<!-- PANEL LATERAL -->
+<div class="submenu" [class.active]="isPanelOpen">
+  <ul class="nav flex-column p-3">
+    <li class="nav-item mb-3">
+      <button class="btn btn-warning w-100 fw-bold shadow-sm" (click)="setActiveSection('reporte')">
+        📊 Reporte
+      </button>
+    </li>
+    <li class="nav-item mb-3">
+      <button class="btn btn-primary w-100 fw-bold shadow-sm" (click)="setActiveSection('cargue')">
+        📂 Cargue
+      </button>
+    </li>
+    <li class="nav-item mb-3">
+      <button class="btn btn-primary w-100 fw-bold shadow-sm" (click)="setActiveSection('formatos')">
+        📂 Formatos - Directivas
+      </button>
+    </li>
+  </ul>
+</div>
+
+
+<!-- CONTENIDO REPORTE -->
+<!-- CONTENIDO REPORTE -->
+<div class="content" *ngIf="activeSection === 'reporte'">
+  <h3 class="mb-4 fw-bold text-primary">
+    📊 Generar Reporte
+  </h3>
+
+  <div class="card shadow-lg border-0 rounded-4">
+    <div class="card-body p-4">
+      <div class="row g-3 align-items-end">
+
+        <!-- Campo de fecha -->
+        <div class="col-md-6">
+          <label class="form-label fw-semibold" style="color: snow;">Seleccionar Fecha</label>
+          <div class="position-relative">
+            <input
+              type="date"
+              #fechaInput
+              class="form-control form-control-lg shadow-sm input-fecha"
+              [(ngModel)]="fechaReporte"
+              name="fechaReporte"
+            />
+            <i class="bi bi-calendar2-week icono-calendario clickeable" (click)="fechaInput.showPicker()"></i>
+          </div>
+        </div>
+
+        <!-- Botón -->
+        <div class="col-md-6 d-flex align-items-center">
+          <button
+            class="btn btn-gradient w-100 btn-lg d-flex justify-content-center align-items-center gap-2"
+            (click)="generarReporte()"
+            [disabled]="cargandoReporte"
+          >
+            <ng-container *ngIf="!cargandoReporte; else loading">
+              📊 Generar Reporte
+              <i class="bi bi-download ms-2"></i>
+            </ng-container>
+            <ng-template #loading>
+              <span class="spinner-border spinner-border-sm"></span>
+              <span class="ms-2">Generando...</span>
+            </ng-template>
+          </button>
+        </div>
+
+        <!-- Checkbox: Actualizar mapas -->
+        <div class="col-12 mt-3">
+          <div class="form-check form-switch text-light">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              id="actualizarMapas"
+              [(ngModel)]="actualizarMapas"
+              (change)="mostrarAdvertencia = actualizarMapas"
+            />
+            <label class="form-check-label fw-semibold" for="actualizarMapas">
+              🔄 Actualizar mapas antes de generar reporte
+            </label>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- 🪟 Ventana flotante de advertencia -->
+  <div class="ventana-advertencia" *ngIf="mostrarAdvertencia">
+    <div class="ventana-contenido">
+      <h5 class="fw-bold text-warning mb-2">⚠️ Advertencia</h5>
+      <p class="mb-3 text-light">
+        Esta acción actualizará los mapas, lo que puede tardar algunos minutos más en generar el reporte.
+      </p>
+      <button class="btn btn-sm btn-secondary" (click)="mostrarAdvertencia = false">Entendido</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- CONTENIDO CARGUE -->
+<div class="content" *ngIf="activeSection === 'cargue'">
+  <h3 class="mb-4">📂 Cargue de Información</h3>
+
+  <div class="row g-4">
+    <!-- 🔹 SICOE -->
+    <div class="col-md-6 col-lg-6">
+      <div class="card p-4 shadow h-100 text-center border-primary">
+        <div class="mb-3 text-primary">
+          <i class="bi bi-database-fill-gear" style="font-size: 2.5rem;"></i>
+        </div>
+        <h5 class="fw-bold text-primary">REPORTE DESDE EL SICOE</h5>
+        <input type="file" accept=".xlsx, .xls" class="form-control my-3"
+          (change)="onFileSelected($event, 'principal')">
+        <button class="btn btn-primary w-100" (click)="guardar('principal')" [disabled]="cargandoCargue">
+          <ng-container *ngIf="!cargandoCargue">💾 Guardar</ng-container>
+          <ng-container *ngIf="cargandoCargue">
+            <span class="spinner-border spinner-border-sm me-2"></span> Guardando...
+          </ng-container>
+        </button>
+      </div>
+    </div>
+
+    <!-- 🔹 DIVIPOL -->
+    <div class="col-md-6 col-lg-6">
+      <div class="card p-4 shadow h-100 text-center border-success">
+        <div class="mb-3 text-success">
+          <i class="bi bi-clipboard-data-fill" style="font-size: 2.5rem;"></i>
+        </div>
+        <h5 class="fw-bold text-success">REPORTE DESDE DICTE DIVIPOL</h5>
+        <input type="file" accept=".xlsx, .xls" class="form-control my-3" (change)="onFileSelected($event, 'archivo1')">
+        <button class="btn btn-success w-100" (click)="guardar('archivo1')" [disabled]="cargandoCargue1">
+          <ng-container *ngIf="!cargandoCargue1">💾 Guardar</ng-container>
+          <ng-container *ngIf="cargandoCargue1">
+            <span class="spinner-border spinner-border-sm me-2"></span> Guardando...
+          </ng-container>
+        </button>
+      </div>
+    </div>
+
+    <!-- 🔹 Cubrimiento -->
+    <div class="col-md-6 col-lg-6">
+      <div class="card p-4 shadow h-100 text-center border-warning">
+        <div class="mb-3 text-warning">
+          <i class="bi bi-building-check" style="font-size: 2.5rem;"></i>
+        </div>
+        <h5 class="fw-bold text-warning">Unidades de Reserva</h5>
+        <input type="file" accept=".xlsx, .xls" class="form-control my-3" (change)="onFileSelected($event, 'archivo2')">
+        <button class="btn btn-warning text-dark fw-bold w-100" (click)="guardar('archivo2')"
+          [disabled]="cargandoCargue2">
+          <ng-container *ngIf="!cargandoCargue2">💾 Guardar</ng-container>
+          <ng-container *ngIf="cargandoCargue2">
+            <span class="spinner-border spinner-border-sm me-2"></span> Guardando...
+          </ng-container>
+        </button>
+      </div>
+    </div>
+
+    <!-- 🔹 Puesto Votación -->
+    <div class="col-md-6 col-lg-6">
+      <div class="card p-4 shadow h-100 text-center border-info">
+        <div class="mb-3 text-info">
+          <i class="bi bi-building-fill" style="font-size: 2.5rem;"></i>
+        </div>
+        <h5 class="fw-bold text-info">Avance de Cubrimiento de los puesto de votación</h5>
+        <input type="file" accept=".xlsx, .xls" class="form-control my-3" (change)="onFileSelected($event, 'archivo3')">
+        <button class="btn btn-info w-100" (click)="guardar('archivo3')" [disabled]="cargandoCargue3">
+          <ng-container *ngIf="!cargandoCargue3">💾 Guardar</ng-container>
+          <ng-container *ngIf="cargandoCargue3">
+            <span class="spinner-border spinner-border-sm me-2"></span> Guardando...
+          </ng-container>
+        </button>
+      </div>
+    </div>
+
+    <!-- 🔹 Reservas -->
+    <div class="col-md-6 col-lg-6">
+      <div class="card p-4 shadow h-100 text-center border-danger">
+        <div class="mb-3 text-danger">
+          <i class="bi bi-building-fill" style="font-size: 2.5rem;"></i>
+        </div>
+        <h5 class="fw-bold text-danger">PUESTO DIVIPOL</h5>
+        <input type="file" accept=".xlsx, .xls" class="form-control my-3" (change)="onFileSelected($event, 'archivo4')">
+        <button class="btn btn-danger w-100" (click)="guardar('archivo4')" [disabled]="cargandoCargue4">
+          <ng-container *ngIf="!cargandoCargue4">💾 Guardar</ng-container>
+          <ng-container *ngIf="cargandoCargue4">
+            <span class="spinner-border spinner-border-sm me-2"></span> Guardando...
+          </ng-container>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="content" *ngIf="activeSection === 'formatos'">
+  <div class="container my-5">
+    <h2 class="text-center text-dark mb-4">📂 Archivos Disponibles para Descargar</h2>
+    <div class="row g-4">
+      <div class="col-md-4" *ngFor="let archivo of archivos">
+        <div class="card shadow-lg border-0 h-100 custom-card bg-dark text-light">
+          <div class="card-body text-center">
+            <i [class]="archivo.icono + ' display-3 mb-3'" [ngClass]="archivo.color"></i>
+            <h5 class="card-title fw-bold">{{ archivo.titulo }}</h5>
+            <p class="card-text">{{ archivo.descripcion }} </p>
+            <a [href]="archivo.ruta" class="btn w-100" [ngClass]="archivo.botonClase" target="_blank">
+              <i class="bi bi-download me-2"></i> Descargar
+            </a>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

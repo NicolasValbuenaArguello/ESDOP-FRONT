@@ -1,0 +1,108 @@
+
+<div class="container py-4">
+<form [formGroup]="form" (ngSubmit)="buscar()" class="row g-3 align-items-end">
+  <!-- Fecha -->
+  <div class="col-md-3">
+    <label for="fecha" class="form-label fw-bold">Fecha</label>
+    <input 
+      type="date" 
+      formControlName="fecha" 
+      class="form-control border-primary" 
+      id="fecha">
+  </div>
+
+
+  <!-- Botón Buscar -->
+  <div class="col-md-2">
+    <button type="submit" class="btn btn-primary w-100">Buscar</button>
+  </div>
+
+  <!-- Botón Limpiar -->
+  <div class="col-md-2" *ngIf="aisladas.length > 0">
+    <button type="button" class="btn btn-outline-secondary w-100" (click)="resetFiltros()">
+      Limpiar
+    </button>
+  </div>
+
+  <!-- Botón Exportar -->
+  <div class="col-md-2" *ngIf="filtradas.length > 0">
+    <button type="button" class="btn btn-success w-100" (click)="exportarExcel()">
+      Exportar Excel
+    </button>
+  </div>
+</form>
+
+
+  <div *ngIf="loading" class="text-center mt-5">
+    <div class="spinner-border text-primary" role="status"></div>
+    <p class="mt-2">Cargando unidades Cercanas...</p>
+  </div>
+
+  <div *ngIf="aisladas.length > 0 && !loading" class="mt-4">
+    <div class="row g-3 mb-3">
+      <div class="col-md-2" *ngFor="let campo of ['division','brigada','unidad','compania','peloton']">
+        <label [for]="campo" class="form-label text-capitalize fw-bold">{{ campo }}</label>
+        <select class="form-select border-info" [(ngModel)]="filtros[campo]" (ngModelChange)="aplicarFiltros()"
+          [id]="campo" [name]="campo" [ngModelOptions]="{ standalone: true }">
+          <option value="">Todas ({{ aisladas.length }})</option>
+          <option *ngFor="let valor of getUnicos(campo === 'unidad' ? 'sigla_unidd' : 'sigla_' + campo)"
+            [value]="valor">
+            {{ valor }} ({{ contar(campo === 'unidad' ? 'sigla_unidd' : 'sigla_' + campo, valor) }})
+          </option>
+        </select>
+      </div>
+      <div class="col-md-2">
+        <label class="form-label fw-bold">Buscar</label>
+        <input type="text" class="form-control border-secondary" [(ngModel)]="filtros.buscador"
+          (input)="aplicarFiltros()" placeholder="Buscar..." [ngModelOptions]="{ standalone: true }">
+      </div>
+    </div>
+
+<div class="table-responsive shadow rounded">
+<table class="table table-hover table-bordered align-middle">
+  <thead class="table-dark">
+    <tr>
+      <th>División</th>
+      <th>Brigada</th>
+      <th>Unidad</th>
+      <th>Compañía</th>
+      <th>Pelotón</th>
+      <th>Departamento</th>
+      <th>Municipio</th>
+      <th colspan="3" class="text-center">Unidad Cercana</th>
+      <th>Distancia (m)</th>
+    </tr>
+    <tr class="table-secondary">
+      <th colspan="7"></th>
+      <th>Unidad</th>
+      <th>Compañía</th>
+      <th>Pelotón</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let u of filtradas">
+      <td><span class="badge bg-primary">{{ u.sigla_division }}</span></td>
+      <td><span class="badge bg-secondary">{{ u.sigla_brigada }}</span></td>
+      <td><b>{{ u.sigla_unidd }}</b></td>
+      <td>{{ u.compania }}</td>
+      <td>{{ u.peloton }}</td>
+      <td>{{ u.departamento }}</td>
+      <td>{{ u.municipio }}</td>
+
+      <!-- ✅ Unidad cercana -->
+      <td><span class="text-success fw-bold">{{ u.unidad_cercana }}</span></td>
+      <td>{{ u.compania_cercana }}</td>
+      <td>{{ u.peloton_cercana }}</td>
+
+      <!-- Distancia -->
+      <td class="text-end fw-bold text-danger">{{ u.distancia_minima | number:'1.0-0' }}</td>
+    </tr>
+  </tbody>
+</table>
+
+</div>
+
+    <p class="text-end mt-2"><span class="badge bg-secondary">Filtradas: {{ filtradas.length }}</span></p>
+  </div>
+</div>

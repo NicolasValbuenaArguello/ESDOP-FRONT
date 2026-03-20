@@ -1,0 +1,208 @@
+<app-menu></app-menu>
+<div class="cuerpo">
+    <div class="col-md-12 ">
+        <form class="form-group row tamanio" #documentos_pdf="ngForm">
+            <div class="row contenedor">
+                <div class="col-md-4 ">
+                    <h2 class="titulo">Filtro Fechas</h2>
+                    <div class="radios">
+                        <h3>Lapso Actual</h3>
+                        <div class="form-group col-md-11" style="margin: auto;">
+                            <label for="">Fecha Inicial</label>
+                            <input type="date" name="fecha_inicio_p" id="usuario" placeholder="usuario"
+                                class="form-control" ngModel>
+                        </div>
+                        <div class="form-group" style="margin-top: 15px;" *ngIf="aler_p_i">
+                            <div class="alert alert-danger" role="alert">
+                                {{alerta}}!
+                            </div>
+                        </div>
+                        <div class="form-group col-md-11" style="margin: auto;">
+                            <label for="">Fecha Final</label>
+                            <input type="date" name="fecha_final_p" id="usurio" placeholder="password"
+                                class="form-control" ngModel>
+                        </div>
+                        <div class="form-group" style="margin-top: 15px;" *ngIf="aler_p_f">
+                            <div class="alert alert-danger" role="alert">
+                                {{alerta}}!
+                            </div>
+                        </div>
+                        <h3>Lapso Anterior</h3>
+                        <div class="form-group col-md-11" style="margin: auto;">
+                            <label for="">Fecha Inicial</label>
+                            <input type="date" name="fecha_inicio_u" id="usuario" placeholder="usuario"
+                                class="form-control" ngModel>
+                        </div>
+                        <div class="form-group" style="margin-top: 15px;" *ngIf="aler_u_i">
+                            <div class="alert alert-danger" role="alert">
+                                {{alerta}}!
+                            </div>
+                        </div>
+                        <div class="form-group col-md-11" style="margin: auto;">
+                            <label for="">Fecha Final</label>
+                            <input type="date" name="fecha_final_u" id="usurio" placeholder="password"
+                                class="form-control" ngModel>
+                        </div>
+                        <div class="form-group" style="margin-top: 15px;" *ngIf="aler_u_f">
+                            <div class="alert alert-danger" role="alert">
+                                {{alerta}}!
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+
+                    <h2 class="titulo">Filtros</h2>
+
+                    <div class="radios">
+                        <h3>Unidades</h3>
+
+                        <div class="form-group col-md-11" style="margin: auto;">
+                            <label for="">Jefatura de Estado Mayor</label>
+                            <select name="divi_padre" id="" class="form-control" [(ngModel)]="divi_padre"
+                                (change)="div_hija(0,1)">
+                                <option value=""></option>
+                                <option [value]="item" *ngFor="let item of jefactura">{{item}}</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-11" style="margin: auto;">
+                            <label for="">Division</label>
+                            <select name="divi_padre" id="" class="form-control" [(ngModel)]="divi_padre">
+                                <option value=""></option>
+                                <option [value]="item" *ngFor="let item of division">{{item}}</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-11" style="margin: auto;">
+                            <label for="">Comando</label>
+                            <select name="divi_hija" id="" class="form-control" [(ngModel)]="comando">
+                                <option value="" selected></option>
+                                <option [value]="item" *ngFor="let item of comando">{{item}}</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group col-md-11" style="margin: auto;">
+                            <label for="">Fuerza de tarea</label>
+                            <select name="brigada" id="" class="form-control" [(ngModel)]="brigada">
+                                <option value="" selected></option>
+                                <option [value]="item" *ngFor="let item of fuerza_tarea">{{item}}</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-11" style="margin: auto;">
+                            <label for="">CEDE</label>
+                            <select name="batallon" id="" class="form-control" [(ngModel)]="batallon">
+                                <option value="" selected></option>
+                                <option [value]="item" *ngFor="let item of cede">{{item}}
+                                </option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-11" style="margin: auto;">
+                            <label for="">Brigada/Dirección/Regimiento</label>
+                            <select name="batallon" id="" class="form-control" [(ngModel)]="batallon">
+                                <option value="" selected></option>
+                                <option [value]="item" *ngFor="let item of brigada">{{item}}
+                                </option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-11" style="margin: auto;">
+                            <label for="">Unidad</label>
+                            <select name="batallon" id="" class="form-control" [(ngModel)]="batallon">
+                                <option value="" selected></option>
+                                <option [value]="item" *ngFor="let item of unidad_diper">{{item}}
+                                </option>
+                            </select>
+                        </div>
+                        <h3>Lugar</h3>
+                        <div class="form-group col-md-11" style="margin: auto;">
+                            <label for="">Dapartamentos</label>
+                            <select name="departamento" id="" class="form-control" [(ngModel)]="departamento"
+                                (change)="departamentos(4,5)">
+                                <option value=""></option>
+                                <option [value]="item" *ngFor="let item of departamentos_filtrados">{{item}}</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-11" style="margin: auto;">
+                            <label for="">Municipios</label>
+                            <select name="municipios" id="" class="form-control" [(ngModel)]="municipios">
+                                <option value=""></option>
+                                <option [value]="item" *ngFor="let item of unidad_selecionada_municipios">{{item}}
+                                </option>
+                            </select>
+                        </div>
+                        <h3>Tipo Filtro</h3>
+
+                        <div class="form-check ">
+                            <input class="form-check-input" type="radio" name="filtro" id="exampleRadios1"
+                                value="unidad" [(ngModel)]="filtro">
+                            <label class="form-check-label" for="exampleRadios1">
+                                Filtrar por Unidad
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="filtro" id="exampleRadios2" value="lugar"
+                                [(ngModel)]="filtro">
+                            <label class="form-check-label" for="exampleRadios2">
+                                Filtrar por Lugar
+                            </label>
+                        </div>
+
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+
+                    <h2 class="titulo">Filtros</h2>
+
+                    <div class="radios">
+                        <h3>Unidades</h3>
+
+                        <div class="form-group col-md-11" style="margin: auto;">
+                            <label for="">Division</label>
+                            <select name="divi_padre" id="" class="form-control" [(ngModel)]="divi_padre"
+                                (change)="div_hija(0,1)">
+                                <option value=""></option>
+                                <option [value]="item" *ngFor="let item of division">{{item}}</option>
+                            </select>
+                        </div>
+
+
+                        <h3>Lugar</h3>
+                        <div class="form-group col-md-11" style="margin: auto;">
+                            <label for="">Dapartamentos</label>
+                            <select name="departamento" id="" class="form-control" [(ngModel)]="departamento"
+                                (change)="departamentos(4,5)">
+                                <option value=""></option>
+                                <option [value]="item" *ngFor="let item of departamentos_filtrados">{{item}}</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-11" style="margin: auto;">
+                            <label for="">Municipios</label>
+                            <select name="municipios" id="" class="form-control" [(ngModel)]="municipios">
+                                <option value=""></option>
+                                <option [value]="item" *ngFor="let item of unidad_selecionada_municipios">{{item}}
+                                </option>
+                            </select>
+                        </div>
+                        <h3>Tipo Filtro</h3>
+
+                        <div class="form-check ">
+                            <input class="form-check-input" type="radio" name="filtro" id="exampleRadios1"
+                                value="unidad" [(ngModel)]="filtro">
+                            <label class="form-check-label" for="exampleRadios1">
+                                Filtrar por Unidad
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="filtro" id="exampleRadios2" value="lugar"
+                                [(ngModel)]="filtro">
+                            <label class="form-check-label" for="exampleRadios2">
+                                Filtrar por Lugar
+                            </label>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

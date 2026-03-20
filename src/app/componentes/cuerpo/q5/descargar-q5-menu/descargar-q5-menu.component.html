@@ -1,0 +1,28 @@
+<app-menu></app-menu>
+<div class="cuerpo_insitop" id="cuerpo_insitop">
+    <div class="col-md-12 ">
+        <div class="tamanio_proyectos">
+            <h2>menú</h2>
+            <hr style="color: rgb(24, 24, 24);">
+            <button class="btn btn-danger " id="oculto_documentos_btn" (click)="mostrar_menu(1)">Decargar</button>
+            <hr style="color: rgb(24, 24, 24);">
+            <button class="btn btn-danger " id="oculto_documentos_btn" (click)="mostrar_menu(2)">Listado</button>
+
+  
+
+        </div>
+    </div>
+
+    <div class="cuerpo">
+        <div class="oculto_documentos" id="oculto_documentos">
+            <app-descargar-q5-afectaciones></app-descargar-q5-afectaciones>
+        </div>
+        <!--- REGSITRO DE UNIDADES SOLICITANTES-->
+        <div class="oculto_documentos_modificar" id="oculto_documentos_modificar">
+            <app-descargar-q5-listado></app-descargar-q5-listado>
+        </div>
+ 
+    </div>
+
+</div>
+<app-spiner></app-spiner>

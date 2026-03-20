@@ -1,0 +1,826 @@
+<app-menu></app-menu>
+<div class="cuerpo">
+    <div class="col-md-12 ">
+        <form class="form-group row tamanio" #inf_usurio="ngForm" autocomplete="off">
+            <div class="row contenedor">
+                <div class="col-md-4 ">
+                    <h2 class="titulo">Información Usuario</h2>
+                    <div class="radios">
+                        <h3>Foto</h3>
+
+                        <img [src]="img" alt="" width="50px" height="50px" class="foto" id="foto"
+                            (click)="cargar_foto()">
+
+                        <input type="file" name="foto_user" id="foto_user" ngModel hidden (change)="leer_foto($event)">
+
+                        <br>
+                        <br>
+                        <div class="form-group col-md-11" style="margin: auto;">
+                            <label for="">Nombre</label>
+                            <p style="display: flex; text-align: justify; font-weight: 700;">{{nombre}}</p>
+                        </div>
+                        <div class="form-group col-md-11" style="margin: auto;">
+                            <label for="">Usuario</label>
+                            <p style="display: flex; text-align: justify; font-weight: 700;">{{user_name}}</p>
+                        </div>
+                        <div class="form-group col-md-11" style="margin: auto;">
+                            <label for="">Dependencia - Unidad</label>
+                            <p style="display: flex; text-align: justify; font-weight: 700;">{{dependencia}}</p>
+                        </div>
+                        <div class="form-group col-md-11" style="margin: auto;">
+                            <label for="">Roll</label>
+                            <select name="roll" id="roll" class="form-control" [ngModel]="roll" ngModel>
+                                <option value="">---</option>
+                                <option value="AMD">AMD</option>
+                                <option value="USUARIO">USUARIO</option>
+                                <option value="USUARIO">MOVIMIENTOS</option>
+
+                            </select>
+                        </div>
+                        <hr>
+                        <div class="form-group col-md-11" style="margin: auto;">
+                            <div class="card">
+                                <div class="card-body" (click)="cargar_acta_reserva()" style="cursor: pointer;">
+                                    Acta de Reserva.
+                                </div>
+                                <input required id="acta_reserva" ngModel name="acta_reserva" type="file" hidden
+                                    (change)="leer_acta_reserva($event)">
+                                <div class="alert alert-success col-md-11" role="alert" *ngIf="inf_r"
+                                    style="margin: auto !important;">
+                                    {{inf_c_r}}!
+                                </div>
+                                <br *ngIf="inf_r">
+                                <div class="alert alert-danger col-md-11" role="alert" *ngIf="acta_reserva_2 == '---'"
+                                    style="margin: auto !important;">
+                                    NO HAY HAY ACTA DE RESERVA GUARDADA
+                                </div>
+                                <br *ngIf="acta_reserva_2 == '---'">
+                            </div>
+                            <br *ngIf="acta_reserva_2 != '---'">
+                            <button class="btn btn-info" *ngIf="acta_reserva_2 != '---' "
+                                (click)="ver_documento()">ampliar</button>
+                        </div>
+                        <hr>
+                        <div>
+
+                            <div class="alert alert-success col-md-11" role="alert" *ngIf="inf_g"
+                                style="margin: auto !important;">
+                                {{inf_c_g}}!
+                            </div>
+                            <br *ngIf="inf_g">
+                            <div class="alert alert-danger col-md-11" role="alert" *ngIf="inf_a"
+                                style="margin: auto !important;">
+                                {{inf_c_g}}!
+                            </div>
+
+                            <br *ngIf="inf_a">
+                            <div class="row col-md-12" style="margin: auto; gap: 10px;">
+                                <button class="btn btn-primary column col-md-3" style="margin: auto; gap: 10px;"
+                                    (click)="editar(inf_usurio)">Guardar </button>
+                                <button class="btn btn-danger column col-md-3" style="margin: auto; gap: 10px;"
+                                    (click)="eliminar_user()">Eliminar </button>
+                            </div>
+                            <br>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="col-md-4 ">
+                    <h2 class="titulo">Permisos y Unidades</h2>
+                    <div class="radios">
+                        <h3>Nivel de Seguridad</h3>
+                        <div class="form-group col-md-11" style="margin: auto;">
+                            <label for="">Tipo Unidad</label>
+                            <select name="tipo_unidad" id="tipo_unidad" class="form-control" [ngModel]="nivel">
+                                <option value="EJC">EJC</option>
+                                <option value="agr_div">DIVISION</option>
+                                <option value="division">DIV-FT</option>
+                                <option value="brigada">BRIGADA</option>
+                                <option value="unidad">BATLLON</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group col-md-11" style="margin: auto;">
+                            <label for="">Unidad</label>
+                            <input type="text" name="unidad" id="unidad" placeholder="SIGLA UNIDAD" class="form-control"
+                                [ngModel]="unidad">
+                        </div>
+                        <br>
+                        <h3>Nivel de Seguridad</h3>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" [(ngModel)]="ver" name="view"
+                                id="exampleRadios_0_p" value="OK">
+                            <label class="form-check-label" for="exampleRadios_0_p">
+                                VIEW
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" [ngModel]="selecionar" name="select"
+                                id="exampleRadios_1_p" value="OK">
+                            <label class="form-check-label" for="exampleRadios_1_p">
+                                SELECT
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" [ngModel]="insertar" name="insert"
+                                id="exampleRadios_2_p" value="OK">
+                            <label class="form-check-label" for="exampleRadios_2_p">
+                                INSERT
+                            </label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" [ngModel]="actualizar" name="update"
+                                id="exampleRadios_3_p" value="OK">
+                            <label class="form-check-label" for="exampleRadios_3_p">
+                                UPDATE
+                            </label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" [ngModel]="eliminar" name="delete"
+                                id="exampleRadios_4_p" value="OK">
+                            <label class="form-check-label" for="exampleRadios_4_p">
+                                DELETE
+                            </label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" [ngModel]="datos" name="datos"
+                                id="exampleRadios_5_p" value="OK">
+                            <label class="form-check-label" for="exampleRadios_5_p" style="color:  darkred;">
+                                DELETE DATOS EXCEL
+                            </label>
+                        </div>
+
+                        <br>
+                        <h3>Modulos</h3>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" [ngModel]="resultados" name="resultados"
+                                id="exampleRadios_1_r" value="OK">
+                            <label class="form-check-label" for="exampleRadios_1_r">
+                                Resultados
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" [ngModel]="configuracion_especial_res" name="configuracion_especial_res"
+                                id="configuracion_especial_res" value="OK">
+                            <label class="form-check-label" for="configuracion_especial_res">
+                                configuaricion Resultados
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" [ngModel]="boltin_dirop" name="boltin_dirop"
+                                id="exampleRadios_30_es" value="OK">
+                            <label class="form-check-label" for="exampleRadios_30_es">
+                                Boletin Dirop
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" [ngModel]="resaltantes_boletin"
+                                name="resaltantes_boletin" id="resaltantes_boletin" value="OK">
+                            <label class="form-check-label" for="resaltantes_boletin">
+                                Resaltantes Boletín
+                            </label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" [ngModel]="eventos" name="eventos"
+                                id="exampleRadios_1_e" value="OK">
+                            <label class="form-check-label" for="exampleRadios_1_e">
+                                Eventos
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" [ngModel]="usuarios" name="usuarios"
+                                id="exampleRadios_1_u" value="OK">
+                            <label class="form-check-label" for="exampleRadios_1_u">
+                                Usuarios
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" [ngModel]="chat" name="chat"
+                                id="exampleRadios_1_ch" value="OK">
+                            <label class="form-check-label" for="exampleRadios_1_ch">
+                                Chat
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" [ngModel]="conf_narcotrafico"
+                                name="conf_narcotrafico" id="exampleRadios_1_na" value="OK">
+                            <label class="form-check-label" for="exampleRadios_1_na">
+                                Narcotrafico
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" [ngModel]="operaciones" name="operaciones"
+                                id="exampleRadios_1_op" value="OK">
+                            <label class="form-check-label" for="exampleRadios_1_op">
+                                Operaciones
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" [ngModel]="personal" name="personal"
+                                id="exampleRadios_1_per" value="OK">
+                            <label class="form-check-label" for="exampleRadios_1_per">
+                                Personal
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" [ngModel]="orden" name="orden"
+                                id="exampleRadios_1_ord" value="OK">
+                            <label class="form-check-label" for="exampleRadios_1_ord">
+                                Orden del dia
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" [ngModel]="afectaciones_fuera_combate"
+                                name="afectaciones_fuera_comabte" id="exampleRadios_1_afec" value="OK">
+                            <label class="form-check-label" for="exampleRadios_1_afec">
+                                Afectaciones Fuera comabte
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" [ngModel]="cambio_contrasenia"
+                                name="cambio_contrasenia" id="exampleRadios_1_cambio" value="OK">
+                            <label class="form-check-label" for="exampleRadios_1_cambio">
+                                Cambio de Contraseña
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" [ngModel]="alerta" name="alerta"
+                                id="exampleRadios_1_alerta" value="OK">
+                            <label class="form-check-label" for="exampleRadios_1_alerta">
+                                Alertas
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" [ngModel]="movimientos" name="movimientos"
+                                id="exampleRadios_1_movimientos" value="OK">
+                            <label class="form-check-label" for="exampleRadios_1_movimientos">
+                                Movimientos
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" [ngModel]="inventarios" name="inventarios"
+                                id="exampleRadios_1_inventarios" value="OK">
+                            <label class="form-check-label" for="exampleRadios_1_inventarios">
+                                Inventarios
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" [ngModel]="plazos" name="plazos"
+                                id="exampleRadios_1_plazos" value="OK">
+                            <label class="form-check-label" for="exampleRadios_1_plazos">
+                                Plazos
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" [ngModel]="medallas" name="medallas"
+                                id="exampleRadios_1_medallas" value="OK">
+                            <label class="form-check-label" for="exampleRadios_1_medallas">
+                                Medallas
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" [ngModel]="insitop" name="insitop_per"
+                                id="exampleRadios_1_insitop" value="OK">
+                            <label class="form-check-label" for="exampleRadios_1_insitop">
+                                INSITOP
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" [ngModel]="dicte" name="dicte"
+                                id="exampleRadios_1_dicte" value="OK">
+                            <label class="form-check-label" for="exampleRadios_1_dicte">
+                                DICTE
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" [ngModel]="eventos_relevantes" name="eventos_relevantes"
+                                id="exampleRadios_1_eventos_relevantes" value="OK">
+                            <label class="form-check-label" for="exampleRadios_1_eventos_relevantes">
+                                EVENTOS RELEVANTES
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" [ngModel]="registro_Q5"  name="registro_Q5"
+                                id="exampleRadios_1_registro_Q5" value="OK">
+                            <label class="form-check-label" for="exampleRadios_1_registro_Q5">
+                                Q5
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 ">
+                    <h2 class="titulo">Documentos</h2>
+                    <div class="radios">
+                        <h3>Estadistica PDF</h3>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" [ngModel]="boletin_coe" name="boletin_coe"
+                                id="exampleRadios_1_es" value="OK">
+                            <label class="form-check-label" for="exampleRadios_1_es">
+                                Boletin COE
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" [ngModel]="boletin_cuadros_coe"
+                                name="boletin_cuadros_coe" id="exampleRadios_2_es" value="OK">
+                            <label class="form-check-label" for="exampleRadios_2_es">
+                                Boletín cuadros COE
+                            </label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" [ngModel]="boletin_res_div"
+                                name="boletin_res_div" id="exampleRadios_3_es" value="OK">
+                            <label class="form-check-label" for="exampleRadios_3_es">
+                                Boletín Resultados Division
+                            </label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" [ngModel]="cartilla_presidencial_corta"
+                                name="cartilla_presidencial_larga" id="exampleRadios_4_es" value="OK">
+                            <label class="form-check-label" for="exampleRadios_4_es">
+                                Cartilla Presidencial Larga
+                            </label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" [ngModel]="cartilla_presidencial_larga"
+                                name="cartilla_presidencial_corta" id="exampleRadios_5_es" value="OK">
+                            <label class="form-check-label" for="exampleRadios_5_es">
+                                Cartilla Presidencial Corta
+                            </label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" [ngModel]="boletin_diseo"
+                                name="boletin_diseo" id="exampleRadios_6_es" value="OK">
+                            <label class="form-check-label" for="exampleRadios_6_es">
+                                Boletin DISEO
+                            </label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" [ngModel]="boletin_diseo_semanal"
+                                name="boletin_diseo_semanal" id="exampleRadios_7_es" value="OK">
+                            <label class="form-check-label" for="exampleRadios_7_es">
+                                Boletin DISEO Semanal
+                            </label>
+                        </div>
+                        <hr>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" [ngModel]="comando_general"
+                                name="comando_general" id="exampleRadios_8_es" value="OK">
+                            <label class="form-check-label" for="exampleRadios_8_es">
+                                Comando General
+                            </label>
+                        </div>
+                        <hr>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" [ngModel]="Estadistica_resultados"
+                                name="Estadistica_resultados" id="exampleRadios_9_es" value="OK">
+                            <label class="form-check-label" for="exampleRadios_9_es">
+                                Estadistica Resultados
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" [ngModel]="com_resultados_reducido"
+                                name="com_resultados_reducido" id="exampleRadios_10_es" value="OK">
+                            <label class="form-check-label" for="exampleRadios_10_es">
+                                Comparativo Resultados Reducido
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" [ngModel]="ayuda_comparativa_consejos"
+                                name="ayuda_comparativa_consejos" id="ayuda_comparativa_consejos" value="OK">
+                            <label class="form-check-label" for="ayuda_comparativa_consejos">
+                                Comparativo Consejos
+                            </label>
+                        </div>
+                        
+                        <hr>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" [ngModel]="narcotrafico" name="narcotrafico"
+                                id="exampleRadios_11_es" value="OK">
+                            <label class="form-check-label" for="exampleRadios_11_es">
+                                Narcotrafico
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" [ngModel]="narcotrafico_metas"
+                                name="narcotrafico_metas" id="exampleRadios_11_metas" value="OK">
+                            <label class="form-check-label" for="exampleRadios_11_metas">
+                                Narcotrafico Metas
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" [ngModel]="docna_semanal"
+                                name="docna_semanal" id="exampleRadios_11_semanal" value="OK">
+                            <label class="form-check-label" for="exampleRadios_11_semanal">
+                                DOCNA Mapa
+                            </label>
+                        </div>
+
+                        <hr>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" [ngModel]="artemisa" name="artemisa"
+                                id="exampleRadios_12_es" value="OK">
+                            <label class="form-check-label" for="exampleRadios_12_es">
+                                Artemisa
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" [ngModel]="artemisa_comparativo"
+                                name="artemisa_comparativo" id="exampleRadios_13_es" value="OK">
+                            <label class="form-check-label" for="exampleRadios_13_es">
+                                Artemisa Comparativo
+                            </label>
+                        </div>
+                        <hr>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" [ngModel]="contrabando" name="contrabando"
+                                id="exampleRadios_14_es" value="OK">
+                            <label class="form-check-label" for="exampleRadios_14_es">
+                                Contrabando
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" [ngModel]="contrabando_comparativo"
+                                name="contrabando_comparativo" id="exampleRadios_15_es" value="OK">
+                            <label class="form-check-label" for="exampleRadios_15_es">
+                                Contrabando Comparativo
+                            </label>
+                        </div>
+                        <hr>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" [ngModel]="mineria" name="mineria"
+                                id="exampleRadios_16_es" value="OK">
+                            <label class="form-check-label" for="exampleRadios_16_es">
+                                Mineria
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" [ngModel]="mineria_comparativo"
+                                name="mineria_comparativo" id="exampleRadios_17_es" value="OK">
+                            <label class="form-check-label" for="exampleRadios_17_es">
+                                Mineria Comparativo
+                            </label>
+                        </div>
+                        <hr>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" [ngModel]="comparativo_enemigo"
+                                name="comparativo_enemigo" id="exampleRadios_18_es" value="OK">
+                            <label class="form-check-label" for="exampleRadios_18_es">
+                                Comparativo Enemigo
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" [ngModel]="comparativo_mapa"
+                                name="comparativo_mapa" id="exampleRadios_19_es" value="OK">
+                            <label class="form-check-label" for="exampleRadios_19_es">
+                                Comparativo Mapa Calor
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" [ngModel]="comparativo_resultados"
+                                name="comparativo_resultados" id="exampleRadios_20_es" value="OK">
+                            <label class="form-check-label" for="exampleRadios_20_es">
+                                Comparativo Resultados
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" [ngModel]="boletin_mapa_comparativa"
+                                name="boletin_mapa_comparativa" id="boletin_mapa_comparativa" value="OK">
+                            <label class="form-check-label" for="boletin_mapa_comparativa">
+                                Comparativo con Mapa
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" [ngModel]="com_div_mapa" name="com_div_mapa"
+                                id="com_div_mapa" value="OK">
+                            <label class="form-check-label" for="com_div_mapa">
+                                Compartiva con Mapa DIV
+                            </label>
+                        </div>
+                        
+                        <hr>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" [ngModel]="afectacion_comparativa_p_t"
+                                name="afectacion_comparativa_p_t" id="exampleRadios_22_es" value="OK">
+                            <label class="form-check-label" for="exampleRadios_22_es">
+                                Afectaciones Propias Tropas Comparativa
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" [ngModel]="lis_afectaciones"
+                                name="lis_afectaciones" id="exampleRadios_23_es" value="OK">
+                            <label class="form-check-label" for="exampleRadios_23_es">
+                                Listado de Afectaciones
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" [ngModel]="afectaciones_mapa"
+                                name="afectaciones_mapa" id="exampleRadios_24_es" value="OK">
+                            <label class="form-check-label" for="exampleRadios_24_es">
+                                Afectaciones Mapa
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" [ngModel]="afectaciones_cuadros"
+                                name="afectaciones_cuadros" id="exampleRadios_25_es" value="OK">
+                            <label class="form-check-label" for="exampleRadios_25_es">
+                                Afectaciones Cuadros
+                            </label>
+                        </div>
+                        <hr>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" [ngModel]="regiones" name="regiones"
+                                id="exampleRadios_26_es" value="OK">
+                            <label class="form-check-label" for="exampleRadios_26_es">
+                                Regiones
+                            </label>
+                        </div>
+                        <hr>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" [ngModel]="resaltantes" name="resaltantes"
+                                id="exampleRadios_27_es" value="OK">
+                            <label class="form-check-label" for="exampleRadios_27_es">
+                                Resultados Resaltantes
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" [ngModel]="reslatantes_divisiones"
+                                name="reslatantes_divisiones" id="exampleRadios_28_es" value="OK">
+                            <label class="form-check-label" for="exampleRadios_28_es">
+                                Resultados Resaltantes Divisiones
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" [ngModel]="resaltantes_mapa"
+                                name="resaltantes_mapa" id="resaltantes_mapa" value="OK">
+                            <label class="form-check-label" for="resaltantes_mapa">
+                                Resultados Mapa
+                            </label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" [ngModel]="comp_div_mapa_bal"
+                                name="comp_div_mapa_bal" id="comp_div_mapa_bal" value="OK">
+                            <label class="form-check-label" for="comp_div_mapa_bal">
+                                Res Map Bal
+                            </label>
+                        </div>
+                        <hr>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" [ngModel]="res_lineas_estrategicas"
+                                name="res_lineas_estrategicas" id="res_lineas_estrategicas" value="OK">
+                            <label class="form-check-label" for="res_lineas_estrategicas">
+                                Res Lineas Est.
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" [ngModel]="res_linea_obj_4" name="res_linea_obj_4"
+                                id="res_linea_obj_4" value="OK">
+                            <label class="form-check-label" for="res_linea_obj_4">
+                                Res Est 4.
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" [ngModel]="linea_estrategica_narcotrafico" name="linea_estrategica_narcotrafico"
+                                id="linea_estrategica_narcotrafico" value="OK">
+                            <label class="form-check-label" for="linea_estrategica_narcotrafico">
+                                Res Paya.
+                            </label>
+                        </div>
+                        <hr>
+                        <h3>OBJECTIVOS PAYA</h3>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" [ngModel]="obj_1" name="obj_1"
+                                id="obj_1" value="OK">
+                            <label class="form-check-label" for="obj_1">
+                                OBJ 1.
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" [ngModel]="obj_2" name="obj_2"
+                                id="obj_2" value="OK">
+                            <label class="form-check-label" for="obj_2">
+                                OBJ 2.
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" [ngModel]="obj_3" name="obj_3"
+                                id="obj_3" value="OK">
+                            <label class="form-check-label" for="obj_3">
+                                OBJ 3.
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" [ngModel]="obj_4" name="obj_4"
+                                id="obj_4" value="OK">
+                            <label class="form-check-label" for="obj_4">
+                                OBJ 4.
+                            </label>
+                        </div>
+                        <hr>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" [ngModel]="excel_ut" name="excel_ut"
+                                id="excel_ut" value="OK">
+                            <label class="form-check-label" for="excel_ut">
+                                Resultados en EXCEL UT
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" [ngModel]="excel_amenaza"
+                                name="excel_amenaza" id="excel_amenaza" value="OK">
+                            <label class="form-check-label" for="excel_amenaza">
+                                Resultados en EXCEL Amenaza
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox"
+                                [ngModel]="resultados_excel_tipo_operaciones" name="resultados_excel_tipo_operaciones"
+                                id="resultados_excel_tipo_operaciones" value="OK">
+                            <label class="form-check-label" for="resultados_excel_tipo_operaciones">
+                                Resultados EXCEL Tipo Operacion
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" [ngModel]="excel_anios" name="excel_anios"
+                                id="excel_anios" value="OK">
+                            <label class="form-check-label" for="excel_anios">
+                                EXCEL Años
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" [ngModel]="archivo_spoa" name="archivo_spoa"
+                                id="archivo_spoa" value="OK">
+                            <label class="form-check-label" for="archivo_spoa">
+                                Archivo plano SPOA
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" [ngModel]="archivo_plano_excel" name="archivo_plano_excel"
+                                id="archivo_plano_excel" value="OK">
+                            <label class="form-check-label" for="archivo_plano_excel">
+                                Archivo Plano RES.
+                            </label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" [ngModel]="mapa_division_dinamico"
+                                name="mapa_division_dinamico" id="mapa_division_dinamico" value="OK">
+                            <label class="form-check-label" for="mapa_division_dinamico">
+                                Mapa Dinamico Divisiones
+                            </label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" [ngModel]="afectacion_a_la_amenaza"
+                                name="afectacion_a_la_amenaza" id="exampleRadios_21_es" value="OK">
+                            <label class="form-check-label" for="exampleRadios_21_es">
+                                Ayuda un solo Resultado
+                            </label>
+                        </div>
+
+                        <hr>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" [ngModel]="bullets" name="bullets"
+                                id="exampleRadios_29_es" value="OK">
+                            <label class="form-check-label" for="exampleRadios_29_es">
+                                Bullets
+                            </label>
+                        </div>
+                        <hr>
+                        <h3>AETCR</h3>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" [ngModel]="aetcr" name="aetcr"
+                                id="exampleRadios_30_aetcr" value="OK">
+                            <label class="form-check-label" for="exampleRadios_30_aetcr">
+                                AETCR
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" [ngModel]="ingreso_aetcr"
+                                name="ingreso_aetcr" id="exampleRadios_30_ingreso_aetcr" value="OK">
+                            <label class="form-check-label" for="exampleRadios_30_ingreso_aetcr">
+                                INGRESO AETCR
+                            </label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" [ngModel]="listado_aetcr"
+                                name="listado_aetcr" id="exampleRadios_30_ingreso_listado_aetcr" value="OK">
+                            <label class="form-check-label" for="exampleRadios_30_ingreso_listado_aetcr">
+                                LISTADO AETCR
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" [ngModel]="alerta_aetcr" name="alerta_aetcr"
+                                id="exampleRadios_30_ingreso_alerta_aetcr" value="OK">
+                            <label class="form-check-label" for="exampleRadios_30_ingreso_alerta_aetcr">
+                                ALERTA AETCR
+                            </label>
+                        </div>
+                        <hr>
+  
+                        <h3>Eventos</h3>
+                        <hr>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" [ngModel]="estadistica_eventos"
+                                name="estadistica_eventos" id="exampleRadios_1_eve" value="OK">
+                            <label class="form-check-label" for="exampleRadios_1_eve">
+                                Estadisitca
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" [ngModel]="informe_eventos"
+                                name="informe_eventos" id="exampleRadios_0_eve" value="OK">
+                            <label class="form-check-label" for="exampleRadios_0_eve">
+                                Informe
+                            </label>
+                        </div>
+                        <hr>
+                        <h3>Per. Plazos</h3>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" [ngModel]="asignacion_plazo"
+                                name="asignacion_plazo" id="exampleRadios_0_asignacion_plazo" value="OK">
+                            <label class="form-check-label" for="exampleRadios_0_asignacion_plazo">
+                                Asignación
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" [ngModel]="reasignacion_plazo"
+                                name="reasignacion_plazo" id="exampleRadios_0_reasignacion_plazo" value="OK">
+                            <label class="form-check-label" for="exampleRadios_0_reasignacion_plazo">
+                                Reasignación
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" [ngModel]="validacion_plazo"
+                                name="validacion_plazo" id="exampleRadios_0_validacion_plazo" value="OK">
+                            <label class="form-check-label" for="exampleRadios_0_validacion_plazo">
+                                Validación
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" [ngModel]="creacion_plazo"
+                                name="creacion_plazo" id="exampleRadios_0_creacion_plazo" value="OK">
+                            <label class="form-check-label" for="exampleRadios_0_creacion_plazo">
+                                creacion_plazo
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" [ngModel]="cumplimiento_plazo"
+                                name="cumplimiento_plazo" id="exampleRadios_0_cumplimiento" value="OK">
+                            <label class="form-check-label" for="exampleRadios_0_cumplimiento">
+                                Cumplimiento
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" [ngModel]="seguimineto_plazos_respueta"
+                                name="seguimineto_plazos_respueta" id="exampleRadios_0_seguimineto_plazos_respueta"
+                                value="OK">
+                            <label class="form-check-label" for="exampleRadios_0_seguimineto_plazos_respueta">
+                                Plazos con Respuesta
+                            </label>
+                        </div>
+                        <h3>Per. INSITOP</h3>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" [ngModel]="ingreso_insitop"
+                                name="cargue_insitop" id="exampleRadios_0_ingreso_insitop" value="OK">
+                            <label class="form-check-label" for="exampleRadios_0_ingreso_insitop">
+                                Cargue INSITOP
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" [ngModel]="reporte_insitop"
+                                name="estadistica_insitop" id="exampleRadios_0_reporte_insitop" value="OK">
+                            <label class="form-check-label" for="exampleRadios_0_reporte_insitop">
+                                Boletím INSITOP
+                            </label>
+                        </div>
+                        <h3>Per. DICTE</h3>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" [ngModel]="dicte_pasos_fronterizos"
+                                name="dicte_pasos_fronterizos" id="exampleRadios_0_dicte_pasos_fronterizos" value="OK">
+                            <label class="form-check-label" for="exampleRadios_0_dicte_pasos_fronterizos">
+                                Pasos Fronterizos
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </form>
+    </div>
+</div>
+<app-ver-document [server]="server"></app-ver-document>
+<app-spiner></app-spiner>

@@ -1,0 +1,34 @@
+
+<div id="map" #screen>
+<!-- Botón flotante -->
+<button class="btn-toggle" (click)="toggleFormulario()">
+  📍 Coordenadas
+</button>
+
+<!-- Formulario que se oculta o muestra -->
+<div class="coords-input-box" *ngIf="mostrarFormulario">
+  <h4>📍 Crear Marker</h4>
+  <label>Latitud:</label>
+  <input type="text" [(ngModel)]="latInput" placeholder="Ej: 4.6097 o 4°36'35&quot;N" />
+
+  <label>Longitud:</label>
+  <input type="text" [(ngModel)]="lngInput" placeholder="Ej: -74.0817 o 74°4'54&quot;W" />
+
+  <button (click)="crearMarkerDesdeFormulario()">Crear Marker</button>
+</div>
+
+<!-- Caja para mostrar coordenadas del mouse -->
+<div id="coords-box" class="coords-box"></div>
+
+
+<!-- Caja para mostrar coordenadas del mouse -->
+<div id="coords-box" class="coords-box"></div>
+
+    <div id="coords-box" class="coords-box"></div>
+
+
+</div>
+
+
+
+

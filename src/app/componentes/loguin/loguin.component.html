@@ -1,0 +1,109 @@
+<!-- Barra superior -->
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+  <div class="navbar-brand" style="margin-left: 15px;">
+    <img src="assets/img/logo.png" alt="logo" width="40px" />
+    <b style="color: white; margin-left: 5px;">ESDOP</b>
+  </div>
+<ul class="navbar-nav ml-auto">
+  <li class="nav-item">
+<a class="nav-link iniciar-sesion" (click)="verLogin()">
+  <span class="emoji-glow">🔐</span>
+  <span class="texto-glow">Iniciar Sesión</span>
+</a>
+  </li>
+</ul>
+</nav>
+
+<!-- Página principal -->
+<div class="main-container">
+  <div class="escudo-container">
+    <img src="../../../assets/logos/JEMOP-DIROP.png" alt="Escudo" (click)="verLogin()" class="escudo" />
+  </div>
+  <div class="texto-container">
+    <h1>Dirección de<br />Operaciones del<br />Ejército Nacional</h1>
+    <h2>2026</h2>
+  </div>
+</div>
+<div *ngIf="inf_u" class="alerta-notificacion">
+  ⚠️ {{ inf_c }}
+  <button class="btn-cerrar-alerta" (click)="inf_u = false">✖</button>
+</div>
+
+<div class="seguridad-modal" *ngIf="mostrarReserva">
+
+  <div class="seguridad-box">
+
+    <h2>⚠ SISTEMA DE INFORMACIÓN OPERACIONAL</h2>
+
+    <h3>COMPROMISO DE RESERVA</h3>
+
+    <p>
+      La información contenida en este sistema goza de reserva legal. 
+      Todo servidor público que tenga acceso queda obligado a garantizar 
+      su debida custodia y confidencialidad.
+    </p>
+
+    <p>
+      Cualquier uso indebido, difusión o divulgación no autorizada 
+      constituye violación de la ley conforme a:
+    </p>
+
+    <ul>
+      <li>Ley 1621 de 2013</li>
+      <li>Decreto 1070 de 2015</li>
+      <li>Código Penal Militar Ley 1407 de 2010</li>
+      <li>Código Penal Colombiano Ley 599 de 2000</li>
+    </ul>
+
+    <p class="advertencia">
+      El acceso a este sistema implica la aceptación de las 
+      responsabilidades legales derivadas del manejo de información reservada.
+    </p>
+
+    <button class="btn-aceptar" (click)="aceptarReserva()">
+      ACEPTAR Y CONTINUAR
+    </button>
+
+  </div>
+
+</div>
+
+<!-- Login flotante -->
+<div class="login-modal" *ngIf="mostrarLogin">
+  <div class="login-box" #loginBox (mousedown)="iniciarMovimiento($event)">
+    <button class="btn-cerrar" (click)="cerrarLogin()">✖</button>
+    <h2>ESDOP</h2>
+    <form #miformulario="ngForm" autocomplete="off">
+      <input type="text" name="usuario" [(ngModel)]="usuario" placeholder="Usuario" required />
+      <input type="password" name="password" [(ngModel)]="password" placeholder="Contraseña" required />
+      <button type="submit" (click)="login(miformulario)" (keypress)="login(miformulario)">Ingresar</button>
+    </form>
+    <button class="btn-reserva" (click)="mostrarReserva = true">Ver compromiso de reserva</button>
+  </div>
+  <app-spiner></app-spiner>
+</div>
+
+<!-- Compromiso de reserva (completo, siempre visible dentro del modal) -->
+<div class="reserva-panel" *ngIf="mostrarReserva">
+  <div class="reserva-contenido">
+    <button class="btn-cerrar-reserva" (click)="mostrarReserva = false">✖</button>
+    <h3>COMPROMISO DE RESERVA:</h3>
+    <p>La información contenida en el presente documento goza de Reserva Legal, razón por la cual todo servidor público
+      que tenga acceso a su contenido, quedará por el mismo hecho obligado a garantizar su debida custodia y reserva.
+    </p>
+    <h4>PRECAUCIÓN</h4>
+    <p>La información contenida en el presente documento por disposición legal no reviste mérito probatorio y reviste
+      clasificación de seguridad reservada.</p>
+    <h4>SEGURIDAD RESERVADA:</h4>
+    <p>De igual forma los datos suministrados de manera verbal respecto al presente caso gozan de Reserva Legal.
+      Cualquier difusión, divulgación o uso irregular no autorizado que se haga por parte del receptor o por terceros no
+      autorizados, significa violación de la ley por parte del receptor de este producto de inteligencia (Art. 2.2.3.7.1
+      Decreto 1070 de 2015 Reglamentario Ley 1621 de 2013) y sus consecuencias se hallan contenidas en los artículos 130
+      y 131 de la Ley 1407 de 2010 (Código Penal Militar), 194, 196, 269 A, 418, 419, 420, 431 y 463 de la Ley 599 de
+      2000 (Código Penal Colombiano), así como los artículos 59 y 60 de la Ley 836 de 2003 (Reglamento de Régimen
+      Disciplinario para las FF.MM), normas cuyas consecuencias punitivas y disciplinarias oscilan entre prisión de
+      cinco (5) a dieciocho (18) años, pérdida del empleo o cargo público, suspensión y/o multa.</p>
+    <p>En este orden de ideas se le pone de presente que la información que se suministra es de uso exclusivo
+      institucional y para el estricto cumplimiento de sus funciones.</p>
+  </div>
+</div>

@@ -1,0 +1,878 @@
+<app-menu></app-menu>
+<div class="dashboard-container">
+
+  <!-- Submenú superior -->
+  <div class="sub-menu">
+
+
+    <!-- Botón para abrir la ventana -->
+    <button class="btn-open" (click)="mostrarVentana = true">
+      <i class="bi bi-funnel-fill"></i> Filtro de Minería
+    </button>
+
+    <button (click)="accion1()"><i class="bi bi-graph-up-arrow"></i>Dashoboad</button>
+    <button (click)="accion2()"><i class="bi bi-table"></i>Tablas</button>
+    <button (click)="accion3()"><i class="bi bi-vector-pen"></i>Valores</button>
+  </div>
+
+  <!-- Contenedor principal de 3 columnas -->
+  <div class="columns-container" *ngIf="mostrarDasho">
+
+    <!-- Columna izquierda: Mapa -->
+    <div class="column column-left" style="color: black;">
+      <div id="map" class="map-placeholder">
+        <app-mapa-digital></app-mapa-digital>
+      </div>
+    </div>
+
+    <!-- Columna central -->
+    <div class="column column-center">
+      <div class="operaciones-container">
+        <div class="anio">
+          <span> {{anio_actual}} </span>
+        </div>
+
+        <div class="hex-grid">
+          <!-- 🔹 Primera fila -->
+          <div class="hex-row">
+            <div class="hex" *ngFor="let item of getFila(1)">
+              <div class="hex-content" [ngClass]="item.color">
+                <h4>{{ item.numero }}</h4>
+                <p class="cantidad">{{ item.cantidad }}</p>
+                <p class="titulo" [innerHTML]="item.titulo"></p>
+                <i *ngIf="!item.central" class="bi" [ngClass]="item.icono + ' hex-icon'"></i>
+              </div>
+            </div>
+          </div>
+
+          <!-- 🔹 Segunda fila -->
+          <div class="hex-row middle">
+            <div class="hex" *ngFor="let item of getFila(2)" [ngClass]="{ 'central': item.central }">
+              <div class="hex-content" [ngClass]="item.color">
+                <ng-container *ngIf="!item.central">
+                  <h4>{{ item.numero }}</h4>
+                  <p class="cantidad">{{ item.cantidad }}</p>
+                  <p class="titulo" [innerHTML]="item.titulo"></p>
+                  <i *ngIf="!item.central" class="bi" [ngClass]="item.icono + ' hex-icon'"></i>
+                </ng-container>
+
+                <ng-container *ngIf="item.central">
+                  <p class="cantidad-central">{{ item.cantidad }}</p>
+                  <p class="titulo-central">{{ item.titulo }}</p>
+                  <i *ngIf="!item.central" class="bi" [ngClass]="item.icono + ' hex-icon'"></i>
+                </ng-container>
+              </div>
+            </div>
+          </div>
+
+          <!-- 🔹 Tercera fila -->
+          <div class="hex-row">
+            <div class="hex" *ngFor="let item of getFila(3)">
+              <div class="hex-content" [ngClass]="item.color">
+                <h4>{{ item.numero }}</h4>
+                <p class="cantidad">{{ item.cantidad }}</p>
+                <p class="titulo" [innerHTML]="item.titulo"></p>
+                <i *ngIf="!item.central" class="bi" [ngClass]="item.icono + ' hex-icon'"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <!-- Columna derecha -->
+    <div class="column column-right">
+      <div class="info-container">
+        <div class="info-box">
+          <p class="titulo">
+            Valor aproximado de la maquinaria inutilizada y/o incautada:
+          </p>
+
+          <p class="monto">
+            <span class="moneda">COP</span> <span class="valor">{{ valorMaquinaria.cop |
+              currency:'COP':'symbol-narrow':'1.0-0' }}</span><br>
+            <span class="moneda">USD</span> <span class="valor">{{ valorMaquinaria.usd |
+              currency:'USD':'symbol-narrow':'1.0-0' }}</span>
+          </p>
+
+          <p class="subtitulo">
+            Valor Aproximado dejado de percibir por esta economía ilícita.
+          </p>
+
+          <p class="monto">
+            <span class="moneda">COP</span> <span class="valor">{{ valorEconomia.cop |
+              currency:'COP':'symbol-narrow':'1.0-0' }}</span><br>
+            <span class="moneda">USD</span> <span class="valor">{{ valorEconomia.usd |
+              currency:'USD':'symbol-narrow':'1.0-0' }}</span>
+          </p>
+
+          <div class="detalle">
+            <p><strong>Incautación mercurio:</strong> {{ detalles.mercurio | number }} Kg</p>
+            <p><strong>Incautación Combustible:</strong> {{ detalles.combustible | number }} Gls</p>
+            <p><strong>Incautación de Oro:</strong> {{ detalles.oro | number }} <span class="unidad">Kg</span></p>
+            <p><strong>Hectáreas Intervenidas:</strong> {{ detalles.hectareas }}</p>
+          </div>
+        </div>
+
+        <div class="trm-box">
+          <p><strong>{{ trm | number:'1.0-2' }}</strong><br>{{ fechaTrm | date:'dd/MM/yyyy' }}</p>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+
+  <!-- Ventana emergente -->
+  <div class="columns-container" *ngIf="mostrarVentanaTabla" (click)="cerrarVentana($event)">
+    <div class="ventana" (click)="$event.stopPropagation()">
+      <div class="estructura">
+        <div class="columna-izquierda">
+          <div class="tabla-mineria-container">
+            <div class="encabezado-tabla">
+              <h3 class="titulo-tabla">📊 Comparativo de Minería</h3>
+              <div class="formula">
+                <span>CV =</span>
+                <img src="https://latex.codecogs.com/svg.image?%5Cfrac%7Bx2-x1%7D%7Bx1%7D*100" alt="Fórmula CV">
+              </div>
+            </div>
+
+            <table class="tabla-mineria">
+              <thead>
+                <tr>
+                  <th class="col-icono"></th>
+                  <th>BRCMI</th>
+                  <th>TOTAL {{anio_anterior}} (x1)</th>
+                  <th>{{mesAnterior}} {{anio_anterior}} (x1)</th>
+                  <th>{{mesActual}} {{anio_actual}} (x2)</th>
+                  <th>DIARIO CV (%)</th>
+                  <th>ANUAL CV (%)</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr *ngFor="let item of datos">
+                  <td><i class="bi {{ item.icono }} icono"></i></td>
+                  <td>{{ item.nombre }}</td>
+                  <td>{{ item.total2024 }}</td>
+                  <td>{{ item.oct2024 }}</td>
+                  <td>{{ item.oct2025 }}</td>
+                  <td>
+                    {{ item.diarioCV }}
+                    <span *ngIf="item.diarioCV !== '–'" class="flecha"
+                      [ngClass]="item.diarioCVUp ? 'arriba' : 'abajo'"></span>
+                  </td>
+                  <td>
+                    {{ item.anualCV }}
+                    <span *ngIf="item.anualCV !== '–'" class="flecha"
+                      [ngClass]="item.anualCVUp ? 'arriba' : 'abajo'"></span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+          </div>
+
+
+        </div>
+        <div class="columna-derecha">
+          <div class="superior">
+            <div class="card"
+              style="background:#ffffff;border-radius:20px;box-shadow:0 6px 25px rgba(0,0,0,0.08);padding:24px 28px;display:flex;flex-direction:column;align-items:center;max-width:400px;margin:auto;font-family:'Segoe UI',sans-serif;">
+              <!-- Logo superior -->
+              <div class="logo"
+                style="width:70px;height:70px;border-radius:50%;overflow:hidden;border:3px solid #f1c40f;background:#0b0b0b;display:flex;align-items:center;justify-content:center;margin-bottom:14px;">
+                <img src="../../../../../assets/logos/JEMOP-DIROP.png" alt="Escudo"
+                  style="width:60%;height:60%;object-fit:contain;">
+              </div>
+
+              <!-- Título -->
+              <h3
+                style="font-size:18px;font-weight:700;color:#111827;margin:4px 0 18px 0;text-align:center;letter-spacing:0.4px;">
+                VALOR DE LA MAQUINARIA</h3>
+
+              <!-- Contenido principal -->
+              <div class="content" style="display:flex;align-items:center;gap:20px;justify-content:center;">
+                <!-- Ícono -->
+                <div class="icon"
+                  style="width:70px;height:70px;display:flex;align-items:center;justify-content:center;background:linear-gradient(145deg,#f8fafc,#e2e8f0);border-radius:14px;box-shadow:inset 0 2px 4px rgba(255,255,255,0.5),0 2px 10px rgba(0,0,0,0.08);">
+                  <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg"
+                    style="width:42px;height:42px;">
+                    <rect x="2" y="38" width="60" height="8" rx="3" fill="#111827" opacity="0.08" />
+                    <path d="M8 44c2-6 8-6 10-6h18l6-10-6-6h-6" stroke="#111827" stroke-width="3" stroke-linecap="round"
+                      stroke-linejoin="round" />
+                    <path d="M44 36h8l4 6h-8" stroke="#111827" stroke-width="3" stroke-linecap="round"
+                      stroke-linejoin="round" />
+                    <circle cx="20" cy="50" r="5" fill="#111827" />
+                    <circle cx="48" cy="50" r="5" fill="#111827" />
+                  </svg>
+                </div>
+
+                <!-- Datos -->
+                <div class="details" style="display:flex;flex-direction:column;gap:12px;">
+                  <div class="row" style="text-align:left;">
+                    <div class="year" style="font-size:14px;font-weight:600;color:#374151;">{{anio_anterior}} COP</div>
+                    <div class="amount" style="font-size:18px;font-weight:800;color:#0f172a;"><span class="valor">{{
+                        valorMaquinariaAnterior.cop | currency:'COP':'symbol-narrow':'1.0-0' }}</span></div>
+                  </div>
+                  <div class="row" style="text-align:left;">
+                    <div class="year" style="font-size:14px;font-weight:600;color:#374151;">{{anio_actual}} COP</div>
+                    <div class="amount" style="font-size:18px;font-weight:800;color:#0f172a;"><span class="valor">{{
+                        valorMaquinaria.cop | currency:'COP':'symbol-narrow':'1.0-0' }}</span></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Línea decorativa -->
+              <div
+                style="margin-top:18px;width:80%;height:2px;background:linear-gradient(90deg,#f1c40f,transparent);border-radius:2px;">
+              </div>
+            </div>
+
+          </div>
+          <div class="inferior">
+            <div class="card-afectacion">
+
+              <h3 class="titulo-afectacion">
+                VALOR DE LA AFECTACIÓN ECONÓMICA EN DÓLARES
+              </h3>
+
+              <div class="icono-afectacion">💰</div>
+
+              <div class="data-afectacion">
+                <div class="data-item">
+                  <div class="year">{{anio_anterior}} USD</div>
+                  <div class="amount"><span class="valor">{{ valorMaquinariaAnterior.usd |
+                      currency:'USD':'symbol-narrow':'1.0-0' }}</span></div>
+                </div>
+
+                <div class="divider"></div>
+
+                <div class="data-item">
+                  <div class="year">{{anio_actual}} USD</div>
+                  <div class="amount"><span class="valor">{{ valorMaquinaria.usd |
+                      currency:'USD':'symbol-narrow':'1.0-0' }}</span></div>
+                </div>
+              </div>
+
+              <div class="fecha" style="color: black;">{{fechaTrm}}</div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+
+  <!-- Ventana emergente -->
+  <div class="columns-container" *ngIf="mostrarVentanavalores" (click)="cerrarVentana($event)">
+    <div class="ventana shadow-lg rounded-4" (click)="$event.stopPropagation()">
+
+      <!-- Encabezado -->
+      <!-- 🔷 Encabezado -->
+      <div class="ventana-header d-flex justify-content-between align-items-center mb-4 border-bottom pb-2">
+        <h4 class="m-0 fw-bold text-primary d-flex align-items-center">
+          <i class="bi bi-cash-coin me-2 text-success"></i>
+          Gestión de Valores
+        </h4>
+
+      </div>
+
+      <!-- 🔸 Contenido principal -->
+      <div class="container-fluid py-4 fondo-gradiente">
+        <div class="row g-4 align-items-stretch">
+          <!-- Columna 1: Valor Material -->
+          <div class="col-md-6">
+            <div class="card tarjeta h-100">
+              <div class="card-body p-4">
+                <h5 class="card-title titulo-card text-success mb-4">
+                  <i class="bi bi-building me-2"></i> Valor del Material
+                </h5>
+
+                <form [formGroup]="formColumna1" (ngSubmit)="agregarItem(1)">
+                  <!-- Material -->
+                  <div class="mb-3 position-relative">
+                    <label class="form-label fw-semibold text-secondary">Material</label>
+
+                    <div class="dropdown w-100">
+                      <button class="btn dropdown-boton w-100 text-start" type="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        {{ materialSeleccionado || 'Seleccione un material...' }}
+                        <i class="bi bi-caret-down-fill ms-2"></i>
+                      </button>
+
+                      <ul class="dropdown-menu w-100 shadow-sm p-2 lista-dropdown">
+                        <li class="mb-2">
+                          <input type="text" class="form-control rounded-pill" placeholder="Buscar..."
+                            [(ngModel)]="busquedaMaterial" [ngModelOptions]="{standalone: true}"
+                            (input)="filtrarMateriales()" />
+                        </li>
+
+                        <li *ngFor="let mat of materialesFiltrados">
+                          <button class="dropdown-item rounded-3" type="button" (click)="seleccionarMaterial(mat)">
+                            {{ mat }}
+                          </button>
+                        </li>
+
+                        <li *ngIf="materialesFiltrados.length === 0" class="text-center text-muted py-2">
+                          No se encontraron resultados
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <!-- Valor -->
+                  <div class="mb-3">
+                    <label class="form-label fw-semibold text-secondary">Valor (COP)</label>
+                    <div class="input-group">
+                      <span class="input-group-text bg-success-subtle border-0 rounded-start-pill">💰</span>
+                      <input type="number" formControlName="valor" class="form-control border-start-0 rounded-end-pill"
+                        placeholder="Ej. 150000" />
+                    </div>
+                  </div>
+
+                  <button class="btn btn-success w-100 mt-3 boton-agregar" type="submit">
+                    <i class="bi bi-plus-circle me-1"></i> Agregar
+                  </button>
+                </form>
+
+                <hr class="my-4" />
+
+                <!-- Lista -->
+                <ul class="list-group list-group-flush lista-materiales">
+                  <li *ngFor="let item of lista1; let i = index"
+                    class="list-group-item elemento-lista d-flex justify-content-between align-items-center">
+                    <div class="d-flex align-items-center">
+                      <div
+                        class="icono-lista bg-success-subtle text-success rounded-circle d-flex align-items-center justify-content-center me-3">
+                        <i class="bi bi-box-seam"></i>
+                      </div>
+                      <div>
+                        <div class="fw-semibold text-dark">{{ item.material }}</div>
+                        <div class="text-muted small">{{ item.valor | currency:'COP':'symbol-narrow' }}</div>
+                      </div>
+                    </div>
+
+                    <button class="btn btn-light btn-sm text-danger border-0 shadow-sm eliminar-btn"
+                      (click)="eliminarItem(1, i)" title="Eliminar">
+                      <i class="bi bi-trash-fill"></i>
+                    </button>
+                  </li>
+                </ul>
+
+              </div>
+            </div>
+          </div>
+
+          <!-- Columna 2: Valor Dólar -->
+          <div class="col-md-6">
+            <div class="card tarjeta h-100">
+              <div class="card-body p-4">
+                <h5 class="card-title titulo-card text-info mb-4">
+                  <i class="bi bi-currency-exchange me-2"></i> Valor Dólar
+                </h5>
+
+                <form [formGroup]="formColumna2" (ngSubmit)="agregarItem(2)">
+                  <div class="mb-3">
+                    <label class="form-label fw-semibold text-secondary">Valor (USD)</label>
+                    <div class="input-group">
+                      <span class="input-group-text bg-info-subtle border-0 rounded-start-pill">$</span>
+                      <input formControlName="material" class="form-control border-start-0 rounded-end-pill"
+                        placeholder="Ej. 120" />
+                    </div>
+                  </div>
+
+                  <div class="mb-3">
+                    <label class="form-label fw-semibold text-secondary">Fecha</label>
+                    <input type="date" formControlName="valor" class="form-control rounded-pill" />
+                  </div>
+
+                  <button class="btn btn-info w-100 mt-3 boton-agregar" type="submit">
+                    <i class="bi bi-plus-circle me-1"></i> Agregar
+                  </button>
+                </form>
+
+                <hr class="my-4" />
+
+                <ul class="list-group list-group-flush lista-materiales">
+                  <li *ngFor="let item of lista2; let i = index"
+                    class="list-group-item elemento-lista d-flex justify-content-between align-items-center">
+
+                    <div class="d-flex align-items-center">
+                      <div
+                        class="icono-lista bg-info-subtle text-info rounded-circle d-flex align-items-center justify-content-center me-3">
+                        <i class="bi bi-calendar-check"></i>
+                      </div>
+                      <div>
+                        <div class="fw-semibold text-dark">{{ item.material }}</div>
+                        <div class="text-muted small">
+                          {{ item.valor | date:'mediumDate' }}
+                        </div>
+                      </div>
+                    </div>
+
+                    <button class="btn btn-light btn-sm text-danger border-0 shadow-sm eliminar-btn"
+                      (click)="eliminarItem(2, i)" title="Eliminar">
+                      <i class="bi bi-trash-fill"></i>
+                    </button>
+                  </li>
+                </ul>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+    </div>
+  </div>
+
+</div>
+
+<!-- Ventana emergente -->
+<div class="overlay" *ngIf="mostrarVentana" (click)="cerrarVentana($event)">
+  <div class="ventana_f" (click)="$event.stopPropagation()">
+    <h2 class="titulo">⚒️ Filtro de Minería</h2>
+
+    <div class="form-grid">
+      <!-- Columna 1: Fechas -->
+      <div class="columna fechas">
+        <label>Fecha Inicial:</label>
+        <input type="date" name="fechaInicio" [(ngModel)]="filtros.fechaInicio" required #fechaInicio="ngModel"
+          class="input-fecha">
+        <div class="error" *ngIf="fechaInicio.invalid && fechaInicio.touched">
+          ⚠️ La fecha inicial es obligatoria.
+        </div>
+
+        <label>Fecha Final:</label>
+        <input type="date" name="fechaFin" [(ngModel)]="filtros.fechaFin" (change)="extraerAnioActual()" required
+          #fechaFin="ngModel" class="input-fecha">
+        <div class="error" *ngIf="fechaFin.invalid && fechaFin.touched">
+          ⚠️ La fecha final es obligatoria.
+        </div>
+
+        <hr>
+
+        <h3>Lapso Anterior</h3>
+
+        <label>Fecha Inicial:</label>
+        <input type="date" name="fechaInicioAnterior" [(ngModel)]="filtros.fechaInicioAnterior" required
+          #fechaInicioAnterior="ngModel" class="input-fecha">
+        <div class="error" *ngIf="fechaInicioAnterior.invalid && fechaInicioAnterior.touched">
+          ⚠️ La fecha inicial anterior es obligatoria.
+        </div>
+
+        <label>Fecha Final:</label>
+        <input type="date" name="fechaFinAnterior" [(ngModel)]="filtros.fechaFinAnterior"
+          (change)="extraerAnioAntrior()" required #fechaFinAnterior="ngModel" class="input-fecha">
+        <div class="error" *ngIf="fechaFinAnterior.invalid && fechaFinAnterior.touched">
+          ⚠️ La fecha final anterior es obligatoria.
+        </div>
+      </div>
+
+
+      <!-- Columna 2: Selector -->
+      <div class="columna selectores">
+        <label for="">Division</label>
+        <select name="divi_padre" id="" class="form-control" [(ngModel)]="filtros.divi_padre" (change)="div_hija(0,1)">
+          <option value=""></option>
+          <option [value]="item" *ngFor="let item of division">{{item}}</option>
+        </select>
+        <label for="">Division FT</label>
+        <select name="divi_hija" id="" class="form-control" [(ngModel)]="filtros.divi_hija" (change)="brigadas(1,2)">
+          <option value="" selected></option>
+          <option [value]="item" *ngFor="let item of unidad_selecionada_div">{{item}}</option>
+        </select>
+
+
+        <!-- GRUPO DE BOTONES MEJORADO -->
+
+        <div class="mt-3 d-grid gap-2">
+
+          <button class="btn btn-outline-warning btn-lg" (click)="ver_brigadas()">
+            <i class="bi bi-diagram-3"></i> Brigadas
+          </button>
+
+          <button class="btn btn-outline-warning btn-lg" (click)="ver_batallones()">
+            <i class="bi bi-people-fill"></i> Batallones
+          </button>
+
+          <button class="btn btn-outline-warning btn-lg" (click)="mostrar_dpto()">
+            <i class="bi bi-geo-alt-fill"></i> Departamentos
+          </button>
+
+          <button class="btn btn-outline-warning btn-lg" (click)="mostrar_mpio()">
+            <i class="bi bi-geo"></i> Municipios
+          </button>
+        </div>
+      </div>
+
+      <!-- Columna 3: Botón -->
+      <div class="columna acciones">
+
+        <div class="form-group col-md-12 text-center">
+
+          <!-- Botón principal -->
+          <button class="btn-subregion" (click)="abrirVentanaSubregiones()">
+            <i class="bi bi-geo-alt-fill"></i> Ver subregiones
+          </button>
+
+          <!-- Tarjeta de subregión seleccionada -->
+          <div *ngIf="subregionSeleccionadaNombre" class="card-subregion mt-3 shadow-sm">
+
+            <!-- Header -->
+            <div class="card-subregion-header d-flex justify-content-between align-items-center">
+              <div class="d-flex align-items-center gap-2">
+                <span class="icono-subregion">🧭</span>
+                <strong>Subregión seleccionada</strong>
+              </div>
+
+              <button class="btn-cerrar" (click)="limpiarSubregion()">✖</button>
+            </div>
+
+            <!-- Contenido -->
+            <div class="card-subregion-body text-center">
+              <h5 class="mb-1 fw-bold text-dark">{{ subregionSeleccionadaNombre }}</h5>
+
+              <button type="button" (click)="abrirVentanaSubregiones()" class="btn-cambiar-subregion mt-2">
+                <i class="bi bi-arrow-repeat"></i> Cambiar subregión
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="form-group col-md-11" style="margin: auto;">
+          <button class="btn btn-warning form-control" (click)="ver_amenaza()">Amenaza<img
+              src="../../../../../assets/iconos-menu/descargar.svg" alt=""></button>
+        </div>
+        <br>
+        <hr>
+        <div class="form-group col-md-11" style="margin: auto;">
+          <label for="">LOE / LOE</label>
+          <select name="op_mayores" id="" class="form-control" [(ngModel)]="filtros.op_mayores">
+            <option value="">---</option>
+            <option [value]="item" *ngFor="let item of op_mayores">{{item}}</option>
+          </select>
+        </div>
+        <hr>
+        <!-- Botón elegante para abrir ventana -->
+        <button class="btn-elegante-apoyos" (click)="ventanaApoyosVisible = true">
+          <i class="bi bi-hand-index-thumb"></i> Abrir Ventana de Apoyos
+        </button>
+
+        <!-- Mostrar selección si existe -->
+        <h4 *ngIf="tieneApoyoSeleccionado()" class="apoyo-seleccionado">
+          Apoyo Seleccionado: {{ apoyoSeleccionado }}
+        </h4>
+
+        <button class="btn-filtrar " (click)="documento()">
+          <i class="bi bi-file-earmark-pdf"></i> PDF
+        </button>
+        <button class="btn-filtrar" (click)="filtrar()">
+          <i class="bi bi-search"></i> Filtrar
+        </button>
+        <button class="btn-cerrar" (click)="cerrarVentana()">Cancelar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Fondo modal -->
+<div class="modal-overlay oculto" id="mostrar_dpto">
+
+  <!-- Contenido del modal -->
+  <div class="modal-content listado-modal shadow-lg rounded-4" id="ventana_dpto">
+
+    <!-- Header -->
+    <div
+      class="card-header d-flex justify-content-between align-items-center cursor-move rounded-top-4 bg-warning text-dark px-3 py-2"
+      id="cabecera_dpto">
+      <span class="fw-bold">Seleccionar Departamentos</span>
+      <button class="btn btn-sm btn-light border" (click)="mostrar_dpto()">✖</button>
+    </div>
+
+    <!-- Lista -->
+    <ul class="list-group list-group-flush stylish-list lista-scroll">
+      <li class="list-group-item" *ngFor="let item of departamentos_filtrados">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" ngModel name="boletin_diseo" [id]="item" value="OK"
+            (click)="departamentoos(4, 5, item)">
+          <label class="form-check-label fw-semibold" [for]="item">
+            {{ item }}
+          </label>
+        </div>
+      </li>
+    </ul>
+
+  </div>
+</div>
+
+<!-- Ventana flotante de municipios -->
+<div class="modal-overlay oculto" id="mostrar_mpio">
+  <!-- Contenido del modal -->
+  <div class="modal-content listado-modal shadow-lg rounded-4" id="ventana_mpio">
+
+    <!-- Header -->
+    <div
+      class="card-header d-flex justify-content-between align-items-center cursor-move rounded-top-4 bg-warning text-dark px-3 py-2"
+      id="cabecera_dpto">
+      <span class="fw-bold">Seleccionar Municipios</span>
+      <button class="btn btn-sm btn-light border" (click)="mostrar_mpio()">✖</button>
+    </div>
+
+    <!-- Lista -->
+    <ul class="list-group list-group-flush stylish-list lista-scroll">
+      <li class="list-group-item" *ngFor="let item of unidad_selecionada_municipios; index as i">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" ngModel name="mpio" [id]="i + '. ' + item" value="OK"
+            (click)="municipios_selecionados(item, i)">
+          <label class="form-check-label" [for]="i + '. ' + item">
+            {{ i + '. ' + item }}
+          </label>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<!-- ver_brigadas -->
+<div class="brigadas-modal oculto" id="ver_brigadas">
+  <div class="brigadas-card shadow-lg rounded-4 p-4">
+
+    <!-- Título -->
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <h3 class="m-0 fw-bold text-warning">Brigadas</h3>
+
+      <button class="btn btn-sm btn-danger rounded-circle p-2" (click)="ver_brigadas()">
+        ✖
+      </button>
+    </div>
+
+    <!-- Lista de tarjetas -->
+    <div class="row g-3">
+      <div class="col-6 col-md-4" *ngFor="let item of unidad_selecionada_brigada; index as i"
+        (click)="batallones(2,3, item, i)"[id]="i+item+1">
+
+        <div class="card brigada-item shadow-sm h-100">
+          <div class="card-body text-center">
+
+            <div class="che mb-2" id="{{i+item}}"></div>
+
+            <h5 class="card-title fw-semibold text-dark">
+              {{ item }}
+            </h5>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Seleccionados -->
+    <div class="mt-4">
+      <div class="alert alert-warning shadow-sm" role="alert">
+        <strong>Seleccionadas:</strong>
+        <ul class="m-2 p-0" style="list-style: square;">
+          <li *ngFor="let mun of unidad_selecionada_brigadas_filtradas">
+            {{ mun }}
+          </li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Batallones -->
+<div class="brigadas-modal oculto" style="margin: auto;" id="ver_batallones">
+  <div class="brigadas-card shadow-lg rounded-4 p-4">
+    <!-- Título -->
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <h3 class="m-0 fw-bold text-warning">Batallones</h3>
+
+      <button class="btn btn-sm btn-danger rounded-circle p-2" (click)="ver_batallones()">
+        ✖
+      </button>
+    </div>
+    <!-- Lista de tarjetas -->
+    <div class="row g-3">
+      <div class="col-6 col-md-4" *ngFor="let item of unidad_selecionada_batallones"
+        (click)="batallones_selecionados(item)" [id]="item+1">
+
+        <div class="card brigada-item shadow-sm h-100">
+          <div class="card-body text-center">
+
+            <div class="che mb-2" id="{{item}}"></div>
+
+            <h5 class="card-title fw-semibold text-dark">
+              {{ item }}
+            </h5>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Seleccionados -->
+    <div class="mt-4">
+      <div class="alert alert-warning shadow-sm" role="alert">
+        <strong>Seleccionadas:</strong>
+        <ul class="m-2 p-0" style="list-style: square;">
+          <li *ngFor="let mun of datos_batallones">
+            {{ mun }}
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="ventana-subregion" *ngIf="ventanaVisible">
+  <div class="ventana-subregion-contenido">
+
+    <h3 class="titulo-subregion">Seleccione una Subregión</h3>
+
+    <div class="subregiones-lista">
+      <div *ngFor="let subregion of subregiones" class="subregion-item card shadow-sm">
+
+        <div class="card-body d-flex justify-content-between align-items-center">
+          <label class="radio-opcion d-flex align-items-center gap-2 mb-0">
+            <input type="radio" class="radio-subregion" name="subregionEmergente" [value]="subregion.id"
+              [(ngModel)]="subregionSeleccionadaId" />
+
+            <span class="nombre-sub" (click)="toggleDetalleSubregion(subregion.id)">
+              {{ subregion.nombre }}
+            </span>
+          </label>
+
+          <span class="detalle-sub text-muted small">
+            {{ subregion.departamentos.length }} deptos • {{ contarMunicipios(subregion) }} municipios
+          </span>
+        </div>
+
+        <!-- Detalles -->
+        <div *ngIf="subregionDetalleVisible === subregion.id" class="detalle-muni card-footer">
+          <strong>Departamentos:</strong>
+          <ul>
+            <li *ngFor="let d of subregion.departamentos">
+              {{ d.nombre }}:
+              <ul>
+                <li *ngFor="let m of d.municipios">- {{ m }}</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="ventana-subregion-botones d-flex justify-content-between mt-3">
+      <button class="btn btn-success" (click)="confirmarSeleccion()">Confirmar</button>
+      <button class="btn btn-secondary" (click)="quitarSeleccion()">Quitar</button>
+ 
+      <button class="btn btn-sm btn-danger rounded-circle p-2" (click)="ventanaVisible = false">✖</button>
+    </div>
+
+  </div>
+</div>
+
+<!-- enemigo -->
+<div class="brigadas-modal oculto" id="ver_amenzaza">
+
+  <div class="modal-contenido">
+
+    <!-- Botón cerrar -->
+    <button class="btn btn-sm btn-danger rounded-circle p-2" (click)="ver_amenaza()">✖</button>
+
+    <!-- SECCIÓN AMENAZA -->
+    <section class="seccion">
+      <h3>Amenaza</h3>
+      <div class="grid-items">
+        <div class="item" *ngFor="let item of amenaza_select" (click)="enemigos_selecionados(item)" [id]="item+1">
+          <div class="che" [id]="item"></div>
+          <span>{{item}}</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN ESTRUCTURA -->
+    <section class="seccion">
+      <h3>Estructura</h3>
+      <div class="grid-items">
+        <div class="item" *ngFor="let item of acam_enemigo" (click)="estructura_selecionados(item)" [id]="item+1">
+          <div class="che" [id]="item"></div>
+          <span>{{item}}</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN BLOQUE -->
+    <section class="seccion">
+      <h3>Bloque</h3>
+      <div class="grid-items">
+        <div class="item" *ngFor="let item of acam_estructura" (click)="bloque_selecionados(item)"[id]="item+1">
+          <div class="che" [id]="item"></div>
+          <span>{{item}}</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN SUBESTRUCTURA -->
+    <section class="seccion">
+      <h3>Subestructura</h3>
+      <div class="grid-items">
+        <div class="item" *ngFor="let item of ene_estructura" (click)="suboestructura_selecionados(item)"[id]="item+1">
+          <div class="che" [id]="item"></div>
+          <span>{{item}}</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- RESULTADOS -->
+    <section class="resultados">
+      <div class="resultado-card">
+        <h4>Estructuras seleccionadas</h4>
+        <ul><li *ngFor="let mun of datos_estructuras">{{mun}}</li></ul>
+      </div>
+
+      <div class="resultado-card">
+        <h4>Amenazas seleccionadas</h4>
+        <ul><li *ngFor="let mun of datos_amenaza">{{mun}}</li></ul>
+      </div>
+
+      <div class="resultado-card">
+        <h4>Bloques seleccionados</h4>
+        <ul><li *ngFor="let mun of datos_bloque">{{mun}}</li></ul>
+      </div>
+
+      <div class="resultado-card">
+        <h4>Subestructuras seleccionadas</h4>
+        <ul><li *ngFor="let mun of datos_suboestructura">{{mun}}</li></ul>
+      </div>
+    </section>
+
+  </div>
+</div>
+<!-- Ventana emergente -->
+<div class="ventana-emergente" *ngIf="ventanaApoyosVisible">
+    <div class="modal-contenido">
+        <h4 class="subtitulo">Apoyos disponibles</h4>
+        <div class="radio-grid">
+            <div class="form-check" *ngFor="let apoyo of apoyosUnificados">
+                <input class="form-check-input" type="radio" name="apoyo_disponible" [id]="apoyo.id"
+                    [value]="apoyo.valor" [(ngModel)]="apoyoSeleccionado" />
+                <label class="form-check-label" [for]="apoyo.id">{{ apoyo.texto }}</label>
+            </div>
+        </div>
+
+        <!-- Cerrar ventana -->
+         <button class="btn btn-sm btn-danger rounded-circle p-2" (click)="cerrarVentanaApoyos()">✖</button>
+    </div>
+</div>
+<!-- 🔹 Loader overlay -->
+<div class="overlay" *ngIf="loading">
+  <div class="spinner"></div>
+  <p class="loading-text">Procesando...</p>
+</div>

@@ -1,0 +1,264 @@
+<div class="containeres">
+    <div class="configuaracion  ">
+        <div class="cuerpo_informacions" style="height: 90px;" (click)="cambio_informacion()">
+            <div class="row col-md-12" style="margin: auto;">
+                <form class="form-group row " #documentos_pdf="ngForm">
+                    <div class="row col-md-6" style="margin: auto;">
+                        <div class="form-group col-md-12" style="margin: auto;">
+                            <label for="">Fecha Inicial</label>
+                            <input type="date" name="fecha_pasos_informacion" id="usuario" placeholder="usuario"
+                                class="form-control" ngModel>
+                        </div>
+                    </div>
+                    <div class="row col-md-6" style="margin: auto;">
+                        <button class="btn btn-warning" (click)="paso_fronterizos(documentos_pdf)">Actualizar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="containeres" *ngIf="general">
+    <div class="configuaracion  " *ngFor="let item of das_general; index as i; first as isFirst" (click)="das_indi()">
+        <div class="cuerpo_informacions">
+            <div class="row col-md-12" style="margin: auto;">
+                <div class="row col-md-4" style="margin: auto;">
+                    <img src="../../../../../assets/resultados/{{item[1]}}.png" alt=""
+                        style=" width: 120px; height: 60px;">
+                </div>
+                <div class="row col-md-8" style="margin: auto;">
+                    <h5>{{item[0]}}</h5>
+                    <h2>{{item[2]}}</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="containeres" *ngIf="general_2">
+
+    <div class="configuaracion_2" *ngFor="let item of dash_divisiones; index as i; first as isFirst">
+        <div class="cuerpo_informacions_2" (click)="cambio_informacion_2(i)">
+            <div class="row col-md-12" style="margin: auto;">
+                <div class="row col-md-4" style="margin: auto;">
+                    <img src="../../../../../assets/resultados/{{item[1]}}.png" alt=""
+                        style=" width: 120px; height: 60px;">
+                </div>
+                <div class="row col-md-8" style="margin: auto;">
+                    <h5>{{item[0]}}</h5>
+                    <h2>{{item[2]}}</h2>
+                </div>
+            </div>
+            <hr>
+            <div class="row col-md-12" style="margin: auto;">
+                <div class="row col-md-4" style="margin: auto;">
+                    <img src="../../../../../assets/resultados/{{item[1+3]}}.png" alt=""
+                        style=" width: 120px; height: 60px;">
+                </div>
+                <div class="row col-md-8" style="margin: auto;">
+                    <h5>{{item[0+3]}}</h5>
+                    <h2>{{item[2+3]}}</h2>
+                </div>
+            </div>
+            <hr>
+            <div class="row col-md-12" style="margin: auto;">
+                <div class="row col-md-4" style="margin: auto;">
+                    <img src="../../../../../assets/resultados/{{item[1+6]}}.png" alt=""
+                        style=" width: 120px; height: 60px;">
+                </div>
+                <div class="row col-md-8" style="margin: auto;">
+                    <h5>{{item[0+6]}}</h5>
+                    <h2>{{item[2+6]}}</h2>
+                </div>
+            </div>
+            <hr>
+            <div class="row col-md-12" style="margin: auto;">
+                <div class="row col-md-4" style="margin: auto;">
+                    <img src="../../../../../assets/resultados/{{item[1+9]}}.png" alt=""
+                        style=" width: 120px; height: 60px;">
+                </div>
+                <div class="row col-md-8" style="margin: auto;">
+                    <h5>{{item[0+9]}}</h5>
+                    <h2>{{item[2+9]}}</h2>
+                </div>
+            </div>
+            <hr>
+            <div class="row col-md-12" style="margin: auto;">
+                <div class="row col-md-4" style="margin: auto;">
+                    <img src="../../../../../assets/resultados/{{item[1+12]}}.png" alt=""
+                        style=" width: 120px; height: 60px;">
+                </div>
+                <div class="row col-md-8" style="margin: auto;">
+                    <h5>{{item[0+12]}}</h5>
+                    <h2>{{item[2+12]}}</h2>
+                </div>
+            </div>
+            <hr>
+            <div class="row col-md-12" style="margin: auto;">
+                <div class="row col-md-4" style="margin: auto;">
+                    <img src="../../../../../assets/resultados/{{item[1+15]}}.png" alt=""
+                        style=" width: 120px; height: 60px;">
+                </div>
+                <div class="row col-md-8" style="margin: auto;">
+                    <h5>{{item[0+15]}}</h5>
+                    <h2>{{item[2+15]}}</h2>
+                </div>
+            </div>
+            <hr>
+            <div class="row col-md-12" style="margin: auto;">
+                <div class="row col-md-4" style="margin: auto;">
+                    <img src="../../../../../assets/resultados/{{item[1+18]}}.png" alt=""
+                        style=" width: 120px; height: 60px;">
+                </div>
+                <div class="row col-md-8" style="margin: auto;">
+                    <h5>{{item[0+18]}}</h5>
+                    <h2>{{item[2+18]}}</h2>
+                </div>
+            </div>
+            <hr>
+            <div class="row col-md-12" style="margin: auto;">
+                <div class="row col-md-4" style="margin: auto;">
+                    <img src="../../../../../assets/resultados/{{item[1+21]}}.png" alt=""
+                        style=" width: 120px; height: 60px;">
+                </div>
+                <div class="row col-md-8" style="margin: auto;">
+                    <h5>{{item[0+21]}}</h5>
+                    <h2>{{item[2+21]}}</h2>
+                </div>
+            </div>
+            <hr>
+            <div class="row col-md-12" style="margin: auto;">
+                <div class="row col-md-4" style="margin: auto;">
+                    <img src="../../../../../assets/resultados/{{item[1+24]}}.png" alt=""
+                        style=" width: 120px; height: 60px;">
+                </div>
+                <div class="row col-md-8" style="margin: auto;">
+                    <h5>{{item[0+24]}}</h5>
+                    <h2>{{item[2+24]}}</h2>
+                </div>
+            </div>
+            <hr>
+            <div class="row col-md-12" style="margin: auto;">
+                <div class="row col-md-4" style="margin: auto;">
+                    <img src="../../../../../assets/resultados/{{item[1+27]}}.png" alt=""
+                        style=" width: 120px; height: 60px;">
+                </div>
+                <div class="row col-md-8" style="margin: auto;">
+                    <h5>{{item[0+27]}}</h5>
+                    <h2>{{item[2+27]}}</h2>
+                </div>
+            </div>
+            <hr>
+            <div class="row col-md-12" style="margin: auto;">
+                <div class="row col-md-4" style="margin: auto;">
+                    <img src="../../../../../assets/resultados/{{item[1+30]}}.png" alt=""
+                        style=" width: 120px; height: 60px;">
+                </div>
+                <div class="row col-md-8" style="margin: auto;">
+                    <h5>{{item[0+30]}}</h5>
+                    <h2>{{item[2+30]}}</h2>
+                </div>
+            </div>
+            <hr>
+            <div class="row col-md-12" style="margin: auto;">
+                <div class="row col-md-4" style="margin: auto;">
+                    <img src="../../../../../assets/resultados/{{item[1+33]}}.png" alt=""
+                        style=" width: 120px; height: 60px;">
+                </div>
+                <div class="row col-md-8" style="margin: auto;">
+                    <h5>{{item[0+33]}}</h5>
+                    <h2>{{item[2+33]}}</h2>
+                </div>
+            </div>
+            <hr>
+            <div class="row col-md-12" style="margin: auto;">
+                <div class="row col-md-4" style="margin: auto;">
+                    <img src="../../../../../assets/resultados/{{item[1+36]}}.png" alt=""
+                        style=" width: 120px; height: 60px;">
+                </div>
+                <div class="row col-md-8" style="margin: auto;">
+                    <h5>{{item[0+36]}}</h5>
+                    <h2>{{item[2+36]}}</h2>
+                </div>
+            </div>
+            <hr>
+            <div class="row col-md-12" style="margin: auto;">
+                <div class="row col-md-4" style="margin: auto;">
+                    <img src="../../../../../assets/resultados/{{item[1+39]}}.png" alt=""
+                        style=" width: 120px; height: 60px;">
+                </div>
+                <div class="row col-md-8" style="margin: auto;">
+                    <h5>{{item[0+39]}}</h5>
+                    <h2>{{item[2+39]}}</h2>
+                </div>
+            </div>
+            <hr>
+            <div class="row col-md-12" style="margin: auto;">
+                <div class="row col-md-4" style="margin: auto;">
+                    <img src="../../../../../assets/resultados/{{item[1+42]}}.png" alt=""
+                        style=" width: 120px; height: 60px;">
+                </div>
+                <div class="row col-md-8" style="margin: auto;">
+                    <h5>{{item[0+42]}}</h5>
+                    <h2>{{item[2+42]}}</h2>
+                </div>
+            </div>
+            <hr>
+            <div class="row col-md-12" style="margin: auto;">
+                <div class="row col-md-4" style="margin: auto;">
+                    <img src="../../../../../assets/resultados/{{item[1+45]}}.png" alt=""
+                        style=" width: 120px; height: 60px;">
+                </div>
+                <div class="row col-md-8" style="margin: auto;">
+                    <h5>{{item[0+45]}}</h5>
+                    <h2>{{item[2+45]}}</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+<div class="containeres" *ngIf="general_3">
+    <div class="configuaracion  " *ngFor="let item of control; index as i; first as isFirst"
+        (click)="cambio_informacion_2(i)">
+        <div class="cuerpo_informacions">
+            <div class="row col-md-12" style="margin: auto;">
+                <div class="row col-md-4" style="margin: auto;">
+                    <img src="../../../../../assets/resultados/{{item[1]}}.png" alt=""
+                        style=" width: 120px; height: 60px;">
+                </div>
+                <div class="row col-md-8" style="margin: auto;">
+                    <h5>{{item[0]}}</h5>
+                    <h2>{{item[2]}}</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="containeres">
+
+    <div class="configuaracion " *ngIf="general_4">
+        <div class="cuerpo_informacions" style="height: 90px;">
+            <div class="row col-md-12" style="margin: auto;">
+
+                <form class="form-group row " #documentos="ngForm">
+                    <div class="form-group col-md-11" style="margin: auto;">
+                        <label for="">Dash</label>
+                        <select name="dash_res" id="dash_res" class="form-control" ngModel
+                            (change)="cambio_dash(documentos)">
+                            <option value="" selected></option>
+                            <option [value]="item" *ngFor="let item of dash_label">{{item}}</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="row col-md-12 ejc oculto" style="margin: auto;" (click)="das_indi()" id="oculto">
+    <canvas id="chart_1">{{ chart_1 }}</canvas>
+
+</div>

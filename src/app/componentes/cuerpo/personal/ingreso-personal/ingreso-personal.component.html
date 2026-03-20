@@ -1,0 +1,226 @@
+<app-menu></app-menu>
+<div class="cuerpo" ng-init="inicioAlgo()">
+    <div class="col-md-12">
+        <form class="form-group row tamanio" #personal="ngForm" autocomplete="off">
+            <div class="row contenedor">
+                <div class="col-md-12 ">
+                    <h2 class="titulo">Personal de la Dirección de Operaciones</h2>
+                    <div class="radios">
+                        <div class=" row col-md-12">
+                            <div class=" row col-md-3">
+                                <div class="img">
+
+                                    <div class="imagen">
+                                        <img [src]="img" alt="" class="foto" id="foto" (click)="cargar_foto()">
+
+                                        <input type="file" name="foto_user" id="foto_user" ngModel hidden
+                                            (change)="leer_foto($event)">
+                                        <br>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class=" col-md-8">
+                                <br>
+                                <h4>Información Personal </h4>
+                                <div class=" row col-md-12">
+                                    <div class="form-group col-md-1" style="margin: auto;">
+                                        <label for="">Grd: </label>
+                                        <select name="grd" id="grd" class="form-control" ngModel>
+                                            <option value=""></option>
+                                            <option [value]="item" *ngFor="let item of grd">{{item}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-3" style="margin: auto;">
+                                        <label for="">Apellidos</label>
+                                        <input type="text" name="apellidos" id="apellidos" class="form-control" ngModel>
+                                    </div>
+                                    <div class="form-group col-md-3" style="margin: auto;">
+                                        <label for="">Nombres</label>
+                                        <input type="text" name="nombres" id="nombres" class="form-control" ngModel>
+                                    </div>
+                                    <div class="form-group col-md-3" style="margin: auto;">
+                                        <label for="">Cedula</label>
+                                        <input type="text" name="cedula" id="cedula" class="form-control" ngModel>
+                                    </div>
+                                    <div class="form-group col-md-2" style="margin: auto;">
+                                        <label for="">Telefono Principal</label>
+                                        <input type="text" name="tel_principal" id="tel_principal" class="form-control"
+                                            ngModel>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class=" row col-md-12">
+                                    <div class="row col-md-2" style="margin: auto;">
+                                        <label for="">Fecha de Nacimiento</label>
+                                        <input type="date" name="fecha_cumpleaños" id="fecha_cumpleaños"
+                                            class="form-control" ngModel >
+                                    </div>
+
+                                    <div class="form-group col-md-5" style="margin: auto;">
+                                        <label for="">Correo Institucional</label>
+                                        <input type="text" name="correo_ejc" id="correo_ejc" class="form-control" ngModel>
+                                    </div>
+                                    <div class="form-group col-md-5" style="margin: auto;">
+                                        <label for="">Correo Personal</label>
+                                        <input type="text" name="correo_civil" id="correo_civil" class="form-control"
+                                            ngModel>
+                                    </div>
+
+                                </div>
+
+                                <br>
+                                <h4>Dirección en la Guarnición</h4>
+                                <div class=" row col-md-12">
+
+                                <div class="form-group col-md-2" style="margin: auto;">
+                                    <label for="">Departamento</label>
+                                    <select name="departamento" id="departamento" class="form-control"
+                                        [(ngModel)]="departamento" (change)="departamentos(4,5)">
+                                        <option value=""></option>
+                                        <option [value]="item" *ngFor="let item of departamentos_filtrados">{{item}}
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-3" style="margin: auto;">
+                                    <label for="">Municipio</label>
+                                    <select name="municipio" id="municipio" class="form-control" ngModel>
+                                        <option value=""></option>
+                                        <option [value]="item" *ngFor="let item of unidad_selecionada_municipios">
+                                            {{item}}
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-3" style="margin: auto;">
+                                    <label for="">Barrio</label>
+                                    <input type="text" name="barrio" id="barrio" class="form-control" ngModel>
+                                </div>
+
+                                <div class="form-group col-md-4" style="margin: auto;">
+                                    <label for="">Direcion en Bogota</label>
+                                    <input type="text" name="direcion_principal" id="direcion_principal"
+                                        class="form-control" ngModel>
+                                </div>
+                            </div>
+
+                            <br>
+                            <h4>Dirección fuera de la Guarnición</h4>
+                            <div class=" row col-md-12">
+
+                            <div class="form-group col-md-2" style="margin: auto;">
+                                <label for="">Departamento</label>
+                                <select name="departamento_fuera" id="departamento_fuera" class="form-control"
+                                    [(ngModel)]="departamento_fuera" (change)="departamentos_2(4,5)">
+                                    <option value=""></option>
+                                    <option [value]="item" *ngFor="let item of departamentos_filtrados_2">{{item}}
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-3" style="margin: auto;">
+                                <label for="">Municipio</label>
+                                <select name="municipio_fuera" id="municipio_fuera" class="form-control" ngModel>
+                                    <option value=""></option>
+                                    <option [value]="item" *ngFor="let item of unidad_selecionada_municipios_2">
+                                        {{item}}
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-3" style="margin: auto;">
+                                <label for="">Barrio</label>
+                                <input type="text" name="barrio_fuera" id="barrio_fuera" class="form-control" ngModel>
+                            </div>
+
+                            <div class="form-group col-md-4" style="margin: auto;">
+                                <label for="">Direcion en Bogota</label>
+                                <input type="text" name="direcion_principal_fuera" id="direcion_principal_fuera"
+                                    class="form-control" ngModel>
+                            </div>
+                        </div>
+
+
+
+                        <br>
+                        <h4>Contacto de Emergencia</h4>
+                        <div class=" row col-md-12">
+                            <div class="form-group col-md-2" style="margin: auto;">
+                                <label for="">Telefono</label>
+                                <input type="text" name="telefono_alterno" id="telefono_alterno"
+                                    class="form-control" ngModel>
+                            </div>
+                            <div class="form-group col-md-5" style="margin: auto;">
+                                <label for="">Nombre</label>
+                                <input type="text" name="nombre_contacto" id="nombre_contacto" class="form-control" ngModel>
+                            </div>
+                            <div class="form-group col-md-5" style="margin: auto;">
+                                <label for="">Parentesco</label>
+                                <input type="text" name="parentesco" id="parentesco" class="form-control" ngModel>
+                            </div>
+
+
+                        </div>
+                            
+                        <br>
+                        <h4>Informacion Laboral</h4>
+                                <div class=" row col-md-12">
+                                    <div class="row col-md-3" style="margin: auto;">
+                                        <label for="">Fecha Traslado Unidad</label>
+                                        <input type="datetime-local" name="fecha_unidad" id="fecha_unidad"
+                                            class="form-control" ngModel (change)="fecha_trasalado_unidad(personal)">
+                                    </div>
+                                <div class="form-group col-md-6" style="margin: auto;">
+                                    <label for="">Cargo</label>
+                                    <select name="cargo" id="cargo" class="form-control" ngModel>
+                                        <option value=""></option>
+                                        <option [value]="item" *ngFor="let item of cargos_dirop">{{item}}</option>
+                                    </select>
+                                </div>
+                                <div class="row col-md-3" style="margin: auto;">
+                                    <label for="">Fecha Poseción Cargo Actual</label>
+                                    <input type="datetime-local" name="fecha_cargo" id="fecha_cargo"
+                                        class="form-control" ngModel (change)="fecha_cargo_unidad(personal)">
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <br>
+                    <hr>
+                    <br><br>
+                    <div class=" row col-md-12">
+
+                        <div class="alert alert-success col-md-11" role="alert" *ngIf="inf_g"
+                            style="margin: auto !important;">
+                            {{inf_c_g}}!
+                        </div>
+                        <br *ngIf="inf_g">
+                        <div class="alert alert-danger col-md-11" role="alert" *ngIf="inf_a"
+                            style="margin: auto !important;">
+                            {{inf_c_g}}!
+                        </div>
+
+                        <br *ngIf="inf_a">
+                        <div class="posicion_btn">
+                            <button class="btn btn-success" (click)="guardar(personal)" *ngIf="inf_btn">GUARDAR</button>
+                            <button class="btn btn-success" (click)="clear()" *ngIf="inf_btnuew">Nuevo</button>
+                        </div>
+                    </div>
+                    <hr>
+                    <ul class="list-group">
+                        <li *ngIf="time_unidad" class="list-group-item"><b>Tiempo en la Unidad:
+                            </b>{{tiempo_unidad}}</li>
+                        <li *ngIf="time_cargo" class="list-group-item"><b>Tiempo en el Cargo Actual:
+                            </b>{{tiempo_cargo}}
+                        </li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+    </div>
+    </form>
+</div>
+</div>
+<app-spiner></app-spiner>

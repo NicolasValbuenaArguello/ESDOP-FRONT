@@ -1,0 +1,72 @@
+<app-menu></app-menu>
+
+<div class="usuarios-container" [class.dark-mode]="modoOscuro">
+  <div class="header">
+    <h2 class="titulo fw-bold">
+      👥 {{ listado_usurios.length }} Usuarios
+    </h2>
+
+    <div class="d-flex align-items-center gap-2">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="🔍 Buscar usuario, username o unidad..."
+        [(ngModel)]="busqueda"
+        style="width: 250px; border-radius: 8px;"
+      />
+      <button class="btn btn-outline-secondary btn-sm" (click)="limpiarBusqueda()">❌</button>
+      <button class="btn btn-toggle" (click)="modoOscuro = !modoOscuro">
+        <span *ngIf="!modoOscuro">🌙 Modo oscuro</span>
+        <span *ngIf="modoOscuro">☀️ Modo claro</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="cards-container">
+    <div
+      class="usuario-card shadow-sm"
+      *ngFor="let item of listado_usurios | filterUsuarios: busqueda; index as i"
+    >
+      <div class="card-header">
+        <img
+          [src]="'http://172.22.2.36:5198' + item[4]"
+          alt="FOTO"
+          class="foto"
+        />
+        <div class="info-header">
+          <h5 class="nombre">{{ item[1] }}</h5>
+          <p class="username">@{{ item[2] }}</p>
+        </div>
+      </div>
+
+      <div class="card-body">
+        <p><strong>Unidad:</strong> {{ item[54] }}</p>
+      </div>
+
+      <div class="card-footer">
+        <div class="acciones">
+          <ng-container *ngIf="item[61] === '---' || item[61] === '-//-'; else tieneActa">
+            <button class="btn btn-outline-secondary btn-sm" disabled>Sin Acta</button>
+          </ng-container>
+
+          <ng-template #tieneActa>
+            <button class="btn btn-success btn-sm" (click)="ver_documento(item[61])">
+              📄 Ver Acta
+            </button>
+          </ng-template>
+
+          <button class="btn btn-info btn-sm ms-2" (click)="info(i)">
+            ✏️ Editar
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 🔹 Mensaje si no hay coincidencias -->
+    <div *ngIf="(listado_usurios | filterUsuarios: busqueda).length === 0" class="text-center text-muted mt-4">
+      🚫 No se encontraron usuarios con ese criterio.
+    </div>
+  </div>
+</div>
+
+<app-ver-document [server]="server"></app-ver-document>

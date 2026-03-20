@@ -1,0 +1,425 @@
+<app-menu></app-menu>
+<div class="cuerpo_2">
+    <div class="col-md-12 ">
+        <div class="row contenedor">
+            <div class="col-md-12 ">
+                <h2 class="titulo"> {{plazos_signar.length}} Plazos sin Asignar <button class="btn btn-danger"
+                        (click)="listado()">Actualizar</button> </h2>
+                <div class="radios">
+                    <div class="col-md-12 " style="margin: auto;">
+                        <div class="row col-md-12 " style=" margin: auto; ">
+                            <br>
+                            <div class="col-sm" *ngFor="let item of plazos_signar; index as i; first as isFirst">
+
+                                <div class="card esquina_pagina" style="width: 12rem;" (click)="asignar_plazos(item)">
+                                    <img class="card-img-top" src="../../../../../assets/logos/JEMOP-DIROP.png"
+                                        alt="Card image cap" width="50px">
+                                    <div class="card-body">
+                                        <p class="card-text">NÚMERO DE ORFEO: .</p><br><b><i>{{item}}</i></b>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="asignar oculto" id="view_dumentos_s">
+                <div class="row col-md-12 " style="height: 100%;">
+                    <div class="col-md-7 " id="documento_pdf">
+
+                        <div class="botones">
+                            <button class="btn btn-danger boton" (click)="cerrar()" >X</button>
+                            <button class="btn btn-primary boton" (click)="exppdir()"*ngIf="expandir" >></button>
+                            <button class="btn btn-primary boton" (click)="contraer()" *ngIf="contrae"><</button>
+            
+                        </div>
+
+    
+                        <object type="application/pdf" 
+        [data]="doc_ver | safe" 
+        width="100%" 
+        height="100%" 
+        style="overflow:auto;">
+</object>
+
+                    </div>
+
+                    <div class="col-md-5" id="documento_pdf_asignar">
+                        <div class="plazos_s">
+                            <h2 style="color: snow;">{{orfeo}}</h2>
+                            <form class="form-group row tamanio" #plazos="ngForm">
+                                <div class="form-group col-md-11" style="margin: auto;">
+                                    <label for="">Funcionario:</label>
+                                    <select name="responsable" id="responsable" class="form-control" ngModel
+                                        (change)="asignar_cargo(plazos)">
+                                        <option value=""></option>
+                                        <option [value]="item[0]"
+                                            *ngFor="let item of listado_usurios; index as i; first as isFirst">
+                                            {{item[1]}}. {{item[2]}} {{item[3]}}
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-11" style="margin: auto;">
+                                    <label for="">Cargo:</label>
+                                    <input type="text" name="cargo" id="cargo" class="form-control" [ngModel]="cargo">
+                                </div>
+
+                                <label for="">NIVEL DE PRIORIDAD</label>
+                                <div class="row col-md-12" style="margin: auto;">
+
+                                    <div class="col-md-6">
+
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" ngModel name="op_inmedita"
+                                                id="exampleRadios_1_op_inmedita" value="OK">
+                                            <label class="form-check-label" for="exampleRadios_1_op_inmedita">
+                                                OPERACIÓN INMEDIATA
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" ngModel
+                                                name="estrito_cumplimiento" id="exampleRadios_1_estrito_cumplimiento"
+                                                value="OK">
+                                            <label class="form-check-label" for="exampleRadios_1_estrito_cumplimiento">
+                                                ESTRICTO CUMPLIMIENTO
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" ngModel
+                                                name="para_su_control" id="exampleRadios_1_para_su_control" value="OK">
+                                            <label class="form-check-label" for="exampleRadios_1_para_su_control">
+                                                PARA SU CONTROL
+                                            </label>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="col-md-6">
+
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" ngModel name="autorizado"
+                                                id="exampleRadios_1_autorizado" value="OK">
+                                            <label class="form-check-label" for="exampleRadios_1_autorizado">
+                                                AUTORIZADO
+                                            </label>
+                                        </div>
+
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" ngModel name="no_autorizado"
+                                                id="exampleRadios_1_no_autorizado" value="OK">
+                                            <label class="form-check-label" for="exampleRadios_1_no_autorizado">
+                                                NO AUTORIZADO
+                                            </label>
+                                        </div>
+
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" ngModel
+                                                name="lo_de_su_cargo" id="exampleRadios_1_lo_de_su_cargo" value="OK">
+                                            <label class="form-check-label" for="exampleRadios_1_lo_de_su_cargo">
+                                                LO DE SU CARGO
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
+                                <label for="">NIVEL DE AUTORIDAD</label>
+                                <div class="row col-md-12" style="margin: auto;">
+
+                                    <div class="col-md-6">
+
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" ngModel name="firma_coejc"
+                                                id="exampleRadios_1_firma_coejc" value="OK">
+                                            <label class="form-check-label" for="exampleRadios_1_firma_coejc">
+                                                RESPUESTA CON FIRMA COEJC
+                                            </label>
+                                        </div>
+
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" ngModel name="firma_secej"
+                                                id="exampleRadios_1_firma_secej" value="OK">
+                                            <label class="form-check-label" for="exampleRadios_1_firma_secej">
+                                                RESPUESTA CON FIRMA SECEJ
+                                            </label>
+                                        </div>
+
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" ngModel name="firma_jemop"
+                                                id="exampleRadios_1_firma_jemop" value="OK">
+                                            <label class="form-check-label" for="exampleRadios_1_firma_jemop">
+                                                RESPUESTA CON FIRMA JEMOP
+                                            </label>
+                                        </div>
+
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" ngModel name="firma_dirop"
+                                                id="exampleRadios_1_firma_dirop" value="OK">
+                                            <label class="form-check-label" for="exampleRadios_1_firma_dirop">
+                                                RESPUESTA CON FIRMA DIROP
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" ngModel
+                                                name="resuelva_informe" id="exampleRadios_1_resuelva_informe"
+                                                value="OK">
+                                            <label class="form-check-label" for="exampleRadios_1_resuelva_informe">
+                                                RESUELVA E INFORMA
+                                            </label>
+                                        </div>
+
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" ngModel name="seguimiento"
+                                                id="exampleRadios_1_seguimiento" value="OK">
+                                            <label class="form-check-label" for="exampleRadios_1_seguimiento">
+                                                SEGUIMIENTO
+                                            </label>
+                                        </div>
+
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" ngModel
+                                                name="estudie_recomiende" id="exampleRadios_1_estudie_recomiende"
+                                                value="OK">
+                                            <label class="form-check-label" for="exampleRadios_1_estudie_recomiende">
+                                                ESTUDIÉ Y RECOMIENDE
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <label for="">ACCION</label>
+                                <div class="row col-md-12" style="margin: auto;">
+
+                                    <div class="col-md-6">
+
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" ngModel name="trate_conmigo"
+                                                id="exampleRadios_1_trate_conmigo" value="OK">
+                                            <label class="form-check-label" for="exampleRadios_1_trate_conmigo">
+                                                TRATAR CON DIROP
+                                            </label>
+                                        </div>
+
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" ngModel
+                                                name="de_acuerdo_norma" id="exampleRadios_1_de_acuerdo_norma"
+                                                value="OK">
+                                            <label class="form-check-label" for="exampleRadios_1_de_acuerdo_norma">
+                                                DE ACUEDO A NORMA
+                                            </label>
+                                        </div>
+
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" ngModel name="asistir"
+                                                id="exampleRadios_1_asistir" value="OK">
+                                            <label class="form-check-label" for="exampleRadios_1_asistir">
+                                                ASISTIR
+                                            </label>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-6">
+
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" ngModel name="archivar"
+                                                id="exampleRadios_1_archivar" value="OK">
+                                            <label class="form-check-label" for="exampleRadios_1_archivar">
+                                                ARCHIVAR
+                                            </label>
+                                        </div>
+
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" ngModel name="agendar"
+                                                id="exampleRadios_1_agendar" value="OK">
+                                            <label class="form-check-label" for="exampleRadios_1_agendar">
+                                                AGENDAR
+                                            </label>
+                                        </div>
+                                        
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" ngModel name="devolver"
+                                                id="exampleRadios_1_devolver" value="OK">
+                                            <label class="form-check-label" for="exampleRadios_1_devolver">
+                                                DEVOLVER
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <label for="">ORDENES A DIVISIONES</label>
+                                <div class="row col-md-12" style="margin: auto;">
+
+                                    <div class="col-md-6">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" ngModel name="difundir"
+                                                id="exampleRadios_1_difundir" value="OK">
+                                            <label class="form-check-label" for="exampleRadios_1_difundir">
+                                                DIFUNDIR
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" ngModel name="remitir"
+                                                id="exampleRadios_1_remitir" value="OK">
+                                            <label class="form-check-label" for="exampleRadios_1_remitir">
+                                                REMITIR
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <label for="">DIVISIONES</label>
+                                <div class="row col-md-12" style="margin: auto;">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" ngModel name="todiv"
+                                            id="exampleRadios_1_todiv" value="OK">
+                                        <label class="form-check-label" for="exampleRadios_1_todiv"
+                                            (click)="divisiones_def()">
+                                            TODAS LAS DIVISIONES
+                                        </label>
+                                    </div>
+                                    <div class="col-md-4">
+
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" ngModel name="div1"
+                                                id="exampleRadios_1_div1" value="OK" [ngModel]="div1">
+                                            <label class="form-check-label" for="exampleRadios_1_div1">
+                                                DIV01
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" ngModel name="div2"
+                                                id="exampleRadios_1_div2" value="OK" [ngModel]="div2">
+                                            <label class="form-check-label" for="exampleRadios_1_div2">
+                                                DIV02
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" ngModel name="div3"
+                                                id="exampleRadios_1_div3" value="OK" [ngModel]="div3">
+                                            <label class="form-check-label" for="exampleRadios_1_div3">
+                                                DIV03
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" ngModel name="div4"
+                                                id="exampleRadios_1_div4" value="OK" [ngModel]="div4">
+                                            <label class="form-check-label" for="exampleRadios_1_div4">
+                                                DIV04
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" ngModel name="div5"
+                                                id="exampleRadios_1_div5" value="OK" [ngModel]="div5">
+                                            <label class="form-check-label" for="exampleRadios_1_div5">
+                                                DIV05
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" ngModel name="div6"
+                                                id="exampleRadios_1_div6" value="OK" [ngModel]="div6">
+                                            <label class="form-check-label" for="exampleRadios_1_div6">
+                                                DIV06
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" ngModel name="div7"
+                                                id="exampleRadios_1_div7" value="OK" [ngModel]="div7">
+                                            <label class="form-check-label" for="exampleRadios_1_div7">
+                                                DIV07
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" ngModel name="div8"
+                                                id="exampleRadios_1_div8" value="OK" [ngModel]="div8">
+                                            <label class="form-check-label" for="exampleRadios_1_div8">
+                                                DIV08
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" ngModel name="davaa"
+                                                id="exampleRadios_1_davaa" value="OK" [ngModel]="davaa">
+                                            <label class="form-check-label" for="exampleRadios_1_davaa">
+                                                DAVAA
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" ngModel name="divfe"
+                                                id="exampleRadios_1_divfe" value="OK" [ngModel]="divfe">
+                                            <label class="form-check-label" for="exampleRadios_1_divfe">
+                                                DIVFE
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" ngModel name="futco"
+                                                id="exampleRadios_1_futco" value="OK" [ngModel]="futco">
+                                            <label class="form-check-label" for="exampleRadios_1_futco">
+                                                FUTOM
+                                            </label>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-md-11" style="margin: auto;">
+                                    <label for="">OBSERVACIONES </label>
+                                    <div class="form-group col-md-11" style="margin: auto;">
+                                        <textarea class="form-control" rows="4" cols="" name="orden" id="orden" ngModel></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-md-11" style="margin: auto;">
+                                    <label for="">Plazo </label>
+                                    <input type="date" name="fecha_plazo" id="fecha_plazo"
+                                        class="form-control" ngModel>
+                                </div>
+                                <label for="" *ngIf="time_unidad">tiempo para Gestionar
+                                    <strong>{{tiempo_unidad}}</strong>
+                                </label>
+
+                                <div class="form-group col-md-11" style="margin: auto;">
+                                    <label for="">Trate Conmigo “JEMOP” </label>
+                                    <select name="respuesta" id="respuesta" class="form-control" ngModel
+                                        (click)="mostrar_fecha(plazos)">
+                                        <option value=""></option>
+                                        <option value="SI">SI</option>
+                                        <option value="NO">NO</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group col-md-11" style="margin: auto;" *ngIf="fecha_res">
+                                    <label for="">Tiempo para Gestionar </label>
+                                    <input type="date" name="fecha_plazo_respuesta" id="fecha_plazo_respuesta"
+                                        class="form-control" ngModel >
+                                </div>
+
+                                <label for="" *ngIf="time_respuesta">tiempo para Gestionar
+                                    <strong>{{tiempo_respuesta}}</strong>
+                                </label>
+                                <br><br>
+                                
+                                <div class="form-group col-md-11" style="margin: auto;">
+                                    <p for="">-----------------</p>
+                                    <button class="btn btn-success" (click)="asignar_plazo(plazos)">ASIGNAR</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+<app-spiner></app-spiner>

@@ -1,0 +1,85 @@
+.cuerpo_insitop {
+position: fixed;
+  display: flex;
+  height: calc(100vh - 80px); /* se ajusta a la pantalla quitando header */
+  margin-top: 80px; /* espacio justo debajo del menú superior */
+  margin-left: 11.5%;
+  width: 88%;
+  border: 2px solid #555;
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.65);
+  color: whitesmoke;
+  overflow: hidden;
+  backdrop-filter: blur(4px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+}
+
+/* MENÚ LATERAL */
+.tamanio_proyectos {
+  background: #1f1f1f;
+  color: #eee;
+  width: 220px;
+  padding: 20px 10px;
+  border-right: 2px solid #333;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.tamanio_proyectos h2 {
+  font-size: 18px;
+  color: #ffda44;
+  margin-bottom: 12px;
+}
+
+/* BOTONES */
+.tamanio_proyectos button {
+  width: 90%;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 10px;
+  border-radius: 6px;
+  background: #dc3545;
+  border: none;
+  color: white;
+  transition: all 0.2s ease-in-out;
+}
+
+.tamanio_proyectos button:hover {
+  background: #ff4d5a;
+  transform: translateX(4px);
+}
+
+/* CONTENIDO */
+.cuerpo {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+  background: rgba(30, 30, 30, 0.85);
+  border-radius: 0 8px 8px 0;
+  right: 5px;
+  top: 5px;
+  width: 86%;
+  height: 98vh;
+}
+
+/* SECCIONES */
+.oculto,
+.oculto_documentos,
+.oculto_documentos_modificar,
+.oculto_documentos_planilla_crear,
+.oculto_documentos_planilla_firmas {
+  display: none;
+}
+
+.activo {
+  display: block !important;
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+/* ANIMACIÓN */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}

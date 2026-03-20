@@ -1,0 +1,41 @@
+<div class="container">
+  <!-- Lista disponibles -->
+  <div class="lista">
+    <h3>Disponibles</h3>
+    <label>Filtrar:
+      <select [(ngModel)]="filtroDisponibles">
+        <option>Todos</option>
+        <option>Departamento</option>
+        <option>Municipio</option>
+      </select>
+    </label>
+    <div
+      *ngFor="let item of disponiblesFiltrados"
+      cdkDrag
+      [cdkDragData]="item"
+      class="item"
+    >
+      {{ item.nombre }} ({{ item.tipo }})
+    </div>
+  </div>
+
+  <!-- Lista seleccionados -->
+  <div
+    class="lista"
+    cdkDropList
+    (cdkDropListDropped)="onDrop($event)"
+    [cdkDropListEnterPredicate]="permitirEntrada"
+  >
+    <h3>Seleccionados (solo Municipios)</h3>
+    <label>Filtrar:
+      <select [(ngModel)]="filtroSeleccionados">
+        <option>Todos</option>
+        <option>Departamento</option>
+        <option>Municipio</option>
+      </select>
+    </label>
+    <div *ngFor="let item of seleccionadosFiltrados" class="item selected">
+      {{ item.nombre }} ({{ item.tipo }})
+    </div>
+  </div>
+</div>

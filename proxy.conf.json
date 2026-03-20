@@ -1,0 +1,7 @@
+{
+    "/api*": {
+    "target": "http://172.22.36.2o:5031",
+    "secure": false, 
+    "logLevel":"debug"
+    }
+    }

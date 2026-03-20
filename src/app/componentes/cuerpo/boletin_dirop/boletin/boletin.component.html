@@ -1,0 +1,117 @@
+<app-boletin-mmenu></app-boletin-mmenu>
+<div class="cuerpo">
+    <div class="card positicion" style="width: 50rem;">
+        <div style="width: 30px;">
+            <img src="../../../../../assets/logos/JEMOP-DIROP.png" class="card-img-top" alt="...">
+        </div>
+        <div class="card-body">
+            <h3>Registro boleton operacinal</h3>
+            <hr style="background-color: transparent; color: transparent;">
+            <hr>
+            <form class="form-group row tamanio" #boletin_operacional="ngForm">
+                <div class="row col-md-12" style="margin: auto;">
+                    <div class="form-group col-md-6" style="margin: auto;">
+                        <label for="" class="color_label">Numero Boletín </label>
+                        <input type="text" name="numero_boletin" id="numero_boletin" class="form-control"
+                            [(ngModel)]="numero_boletin">
+                    </div>
+                    <div class="form-group col-md-6" style="margin: auto;">
+                        <label for="" class="color_label">Oficial Apoyos Terrestre </label>
+                        <input type="date" name="fecha" id="fecha" class="form-control" [(ngModel)]="fecha">
+                    </div>
+                </div>
+                <hr style="background-color: transparent; color: transparent;">
+                <hr>
+                <div class="row col-md-12" style="margin: auto;">
+                    <div class="form-group col-md-2" style="margin: auto;">
+                        <label for="">GRD: </label>
+                        <select name="grado_ofi" id="grado_ofi" class="form-control" [(ngModel)]="grado_ofi">
+                            <option value=""></option>
+                            <option [value]="item" *ngFor="let item of grd_recibe">{{item}}
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="form-group col-md-10" style="margin: auto;">
+                        <label for="" class="color_label">Oficial Centro Operaciones Ejército.</label>
+                        <input type="text" name="apellidos_nombres_ofi" id="apellidos_nombres_ofi" class="form-control"
+                            [(ngModel)]="apellidos_nombres_ofi">
+                    </div>
+                </div>
+                <hr style="background-color: transparent; color: transparent;">
+                <hr>
+                <div class="row col-md-12" style="margin: auto;">
+                    <div class="form-group col-md-2" style="margin: auto;">
+                        <label for="">GRD: </label>
+                        <select name="grado_sub" id="grado_sub" class="form-control" [(ngModel)]="grado_sub">
+                            <option value=""></option>
+                            <option [value]="item" *ngFor="let item of grd_recibe">{{item}}
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="form-group col-md-10" style="margin: auto;">
+                        <label for="" class="color_label">Suboficial Centro Operaciones Ejército.</label>
+                        <input type="text" name="apellidos_nombres_sub" id="apellidos_nombres_sub" class="form-control"
+                            [(ngModel)]="apellidos_nombres_sub">
+                    </div>
+                </div>
+
+                <hr style="background-color: transparent; color: transparent;">
+                <hr *ngIf="inf_btn">
+                <div class="posicion_btn">
+                    <div class=" row col-md-12">
+
+                        <div class="alert alert-success col-md-11" role="alert" *ngIf="inf_g"
+                            style="margin: auto !important;">
+                            {{inf_c_g}}!
+                        </div>
+                        <br *ngIf="inf_g">
+                        <div class="alert alert-danger col-md-11" role="alert" *ngIf="inf_a"
+                            style="margin: auto !important;">
+                            {{inf_c_g}}!
+                        </div>
+
+                        <br *ngIf="inf_a">
+                    </div>
+                    <div class="posicion_btn">
+                        <button class="btn btn-success" (click)="guardar_boletin(boletin_operacional)"
+                            *ngIf="inf_btn">GUARDAR</button>
+                        <hr *ngIf="inf_btn_edit">
+                        <button class="btn btn-success" (click)="guardar_boletin(boletin_operacional)"
+                            *ngIf="inf_btn_edit">GUARDAR NUEVO</button>
+                        <hr>
+                        <button class="btn btn-warning" (click)="editar_info(boletin_operacional)"
+                            *ngIf="inf_btn_edit">EDITAR</button>
+                        <hr *ngIf="inf_btn_edit">
+
+                        <button class="btn btn-danger" (click)="eliminar_info()" *ngIf="inf_btn_edit">ELIMINAR</button>
+                        <hr *ngIf="inf_btn_edit">
+                        <button class="btn btn-success" (click)="nuevo()" *ngIf="inf_btn_edit">LIMPIAR</button>
+
+
+                        <button class="btn btn-success" (click)="clear()" *ngIf="inf_btnuew">Nuevo</button>
+                    </div>
+
+                </div>
+            </form>
+
+
+        </div>
+    </div>
+
+    <div class="listado_boletines">
+        <div class="card" style="background-color: rgba(0, 0, 0, 0.363); color: snow;"
+            *ngFor="let item of listado_boletin_ooperacional_registrado; index as i; first as isFirst">
+            <div class="card-body" style="background-color: rgba(0, 0, 0, 0.363);" (click)="cargar_informacion(item)">
+                boletín No. {{item[1]}}.
+                <br>
+                Fecha. {{item[2]}}.
+                <br>
+                Oficial COE {{item[3]}}. {{item[4]}}.
+                <br>
+                Suboficial COE {{item[5]}}. {{item[6]}}.
+            </div>
+        </div>
+    </div>
+</div>

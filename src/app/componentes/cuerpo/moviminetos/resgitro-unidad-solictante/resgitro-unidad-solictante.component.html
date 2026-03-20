@@ -1,0 +1,51 @@
+<!--- REGSITRO DE UNIDADES SOLICITANTES-->
+<div class="card positicion" style="width: 30rem; top: 30%;">
+    <div style="width: 50px;">
+        <img src="../../../../../assets/logos/JEMOP-DIROP.png" class="card-img-top" alt="...">
+    </div>
+    <div class="card-body">
+        <h3>Registro de Unidades solitantes</h3>
+        <form class="form-group row tamanio" #form_unidad_solicitante="ngForm" autocomplete="off">
+            <hr>
+            <div class="form-group col-md-12" style="margin: auto;">
+                <input type="text" name="unidad_solitante" id="unidad_solitante" class="form-control" ngModel>
+            </div>
+            <hr style="color: transparent;">
+            <hr style="color: snow;">
+
+            <div class="posicion_btn">
+                <div class=" row col-md-12">
+
+                    <div class="alert alert-success col-md-11" role="alert" *ngIf="inf_g"
+                        style="margin: auto !important;">
+                        {{inf_c_g}}!
+                    </div>
+                    <br *ngIf="inf_g">
+                    <div class="alert alert-danger col-md-11" role="alert" *ngIf="inf_a"
+                        style="margin: auto !important;">
+                        {{inf_c_g}}!
+                    </div>
+
+                    <br *ngIf="inf_a">
+                    <div class="posicion_btn">
+                        <button class="btn btn-success" (click)="guardar_unidad(form_unidad_solicitante)"
+                            *ngIf="inf_btn">GUARDAR</button>
+                        <button class="btn btn-success" (click)="clear()" *ngIf="inf_btnuew">Nuevo</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <p class="card-text">Regsitro Informacion.</p>
+    </div>
+</div>
+
+<div class="listado_unidades">
+    <div class="card" style="width: 18rem; background-color: rgba(0, 0, 0, 0.356)">
+
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item" style="background-color: rgba(0, 0, 0, 0.356) ; color: snow;" *ngFor="let item of listado_unidades_solicitantes; index as i; first as isFirst">{{item[1]}}</li>
+
+        </ul>
+      </div>
+</div>

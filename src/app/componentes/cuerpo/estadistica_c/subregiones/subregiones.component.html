@@ -1,0 +1,76 @@
+<app-menu></app-menu>
+
+<div class="subregiones-contenedor">
+    <div class="subregiones-wrapper">
+        <!-- Columna izquierda: Lista de subregiones -->
+        <div class="columna-izquierda">
+            <h4>Subregiones</h4>
+            <ul class="subregiones-lista">
+                
+
+                <button class="btn-deseleccionar" *ngIf="subregionSeleccionada" (click)="deseleccionarSubregion()">
+                    ✖ Cancelar selección
+                </button>
+                <div class="crear-subregion">
+                    <input type="text" [(ngModel)]="subregionNombre" placeholder="Nueva subregión">
+                    <button (click)="agregarSubregion()">+</button>
+                </div>
+                <li *ngFor="let sub of subregiones" (click)="seleccionarSubregion(sub)" [ngClass]="[
+              sub === subregionSeleccionada ? 'activa' : '',
+              colorSegunCantidad(contarMunicipios(sub))
+            ]">
+                    <div class="subregion-header">
+                        <i class="bi bi-geo-alt-fill"></i>
+                        {{ sub.nombre }}
+                    </div>
+                    <small>
+                        {{ contarDepartamentos(sub) }} deptos - {{ contarMunicipios(sub) }} municipios
+                    </small>
+                </li>
+            </ul>
+
+        </div>
+        <!-- Columna derecha: Selección de departamentos y municipios -->
+        <div class="columna-derecha">
+
+            <div *ngIf="subregionSeleccionada">
+                <h4>{{ subregionSeleccionada.nombre }}</h4>
+                <!-- Panel de edición -->
+                <div class="editar-subregion" *ngIf="subregionSeleccionada">
+                    <input type="text" [(ngModel)]="subregionSeleccionada.nombre"
+                        placeholder="Editar nombre subregión" />
+                    <button (click)="guardarEdicion()">💾</button>
+                    <button class="btn-eliminar" (click)="eliminarSubregion(subregionSeleccionada.id)">🗑</button>
+                </div>
+                <p class="subregion-descripcion">
+                    Selecciona los departamentos y municipios para esta subregión.
+                </p>
+                <div *ngFor="let departamento of departamentos" class="departamento-bloque">
+                    <div class="departamento-header" (click)="toggleExpandirDepartamento(departamento.nombre)">
+                        <label>
+                            <input type="checkbox"
+                                [checked]="estaDepartamentoSeleccionado(subregionSeleccionada, departamento)"
+                                (click)="toggleDepartamento(subregionSeleccionada, departamento)">
+                            {{ departamento.nombre }}
+                        </label>
+                        <i class="bi"
+                            [ngClass]="departamentoExpandido === departamento.nombre ? 'bi-chevron-up' : 'bi-chevron-down'"></i>
+                    </div>
+
+                    <div class="municipios-lista" *ngIf="departamentoExpandido === departamento.nombre">
+                        <label *ngFor="let municipio of departamento.municipios">
+                            <input type="checkbox"
+                                [checked]="estaMunicipioSeleccionado(subregionSeleccionada, departamento, municipio)"
+                                (click)="toggleMunicipio(subregionSeleccionada, departamento, municipio)">
+                            {{ municipio }}
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="!subregionSeleccionada">
+                <p class="subregion-empty">Selecciona o crea una subregión para comenzar.</p>
+            </div>
+        </div>
+    </div>
+</div>
+

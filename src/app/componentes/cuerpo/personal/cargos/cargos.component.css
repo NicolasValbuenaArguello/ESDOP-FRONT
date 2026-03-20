@@ -1,0 +1,87 @@
+.documento{
+position: absolute;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(36, 36, 36, 0.301);
+    z-index: 1000;
+
+}
+.documento_oculto{
+    display: none;
+}
+
+.contenedor{
+    position: fixed;
+    margin-left: 10%;
+    top: 10%;
+    display: flex;
+    text-align: center;
+    /* background-color: rgba(255, 14, 14, 0.877); */
+    padding: 15px;
+    /* border-right: 5px solid rgb(118, 26, 26); */
+    border-radius: 5px;
+    height: 50em;
+    overflow: hidden;
+    width: 86%;
+    
+}
+
+.radios{
+    position: fixed;
+    margin-top: 0%;
+    border: 2px solid #707070;
+    border-radius: 5px;
+    width:82.6%;
+    height: 75%;
+    overflow: scroll;
+    background-color: rgba(14, 22, 17, 0.932);
+    
+}
+.tabla{
+    position: fixed;
+    /* margin-left: 1%; */
+    width:82.5%;
+}
+thead{
+    width: 20px;
+    color: snow;
+    background-color: #850b0b;
+}
+
+/* 
+.radios{
+    position: fixed;
+    margin-left: 3%;
+    top: 10%;
+    border: 2px solid #707070;
+    border-radius: 5px;
+    width: 90%;
+    height: 90vh;
+    overflow: scroll;
+    background-color: rgba(0, 0, 0, 0.829);
+    
+} */
+/* .contenedor{
+    position: fixed;
+    margin-top: 1%;
+    display: flex;
+    text-align: center;
+    /* background-color: rgba(188, 188, 188, 0.159); */
+    /* padding: 15px; */
+    /* border-right: 5px solid rgb(118, 26, 26); */
+    /* border-radius: 5px; */
+    /* height: 42em; */
+    /* overflow: hidden;
+    width: 80%;
+    color: white; */
+    
+/* } */ 
+hr{
+    color: white;
+}
+label{
+    color: white;
+}
+p{
+    color: white;
+}

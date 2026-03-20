@@ -1,0 +1,83 @@
+<div class="contenedor">
+  <h2>Consulta de Unidades No Cargadas</h2>
+
+  <!-- Formulario -->
+<div class="formulario form-inline my-3 p-3 bg-light rounded shadow-sm d-flex align-items-end gap-3 flex-wrap">
+  <div class="form-group">
+    <label for="fecha" class="form-label fw-bold me-2">📅 Fecha:</label>
+    <input type="date" [(ngModel)]="fecha" id="fecha" class="form-control" />
+  </div>
+
+  <div class="btn-group">
+    <button 
+      class="btn btn-primary" 
+      (click)="enviarFormulario()" 
+      [disabled]="cargando || !fecha">
+      🔍 Consultar
+    </button>
+
+    <button 
+      class="btn btn-success" 
+      (click)="reporte_excel()" 
+      [disabled]="cargando || !fecha">
+      ⬇️ Descargar Excel
+    </button>
+  </div>
+
+  <div *ngIf="cargando" class="spinner-border text-primary ms-3" role="status">
+    <span class="visually-hidden">Cargando...</span>
+  </div>
+</div>
+
+
+  <!-- Spinner -->
+  <div *ngIf="cargando" class="cargando">
+    <span class="spinner"></span> Consultando información...
+  </div>
+
+  <!-- Resultado -->
+  <div *ngIf="!cargando && resumen.length">
+    <h3>Total Divisiones: {{ resumen.length }}</h3>
+
+    <div class="resumen">
+      <div *ngFor="let div of resumen" class="card division">
+        <div class="card-header" (click)="expandirDivision(div.sigla_div)">
+          <strong>{{ div.sigla_div }}</strong>
+          <span class="contador">
+            ({{ div.total_brigadas }} brigadas, {{ div.total_unidades }} batallones)
+          </span>
+        </div>
+
+        <div *ngIf="divisionExpandida === div.sigla_div" class="card-body">
+          <div *ngFor="let br of div.brigadas" class="brigada">
+            <div class="brigada-header" (click)="expandirBrigada(br)">
+              ➤ {{ br }}
+            </div>
+
+            <table *ngIf="brigadaExpandida === br" class="tabla-unidades">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Unidad</th>
+                  <th>Nombre</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let unidad of filtrarUnidadesPorBrigada(div, br); let i = index">
+                  <td>{{ i + 1 }}</td>
+                  <td>{{ unidad.ut }}</td>
+                  <td>{{ unidad.nombre }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sin resultados -->
+  <div *ngIf="!cargando && resumen.length === 0 && fecha">
+    <p>No se encontraron unidades no cargadas para esta fecha.</p>
+  </div>
+</div>

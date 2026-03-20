@@ -1,0 +1,375 @@
+<app-menu></app-menu>
+<div class="cuerpo_insitop" ng-init="inicioAlgo()" id="cuerpo_insitop">
+  <div class="col-md-12">
+    <div class="titulo_evento verde">
+      <p> {{afectacion}} </p>
+    </div>
+    <div class="row contenedor">
+
+      <div class="col-md-6 ">
+        <div class=" titulo_evento_2">
+          Bitácora
+          
+        </div>
+        
+        <div class="radios_mapa_2 " id="radios_mapa_2">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">FECHA</th>
+                <th scope="col">HORA</th>
+                <th scope="col">INFORMACIÓN</th>
+                <th scope="col">EDIT</th>
+                
+              </tr>
+            </thead>
+            <tbody *ngFor="let item of bitacora; index as i; first as isFirst">
+              <tr>
+                <th scope="row" style="display: flex; text-align: center; border: none;">{{i+1}}</th>
+                <td style="width: 100px; border: none;">{{item[2]}}</td>
+                <td style="width: 20px; border: none;" >{{item[3]}}</td>
+                <td style="display: flex; text-align: justify; border: none;">{{item[4]}}</td>
+                <td><button class="btn btn-warning" style="width: 10px; height: 15px; display: flex; text-align: center;" (click)="editar_bitacora(item[0])"></button></td>
+              </tr>
+              <hr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="posicion_boton">
+        <button class="btn btn-primary" [routerLink]="['/VerEventosRelevantesComponent']"><img
+            src="../../../../../assets/iconos-menu/back.svg" alt=""></button>
+        <button class="btn btn-primary" (click)="mostrar_proyecto()"><img
+            src="../../../../../assets/iconos-menu/filter.svg" alt=""></button>
+      </div>
+
+      <div class="col-md-6 ">
+
+        <div class="radios">
+          <div class=" titulo_evento_2">
+            {{afectacion_persona}}
+          </div>
+          <div class="radios_1">
+            <table class="table table-dark">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">GRD</th>
+                  <th scope="col">apellidos nombres</th>
+
+                </tr>
+              </thead>
+              <tbody *ngFor="let item of afectaciones_asesinados; index as i; first as isFirst">
+                <tr>
+                  <th scope="row" *ngIf="item[4] == 'FALLECIDO'" >{{i+1}}</th>
+                  <td *ngIf="item[4] == 'FALLECIDO'" >{{item[2]}}</td>
+                  <td *ngIf="item[4] == 'FALLECIDO'" style="display: flex; text-align: justify;">{{item[3]}}</td>
+                  
+                  
+                  
+                </tr>
+                <tr>
+                  <th scope="row" *ngIf="item[4] == 'SECUESTRADO'" >{{i+1}}</th>
+                  <td *ngIf="item[4] == 'SECUESTRADO'" >{{item[2]}}</td>
+                  <td *ngIf="item[4] == 'SECUESTRADO'" style="display: flex; text-align: justify;">{{item[3]}}</td>
+                  
+
+                </tr>
+                <tr>
+                  <th scope="row" *ngIf="item[4] == 'ASESINADO'" >{{i+1}}</th>
+                  <td *ngIf="item[4] == 'ASESINADO'" >{{item[2]}}</td>
+                  <td *ngIf="item[4] == 'ASESINADO'" style="display: flex; text-align: justify;">{{item[3]}}</td>
+                  
+
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class=" titulo_evento_2" style="position: absolute; top: 51.5%;">
+            Heridos
+          </div>
+          <div class="radios_2">
+            <table class="table table-dark">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">GRD</th>
+                  <th scope="col">apellidos nombres</th>
+
+                </tr>
+              </thead>
+              <tbody *ngFor="let item of afectaciones_heridos; index as e; first as isFirst">
+                <tr>
+                  <th scope="row" *ngIf="item[4] == 'HERIDO'">{{e+1}}</th>
+                  <td *ngIf="item[4] == 'HERIDO'" >{{item[2]}}</td>
+                  <td *ngIf="item[4] == 'HERIDO'" style="display: flex; text-align: justify;">{{item[3]}}</td>
+
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+<div class="proyecto_nuevo oculto " id="proyecto_ingreso">
+  <button class="btn btn-danger posicion_btn_cerrar" (click)="mostrar_proyecto()">
+    X
+  </button>
+
+  <div class="tamanio_proyectos">
+    <hr style="color: snow;">
+    <h2 style="color: snow;">menú</h2>
+
+    <button class="btn btn-danger " id="oculto_documentos_btn" (click)="mostrar_menu(1)">Bitácora</button>
+    <hr style="color: snow;">
+    <button class="btn btn-danger " id="oculto_documentos_btn" (click)="mostrar_menu(2)">Afectación</button>
+    <hr style="color: snow;">
+    <button class="btn btn-warning " id="oculto_documentos_btn" (click)="mostrar_menu(3)">Modificacion Personal</button>
+
+  </div>
+  <div class="card oculto_documentos" id="oculto_documentos" style="width: 70rem; overflow: scroll;">
+    <div style="width: 100px;">
+      <img src="../../../../../assets/logos/JEMOP-DIROP.png" class="card-img-top" alt="...">
+    </div>
+    <div class="card-body">
+      <h3>Registro Bitácora</h3>
+
+      <form class="form-group row tamanio" #guardar_bitacora="ngForm" autocomplete="off">
+
+        <div class="form-group col-md-6" style="margin: auto;">
+          <label for="" class="color_label">
+            Fecha </label>
+          <input type="date" name="fecha_evento" id="fecha_evento" class="form-control" ngModel>
+        </div>
+        
+        <div class="form-group col-md-6" style="margin: auto;">
+          <label for="" class="color_label">
+            Hora </label>
+          <input type="time" name="hora_evento" id="hora_evento" class="form-control" ngModel>
+        </div>
+        <hr>
+        <div class="form-group col-md-12" style="margin: auto;">
+          <label for="" class="color_label">Informacion</label>
+          <textarea class="form-control" id="evento" name="evento" rows="5" ngModel></textarea>
+        </div>
+        <hr>
+
+        <br>
+        <div class="alert alert-danger col-md-11" role="alert" *ngIf="inf_a" style="margin: auto !important;">
+          {{inf_c_g}}!
+        </div>
+        <br>
+        <hr>
+        <div class="posicion_btn">
+          <button class="btn btn-success" (click)="guardar_evento(guardar_bitacora)" *ngIf="inf_btn">
+            Guardar
+          </button>
+          <button class="btn btn-success" (click)="clear()" *ngIf="inf_btnuew">Nuevo Evento </button>
+        </div>
+      </form>
+
+
+    </div>
+  </div>
+  <div class="card oculto_documentos_modificar" id="oculto_documentos_modificar" style="width: 70rem; overflow: scroll;">
+    <div style="width: 100px;">
+      <img src="../../../../../assets/logos/JEMOP-DIROP.png" class="card-img-top" alt="...">
+    </div>
+    <div class="card-body">
+      <h3>Regitro Afectaciones</h3>
+      <form class="form-group row tamanio" #registro_afectacion="ngForm" autocomplete="off">
+        <div class="row col-md-12" style="margin: auto;">
+          <div class="form-group col-md-2" style="margin: auto;">
+            <label for="" class="color_label">Grd </label>
+            <select name="grd" id="grd" class="form-control" [(ngModel)]="grd">
+              <option value=""></option>
+              <option [value]="item" *ngFor="let item of grd_recibe">{{item}}
+              </option>
+            </select>
+
+          </div>
+          <div class="form-group col-md-7" style="margin: auto;">
+            <label for="" class="color_label">Apellidos y Nombres</label>
+
+            <input type="text" name="apellidos_nombres" id="apellidos_nombres" class="form-control" [(ngModel)]="nombre">
+          </div>
+          <div class="form-group col-md-3" style="margin: auto;">
+            <label for="" class="color_label">Afectación</label>
+
+            <select name="afectacion" id="afectacion" class="form-control" [(ngModel)]="afectacio">
+              <option value="ASESINADO">ASESINADO</option>
+              <option value="FALLECIDO">FALLECIDO</option>
+              <option value="HERIDO">HERIDO</option>
+              <option value="SECUESTRADO">SECUESTRADO</option>
+              
+            </select>
+          </div>
+        </div>
+  
+        <br>
+        <div class="alert alert-danger col-md-11" role="alert" *ngIf="inf_a" style="margin: auto !important;">
+          {{inf_c_g}}!
+        </div>
+        <br>
+        <hr>
+        <div class="posicion_btn">
+          <button class="btn btn-success" (click)="guardar_afectacion(registro_afectacion)" *ngIf="inf_btn">
+            Guardar
+          </button>
+          <button class="btn btn-success" (click)="clear()" *ngIf="inf_btnuew">Nuevo Evento </button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="card oculto_documentos_modificar_personal" id="oculto_documentos_modificar_personal" style="width: 70rem; overflow: scroll;">
+    <div style="width: 100px;">
+      <img src="../../../../../assets/logos/JEMOP-DIROP.png" class="card-img-top" alt="...">
+    </div>
+    <div class="card-body">
+      <h3>Modificacion Afectaciones</h3>
+      <form class="form-group row tamanio" #registro_afectacion_modificacion="ngForm" autocomplete="off">
+
+        <div class="form-group col-md-12" style="margin: auto;">
+          <label for="" class="color_label">Persona a Modificar </label>
+          <select name="nombre_inicial" id="nombre_inicial" class="form-control"ngModel (change)="cambio_persona(registro_afectacion_modificacion)">
+            <option value=""></option>
+            <option [value]="item[1]" *ngFor="let item of personal">{{item[0]}}.{{item[1]}}
+            </option>
+          </select>
+        </div>
+
+        <br>
+        <hr>
+        <br>
+
+        <div class="row col-md-12" style="margin: auto;">
+          <div class="form-group col-md-2" style="margin: auto;">
+            <label for="" class="color_label">Grd </label>
+            <select name="grd" id="grd" class="form-control" [(ngModel)]="grados">
+              <option value=""></option>
+              <option [value]="item" *ngFor="let item of grd_recibe">{{item}}
+              </option>
+            </select>
+          </div>
+          <div class="form-group col-md-7" style="margin: auto;">
+            <label for="" class="color_label">Apellidos y Nombres</label>
+
+            <input type="text" name="apellidos_nombres" id="apellidos_nombres" class="form-control" [(ngModel)]="nombres_apellidos">
+          </div>
+          <div class="form-group col-md-3" style="margin: auto;">
+            <label for="" class="color_label">Afectación</label>
+
+            <select name="afectacion" id="afectacion" class="form-control" [(ngModel)]="afectacio">
+              <option value="ASESINADO">ASESINADO</option>
+              <option value="FALLECIDO">FALLECIDO</option>
+              <option value="HERIDO">HERIDO</option>
+              <option value="SECUESTRADO">SECUESTRADO</option>
+              
+            </select>
+          </div>
+        </div>
+
+        <div class="row col-md-12" style="margin: auto;">
+          <div class="form-group col-md-4" style="margin: auto;">
+            <label for="" class="color_label">Cedula</label>
+
+            <input type="text" name="cedula" id="cedula" class="form-control" [(ngModel)]="cedula">
+          </div>
+          <div class="form-group col-md-4" style="margin: auto;">
+            <label for="" class="color_label">Estado Civil</label>
+
+            <input type="text" name="estado_civil" id="estado_civil" class="form-control" [(ngModel)]="estado_civil">
+          </div>
+          <div class="form-group col-md-4" style="margin: auto;">
+            <label for="" class="color_label">Tiempo de Servicio</label>
+
+            <input type="text" name="tiempo_servicio" id="tiempo_servicio" class="form-control" [(ngModel)]="tiempo">
+          </div>
+        </div>
+        <div class="form-group col-md-12" style="margin: auto;">
+          <label for="" class="color_label">Situacioon Actual</label>
+          <textarea class="form-control" id="situacion_actual" name="situacion_actual" rows="5" [(ngModel)]="situacion_actual"></textarea>
+        </div>
+        <div class="form-group col-md-12" style="margin: auto;">
+          <label for="" class="color_label">Familiares</label>
+          <textarea class="form-control" id="familiares" name="familiares" rows="5" [(ngModel)]="familiares"></textarea>
+        </div>
+        <div class="form-group col-md-12" style="margin: auto;">
+          <label for="" class="color_label">Coordinador</label>
+          <textarea class="form-control" id="coordinador" name="coordinador" rows="5" [(ngModel)]="coordinador"></textarea>
+        </div>
+        <br>
+        <div class="alert alert-danger col-md-11" role="alert" *ngIf="inf_a" style="margin: auto !important;">
+          {{inf_c_g}}!
+        </div>
+        <br>
+        <hr>
+        <div class="posicion_btn" style=" width: 15%; display: grid; gap: 10px;">
+          <button class="btn btn-success" (click)="editar_afectacion(registro_afectacion_modificacion)" *ngIf="inf_btn">
+            Editar
+          </button>
+          <button  class="btn btn-warning" (click)="close()"> Cerrar</button>
+          <button class="btn btn-danger" (click)="eliminar_afectacion()" *ngIf="inf_btn">
+            ELIMINAR
+          </button>
+          <button class="btn btn-success" (click)="clear()" *ngIf="inf_btnuew">Nuevo Evento </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!--- modificacion bitacora --->
+<div class="proyecto_nuevo_editar oculto" id="proyecto_nuevo_editar">
+  <div class="card " style="width: 70rem; overflow: scroll;">
+    <div style="width: 100px;">
+      <img src="../../../../../assets/logos/JEMOP-DIROP.png" class="card-img-top" alt="...">
+    </div>
+    <div class="card-body">
+      <h3>Editar Registro Bitácora</h3>
+
+      <form class="form-group row tamanio" #guardar_bitacora_editar="ngForm" autocomplete="off">
+        <div class="form-group col-md-6" style="margin: auto;">
+          <label for="" class="color_label">
+            Fecha </label>
+          <input type="date" name="fecha_evento" id="fecha_evento" class="form-control" [(ngModel)]="fecha_evento">
+        </div>
+        <div class="form-group col-md-6" style="margin: auto;">
+          <label for="" class="color_label">
+            Hora </label>
+          <input type="time" name="hora_evento" id="hora_evento" class="form-control" [(ngModel)]="hora_bitacora">
+        </div>
+        <hr>
+        <div class="form-group col-md-12" style="margin: auto;">
+          <label for="" class="color_label">Informacion</label>
+          <textarea class="form-control" id="evento" name="evento" rows="5" [(ngModel)]="evento_bitacora"></textarea>
+        </div>
+        <hr>
+        <br>
+        <div class="alert alert-danger col-md-11" role="alert" *ngIf="inf_a" style="margin: auto !important;">
+          {{inf_c_g}}!
+        </div>
+        <br>
+        <hr>
+        <div class="posicion_btn" style=" width: 15%; display: grid; gap: 10px;">
+          <button class="btn btn-success" (click)="guardar_evento_editar(guardar_bitacora_editar)" *ngIf="inf_btn">
+            Editar
+          </button>  
+          <button class="btn btn-warning" (click)="close()" *ngIf="inf_btn">
+            Cerrar
+          </button>
+          <button class="btn btn-danger" (click)="eliminar()" *ngIf="inf_btn">
+            ELIMINAR
+          </button>
+
+          <button class="btn btn-success" (click)="clear()" *ngIf="inf_btnuew">Nuevo Evento </button>
+        </div>
+      </form>
+
+
+    </div>
+  </div>
+</div>

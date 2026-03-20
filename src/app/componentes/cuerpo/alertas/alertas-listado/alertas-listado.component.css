@@ -1,0 +1,41 @@
+.contenedor{
+    position: fixed;
+    margin-top: 1%;
+    display: flex;
+    text-align: center;
+    /* background-color: rgba(188, 188, 188, 0.159); */
+    padding: 15px;
+    /* border-right: 5px solid rgb(118, 26, 26); */
+    border-radius: 5px;
+    /* height: 42em; */
+    overflow: hidden;
+    width: 86%;
+    
+}
+.radios{
+    position: fixed;
+    margin-top: 0%;
+    border: 2px solid #707070;
+    border-radius: 5px;
+    width: 82.5%;
+    height: 75vh;
+    overflow: scroll;
+    
+}
+.tamanios{
+    padding-left: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-self: center;
+    justify-items: center;
+}
+.icono{
+    background-image: url(../../../../../assets/iconos-menu/descargar.svg);
+    /* background-size: cover; */
+    background-repeat: no-repeat;
+    background-attachment: local;
+    background-position: center; 
+    width: 35px;
+    height: 35px;
+}

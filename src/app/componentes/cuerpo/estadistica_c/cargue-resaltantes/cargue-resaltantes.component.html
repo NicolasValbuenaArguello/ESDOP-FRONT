@@ -1,0 +1,153 @@
+<app-menu></app-menu>
+<div class="cuerpo">
+    <div class="col-md-12 ">
+
+        <div class="row contenedor">
+            <div class="col-md-12 ">
+                <h2 class="titulo_cambio" (click)="cambio_accion()"> {{ titulo }} </h2>
+                <div class="radios">
+                    <div class="" id="cargue">
+                        <br>
+                        <br>
+                        <form class="form-group row tamanio" #cargue_eventos_resaltantes="ngForm">
+
+                            <div class="form-group col-md-11" style="margin: auto;">
+                                <h3>Fecha del Evento</h3>
+                                <input type="date" name="fecha_evento" id="fecha_evento" class="form-control" ngModel>
+                            </div>
+                            <br>
+                            <hr>
+                            <br>
+                            <div class="form-group col-md-11" style="margin: auto;">
+                                <h3>Tipo Evento</h3>
+                                <select name="tipo_evento" id="tipo_evento" class="form-control" ngModel>
+                                    <option value=""></option>
+                                    <option value="POSITIVO">POSITIVO</option>
+                                    <option value="NEGATIVO">NEGATIVO</option>
+                                </select>
+                            </div>
+                            <br>
+                            <hr>
+                            <br>
+                            <div class="form-group col-md-11" style="margin: auto;">
+                                <h3>Division</h3>
+                                <select name="divi_padre" id="divi_padre" class="form-control" ngModel>
+                                    <option value=""></option>
+                                    <option [value]="item" *ngFor="let item of division">{{item}}</option>
+                                </select>
+                            </div>
+                            <br>
+                            <hr>
+                            <br>
+                            <div class="form-group col-md-11" style="margin: auto;">
+                                <h3>Enemigo</h3>
+                                <select name="enemigo" id="enemigo" class="form-control" ngModel>
+                                    <option value=""></option>
+                                    <option [value]="item" *ngFor="let item of amenaza_select">{{item}}</option>
+                                </select>
+                            </div>
+                            <br>
+                            <hr>
+                            <br>
+                            <div class="form-group col-md-11" style="margin: auto;">
+                                <h3>Evento</h3>
+                                <textarea name="resumen" id="resumen" cols="30" rows="7" class="form-control"
+                                    ngModel></textarea>
+
+                            </div>
+                        </form>
+                        <br>
+                        <div class="alert alert-success col-md-11" role="alert" *ngIf="inf_g"
+                            style="margin: auto !important;">
+                            {{inf_c_g}}!
+                        </div>
+
+                        <div class="alert alert-danger col-md-11" role="alert" *ngIf="inf_a"
+                            style="margin: auto !important;">
+                            {{inf_c_g}}!
+                        </div>
+                        <br *ngIf="inf_a">
+                        <br *ngIf="inf_g">
+                        <div class="form-group col-md-11" style="margin: auto;">
+
+                                <button class="btn btn-primary" (click)="cargue_eventos(cargue_eventos_resaltantes)"
+                                *ngIf="inf_btn">Cargar </button>
+                            <button class="btn btn-success" (click)="clear()" *ngIf="inf_btnuew">Nuevo Evento </button>
+
+                        </div>
+                    </div>
+                    <div class="descargue" id="descargue">
+                        <br>
+                        <br>
+                        <form class="form-group row tamanio" #descarga_eventos_resaltantes="ngForm">
+                            <div class="row col-md-12" style="margin: auto;">
+                                <div class="form-group col-md-4" style="margin: auto;">
+                                    <h3>Fecha Inicio</h3>
+                                    <input type="date" name="fecha_evento_inicio" id="fecha_evento_inicio" class="form-control"
+                                        ngModel>
+                                </div>
+                                <br>
+                                <div class="form-group col-md-4" style="margin: auto;">
+                                    <h3>Fecha Final</h3>
+                                    <input type="date" name="fecha_evento_final" id="fecha_evento_final" class="form-control"
+                                        ngModel>
+                                </div>
+                            </div>
+                            <br>
+                            <hr>
+                            <br>
+                            <div class="row col-md-12" style="margin: auto;">
+                                <div class="form-group col-md-3" style="margin: auto;">
+                                    <h3>Tipo Evento</h3>
+                                    <select name="tipo_evento" id="tipo_evento" class="form-control" ngModel>
+                                        <option value=""></option>
+                                        <option value="POSITIVO">POSITIVO</option>
+                                        <option value="NEGATIVO">NEGATIVO</option>
+                                    </select>
+                                </div>
+                                <br>
+
+                                <div class="form-group col-md-3" style="margin: auto;">
+                                    <h3>Division</h3>
+                                    <select name="divi_padre" id="divi_padre" class="form-control" ngModel>
+                                        <option value=""></option>
+                                        <option [value]="item" *ngFor="let item of division">{{item}}</option>
+                                    </select>
+                                </div>
+                                <br>
+                                <div class="form-group col-md-3" style="margin: auto;">
+                                    <h3>Enemigo</h3>
+                                    <select name="enemigo" id="enemigo" class="form-control" ngModel>
+                                        <option value=""></option>
+                                        <option [value]="item" *ngFor="let item of amenaza_select">{{item}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </form>
+                        <br>
+                        <div class="alert alert-success col-md-11" role="alert" *ngIf="inf_g"
+                            style="margin: auto !important;">
+                            {{inf_c_g}}!
+                        </div>
+
+                        <div class="alert alert-danger col-md-11" role="alert" *ngIf="inf_a"
+                            style="margin: auto !important;">
+                            {{inf_c_g}}!
+                        </div>
+                        <br *ngIf="inf_a">
+                        <br *ngIf="inf_g">
+                        <hr>
+                        <div class="form-group col-md-11" style="margin: auto;">
+
+                            <button class="btn btn-success" (click)="descargar(descarga_eventos_resaltantes)">Descargar</button>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+<app-spiner></app-spiner>

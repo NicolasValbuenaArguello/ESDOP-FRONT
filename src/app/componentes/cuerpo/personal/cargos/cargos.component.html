@@ -1,0 +1,88 @@
+<div class="documento documento_oculto" id="view_dumentos">
+
+    <div class="col-md-12 ">
+
+
+
+        <!-- <h4 class="titulo"> {{nombre_dumento}}</h4> -->
+        <!-- <h6 class="titulo"> {{server}}</h6> -->
+        
+            <button class="btn btn-danger" (click)="cerrar()" style="position: fixed; top: 5%; left: 5%;">X</button>
+
+            <!-- <object type="application/pdf" [data]="server | safe" width="100%" height="100%"></object> -->
+
+
+            <!-- <embed [src]="server" width="400px" height="400px"> -->
+
+            <div class="col-md-12">
+                <form class="form-group row tamanio" #cargos="ngForm" autocomplete="off">
+                    <div class="row contenedor">
+                        
+                        <div class="radios">
+                            <h2 class="titulo">Cargos Ocupados</h2>
+                        <div class="row col-md-12">
+                                <div class="col-md-4" style="margin: auto;">
+                                    <label for="">Cargo</label>
+
+                                    <select name="cargo" id="cargo" class="form-control" ngModel>
+                                        <option value=""></option>
+                                        <option [value]="item" *ngFor="let item of cargos_dirop">{{item}}</option>
+                                    </select>
+                                </div>
+
+
+
+                            <div class="col-md-2" style="margin: auto;">
+                                <label for="">Fecha en Cargo</label>
+                                <input type="datetime-local" name="fecha_inicio_cargo" id="fecha_inicio_cargo" class="form-control"
+                                    ngModel  (change)="fecha_trasalado_unidad(cargos)">
+                            </div>
+                            <div class="col-md-2" style="margin: auto;">
+                                <label for="">Fecha en Cargo</label>
+                                <input type="datetime-local" name="fecha_termino_cargo" id="fecha_termino_cargo" class="form-control"
+                                    ngModel (change)="fecha_trasalado_unidad(cargos)">
+                            </div>
+                            <div class="col-md-2" style="margin: auto;">
+                                <label for="">Tiempo en el Cargo</label>
+                                <p>{{tiempo_cargo}}</p>
+                            </div>
+                            <div class="col-md-2" style="margin: auto;">
+                                <!-- <label for="">Fecha en Cargo</label> -->
+
+                                <button class="btn btn-success" (click)="guardar(cargos)">Guardar</button>
+                            </div>
+
+                        </div>
+                        <hr>
+                        <div class="row col-md-12">
+
+                            <table class="table table-hover tabla" id="table">
+                                <thead>
+                                    <th>cargo</th>
+                                    <th>inicio</th>
+                                    <th>termino</th>
+                                    <th>tiempo</th>
+                                    <th>eliminar</th>
+                                </thead>
+                                <tbody id="t_body">
+                                    <tr *ngFor="let item of listado_cargos; index as i; first as isFirst">
+                                        <td>{{item[3]}}</td>
+                                        <td>{{item[4]}}</td>
+                                        <td>{{item[5]}}</td>
+                                        <td>{{item[6]}}</td>
+                                        <td><button class="btn btn-danger" (click)="eliminar_user(i)"></button></td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                </form>
+            
+            <hr>
+
+
+        </div>
+    </div>
+</div>

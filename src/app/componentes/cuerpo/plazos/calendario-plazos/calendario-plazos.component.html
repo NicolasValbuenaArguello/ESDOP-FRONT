@@ -1,0 +1,76 @@
+<app-menu></app-menu>
+<div id="calendario">
+  <div class="calendario-wrapper">
+    <div class="calendario-container">
+      <!-- Controles de mes y año -->
+      <div class="calendario-header">
+        <button (click)="cambiarMes(-1)">◀</button>
+        <span>{{ nombreMes }} {{ anio }}</span>
+        <button (click)="cambiarMes(1)">▶</button>
+
+        <!-- Botones de exportación -->
+        <div class="export-buttons ms-3">
+          <button class="btn-export img" (click)="descargarCalendario()">
+            <i class="bi bi-image"></i> Imagen
+          </button>
+          <button class="btn-export file" (click)="exportarPlazos()">
+            <i class="bi bi-file-earmark-spreadsheet"></i> Exportar
+          </button>
+        </div>
+      </div>
+
+      <!-- Días de la semana -->
+      <div class="dias-semana">
+        <div *ngFor="let dia of diasSemana" class="dia-semana">
+          {{ dia }}
+        </div>
+      </div>
+
+      <!-- Celdas del calendario -->
+      <div class="grid-calendario">
+        <div *ngFor="let celda of calendario" class="celda" [class.vacia]="!celda.dia"
+          (click)="celda.dia && abrirModal(celda)">
+          <div class="numero-dia" *ngIf="celda.dia">{{ celda.dia }}</div>
+          <div class="plazos">
+            <div class="plazos-cantidad" *ngIf="celda.plazos.length">
+              {{ celda.plazos.length }} plazo{{ celda.plazos.length > 1 ? 's' : '' }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Modal -->
+  <div class="modal-overlay" *ngIf="modalVisible">
+    <div class="modal">
+      <!-- Botón cerrar arriba -->
+      <button class="modal-close" (click)="cerrarModal()">✕</button>
+
+      <!-- Título con cantidad de plazos -->
+      <h2>
+        Plazos para el día {{ modalDia?.dia }}
+        <span *ngIf="modalDia?.plazos?.length as cantidad">
+          ({{ cantidad }} en total)
+        </span>
+      </h2>
+
+
+      <!-- Lista de plazos -->
+      <div *ngIf="modalDia?.plazos?.length; else sinPlazos">
+        <div *ngFor="let p of modalDia?.plazos" class="card">
+          <h4>{{ p.orfeo }}</h4>
+          <p><strong>Descripción:</strong> {{ p.descripcion }}</p>
+          <p><strong>Responsable:</strong> {{ p.responsable }}</p>
+          <p><strong>Cumplido:</strong> {{ p.estado }}</p>
+          <p><strong>Asunto:</strong> {{ p.asunto }}</p>
+          <p><strong>Ordén:</strong> {{ p.orden }}</p>
+        </div>
+      </div>
+
+      <!-- Si no hay plazos -->
+      <ng-template #sinPlazos>
+        <p>No hay plazos asignados para este día.</p>
+      </ng-template>
+    </div>
+  </div>

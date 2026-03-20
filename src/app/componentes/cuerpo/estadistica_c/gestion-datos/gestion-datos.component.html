@@ -1,0 +1,50 @@
+<app-menu></app-menu>
+
+<div class="contenedor">
+  <h2 class="titulo">🗂️ Gestión de Datos</h2>
+
+  <!-- Módulo 1 -->
+  <div class="modulo">
+    <h3>🗑️ Eliminar Datos</h3>
+    <div class="formulario">
+      <input type="date" [(ngModel)]="fechaInicio" placeholder="Fecha Inicial" />
+      <input type="date" [(ngModel)]="fechaFin" placeholder="Fecha Final" />
+      <button (click)="eliminarDatos()" [disabled]="loading">Eliminar</button>
+    </div>
+  </div>
+
+  <!-- Módulo 2 -->
+  <div class="modulo">
+    <h3>📁 Cargar Archivos Excel</h3>
+    <div class="formulario">
+      <div class="file-upload-group">
+        <label class="file-label" for="hechos">
+          <i class="fas fa-upload"></i> Hechos
+        </label>
+        <input type="file" id="hechos" (change)="onHechosFileChange($event)" accept=".xlsx" hidden />
+        <span *ngIf="hechosFile" class="file-name">{{ hechosFile.name }}</span>
+      </div>
+
+      <div class="file-upload-group">
+        <label class="file-label" for="resultados">
+          <i class="fas fa-upload"></i> Resultados
+        </label>
+        <input type="file" id="resultados" (change)="onResultadosFileChange($event)" accept=".xlsx" hidden />
+        <span *ngIf="resultadosFile" class="file-name">{{ resultadosFile.name }}</span>
+      </div>
+
+      <button (click)="guardarArchivos()" [disabled]="loading">Guardar</button>
+    </div>
+  </div>
+
+  <!-- Card de respuesta -->
+  <div *ngIf="cardType" class="respuesta-card" [ngClass]="cardType">
+    <p>{{ cardMessage }}</p>
+  </div>
+</div>
+
+<!-- 🔹 Loader overlay -->
+<div class="overlay" *ngIf="loading">
+  <div class="spinner"></div>
+  <p class="loading-text">Procesando...</p>
+</div>

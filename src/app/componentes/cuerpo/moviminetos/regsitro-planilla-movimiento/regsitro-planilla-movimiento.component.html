@@ -1,0 +1,121 @@
+<div class="cuerpo_insitop">
+  <div class="card positicion">
+    <div class="card-header">
+      <img src="../../../../../assets/logos/JEMOP-DIROP.png" alt="Logo JEMOP" />
+      <h3>Registro de Movimientos</h3>
+    </div>
+
+    <div class="card-body">
+      <form #guardar_movimiento_listado="ngForm">
+
+        <!-- Datos principales -->
+        <fieldset>
+          <legend>Datos del movimiento</legend>
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="hr_movimiento">No. HR JEMOP</label>
+              <input type="text" id="hr_movimiento" class="form-control" name="hr_movimiento" ngModel>
+            </div>
+
+            <div class="form-group">
+              <label for="unidad_solicitante">Unidad solicitante</label>
+              <select id="unidad_solicitante" class="form-control" name="unidad_solicitante" ngModel>
+                <option *ngFor="let item of listado_unidades_solicitantes" [value]="item[1]">{{item[1]}}</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="tipo_escolta">Tipo escolta</label>
+              <select id="tipo_escolta" class="form-control" name="tipo_escolta" ngModel>
+                <option value=""></option>
+                <option value="FISICA">FISICA</option>
+                <option value="PUNTOS CRITICOS">PUNTOS CRITICOS</option>
+              </select>
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- Fechas -->
+        <fieldset>
+          <legend>Fechas</legend>
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="fecha_inicio">Fecha inicio</label>
+              <input type="date" id="fecha_inicio" class="form-control" name="fecha_inicio" ngModel>
+            </div>
+
+            <div class="form-group">
+              <label for="fecha_termino">Fecha término</label>
+              <input type="date" id="fecha_termino" class="form-control" name="fecha_termino" ngModel>
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- Detalles -->
+        <fieldset>
+          <legend>Detalles de la operación</legend>
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="ruta_completa">Ruta completa</label>
+              <textarea id="ruta_completa" class="form-control" name="ruta_completa" ngModel></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="motivos_escolta">Motivo - Unidad solicitante</label>
+              <textarea id="motivos_escolta" class="form-control" name="motivos_escolta" ngModel></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="unidades_comprometidas">Unidades comprometidas</label>
+              <textarea id="unidades_comprometidas" class="form-control" name="unidades_comprometidas" ngModel></textarea>
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- Logística -->
+        <fieldset>
+          <legend>Logística</legend>
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="hr_unidad">HR unidad</label>
+              <input type="text" id="hr_unidad" class="form-control" name="hr_unidad" ngModel>
+            </div>
+            <div class="form-group">
+              <label for="cantidad_vehiculos">Cantidad vehículos</label>
+              <input type="text" id="cantidad_vehiculos" class="form-control" name="cantidad_vehiculos" ngModel>
+            </div>
+            <div class="form-group">
+              <label for="cantidad_faces">Cantidad faces</label>
+              <input type="text" id="cantidad_faces" class="form-control" name="cantidad_faces" ngModel>
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- Contacto -->
+        <fieldset>
+          <legend>Contacto</legend>
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="encargado_material">Encargado / Comandante</label>
+              <input type="text" id="encargado_material" class="form-control" name="encargado_material" ngModel>
+            </div>
+            <div class="form-group">
+              <label for="telefono">Teléfono / Celular</label>
+              <input type="text" id="telefono" class="form-control" name="telefono" ngModel>
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- Alertas -->
+        <div *ngIf="inf_g" class="alert alert-success">{{inf_c_g}}!</div>
+        <div *ngIf="inf_a" class="alert alert-danger">{{inf_c_g}}!</div>
+
+        <!-- Botones -->
+        <div class="posicion_btn">
+          <button class="btn btn-success" (click)="guardar_movimiento(guardar_movimiento_listado)" *ngIf="inf_btn">Guardar</button>
+          <button class="btn btn-secondary" (click)="clear()" *ngIf="inf_btnuew">Nuevo</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

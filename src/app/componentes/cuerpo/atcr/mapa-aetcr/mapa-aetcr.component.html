@@ -1,0 +1,106 @@
+<app-menu></app-menu>
+<div class="cuerpo" ng-init="inicioAlgo()">
+
+        <div class=" row col-md-6"> </div>
+        <div class=" row col-md-3"></div>
+        <div class=" row col-md-1"></div>
+        <div class=" row col-md-1">
+
+        </div>
+        <div class="posicion_resultados ">
+            <div class="posicion_btn_menu  " style="padding-inline: 10px;">
+                <button class="btn btn-success " (click)="resultados_oculto()" id="btn_buscar">BUSCAR
+                </button>
+                <button class="btn btn-danger x resultados_oculto" (click)="resultados_oculto()" id="buton_x"></button>
+
+            </div>
+        </div>
+
+
+    <div class="row contenedor">
+        <div class="col-md-12">
+
+            <div class="radios">
+
+                <app-mapa-digital></app-mapa-digital>
+            </div>
+            <br><br>
+
+            <div class="form-group resultados resultados_oculto " style="margin: auto;" id="resultados_oculto">
+
+                <div class="container-fluid" style="margin: auto; margin-top: 3%;">
+
+
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm">
+                                <div class="card" style="width: 20rem;">
+                                    <img class="card-img-top" src="../../../../../assets/img/colombia.png"
+                                        alt="Card image cap">
+                                    <div class="card-body">
+                                        <h5 class="card-title">INF. Mapa</h5>
+                                        <p class="card-text">Información de las AETCR georreferencias a nivel Nacional.
+                                        </p>
+                                    </div>
+                                    
+                                    
+                                        <ul class="list-group list-group-flush">
+                                            <form class="" #documentos_pdf="ngForm" autocomplete="off">
+                                            <li class="list-group-item">
+                                                
+                                                    <label for="">Fecha de Ingreso</label>
+                                                    
+                                                
+                                            </li>
+                                            <li class="list-group-item"><input type="date" name="fecha_ingreso" id="fecha_ingreso" class="form-control"
+                                                ngModel></li>
+                                            <li class="list-group-item"><button class="btn btn-primary" (click)="graficar_mapa(documentos_pdf)">Graficar</button></li>
+                                        </form>
+                                        </ul>
+                                    
+                                
+
+                                </div>
+                            </div>
+                            <div class="col-sm">
+                                <div class="card" style="width: 20rem;">
+                                    <br>
+                                    <img class="card-img-top" src="../../../../../assets/img/aectr.png"
+                                        alt="Card image cap" >
+                                    <div class="card-body">
+                                        <br><br><br>
+                                        <h5 class="card-title">Card title</h5>
+                                        <p class="card-text">Some quick example text to build on the card title and make
+                                            up the bulk
+                                            of the card's content.</p>
+                                    </div>
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item">Cras justo odio</li>
+                                        <li class="list-group-item">Dapibus ac facilisis in</li>
+                                        <li class="list-group-item">Vestibulum at eros</li>
+                                    </ul>
+                                    <div class="card-body">
+                                        <a href="#" class="card-link">Card link</a>
+                                        <a href="#" class="card-link">Another link</a>
+                                    </div>
+                                </div>
+                            </div>
+                            
+
+
+
+
+                    <div class="alerta" style="margin-top: 15px;">
+                        <div class="alert alert-secondary" role="alert">
+                            <ul>
+                                <li *ngFor="let mun of datos_resultados">{{mun}}</li>
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,78 @@
+<app-menu></app-menu>
+
+<div class="password-wrapper">
+  <div class="password-card">
+    <h2 class="titulo">
+      <i class="bi bi-shield-lock-fill"></i> Cambiar Contraseña
+    </h2>
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <!-- Contraseña actual -->
+      <div class="form-group">
+        <label for="actual">Contraseña actual</label>
+        <div class="input-wrapper">
+          <i class="bi bi-lock"></i>
+          <input
+            type="password"
+            id="actual"
+            formControlName="actual"
+            placeholder="••••••••"
+          />
+        </div>
+        <div class="alerta" *ngIf="f['actual'].touched && f['actual'].invalid">
+          ⚠️ Este campo es obligatorio.
+        </div>
+      </div>
+
+      <!-- Nueva contraseña -->
+      <div class="form-group">
+        <label for="nueva">Nueva contraseña</label>
+        <div class="input-wrapper">
+          <i class="bi bi-key"></i>
+          <input
+            type="password"
+            id="nueva"
+            formControlName="nueva"
+            placeholder="••••••••"
+          />
+        </div>
+        <div
+          class="alerta"
+          *ngIf="f['nueva'].touched && f['nueva'].hasError('minlength')"
+        >
+          ⚠️ La contraseña debe tener al menos 8 caracteres.
+        </div>
+      </div>
+
+      <!-- Confirmar nueva contraseña -->
+      <div class="form-group">
+        <label for="confirmar">Confirmar nueva contraseña</label>
+        <div class="input-wrapper">
+          <i class="bi bi-shield-check"></i>
+          <input
+            type="password"
+            id="confirmar"
+            formControlName="confirmar"
+            placeholder="••••••••"
+          />
+        </div>
+        <div class="alerta" *ngIf="mostrarErrorCoincidencia">
+          ❌ Las contraseñas no coinciden.
+        </div>
+      </div>
+
+      <!-- Mensaje de cambio de contraseña -->
+      <div *ngIf="mensajeCambio" 
+           [ngClass]="{'mensaje-success': tipoMensaje==='success', 'mensaje-error': tipoMensaje==='error'}"
+           class="mensaje-cambio">
+        {{ mensajeCambio }}
+      </div>
+
+      <!-- Botón solo habilitado si el formulario es válido -->
+<button type="submit" class="btn-guardar" [disabled]="form.invalid || loading">
+  <i class="bi bi-arrow-repeat"></i> Actualizar Contraseña
+</button>
+
+    </form>
+  </div>
+</div>

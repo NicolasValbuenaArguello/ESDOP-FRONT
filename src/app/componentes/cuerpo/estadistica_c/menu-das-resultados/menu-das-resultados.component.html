@@ -1,0 +1,111 @@
+<app-spiner></app-spiner>
+
+<!-- Menú lateral -->
+<div class="menu" id="menu">
+  <h3 class="mb-3">Menú</h3>
+  <hr />
+  <form #documentos_pdf="ngForm">
+    <h4>Lapso Actual</h4>
+
+    <!-- Fecha Inicial -->
+    <div class="form-group col-md-11 mx-auto">
+      <label for="fecha_inicio_p">Fecha Inicial</label>
+      <input
+        type="date"
+        id="fecha_inicio_p"
+        name="fecha_inicio_p"
+        class="form-control"
+        ngModel
+        required
+      />
+    </div>
+
+    <!-- Alerta Fecha Inicial -->
+    <div class="form-group mt-3" *ngIf="aler_p_i">
+      <div class="alert alert-danger text-center" role="alert">
+        {{ alerta }}!
+      </div>
+    </div>
+
+    <!-- Fecha Final -->
+    <div class="form-group col-md-11 mx-auto mt-4">
+      <label for="fecha_final_p">Fecha Final</label>
+      <input
+        type="date"
+        id="fecha_final_p"
+        name="fecha_final_p"
+        class="form-control"
+        ngModel
+        required
+      />
+    </div>
+
+    <!-- Alerta Fecha Final -->
+    <div class="form-group mt-3" *ngIf="aler_p_f">
+      <div class="alert alert-danger text-center" role="alert">
+        {{ alerta }}!
+      </div>
+    </div>
+
+    <!-- División -->
+    <div class="form-group col-md-10 mx-auto mt-4">
+      <label for="obj">División</label>
+      <select id="obj" name="obj" class="form-control" ngModel>
+        <option value="">Seleccione...</option>
+        <option value="OBJ #1">OBJ #1</option>
+        <option value="OBJ #2">OBJ #2</option>
+        <option value="OBJ #3">OBJ #3</option>
+        <option value="OBJ #4">OBJ #4</option>
+      </select>
+    </div>
+
+    <hr />
+
+    <!-- Botón Actualizar -->
+    <div class="text-center mt-4">
+      <button
+        type="button"
+        class="btn btn-warning"
+        (click)="paso_fronterizos(documentos_pdf)"
+      >
+        Actualizar
+      </button>
+    </div>
+  </form>
+</div>
+
+<!-- Resultado -->
+<div class="resultado_das_ejc" id="resultado_das_ejc">
+  <div class="res_das">
+    <div class="text-center w-100 mb-4">
+      <h1 style="color: snow;">Resultados</h1>
+    </div>
+
+    <div class="containeres">
+      <div
+        class="configuaracion"
+        *ngFor="let item of das_general_ejc"
+      >
+        <div class="cuerpo_informacions">
+          <div class="row align-items-center">
+            <!-- Imagen -->
+            <div class="col-md-4 text-center">
+              <img
+                [src]="'../../../../../assets/resultados/' + item[2] + '.' + item[3]"
+                alt="Resultado"
+                width="120"
+                height="60"
+              />
+            </div>
+
+            <!-- Texto -->
+            <div class="col-md-8">
+              <h5 class="mb-1">{{ item[1] }}</h5>
+              <h2 class="mb-0">{{ item[0] }}</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

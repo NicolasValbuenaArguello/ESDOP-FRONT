@@ -1,0 +1,97 @@
+.contenedor{
+    position: fixed;
+    margin-top: 1%;
+    display: flex;
+    text-align: center;
+    /* background-color: rgba(188, 188, 188, 0.159); */
+    padding: 15px;
+    /* border-right: 5px solid rgb(118, 26, 26); */
+    border-radius: 5px;
+    /* height: 42em; */
+    overflow: hidden;
+    width: 86%;
+    
+}
+
+.radios{
+    position: fixed;
+    margin-top: 0%;
+    border: 2px solid #707070;
+    border-radius: 5px;
+    width:40%;
+    height: 75%;
+    overflow: scroll;
+    
+}
+
+.foto{
+    width: 60%;
+    height: 80%;
+    margin: auto;
+    border: 2px solid gray;
+    border-radius: 7px;
+    background-color: rgb(80, 80, 80);
+    /* background-image: url(../../../../../assets/img_user/user.jpg); */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: local;
+    background-position: center; 
+}
+.foto:hover{
+    cursor: pointer;
+    background-color: #0fbf12;
+}
+
+.foto_a{
+    width: 80%;
+    height: 80%;
+    margin: auto;
+    border: 2px solid gray;
+    border-radius: 7px;
+    background-color: rgb(80, 80, 80);
+    /* background-image: url(../../../../../assets/img_user/user.jpg); */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: local;
+    background-position: center; 
+}
+.foto_a:hover{
+    cursor: pointer;
+    background-color: #910707;
+}
+.muy_alto{
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+    background-color: #910707;
+}
+.alto{
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+    background-color: red;
+}
+.mediano{
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+    background-color: darkgoldenrod;
+}
+.bajo{
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+    background-color: yellow;
+}
+.minimo{
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+    background-color: green;
+}
+.no_ejc{
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+    background-color: grey;
+}

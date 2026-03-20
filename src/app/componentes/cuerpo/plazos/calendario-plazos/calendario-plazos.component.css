@@ -1,0 +1,227 @@
+/* Contenedor general */
+.calendario-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  padding: 20px;
+  background: #ffffff;
+  margin-top: 4%;
+}
+
+.calendario-container {
+  width: 90%;
+  height: 85vh;
+  /*max-width: 1000px;*/
+  background: #eeeeee;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  padding: 20px;
+}
+
+/* Encabezado mes */
+.calendario-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  font-size: 1.25em;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.calendario-header button {
+  background: #2563eb;
+  color: #fff;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.calendario-header button:hover {
+  background: #1e40af;
+}
+
+/* Días de la semana */
+.dias-semana {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+  font-weight: 600;
+  background: #e0e7ff;
+  border-radius: 8px;
+  padding: 10px 0;
+  margin-bottom: 10px;
+}
+
+/* Celdas calendario */
+.grid-calendario {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 8px;
+}
+
+.celda {
+  height: 100px;
+  max-width: 250px;
+  border-radius: 10px;
+  background: #ffffff;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+  border: 1px solid #e5e7eb;
+}
+
+.celda:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.celda.vacia {
+  background: #f9fafb;
+  cursor: default;
+}
+
+/* Número del día */
+.numero-dia {
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: #1e3a8a;
+}
+
+/* Plazos */
+.plazos {
+  margin-top: 4px;
+  flex-grow: 1;
+  overflow-y: auto;
+}
+
+.plazo {
+  background: #2563eb;
+  color: #fff;
+  padding: 4px 6px;
+  border-radius: 6px;
+  margin-bottom: 4px;
+  font-size: 0.8em;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+/* Scroll dentro de la celda */
+.plazos::-webkit-scrollbar {
+  width: 5px;
+}
+
+.plazos::-webkit-scrollbar-thumb {
+  background-color: #2563eb;
+  border-radius: 10px;
+}
+
+/* Modal */
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal {
+  position: relative; /* importante para colocar el botón cerrar dentro */
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 25px;
+  width: 600px;
+  max-width: 95%;
+  max-height: 80vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Botón cerrar arriba */
+.modal-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: #ef4444;
+  color: #fff;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.3s;
+}
+
+.modal-close:hover {
+  background: #b91c1c;
+}
+
+.card {
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 15px 18px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  transition: transform 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+}
+
+.card h4 {
+  margin: 0 0 8px;
+  color: #1e3a8a;
+  font-weight: 600;
+}
+
+.card p {
+  margin: 3px 0;
+  font-size: 0.9em;
+  color: #374151;
+}
+.export-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.btn-export {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+}
+
+.btn-export.img {
+  background: #2563eb;
+  color: #fff;
+}
+
+.btn-export.img:hover {
+  background: #1e40af;
+}
+
+.btn-export.file {
+  background: #059669;
+  color: #fff;
+}
+
+.btn-export.file:hover {
+  background: #047857;
+}

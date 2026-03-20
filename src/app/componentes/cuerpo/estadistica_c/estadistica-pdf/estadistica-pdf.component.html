@@ -1,0 +1,1533 @@
+<app-menu></app-menu>
+
+<div class="cuerpo " id="cuerpos">
+    <div class="col-md-12 tamanio ">
+        <form class="form-group row " #documentos_pdf="ngForm">
+            <div class="row contenedor " id="contendor">
+                <div class="col-md-3 ">
+
+                    <h2 class="titulo">Filtro Fechas</h2>
+                    <div class="radios">
+                        <h3>Lapso Actual</h3>
+                        <div class="form-group col-md-11" style="margin: auto;">
+                            <label for="">Fecha Inicial</label>
+                            <input type="date" name="fecha_inicio_p" id="usuario" placeholder="usuario"
+                                class="form-control" ngModel>
+                        </div>
+                        <div class="form-group" style="margin-top: 15px;" *ngIf="aler_p_i">
+                            <div class="alert alert-danger" role="alert">
+                                {{alerta}}!
+                            </div>
+                        </div>
+                        <div class="form-group col-md-11" style="margin: auto;">
+                            <label for="">Fecha Final</label>
+                            <input type="date" name="fecha_final_p" id="usurio" placeholder="password"
+                                class="form-control" ngModel>
+                        </div>
+                        <div class="form-group" style="margin-top: 15px;" *ngIf="aler_p_f">
+                            <div class="alert alert-danger" role="alert">
+                                {{alerta}}!
+                            </div>
+                        </div>
+                        <h3>Lapso Anterior</h3>
+                        <div class="form-group col-md-11" style="margin: auto;">
+                            <label for="">Fecha Inicial</label>
+                            <input type="date" name="fecha_inicio_u" id="usuario" placeholder="usuario"
+                                class="form-control" ngModel>
+                        </div>
+                        <div class="form-group" style="margin-top: 15px;" *ngIf="aler_u_i">
+                            <div class="alert alert-danger" role="alert">
+                                {{alerta}}!
+                            </div>
+                        </div>
+                        <div class="form-group col-md-11" style="margin: auto;">
+                            <label for="">Fecha Final</label>
+                            <input type="date" name="fecha_final_u" id="usurio" placeholder="password"
+                                class="form-control" ngModel>
+                        </div>
+                        <div class="form-group" style="margin-top: 15px;" *ngIf="aler_u_f">
+                            <div class="alert alert-danger" role="alert">
+                                {{alerta}}!
+                            </div>
+                        </div>
+                        <hr>
+                        <h3>Tipo comprativo</h3>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="com_metas_narcotrafico"
+                                id="com_metas_narcotrafico" value="com_metas_narcotrafico"
+                                [(ngModel)]="com_metas_narcotrafico">
+                            <label class="form-check-label" for="com_metas_narcotrafico">
+                                Resultado con Parativo Metas
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="com_metas_narcotrafico"
+                                id="com_lapso_anterior" value="com_lapso_anterior" [(ngModel)]="com_metas_narcotrafico">
+                            <label class="form-check-label" for="com_lapso_anterior">
+                                Resultado lapso anterior
+                            </label>
+                        </div>
+                        <hr>
+                        <h3>SPOA</h3>
+
+                        <div class="form-check ">
+                            <input class="form-check-input" type="radio" name="spoa" id="sin_spoa" value="sin_spoa"
+                                [(ngModel)]="spoa">
+                            <label class="form-check-label" for="sin_spoa">
+                                Resultados con SPOA
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="spoa" id="con_spoa" value="con_spoa"
+                                [(ngModel)]="spoa">
+                            <label class="form-check-label" for="con_spoa">
+                                Resultados Omitiendo SPOA
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="spoa" id="res_sin_spoa"
+                                value="res_sin_spoa" [(ngModel)]="spoa">
+                            <label class="form-check-label" for="res_sin_spoa">
+                                Resultados sin SPOA
+                            </label>
+                        </div>
+                        <hr>
+                        <h3>Capturas Delincuencia</h3>
+
+                        <div class="form-check ">
+                            <input class="form-check-input" type="radio" name="delco_cap" id="sin_delco"
+                                value="sin_delco" [(ngModel)]="delco_cap">
+                            <label class="form-check-label" for="sin_delco">
+                                Capturas sin Delincuencia
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="delco_cap" id="con_delco"
+                                value="con_delco" [(ngModel)]="delco_cap">
+                            <label class="form-check-label" for="con_delco">
+                                Capturas con Delincuencia
+                            </label>
+                        </div>
+
+
+
+                    </div>
+                </div>
+                <div class="col-md-3">
+
+                    <h2 class="titulo">Filtros</h2>
+
+                    <div class="radios">
+                        <h3>Unidades</h3>
+
+                        <div class="form-group col-md-11" style="margin: auto;">
+                            <label for="">Division</label>
+                            <select name="divi_padre" id="" class="form-control" [(ngModel)]="divi_padre"
+                                (change)="div_hija(0,1)">
+                                <option value=""></option>
+                                <option [value]="item" *ngFor="let item of division">{{item}}</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-11" style="margin: auto;">
+                            <label for="">Division FT</label>
+                            <select name="divi_hija" id="" class="form-control" [(ngModel)]="divi_hija"
+                                (change)="brigadas(1,2)">
+                                <option value="" selected></option>
+                                <option [value]="item" *ngFor="let item of unidad_selecionada_div">{{item}}</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group col-md-11" style="margin: auto;">
+                            <label for="">Brigadas</label>
+                        </div>
+                        <br>
+                        <button class="btn btn-warning" (click)="ver_brigadas()">Brigadas</button>
+                        <br>
+                        <div class="form-group col-md-11" style="margin: auto;">
+                            <label for="">Batallones</label>
+                        </div>
+                        <br>
+                        <button class="btn btn-warning" (click)="ver_batallones()">Unidades</button>
+                        <br>
+                        <h3>Lugar</h3>
+
+                        <div class="form-group col-md-12" style="margin: auto;">
+                            <button class="btn-elegante" (click)="abrirVentanaSubregiones()">📍 Ver subregiones
+                            </button>
+
+                            <div *ngIf="subregionSeleccionadaNombre" class="card-subregion mt-2">
+                                <div class="card-subregion-header">
+                                    <span class="icono-subregion">🧭</span>
+                                    Subregión seleccionada
+                                    <button class="btn-cerrar" (click)="limpiarSubregion()">✖</button>
+                                </div>
+                                <div class="card-subregion-body">
+                                    <strong>{{ subregionSeleccionadaNombre }}</strong>
+                                    <br />
+                                    <button type="button" (click)="abrirVentanaSubregiones()"
+                                        class="enlace-cambiar btn-link">🔁 Cambiar subregión</button>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+                        <br>
+
+                        <div class="form-group col-md-12" style="margin: auto;">
+                            <!-- Botón para mostrar panel -->
+                            <div class="card listados" style="width: 30rem; margin: auto;">
+                                <button class="btn btn-warning" (click)="mostrar_dpto()">
+                                    Departamentos <img src="../../../../../assets/iconos-menu/descargar.svg" alt="">
+                                </button>
+                            </div>
+
+                            <!-- Resultado selección -->
+                            <div class="alerta" style="margin-top: 15px;">
+                                <div class="alert alert-secondary" role="alert">
+                                    <ul>
+                                        <li *ngFor="let mun of departamentos_filtrado">{{ mun }}</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+
+                        <div class="form-group col-md-12" style="margin: auto;">
+                            <div class="card listados" style="width: 30rem; margin: auto;">
+                                <button class="btn btn-warning" (click)="mostrar_mpio()">Municipios <img
+                                        src="../../../../../assets/iconos-menu/descargar.svg" alt=""></button>
+                            </div>
+
+
+                            <div class="alerta" style="margin-top: 15px;">
+                                <div class="alert alert-secondary" role="alert">
+                                    <ul>
+                                        <li *ngFor="let mun of datos_municipios">{{mun}}</li>
+                                    </ul>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <hr>
+                        <h3>Tipo Filtro</h3>
+
+                        <div class="form-check ">
+                            <input class="form-check-input" type="radio" name="filtro" id="exampleRadios1"
+                                value="unidad" [(ngModel)]="filtro">
+                            <label class="form-check-label" for="exampleRadios1">
+                                Filtrar por Unidad/Amenaza
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="filtro" id="exampleRadios2" value="lugar"
+                                [(ngModel)]="filtro">
+                            <label class="form-check-label" for="exampleRadios2">
+                                Filtrar por Lugar
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="filtro" id="exampleRadios3" value="apoyo"
+                                [(ngModel)]="filtro">
+                            <label class="form-check-label" for="exampleRadios3">
+                                Filtrar por Apoyo
+                            </label>
+                        </div>
+
+                        <h3>CDTE Resultado</h3>
+                        <div class="form-group col-md-11" style="margin: auto;">
+                            <input type="text" name="cdte" id="" class="form-control" ngModel>
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-md-3">
+                    <h2 class="titulo">Filtro Amenaza</h2>
+                    <div class="radios">
+                        <h3>Amenaza</h3>
+                        <div class="form-group col-md-11" style="margin: auto;">
+                            <button class="btn btn-warning form-control" (click)="ver_amenaza()">Amenaza<img
+                                    src="../../../../../assets/iconos-menu/descargar.svg" alt=""></button>
+                        </div>
+                        <br>
+                        <hr>
+                        <div class="form-group col-md-11" style="margin: auto;">
+                            <label for="">LOE / LOE</label>
+                            <select name="op_mayor" id="" class="form-control" [(ngModel)]="op_mayor">
+                                <option value="">---</option>
+                                <option [value]="item" *ngFor="let item of op_mayores">{{item}}</option>
+
+                            </select>
+                        </div>
+                        <hr>
+                        <!-- Botón elegante para abrir ventana -->
+                        <button class="btn-elegante-apoyos" (click)="ventanaApoyosVisible = true">
+                            <i class="bi bi-hand-index-thumb"></i> Abrir Ventana de Apoyos
+                        </button>
+
+                        <!-- Mostrar selección si existe -->
+                        <h4 *ngIf="tieneApoyoSeleccionado()" class="apoyo-seleccionado">
+                            Apoyo Seleccionado: {{ apoyoSeleccionado }}
+                        </h4>
+
+                        <hr>
+                        <h3>Tipo Listados</h3>
+
+                        <div class="form-group col-md-11" style="margin: auto;">
+                            <label for="">Tipo Listado Afectación</label>
+                            <select name="listado_a" id="" class="form-control" [(ngModel)]="listado_a">
+                                <option value="">---</option>
+                                <option [value]="item" *ngFor="let item of listados">{{item}}</option>
+
+                            </select>
+                        </div>
+                        <br>
+                        <h3>Tipo de Afectaciones</h3>
+                        <br>
+                        <div class="form-group col-md-11" style="margin: auto;">
+                            <label for="">Tipo de Afectaciones</label>
+                            <select name="tipo_afectaciones" id="" class="form-control" ngModel>
+                                <option value="---">---</option>
+
+                                <option value="EN COMBATE">EN COMBATE</option>
+                                <option value="EN LABORES DE ERRADICACIÓN">EN LABORES DE ERRADICACIÓN</option>
+                                <option value="POR ACCION DE MINAS">POR ACCION DE MINAS</option>
+                                <option value="POR BLOQUEOS, DISTURBIOS Y MANIFESTACIONES">POR BLOQUEOS, DISTURBIOS Y
+                                    MANIFESTACIONES</option>
+                                <option value="POR FRANCOTIRADOR">POR FRANCOTIRADOR</option>
+                                <option value="POR HOSTIGAMIENTO">POR HOSTIGAMIENTO</option>
+                                <option value="POR LABORES DE INTELIGENCIA">POR LABORES DE INTELIGENCIA</option>
+                                <option value="POR PISA SUAVE">POR PISA SUAVE</option>
+                                <option value="POR PLAN PISTOLA">POR PLAN PISTOLA</option>
+                                <option value="POR ACCIÓN DE UAS (SISTEMA AÉREO NO TRIPULADO)">POR ACCIÓN DE UAS
+                                    (SISTEMA AÉREO NO TRIPULADO)</option>
+                            </select>
+                        </div>
+                        <hr>
+                        <h3>Filtros Resultados</h3>
+                        <div class="form-group col-md-11" style="margin: auto;">
+                            <label for="">Estrategia</label>
+                            <select name="estrategia" id="" class="form-control" [(ngModel)]="estrategia_a">
+                                <option value=""></option>
+                                <option [value]="item" *ngFor="let item of estrategia">{{item}}
+                                </option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-11" style="margin: auto;">
+                            <label for="">Gaulas</label>
+                            <select name="gaulas" id="" class="form-control" ngModel>
+                                <option value=""></option>
+                                <option value="gaulas">Gaulas</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-11" style="margin: auto;">
+                            <label for="">Coordinadas</label>
+                            <select name="coordinadas" id="" class="form-control" ngModel>
+                                <option value="---">---</option>
+                                <option value="SI">SI</option>
+                                <option value="NO">NO</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-11" style="margin: auto;">
+                            <label for="">Conjuntas</label>
+                            <select name="conjuntas" id="" class="form-control" ngModel>
+                                <option value="---">---</option>
+                                <option value="SI">SI</option>
+                                <option value="NO">NO</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-11" style="margin: auto;">
+                            <label for="">Tipo de Operación</label>
+
+                            <select name="tipo_operacion" id="" class="form-control" [(ngModel)]="tipo_operaciones">
+                                <option value="---">---</option>
+                                <option [value]="item" *ngFor="let item of tipo_operacion">{{item}}
+                                </option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-11" style="margin: auto;">
+                            <label for="">Tipo de Hechos</label>
+
+                            <select name="hechos" id="" class="form-control" ngModel>
+                                <option value="---">---</option>
+                                <option [value]="item" *ngFor="let item of hechos">{{item}}
+                                </option>
+                            </select>
+                        </div>
+                        <br><br>
+                    </div>
+                </div>
+                <div class="col-md-3 ">
+                    <h2 class="titulo">PDF</h2>
+
+                    <div class="radios_e">
+                        <div class="radios_i">
+                            <h3
+                                *ngIf=" boletin_cuadros_coe ||  cartilla_presidencial_larga || cartilla_presidencial_corta || boletin_diseo || boletin_diseo_semanal">
+                                Boletines Diarios</h3>
+
+                            <div class="form-check" *ngIf="boletin_cuadros_coe">
+                                <input class="form-check-input" type="radio" name="documento" id="exampleRadios_1"
+                                    value="boletin_estadistica" [(ngModel)]="document_boletin">
+                                <label class="form-check-label" for="exampleRadios_1">
+                                    Boletin Cuadros COE
+                                </label>
+                            </div>
+
+                            <div class="form-check" *ngIf="cartilla_presidencial_larga">
+                                <input class="form-check-input" type="radio" name="documento" id="exampleRadios_3"
+                                    value="cartilla_ejc_cdt" [(ngModel)]="document_boletin">
+                                <label class="form-check-label" for="exampleRadios_3">
+                                    Cartilla Presidencia Larga
+                                </label>
+                            </div>
+
+                            <div class="form-check" *ngIf="cartilla_presidencial_corta">
+                                <input class="form-check-input" type="radio" name="documento" id="exampleRadios_4"
+                                    value="cartilla_ejc_cdt_r" [(ngModel)]="document_boletin">
+                                <label class="form-check-label" for="exampleRadios_4">
+                                    Cartilla Presidencia Corta
+                                </label>
+                            </div>
+
+                            <!-- <div class="form-check" *ngIf="boletin_diseo">
+                                <input class="form-check-input" type="radio" name="documento" id="exampleRadios_5"
+                                    value="resultados_resaltantes_comparativo" [(ngModel)]="document_boletin">
+                                <label class="form-check-label" for="exampleRadios_5">
+                                    Boletin DISEO Diario
+                                </label>
+                            </div>-->
+                            <div class="form-check" *ngIf="boletin_diseo">
+                                <input class="form-check-input" type="radio" name="documento"
+                                    id="boletin_coe_diario_diseo" value="boletin_coe_diario_diseo"
+                                    [(ngModel)]="document_boletin">
+                                <label class="form-check-label" for="boletin_coe_diario_diseo">
+                                    Boletin DISEO Diario
+                                </label>
+                            </div>
+                            <div class="form-check" *ngIf="boletin_diseo_semanal">
+                                <input class="form-check-input" type="radio" name="documento" id="exampleRadios_6"
+                                    value="boletin_coe_semanal_diseo" [(ngModel)]="document_boletin">
+                                <label class="form-check-label" for="exampleRadios_6">
+                                    Boletin DISEO Semanal
+                                </label>
+                            </div>
+
+
+                            <hr
+                                *ngIf="Estadistica_resultados || com_resultados_reducido || ayuda_comparativa_consejos_per">
+                            <h3
+                                *ngIf="Estadistica_resultados || com_resultados_reducido || ayuda_comparativa_consejos_per">
+                                Concejos de Seguridad</h3>
+                            <!-- f
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="documento" id="exampleRadios_8"
+                                value="option3">
+                            <label class="form-check-label" for="exampleRadios_8">
+                                Concesjos
+                            </label>
+                        </div> -->
+
+                            <div class="form-check" *ngIf="Estadistica_resultados">
+                                <input class="form-check-input" type="radio" name="documento" id="exampleRadios_9"
+                                    value="boletin_estadistica_resultados" [(ngModel)]="document_boletin">
+                                <label class="form-check-label" for="exampleRadios_9">
+                                    Estadistica Resultados
+                                </label>
+                            </div>
+
+                            <div class="form-check" *ngIf="com_resultados_reducido">
+                                <input class="form-check-input" type="radio" name="documento" id="exampleRadios_10"
+                                    value="boletin_comparativo_r" [(ngModel)]="document_boletin">
+                                <label class="form-check-label" for="exampleRadios_10">
+                                    Comp. Resultados Redu.
+                                </label>
+                            </div>
+                            <div class="form-check" *ngIf="ayuda_comparativa_consejos_per">
+                                <input class="form-check-input" type="radio" name="documento"
+                                    id="ayuda_comparativa_consejos" value="ayuda_comparativa_consejos"
+                                    [(ngModel)]="document_boletin">
+                                <label class="form-check-label" for="ayuda_comparativa_consejos">
+                                    Comp. Consejos.
+                                </label>
+                            </div>
+
+                            <hr *ngIf="narcotrafico || narcotrafico_metas_per || docna_semanal_per">
+                            <h3 *ngIf="narcotrafico || narcotrafico_metas_per || docna_semanal_per">Narcotrafico</h3>
+
+                            <div class="form-check" *ngIf="narcotrafico">
+                                <input class="form-check-input" type="radio" name="documento" id="exampleRadios_11"
+                                    value="boletin_estadistica_narcotrafico" [(ngModel)]="document_boletin">
+                                <label class="form-check-label" for="exampleRadios_11">
+                                    Estadistica Narcotrafico
+                                </label>
+                            </div>
+                            <div class="form-check" *ngIf="narcotrafico_metas_per">
+                                <input class="form-check-input" type="radio" name="documento" id="narcotrafico_metas"
+                                    value="narcotrafico_metas" [(ngModel)]="document_boletin">
+                                <label class="form-check-label" for="narcotrafico_metas">
+                                    Narcotrafico Metas
+                                </label>
+                            </div>
+                            <div class="form-check" *ngIf="narcotrafico_metas_per">
+                                <input class="form-check-input" type="radio" name="documento"
+                                    id="narcotrafico_metas_power" value="narcotrafico_metas_power"
+                                    [(ngModel)]="document_boletin">
+                                <label class="form-check-label" for="narcotrafico_metas_power">
+                                    Narcotrafico Metas Power Point
+                                </label>
+                            </div>
+                            <div class="form-check" *ngIf="docna_semanal_per">
+                                <input class="form-check-input" type="radio" name="documento" id="docna_semanal"
+                                    value="docna_semanal" [(ngModel)]="document_boletin">
+                                <label class="form-check-label" for="docna_semanal">
+                                    DOCNA Semanal
+                                </label>
+                            </div>
+                            <div class="form-check" *ngIf="linea_estrategica_narcotrafico_per">
+                                <input class="form-check-input" type="radio" name="documento"
+                                    id="res_linea_estrategica_narcotrafico" value="res_linea_estrategica_narcotrafico"
+                                    [(ngModel)]="document_boletin">
+                                <label class="form-check-label" for="res_linea_estrategica_narcotrafico">
+                                    Linea Etrategica PAYA.
+                                </label>
+                            </div>
+                            <div class="form-check" *ngIf="docna_semanal_per">
+                                <input class="form-check-input" type="radio" name="documento"
+                                    id="configuracion_paya_narcotrafico" value="configuracion_paya_narcotrafico"
+                                    [(ngModel)]="document_boletin">
+                                <label class="form-check-label" for="configuracion_paya_narcotrafico">
+                                    DOCNA Paya Power Point
+                                </label>
+                            </div>
+
+                            <hr *ngIf="artemisa || artemisa_comparativo">
+                            <h3 *ngIf="artemisa || artemisa_comparativo">LOE Amazonia</h3>
+
+                            <div class="form-check" *ngIf="artemisa">
+                                <input class="form-check-input" type="radio" name="documento" id="exampleRadios_12"
+                                    value="artemisa" [(ngModel)]="document_boletin">
+                                <label class="form-check-label" for="exampleRadios_12">
+                                    Estadistica LOE Amazonia
+                                </label>
+                            </div>
+
+                            <div class="form-check" *ngIf="artemisa_comparativo">
+                                <input class="form-check-input" type="radio" name="documento" id="exampleRadios_13"
+                                    value="boletin_estadistica_artemisa_comp" [(ngModel)]="document_boletin">
+                                <label class="form-check-label" for="exampleRadios_13">
+                                    Estadistica Artemisa Comp.
+                                </label>
+                            </div>
+
+                            <hr *ngIf="contrabando || contrabando_comparativo">
+                            <h3 *ngIf="contrabando || contrabando_comparativo">Contrabando</h3>
+                            <div class="form-check" *ngIf="contrabando">
+                                <input class="form-check-input" type="radio" name="documento" id="exampleRadios_14"
+                                    value="boletin_estadistica_contrabando" [(ngModel)]="document_boletin">
+                                <label class="form-check-label" for="exampleRadios_14">
+                                    Estadistica Contrabando
+                                </label>
+                            </div>
+
+                            <div class="form-check" *ngIf="contrabando_comparativo">
+                                <input class="form-check-input" type="radio" name="documento" id="exampleRadios_15"
+                                    value="boletin_estadistica_contrabando_comp" [(ngModel)]="document_boletin">
+                                <label class="form-check-label" for="exampleRadios_15">
+                                    Estadistica Contrabando Comp.
+                                </label>
+                            </div>
+
+                            <hr *ngIf="mineria || mineria_comparativo">
+                            <h3 *ngIf="mineria || mineria_comparativo">Mineria</h3>
+                            <div class="form-check" *ngIf="mineria">
+                                <input class="form-check-input" type="radio" name="documento" id="exampleRadios_16"
+                                    value="boletin_estadistica_mineria" [(ngModel)]="document_boletin">
+                                <label class="form-check-label" for="exampleRadios_16">
+                                    Estadistica Mineria
+                                </label>
+                            </div>
+
+                            <div class="form-check" *ngIf="mineria_comparativo">
+                                <input class="form-check-input" type="radio" name="documento" id="exampleRadios_17"
+                                    value="boletin_estadistica_mineria_comparativo" [(ngModel)]="document_boletin">
+                                <label class="form-check-label" for="exampleRadios_17">
+                                    Estadistica Mineria Comp.
+                                </label>
+                            </div>
+
+                            <hr
+                                *ngIf="comparativo_enemigo || comparativo_mapa || comparativo_resultados ||  boletin_mapa_comparativas || com_div_mapa_per">
+                            <h3
+                                *ngIf="comparativo_enemigo || comparativo_mapa || comparativo_resultados ||  boletin_mapa_comparativas || com_div_mapa_per">
+                                Comparativo</h3>
+                            <div class="form-check" *ngIf="comparativo_enemigo">
+                                <input class="form-check-input" type="radio" name="documento" id="exampleRadios_18"
+                                    value="boletin_comparativo_enemigo" [(ngModel)]="document_boletin">
+                                <label class="form-check-label" for="exampleRadios_18">
+                                    Comparativo ENE.
+                                </label>
+                            </div>
+
+                            <div class="form-check" *ngIf="comparativo_mapa">
+                                <input class="form-check-input" type="radio" name="documento" id="exampleRadios_19"
+                                    value="boletin_comparativo_mapa" [(ngModel)]="document_boletin">
+                                <label class="form-check-label" for="exampleRadios_19">
+                                    Comparativo MAP.
+                                </label>
+                            </div>
+
+                            <div class="form-check" *ngIf="comparativo_resultados">
+                                <input class="form-check-input" type="radio" name="documento" id="exampleRadios_20"
+                                    value="boletin_comparativo" [(ngModel)]="document_boletin">
+                                <label class="form-check-label" for="exampleRadios_20">
+                                    Comparativo Resultados.
+                                </label>
+                            </div>
+
+                            <div class="form-check" *ngIf="boletin_mapa_comparativas">
+                                <input class="form-check-input" type="radio" name="documento"
+                                    id="boletin_mapa_comparativa" value="boletin_mapa_comparativa"
+                                    [(ngModel)]="document_boletin">
+                                <label class="form-check-label" for="boletin_mapa_comparativa">
+                                    Comparativos mapa.
+                                </label>
+                            </div>
+                            <div class="form-check" *ngIf="com_div_mapa_per">
+                                <input class="form-check-input" type="radio" name="documento" id="com_div_mapa"
+                                    value="com_div_mapa" [(ngModel)]="document_boletin">
+                                <label class="form-check-label" for="com_div_mapa">
+                                    Comp. Map. Div
+                                </label>
+                            </div>
+                            <div class="form-check" *ngIf="com_div_mapa_per">
+                                <input class="form-check-input" type="radio" name="documento" id="resultados_comparativos_ejc_power_point"
+                                    value="resultados_comparativos_ejc_power_point" [(ngModel)]="document_boletin">
+                                <label class="form-check-label" for="resultados_comparativos_ejc_power_point">
+                                    Comp. power point
+                                </label>
+                            </div>
+                            <hr
+                                *ngIf="afectacion_comparativa_p_t || lis_afectaciones || afectaciones_mapa || afectaciones_cuadros">
+                            <h3
+                                *ngIf="afectacion_comparativa_p_t || lis_afectaciones || afectaciones_mapa || afectaciones_cuadros">
+                                Afectaciones Propias T</h3>
+
+                            <div class="form-check" *ngIf="afectacion_comparativa_p_t">
+                                <input class="form-check-input" type="radio" name="documento" id="exampleRadios_22"
+                                    value="cuadro_compartivo_afectaciones" [(ngModel)]="document_boletin">
+                                <label class="form-check-label" for="exampleRadios_22">
+                                    Afectaciones Comparativas
+                                </label>
+                            </div>
+
+                            <div class="form-check" *ngIf="lis_afectaciones">
+                                <input class="form-check-input" type="radio" name="documento" id="exampleRadios_23"
+                                    value="listado_afectaciones" [(ngModel)]="document_boletin">
+                                <label class="form-check-label" for="exampleRadios_23">
+                                    List. Afectaciones
+                                </label>
+                            </div>
+
+                            <div class="form-check" *ngIf="afectaciones_mapa">
+                                <input class="form-check-input" type="radio" name="documento" id="exampleRadios_24"
+                                    value="afectaciones_mapa" [(ngModel)]="document_boletin">
+                                <label class="form-check-label" for="exampleRadios_24">
+                                    Afectaciones - Mapa
+                                </label>
+                            </div>
+
+                            <div class="form-check" *ngIf="afectaciones_cuadros">
+                                <input class="form-check-input" type="radio" name="documento" id="exampleRadios_25"
+                                    value="afectaciones_cuadro" [(ngModel)]="document_boletin">
+                                <label class="form-check-label" for="exampleRadios_25">
+                                    Afectaciones - Cuadros
+                                </label>
+                            </div>
+
+                            <hr *ngIf="regiones">
+                            <h3 *ngIf="regiones">REGIONES</h3>
+
+                            <div class="form-check" *ngIf="regiones">
+                                <input class="form-check-input" type="radio" name="documento" id="exampleRadios_26"
+                                    value="regiones_colombia" [(ngModel)]="document_boletin">
+                                <label class="form-check-label" for="exampleRadios_26">
+                                    Regiones
+                                </label>
+                            </div>
+
+                            <hr
+                                *ngIf="resaltantes || reslatantes_divisiones || resaltantes_mapa_per || comp_div_mapa_bal_per">
+                            <h3
+                                *ngIf="resaltantes || reslatantes_divisiones || resaltantes_mapa_per || comp_div_mapa_bal_per">
+                                Resultados
+                                Resaltantes</h3>
+
+                            <div class="form-check" *ngIf="resaltantes">
+                                <input class="form-check-input" type="radio" name="documento" id="exampleRadios_27"
+                                    value="resultados_resaltantes" [(ngModel)]="document_boletin"
+                                    (click)="mostrarVentana = true">
+                                <label class="form-check-label" for="exampleRadios_27">
+                                    Resultados Resaltantes
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="documento"
+                                    id="resultados_c_power_point" value="resultados_c_power_point"
+                                    [(ngModel)]="document_boletin">
+                                <label class="form-check-label" for="resultados_c_power_point">
+                                    Resultados Power Point
+                                </label>
+                            </div>
+                            <div class="form-check" *ngIf="reslatantes_divisiones">
+                                <input class="form-check-input" type="radio" name="documento" id="exampleRadios_28"
+                                    value="resultados_resaltantes_div" [(ngModel)]="document_boletin">
+                                <label class="form-check-label" for="exampleRadios_28">
+                                    Resultados Resaltantes DIV
+                                </label>
+                            </div>
+                            <div class="form-check" *ngIf="resaltantes_mapa_per">
+                                <input class="form-check-input" type="radio" name="documento" id="resultados_mapa"
+                                    value="resultados_mapa" [(ngModel)]="document_boletin">
+                                <label class="form-check-label" for="resultados_mapa">
+                                    Resultados Mapa
+                                </label>
+                            </div>
+                            <div class="form-check" *ngIf="comp_div_mapa_bal_per">
+                                <input class="form-check-input" type="radio" name="documento" id="comp_div_mapa_bal"
+                                    value="comp_div_mapa_bal" [(ngModel)]="document_boletin">
+                                <label class="form-check-label" for="comp_div_mapa_bal">
+                                    Res Map Bal
+                                </label>
+                            </div>
+                            <hr
+                                *ngIf="res_lineas_estrategicas_per || res_linea_obj_4_per || linea_estrategica_narcotrafico_per">
+                            <h3
+                                *ngIf="res_lineas_estrategicas_per || res_linea_obj_4_per || linea_estrategica_narcotrafico_per ">
+                                Lineas Estrategicas</h3>
+                            <div class="form-check" *ngIf="res_lineas_estrategicas_per">
+                                <input class="form-check-input" type="radio" name="documento"
+                                    id="configuracion_especial_res" value="configuracion_especial_res"
+                                    [(ngModel)]="document_boletin">
+                                <label class="form-check-label" for="configuracion_especial_res">
+                                    Linea Etrategica #2. power point
+                                </label>
+                            </div>
+                            <div class="form-check" *ngIf="res_lineas_estrategicas_per">
+                                <input class="form-check-input" type="radio" name="documento"
+                                    id="configuracion_especial_res_pdf" value="configuracion_especial_res_pdf"
+                                    [(ngModel)]="document_boletin">
+                                <label class="form-check-label" for="configuracion_especial_res_pdf">
+                                    Linea Etrategica #2.
+                                </label>
+                            </div>
+                            <div class="form-check" *ngIf="res_linea_obj_4_per">
+                                <input class="form-check-input" type="radio" name="documento" id="res_linea_obj_4"
+                                    value="res_linea_obj_4" [(ngModel)]="document_boletin">
+                                <label class="form-check-label" for="res_linea_obj_4">
+                                    Linea Etrategica #4.
+                                </label>
+                            </div>
+                            <div class="form-check" *ngIf="res_lineas_estrategicas_per">
+                                <input class="form-check-input" type="radio" name="documento"
+                                    id="configuracion_especial_res_sin_Comparar"
+                                    value="configuracion_especial_res_sin_Comparar" [(ngModel)]="document_boletin">
+                                <label class="form-check-label" for="configuracion_especial_res_sin_Comparar">
+                                    Linea Etrategica sin Comparar #2.
+                                </label>
+                            </div>
+                            <div class="form-check" *ngIf="res_lineas_estrategicas_per">
+                                <input class="form-check-input" type="radio" name="documento" id="id_mejor_unidadboj2"
+                                    value="id_mejor_unidadboj2" [(ngModel)]="document_boletin"
+                                    (click)="mostrarVentana_mejor = true">
+                                <label class="form-check-label" for="id_mejor_unidadboj2">
+                                    Mejores Unidades.
+                                </label>
+                            </div>
+
+                            <hr *ngIf="obj_1_per || obj_2_per || obj_3_per || obj_4_per">
+                            <h3 *ngIf="obj_1_per || obj_2_per || obj_3_per || obj_4_per">
+                                Lineas Estrategicas EJC</h3>
+                            <div class="form-check" *ngIf="obj_1_per">
+                                <input class="form-check-input" type="radio" name="documento"
+                                    id="ayuda_comparativa_obj_1" value="ayuda_comparativa_obj_1"
+                                    [(ngModel)]="document_boletin">
+                                <label class="form-check-label" for="ayuda_comparativa_obj_1">
+                                    OBJ #1.
+                                </label>
+                            </div>
+                            <div class="form-check" *ngIf="obj_2_per">
+                                <input class="form-check-input" type="radio" name="documento"
+                                    id="ayuda_comparativa_obj_2" value="ayuda_comparativa_obj_2"
+                                    [(ngModel)]="document_boletin">
+                                <label class="form-check-label" for="ayuda_comparativa_obj_2">
+                                    OBJ #2.
+                                </label>
+                            </div>
+                            <div class="form-check" *ngIf="obj_3_per">
+                                <input class="form-check-input" type="radio" name="documento"
+                                    id="ayuda_comparativa_obj_3" value="ayuda_comparativa_obj_3"
+                                    [(ngModel)]="document_boletin">
+                                <label class="form-check-label" for="ayuda_comparativa_obj_3">
+                                    OBJ #3.
+                                </label>
+                            </div>
+                            <div class="form-check" *ngIf="obj_4_per">
+                                <input class="form-check-input" type="radio" name="documento"
+                                    id="ayuda_comparativa_obj_4" value="ayuda_comparativa_obj_4"
+                                    [(ngModel)]="document_boletin">
+                                <label class="form-check-label" for="ayuda_comparativa_obj_4">
+                                    OBJ #4.
+                                </label>
+                            </div>
+
+                            <hr *ngIf="excel_ut_per || excel_amenaza_per || resultados_excel_tipo_operaciones_per">
+                            <h3 *ngIf="excel_ut_per || excel_amenaza_per || resultados_excel_tipo_operaciones_per">
+                                Resultados Excel</h3>
+
+
+                            <div class="form-check" *ngIf="excel_ut_per">
+                                <input class="form-check-input" type="radio" name="documento" id="excel_ut"
+                                    value="excel_ut" [(ngModel)]="document_boletin">
+                                <label class="form-check-label" for="excel_ut">
+                                    Excel UT
+                                </label>
+                            </div>
+
+
+                            <div class="form-check" *ngIf="excel_amenaza_per">
+                                <input class="form-check-input" type="radio" name="documento" id="excel_amenaza"
+                                    value="excel_amenaza" [(ngModel)]="document_boletin">
+                                <label class="form-check-label" for="excel_amenaza">
+                                    Excel Amenaza
+                                </label>
+                            </div>
+
+                            <div class="form-check" *ngIf="resultados_excel_tipo_operaciones_per">
+                                <input class="form-check-input" type="radio" name="documento"
+                                    id="resultados_excel_tipo_operaciones" value="resultados_excel_tipo_operaciones"
+                                    [(ngModel)]="document_boletin">
+                                <label class="form-check-label" for="resultados_excel_tipo_operaciones">
+                                    Excel Tipo Operaciones
+                                </label>
+                            </div>
+                            <div class="form-check" *ngIf="excel_anios_permiso">
+                                <input class="form-check-input" type="radio" name="documento" id="excel_anios_permiso"
+                                    value="excel_anios_permiso" [(ngModel)]="document_boletin">
+                                <label class="form-check-label" for="excel_anios_permiso">
+                                    Excel Años
+                                </label>
+                            </div>
+
+                            <hr *ngIf="archivo_spoa_per">
+                            <h3 *ngIf="archivo_spoa_per">Archivos Planos Excel</h3>
+                            <div class="form-check" *ngIf="archivo_spoa_per">
+                                <input class="form-check-input" type="radio" name="documento" id="archivo_spoas_error"
+                                    value="archivo_spoas_error" [(ngModel)]="document_boletin">
+                                <label class="form-check-label" for="archivo_spoas_error">
+                                    Resultados Revista SPOA
+                                </label>
+                            </div>
+                            <hr *ngIf="archivo_plano_excel_per">
+                            <h3 *ngIf="archivo_plano_excel_per">Archivos Planos </h3>
+                            <div class="form-check" *ngIf="archivo_plano_excel_per">
+                                <input class="form-check-input" type="radio" name="documento" id="archivo_plano_excel"
+                                    value="archivo_plano_excel" [(ngModel)]="document_boletin">
+                                <label class="form-check-label" for="archivo_plano_excel">
+                                    Archivo Plano
+                                </label>
+                            </div>
+
+                            <hr *ngIf="mapa_division_dinamico_per || afectacion_a_la_amenaza">
+                            <h3 *ngIf="mapa_division_dinamico_per || afectacion_a_la_amenaza">Resultado Dinamicos</h3>
+                            <br>
+                            <button class="btn btn-danger" (click)="resultados_oculto()"
+                                *ngIf="mapa_division_dinamico_per">Resultados</button>
+                            <br>
+
+                            <div class="form-check" *ngIf="mapa_division_dinamico_per">
+                                <input class="form-check-input" type="radio" name="documento"
+                                    id="mapa_dinamico_divisiones" value="mapa_dinamico_divisiones"
+                                    [(ngModel)]="document_boletin">
+                                <label class="form-check-label" for="mapa_dinamico_divisiones">
+                                    Mapa Dinamico Divisiones
+                                </label>
+                            </div>
+                            <div class="form-check" *ngIf="afectacion_a_la_amenaza">
+                                <input class="form-check-input" type="radio" name="documento" id="resultados_una_ayuda"
+                                    value="resultados_una_ayuda" [(ngModel)]="document_boletin">
+                                <label class="form-check-label" for="resultados_una_ayuda">
+                                    Ayuda un Solo Resultado
+                                </label>
+                            </div>
+
+                            <br>
+                            <br>
+                        </div>
+                        <div class="posicion_btn">
+                            <button class="btn btn-primary" (click)="conecion_api(documentos_pdf)">DESCARGAR</button>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- municipios_oculto -->
+                <div class="form-group resultados resultados_oculto " style="margin: auto;" id="resultados_oculto">
+                    <h1>Resultados a Selecionar</h1>
+
+                    <div class="posicion_resultados ">
+                        <div class="posicion_btn_menu">
+                            <button class="btn btn-danger x" (click)="resultados_oculto()"
+                                data-tooltip="Cerrar resultados">
+                                ✖
+                            </button>
+
+                            <button class="btn btn-primary icono" (click)="menu_oculto()" data-tooltip="Mostrar menú">
+                                ☰
+                            </button>
+                        </div>
+
+
+                        <br>
+                        <br>
+                        <div class="menu_oculto menu_oculto_hide" id="menu_oculto">
+                            <div class="listados">
+                                <div class="señal"></div>
+                                <h5 class="point" (click)="scroll(elemento)">Afectaciones a la Amenaza</h5>
+                            </div>
+                            <div class="listados">
+                                <div class="señal"></div>
+                                <h5 class="point" (click)="scroll(elemento_1)">Afectaciones a Propias Tropas</h5>
+                            </div>
+                            <div class="listados">
+                                <div class="señal"></div>
+                                <h5 class="point" (click)="scroll(elemento_2)">Material de Guerra</h5>
+                            </div>
+                            <div class="listados">
+                                <div class="señal"></div>
+                                <h5 class="point" (click)="scroll(elemento_3)">Combates</h5>
+                            </div>
+                            <div class="listados">
+                                <div class="señal"></div>
+                                <h5 class="point" (click)="scroll(elemento_4)">Ataque a la Fuerza Publica</h5>
+                            </div>
+                            <div class="listados">
+                                <div class="señal"></div>
+                                <h5 class="point" (click)="scroll(elemento_5)">Explosivos</h5>
+                            </div>
+                            <div class="listados">
+                                <div class="señal"></div>
+                                <h5 class="point" (click)="scroll(elemento_6)">Narcotrafico</h5>
+                            </div>
+                            <div class="listados">
+                                <div class="señal"></div>
+                                <h5 class="point" (click)="scroll(elemento_7)">Economias Ilícitas</h5>
+                            </div>
+                            <div class="listados">
+                                <div class="señal"></div>
+                                <h5 class="point" (click)="scroll(elemento_8)">Afectaciones al Oleoducto</h5>
+                            </div>
+                            <div class="listados">
+                                <div class="señal"></div>
+                                <h5 class="point" (click)="scroll(elemento_9)">Afectaciones a la Mineria</h5>
+                            </div>
+                            <div class="listados">
+                                <div class="señal"></div>
+                                <h5 class="point" (click)="scroll(elemento_10)">Afectaciones al Contrabando</h5>
+                            </div>
+                            <div class="listados">
+                                <div class="señal"></div>
+                                <h5 class="point" (click)="scroll(elemento_11)">Afectaciones LOE Amazonía</h5>
+                            </div>
+                            <div class="listados">
+                                <div class="señal"></div>
+                                <h5 class="point" (click)="scroll(elemento_12)">Otros Eventos</h5>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+
+                    <div class="row cuerpo_card">
+                        <h3 #elemento id="elemento">Afectaciones a la Amenaza</h3>
+                        <div class="col-sm-3" *ngFor="let item of unidad_selecionada_resultados"
+                            (click)="resultados_selecionados(item)">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="che" [id]="item"></div>
+                                    <h5 class="card-title form-check-label">
+                                        {{item}}
+                                    </h5>
+
+                                </div>
+                            </div>
+                        </div>
+                        <br><br>
+                        <h3 #elemento_1 id="elemento_1">Afectaciones a Propias Tropas</h3>
+                        <div class="col-sm-3" *ngFor="let item of unidad_selecionada_resultados_tropas"
+                            (click)="resultados_selecionados(item)">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="che" [id]="item"></div>
+                                    <h5 class="card-title form-check-label">
+                                        {{item}}
+                                    </h5>
+
+                                </div>
+                            </div>
+                        </div>
+                        <br><br>
+                        <h3 #elemento_2 id="elemento_2">Material de Guerra</h3>
+                        <div class="col-sm-3" *ngFor="let item of unidad_selecionada_resultados_armamento"
+                            (click)="resultados_selecionados(item)">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="che" [id]="item"></div>
+                                    <h5 class="card-title form-check-label">
+                                        {{item}}
+                                    </h5>
+
+                                </div>
+                            </div>
+                        </div>
+                        <h3 #elemento_3 id="elemento_3">Combates</h3>
+                        <div class="col-sm-3" *ngFor="let item of comates_a_selecionar"
+                            (click)="resultados_selecionados(item)">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="che" [id]="item"></div>
+                                    <h5 class="card-title form-check-label">
+                                        {{item}}
+                                    </h5>
+                                </div>
+                            </div>
+                        </div>
+                        <h3 #elemento_4 id="elemento_4">Ataque a la Fuerza Publica</h3>
+                        <div class="col-sm-3" *ngFor="let item of ataque_fuerza_publica"
+                            (click)="resultados_selecionados(item)">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="che" [id]="item"></div>
+                                    <h5 class="card-title form-check-label">
+                                        {{item}}
+                                    </h5>
+                                </div>
+                            </div>
+                        </div>
+                        <h3 #elemento_5 id="elemento_5">Explosivos</h3>
+                        <div class="col-sm-3" *ngFor="let item of material_explosivos"
+                            (click)="resultados_selecionados(item)">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="che" [id]="item"></div>
+                                    <h5 class="card-title form-check-label">
+                                        {{item}}
+                                    </h5>
+                                </div>
+                            </div>
+                        </div>
+                        <h3 #elemento_6 id="elemento_6">Narcotrafico</h3>
+                        <div class="col-sm-3" *ngFor="let item of narcotrafico_lista"
+                            (click)="resultados_selecionados(item)">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="che" [id]="item"></div>
+                                    <h5 class="card-title form-check-label">
+                                        {{item}}
+                                    </h5>
+                                </div>
+                            </div>
+                        </div>
+                        <h3 #elemento_7 id="elemento_7">Economias Ilícitas</h3>
+                        <div class="col-sm-3" *ngFor="let item of economias_ilicitas"
+                            (click)="resultados_selecionados(item)">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="che" [id]="item"></div>
+                                    <h5 class="card-title form-check-label">
+                                        {{item}}
+                                    </h5>
+                                </div>
+                            </div>
+                        </div>
+                        <h3 #elemento_8 id="elemento_8">Afectaciones al Oleoducto</h3>
+                        <div class="col-sm-3" *ngFor="let item of afectaciones_oleoducto"
+                            (click)="resultados_selecionados(item)">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="che" [id]="item"></div>
+                                    <h5 class="card-title form-check-label">
+                                        {{item}}
+                                    </h5>
+                                </div>
+                            </div>
+                        </div>
+                        <h3 #elemento_9 id="elemento_9">Afectaciones a la Mineria</h3>
+                        <div class="col-sm-3" *ngFor="let item of afectaciones_a_la_mineria"
+                            (click)="resultados_selecionados(item)">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="che" [id]="item"></div>
+                                    <h5 class="card-title form-check-label">
+                                        {{item}}
+                                    </h5>
+                                </div>
+                            </div>
+                        </div>
+                        <h3 #elemento_10 id="elemento_10">Afectaciones al Contrabando</h3>
+                        <div class="col-sm-3" *ngFor="let item of afectaciones_al_contranando"
+                            (click)="resultados_selecionados(item)">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="che" [id]="item"></div>
+                                    <h5 class="card-title form-check-label">
+                                        {{item}}
+                                    </h5>
+                                </div>
+                            </div>
+                        </div>
+                        <h3 #elemento_11 id="elemento_11">Afectaciones LOE Amazonía</h3>
+                        <div class="col-sm-3" *ngFor="let item of loe_amazonia" (click)="resultados_selecionados(item)">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="che" [id]="item"></div>
+                                    <h5 class="card-title form-check-label">
+                                        {{item}}
+                                    </h5>
+                                </div>
+                            </div>
+                        </div>
+                        <h3 #elemento_12 id="elemento_12">Otros Eventos</h3>
+                        <div class="col-sm-3" *ngFor="let item of otro" (click)="resultados_selecionados(item)">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="che" [id]="item"></div>
+                                    <h5 class="card-title form-check-label">
+                                        {{item}}
+                                    </h5>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <div class="alerta" style="margin-top: 15px;">
+                        <div class="alert alert-secondary" role="alert">
+                            <ul>
+                                <li *ngFor="let mun of datos_resultados">{{mun}}</li>
+                            </ul>
+
+                        </div>
+                    </div>
+
+                </div>
+                <!-- enemigo -->
+                <div class="form-group amenaza municipios_oculto " style="margin: auto;" id="ver_amenzaza">
+                    <h3>Amenaza</h3>
+                    <div class="row">
+                        <div class="col-sm-3" *ngFor="let item of amenaza_select" (click)="enemigos_selecionados(item)">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="che" [id]="item"></div>
+                                    <h5 class="card-title form-check-label">
+                                        {{item}}
+                                    </h5>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <hr>
+                    <h3>Estructura</h3>
+                    <div class="row">
+                        <div class="col-sm-3" *ngFor="let item of acam_enemigo" (click)="estructura_selecionados(item)">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="che" [id]="item"></div>
+                                    <h5 class="card-title form-check-label">
+                                        {{item}}
+                                    </h5>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+
+                    <h3>Bloque</h3>
+                    <div class="row">
+                        <div class="col-sm-3" *ngFor="let item of acam_estructura" (click)="bloque_selecionados(item)">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="che" [id]="item"></div>
+                                    <h5 class="card-title form-check-label">
+                                        {{item}}
+                                    </h5>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <h3>suboestructura</h3>
+                    <div class="row">
+                        <div class="col-sm-3" *ngFor="let item of ene_estructura"
+                            (click)="suboestructura_selecionados(item)">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="che" [id]="item"></div>
+                                    <h5 class="card-title form-check-label">
+                                        {{item}}
+                                    </h5>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="alerta" style="margin-top: 15px;">
+                        <div class="alert alert-secondary" role="alert">
+                            <ul>
+                                <li *ngFor="let mun of datos_estructuras">{{mun}}</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="alerta" style="margin-top: 15px;">
+                        <div class="alert alert-secondary" role="alert">
+                            <ul>
+                                <li *ngFor="let mun of datos_amenaza">{{mun}}</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="alerta" style="margin-top: 15px;">
+                        <div class="alert alert-secondary" role="alert">
+                            <ul>
+                                <li *ngFor="let mun of datos_bloque">{{mun}}</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="alerta" style="margin-top: 15px;">
+                        <div class="alert alert-secondary" role="alert">
+                            <ul>
+                                <li *ngFor="let mun of datos_suboestructura">{{mun}}</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <button class="btn btn-danger posicion_resultados x" (click)="ver_amenaza()"></button>
+                </div>
+                <hr>
+                <!-- enemigo -->
+                <div class="form-group amenaza municipios_oculto " style="margin: auto;" id="ver_batallones">
+                    <h3>Batallones</h3>
+                    <div class="row">
+                        <div class="col-sm-3" *ngFor="let item of unidad_selecionada_batallones"
+                            (click)="batallones_selecionados(item)">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="che" [id]="item"></div>
+                                    <h5 class="card-title form-check-label">
+                                        {{item}}
+                                    </h5>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="alerta" style="margin-top: 15px;">
+                        <div class="alert alert-secondary" role="alert">
+                            <ul>
+                                <li *ngFor="let mun of datos_batallones">{{mun}}</li>
+                            </ul>
+
+                        </div>
+                    </div>
+                    <button class="btn btn-danger posicion_resultados x" (click)="ver_batallones()"></button>
+                </div>
+                <!-- ver_brigadas -->
+                <div class="form-group amenaza municipios_oculto " style="margin: auto;" id="ver_brigadas">
+                    <h3>Brigadas</h3>
+                    <div class="row">
+                        <div class="col-sm-3"
+                            *ngFor="let item of unidad_selecionada_brigada; index as i; first as isFirst"
+                            (click)="batallones(2,3, item, i)">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="che" id="{{i+item}}"></div>
+                                    <h5 class="card-title form-check-label">
+                                        {{item}}
+                                    </h5>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="alerta" style="margin-top: 15px;">
+                        <div class="alert alert-secondary" role="alert">
+                            <ul>
+                                <li *ngFor="let mun of unidad_selecionada_brigadas_filtradas">{{mun}}</li>
+                            </ul>
+
+                        </div>
+                    </div>
+                    <button class="btn btn-danger posicion_resultados x" (click)="ver_brigadas()"></button>
+                </div>
+            </div>
+
+
+            <!-- *ngIf="aler_p_datos" -->
+
+            <br>
+        </form>
+    </div>
+
+</div>
+
+
+<!-- Fondo modal -->
+<div class="modal-overlay oculto" id="mostrar_dpto">
+    <!-- Ventana flotante -->
+    <div class="modal-content listado-modal" id="ventana_dpto">
+        <div class="card-header d-flex justify-content-between align-items-center cursor-move" id="cabecera_dpto">
+            <span><strong>Seleccionar Departamentos</strong></span>
+            <button class="btn btn-sm btn-danger" (click)="mostrar_dpto()">✖</button>
+        </div>
+
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item" *ngFor="let item of departamentos_filtrados">
+                <div class="form-check">
+                    <input class="che_1" type="checkbox" ngModel name="boletin_diseo" [id]="item" value="OK"
+                        (click)="departamentoos(4, 5, item)">
+                    <label class="card-title form-check-label" [for]="item">{{ item }}</label>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<!-- Ventana flotante de municipios -->
+<div class="ventana-flotante oculto" id="mostrar_mpio">
+    <div class="card listado-modal" id="ventana_mpio">
+        <!-- ENCABEZADO FIJO -->
+        <div class="card-header d-flex justify-content-between align-items-center cursor-move">
+            <span><strong>Seleccionar Municipios</strong></span>
+            <button class="btn btn-sm btn-danger" (click)="mostrar_mpio()">✖</button>
+        </div>
+
+        <!-- LISTADO DESPLAZABLE -->
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item" *ngFor="let item of unidad_selecionada_municipios; index as i">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" ngModel name="mpio" [id]="i + '. ' + item"
+                        value="OK" (click)="municipios_selecionados(item, i)">
+                    <label class="form-check-label" [for]="i + '. ' + item">
+                        {{ i + '. ' + item }}
+                    </label>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+
+
+<div class="ventana-subregion" *ngIf="ventanaVisible">
+    <div class="ventana-subregion-contenido">
+        <h3>Seleccione una Subregión</h3>
+
+        <div class="subregiones-lista">
+            <div *ngFor="let subregion of subregiones" class="subregion-item">
+                <label class="radio-opcion">
+                    <input type="radio" class="radio-subregion" name="subregionEmergente" [value]="subregion.id"
+                        [(ngModel)]="subregionSeleccionadaId" />
+                    <span class="nombre-sub" (click)="toggleDetalleSubregion(subregion.id)">
+                        {{ subregion.nombre }}
+                    </span>
+                    <span class="detalle-sub">
+                        {{ subregion.departamentos.length }} deptos / {{ contarMunicipios(subregion) }} municipios
+                    </span>
+                </label>
+
+                <!-- Mostrar detalles solo si está expandida -->
+                <div *ngIf="subregionDetalleVisible === subregion.id" class="detalle-muni">
+                    <strong>Departamentos:</strong>
+                    <ul>
+                        <li *ngFor="let d of subregion.departamentos">
+                            {{ d.nombre }}:
+                            <ul>
+                                <li *ngFor="let m of d.municipios">- {{ m }}</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="ventana-subregion-botones">
+            <button class="btn-confirmar" (click)="confirmarSeleccion()">✅ Confirmar</button>
+            <button class="btn-limpiar" (click)="quitarSeleccion()">🧹 Quitar selección</button>
+            <button class="btn-cerrar" (click)="ventanaVisible = false">❌ Cerrar</button>
+        </div>
+    </div>
+</div>
+
+
+<div class="ventana-emergente" *ngIf="mostrarVentana">
+    <div class="contenido">
+        <h3>Afectaciones</h3>
+
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="afectacion" id="afectacion_con" value="con"
+                [(ngModel)]="afectacion" (change)="evaluarAfectacion()" />
+            <label class="form-check-label" for="afectacion_con">
+                Con afectaciones
+            </label>
+        </div>
+
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="afectacion" id="afectacion_sin" value="sin"
+                [(ngModel)]="afectacion" (change)="evaluarAfectacion()" />
+            <label class="form-check-label" for="afectacion_sin">
+                Sin afectaciones
+            </label>
+        </div>
+
+        <!-- Mensaje dinámico -->
+        <div class="alert alert-info mt-3" *ngIf="mensajeAfectacion">
+            {{ mensajeAfectacion }}
+        </div>
+
+        <!-- Mostrar botón solo si se ha seleccionado una opción -->
+        <button class="btn-cerrar mt-3" *ngIf="afectacion" (click)="mostrarVentana = false">
+            Cerrar
+        </button>
+    </div>
+</div>
+
+<!-- Overlay Mejor Unidad -->
+<div class="mejoru-overlay" *ngIf="mostrarVentana_mejor">
+    <div class="mejoru-modal shadow-lg">
+
+        <!-- Botón cerrar -->
+        <button class="mejoru-btn-close" type="button" (click)="mostrarVentana_mejor = false" aria-label="Cerrar">
+            <i class="bi bi-x"></i>
+        </button>
+
+        <!-- TÍTULO -->
+        <h4 class="mejoru-title text-center mb-3">
+            📊 Mejor Unidad – Comparación OB2
+        </h4>
+
+        <!-- TEXTO -->
+        <p class="mejoru-text text-center mb-4">
+            Seleccione cómo desea organizar las unidades que se generarán:
+        </p>
+
+        <!-- OPCIÓN ASC -->
+        <div class="form-check mejoru-option">
+            <input class="form-check-input" type="radio" name="unidades_asc" id="mejoru_asc" value="asc"
+                [(ngModel)]="unidades_asc" (change)="ascendete()" />
+
+            <label class="form-check-label" for="mejoru_asc">
+                <i class="bi bi-sort-numeric-down-alt"></i>
+                <strong>Mayor a menor</strong>
+                <small>La unidad con mejor desempeño aparecerá primero</small>
+            </label>
+        </div>
+
+        <!-- OPCIÓN DESC -->
+        <div class="form-check mejoru-option">
+            <input class="form-check-input" type="radio" name="unidades_asc" id="mejoru_desc" value="desc"
+                [(ngModel)]="unidades_asc" (change)="ascendete()" />
+
+            <label class="form-check-label" for="mejoru_desc">
+                <i class="bi bi-sort-numeric-up"></i>
+                <strong>Menor a mayor</strong>
+                <small>La unidad con menor desempeño aparecerá primero</small>
+            </label>
+        </div>
+        <!-- OPCIÓN completa -->
+        <div class="form-check mejoru-option">
+            <input class="form-check-input" type="radio" name="unidades_completa" id="unidades_completa" value="solodiv"
+                [(ngModel)]="completa_und" (change)="completa()" />
+
+            <label class="form-check-label" for="unidades_completa">
+                <i class="bi bi-sort-numeric-up"></i>
+                <strong>Solo las Divisioens</strong>
+                <small>Solo se Mostraran las Divisiones</small>
+            </label>
+        </div>
+        <div class="form-check mejoru-option">
+            <input class="form-check-input" type="radio" name="unidades_completa" id="unidades_completa_compl"
+                value="compl" [(ngModel)]="completa_und" (change)="completa()" />
+
+            <label class="form-check-label" for="unidades_completa_compl">
+                <i class="bi bi-sort-numeric-up"></i>
+                <strong>EJC</strong>
+                <small>Mostrara todas las unidades del Ejército</small>
+            </label>
+        </div>
+        <!-- MENSAJE -->
+        <div class="alert alert-info text-center mb-2" *ngIf="mensaje_asc" [innerHTML]="mensaje_asc">
+        </div>
+
+        <div class="alert alert-secondary text-center" *ngIf="mensaje_asc_completa" [innerHTML]="mensaje_asc_completa">
+        </div>
+
+        <!-- BOTÓN PRINCIPAL -->
+        <div class="text-center mt-4">
+            <button class="btn btn-primary btn-lg" (click)="conecion_api(documentos_pdf)">
+                <i class="bi bi-download"></i>
+                Generar y Descargar
+            </button>
+        </div>
+
+    </div>
+</div>
+
+
+<!-- Overlay Selector Apoyos -->
+<div class="selap-overlay" *ngIf="ventanaApoyosVisible">
+    <div class="selap-modal">
+
+        <!-- Botón cerrar -->
+        <button class="selap-close-btn" type="button" (click)="cerrarVentanaApoyos()" aria-label="Cerrar">
+            <i class="bi bi-x"></i>
+        </button>
+
+        <h4 class="selap-title">Apoyos disponibles</h4>
+
+        <!-- Grid de apoyos -->
+        <div class="selap-grid">
+            <label class="selap-item" *ngFor="let apoyo of apoyosUnificados" [for]="apoyo.id">
+
+                <input type="radio" class="selap-radio" name="apoyo_disponible" [id]="apoyo.id" [value]="apoyo.valor"
+                    [(ngModel)]="apoyoSeleccionado" />
+
+                <span class="selap-text">
+                    {{ apoyo.texto }}
+                </span>
+            </label>
+        </div>
+
+    </div>
+</div>
+
+
+
+<app-spiner></app-spiner>

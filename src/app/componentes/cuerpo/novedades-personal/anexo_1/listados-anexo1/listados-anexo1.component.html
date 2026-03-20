@@ -1,0 +1,78 @@
+<app-menu></app-menu>
+<div class="cuerpo">
+    <div class="col-md-12 ">
+        <div class="row contenedor">
+            <form #buscar_personal="ngForm">
+            <div class="row col-md-12">
+
+                <div class="row col-md-5">
+                    <input type="imput" class="form-control rounded" placeholder="CEDULA" aria-label="Search"
+                        aria-describedby="search-addon" name="cedula" id="cedula" ngModel/>
+                </div>
+                <div class="row col-md-5">
+                    <input type="date" class="form-control rounded" placeholder="Search" aria-label="Search"
+                        aria-describedby="search-addon" name="fecha" id="fecha" ngModel/>
+                </div>
+                <div class="row col-md-2">
+                    <button type="button" class="btn btn-outline-primary" data-mdb-ripple-init
+                        (click)="buscar(buscar_personal)">BUSCAR</button>
+                </div>
+
+            </div>
+            </form>
+            <hr>
+            <div class="col-md-12 ">
+                <h2 class="titulo"> {{listado_usurios.length}} Personas Lesionadas Fuera de Combate</h2>
+                <div class="radios">
+                    <table class="table table-hover" id="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">No.</th>
+                                <th scope="col" style="text-align: left;">NOMBRES Y APELLIDOS</th>
+                                <th scope="col">CEDULA</th>
+                                <th scope="col">FECHA</th>
+                                <th scope="col">CLASE NOVEDAD</th>
+                                <th scope="col">TIPO DE NOVEDAD</th>
+                                <th scope="col">CAUSO MUERTE</th>
+                                
+                                <th scope="col">INFORMACIÓN</th>
+
+                            </tr>
+                        </thead>
+                        <tbody id="t_body">
+
+                            <tr *ngFor="let item of listado_usurios; index as i; first as isFirst">
+
+                                <th scope="row">{{i+1}}</th>
+                                <td style="text-align: left;">{{item[43]}}. {{item[44]}} </td>
+                                <td>{{item[42]}}</td>
+                                <td>{{item[23]}}</td>
+                                <td>{{item[65]}}</td>
+                                <td>{{item[66]}}</td>
+                                <td>{{item[70]}}</td>
+
+                                <td><button class="btn btn-info" (click)="info(i)">VER</button></td>
+
+                            </tr>
+
+                            <!-- <td *ngIf="item[29]==falta else ok">{{item[29]}}</td>
+                                <ng-template #ok><td>ok.</td></ng-template>
+
+                                <td *ngIf="item[30]==falta else ok">{{item[30]}}</td>
+                                <ng-template #ok><td>ok.</td></ng-template>
+
+                                <td *ngIf="item[31]==falta else ok">{{item[31]}}</td>
+                                <ng-template #ok><td>ok.</td></ng-template>
+
+                                <td *ngIf="item[32]==falta else ok">{{item[32]}}</td>
+                                <ng-template #ok><td>ok.</td></ng-template> -->
+                            <!-- <td><button class="btn btn-info" (click)="info(i)">VER</button></td> -->
+
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,109 @@
+<div class="contenedor_principal">
+
+  <!-- Bloque lateral: unidades seleccionadas -->
+  <div class="bloque_lateral">
+    <div class="unidades_selecionadas">
+      <div class="card" style="background-color: rgba(0,0,0,0.527); color: aliceblue;">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item"
+              style="background-color: rgba(0,0,0,0.356); color: snow;"
+              *ngFor="let item of movimiento_selecionado_planilla; index as i"
+              (click)="quitar_selecion(item)">
+            {{item}}
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bloque superior: búsqueda y planilla -->
+  <div class="bloque_superior">
+    <div class="formularios_superiores">
+      
+      <!-- Buscar movimientos -->
+      <div class="menu_buscar form-card">
+        <form class="formulario" #buscar_movimientos="ngForm" autocomplete="off">
+          <div class="titulo_form">
+            <label class="color_label">BUSCAR</label><br>
+            <label class="color_label">MOVIMIENTOS</label>
+          </div>
+          <div>
+            <label class="color_label_2">FECHA INICIO</label>
+            <input type="date" name="fecha_inicio" id="fecha_inicio" class="form-control" ngModel>
+          </div>
+          <div>
+            <label class="color_label_2">FECHA TERMINO</label>
+            <input type="date" name="fecha_termino" id="fecha_termino" class="form-control" ngModel>
+          </div>
+          <div>
+            <label class="color_label_2">BUSCAR</label><br>
+            <button class="btn btn-warning" (click)="listado_asignados(buscar_movimientos)">
+              <img src="../../../../../assets/iconos-menu/truck.svg" alt="">
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Crear planilla -->
+      <div class="generar_planilla form-card" id="generar_planilla">
+        <form class="formulario" #generar_planilla="ngForm" autocomplete="off">
+          <div class="titulo_form">
+            <label class="color_label">CREAR</label><br>
+            <label class="color_label">PLANILLA</label>
+          </div>
+          <div>
+            <label class="color_label_2">NUMERO</label>
+            <input type="text" name="numero_planilla" id="numero_planilla" class="form-control" ngModel>
+          </div>
+          <div>
+            <label class="color_label_2">FECHA PLANILLA</label>
+            <input type="date" name="fecha_planilla" id="fecha_planilla" class="form-control" ngModel>
+          </div>
+          <div>
+            <label class="color_label_2">GENERAR</label><br>
+            <button class="btn btn-warning" (click)="planilla(generar_planilla)">
+              <img src="../../../../../assets/iconos-menu/file_pdf.svg" alt="">
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bloque central: tabla de movimientos -->
+  <div class="bloque_central">
+    <div class="tabla">
+      <table class="table table-dark">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>ESTADO</th>
+            <th>RUTA COMPLETA</th>
+            <th>HR JEMOP</th>
+            <th>FECHA</th>
+            <th>UNIDAD SOLI.</th>
+            <th>MOTIVO</th>
+            <th>ENCARGADOS - MATERIAL</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of listado_movimientos_creados; index as i"
+              (click)="celecionar_celda(item)">
+            <th style="width: 50px;">
+              {{i+1}}
+              <img src="../../../../../assets/iconos-menu/check.svg" width="30px" class="oculto" id="{{item[1]}}">
+            </th>
+            <td class="celda">{{item[14]}}</td>
+            <td class="celda">{{item[6]}}</td>
+            <td class="celda">{{item[1]}}</td>
+            <td class="celda" style="width: 100px;">{{item[2]}} <br> {{item[3]}}</td>
+            <td class="celda" style="width: 100px;">{{item[4]}}</td>
+            <td class="celda">{{item[7]}}</td>
+            <td class="celda" style="width: 250px;">{{item[12]}} <br> {{item[13]}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>

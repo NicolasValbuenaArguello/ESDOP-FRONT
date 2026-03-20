@@ -1,0 +1,31 @@
+
+
+<div class="listado_unidades">
+      <table class="table table-dark" style="width: 95%;">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Fuerza</th>
+            <th scope="col" style="width: 100px;">Fecha</th>
+            <th scope="col">DIV</th>
+            <th scope="col">BR</th>
+            <th scope="col">Unidad</th>
+            <th scope="col">Resumen</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr  *ngFor="let item of listado_q5_afectaciones; index as i; first as isFirst" >
+            <th scope="row">{{i+1}}</th>
+            <td>{{item[17]}}</td>
+            <td style="width: 100px;">{{item[1]}}</td>
+            <td>{{item[18]}}</td>
+            <td>{{item[22]}}</td>
+            <td>{{item[23]}}</td>
+            <td>{{item[14]}}</td>
+
+           
+          </tr>
+ 
+        </tbody>
+      </table>
+</div>

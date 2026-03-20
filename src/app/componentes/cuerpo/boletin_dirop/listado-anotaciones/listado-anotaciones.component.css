@@ -1,0 +1,229 @@
+.anotacones_proyecion{
+    width: 100vw;
+    height: 100vh;
+    background-color: black;
+    position: fixed;
+    
+}
+.posicion_boton{
+    position: absolute;
+    top: 0%;
+    left: -10%;
+    z-index: 100;
+    width: 150px;
+    padding: 5px;
+}
+.posicion_boton_boletin{
+    position: absolute;
+    bottom: 0%;
+    left: -10%;
+    z-index: 100;
+    width: 50px;
+}
+.anotaciones{
+    position: fixed;
+    display: flex;
+    width: 90vw;
+    height: 100vh;
+    border: 1px solid gray;
+    border-radius: 7px;
+    right: 0%;
+
+}
+.anotaciones_2{
+    position: fixed;
+    display: flex;
+    width: 88.5%;
+    height: 86vh;
+    border: 1px solid gray;
+    border-radius: 7px;
+    left: 10.5%;
+    top: 13%;
+}
+.listado{
+    width: 65%;
+    height: 100%;
+    border: 1px solid gray;
+    border-radius: 7px;
+     overflow: scroll;
+}
+.listado_mapa{
+    width: 35%;
+    height: 100%;
+    border: 1px solid gray;
+    border-radius: 7px;
+}
+
+
+.titulo_evento{
+    display: flex;
+    font-family: "Kanit", serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 30px;
+}
+.titulo_evento_2{
+    display: flex;
+    font-family: "Kanit", serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 20px;
+}
+.titulo_evento_3{
+    display: flex;
+    font-family: "Kanit", serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 14px;
+    color: red;
+}
+.verde{
+    color: rgb(28, 163, 132);
+}
+.rojo{
+    color: rgb(250, 0, 0);
+}
+.verde_bg{
+    background-color: rgb(33, 95, 81);
+}
+.rojo_bg{
+    background-color: rgb(125, 0, 0);
+}
+.amarillo_bg{
+    background-color: rgb(170, 111, 0);
+}
+.crema{
+    color: rgb(34, 155, 7);
+}
+.numero{
+
+    font-family: "Kanit", serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 20px;
+
+    width: 40px;
+    height: 40px;
+    
+    color: snow;
+ 
+    border-radius: 50%;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+
+    border: 2px solid snow;
+    -webkit-box-shadow: 0px 3px 4px 4px rgba(77, 74, 74, 0.548);
+    -moz-box-shadow: 0px 3px 4px 4px rgba(77, 74, 74, 0.548);
+    box-shadow: 0px 3px 4px 4px rgba(77, 74, 74, 0.548);
+
+}
+.pos{
+    position: absolute;
+    top: 0%;
+    left: -5%;
+
+}
+.pos_1{
+    position: absolute;
+    top: 15%;
+    left: -5%;
+
+}
+.pos_2{
+    position: absolute;
+    top: 30%;
+    left: -5%;
+
+}
+.parrafo{
+    display: flex;
+    align-items: center;
+    text-align: justify;
+    justify-content: space-between;
+}
+.verde{
+    color: rgb(28, 163, 132);
+}
+.rojo{
+    color: rgb(250, 0, 0);
+}
+.verde_bg{
+    background-color: rgb(33, 95, 81);
+}
+.rojo_bg{
+    background-color: rgb(125, 0, 0);
+}
+.crema{
+    color: rgb(34, 155, 7);
+}
+textarea#exampleTextarea{
+    background-color: transparent;
+    color: snow;
+    border: none;
+    font-family: "Kanit", serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 18px;
+    field-sizing: content;
+}
+.proyecto_nuevo{
+    width: 90%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.63);
+    padding: 10px;
+    z-index: 100;
+    position: absolute;
+    left: 7%;
+    top: 1%;
+    border-radius: 7px;
+    display: flex;
+}
+.proyecto_nuevo_2{
+    width: 88%;
+    height: 90vh;
+    background-color: rgba(0, 0, 0, 0.747);
+    padding: 10px;
+    z-index: 100;
+    position: absolute;
+    top: 9%;
+    left: 11.5%;
+    border-radius: 10px;
+    grid-gap: 10px;
+    display: flex;
+}
+.posicion_btn_cerrar{
+    position: absolute;
+    top: 0%;
+    left: 1%;
+    z-index: 100;
+}
+.posicion_btn_cerrar_2{
+    position: absolute;
+    top: 3%;
+    left: 1%;
+    z-index: 100;
+}
+.oculto{
+    display: none;
+}
+
+.oculto_documentos{
+    display: none;
+}
+.oculto_documentos_modificar{
+    display: none;
+}
+.oculto_documentos_modificar_cargar{
+    display: none;
+}
+.oculto_documentos_descargar{
+    display: none;
+}
+.oculto_documentos_descargar_unidades{
+    display: none;
+}
+.oculto_2{
+    display: none;
+}

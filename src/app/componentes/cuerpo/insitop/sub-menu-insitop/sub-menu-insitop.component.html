@@ -1,0 +1,64 @@
+<app-menu></app-menu>
+
+<div class="cuerpo_insitop">
+    <div class="menu-lateral">
+        <h3 class="titulo-menu">Menú</h3>
+        <button class="btn-menu" (click)="mostrar_menu(1)" *ngIf="cargue_insitop_per">
+            <i class="bi bi-upload"></i> Cargar INSITOP
+        </button>
+
+        <button class="btn-menu" (click)="mostrar_menu(2)">
+            <i class="bi bi-bar-chart"></i> Reportes INSITOP
+        </button>
+
+        <button class="btn-menu" (click)="mostrar_menu(4)">
+            <i class="bi bi-cloud-arrow-up"></i> Subir Unidades
+        </button>
+
+        <button class="btn-menu" (click)="mostrar_menu(3)">
+            <i class="bi bi-file-earmark-bar-graph me-1"></i> Calcular Operaciones
+        </button>
+
+        <button class="btn-menu" (click)="mostrar_menu(5)">
+            <i class="bi bi-file-earmark-bar-graph me-1"></i> Unidades sin Cargar
+        </button>
+
+        <button class="btn-menu" (click)="mostrar_menu(6)">
+            <i class="bi bi-file-earmark-bar-graph me-1"></i> Unidades sin Apoyo Mutuo Inmediato
+        </button>
+        <button class="btn-menu" (click)="mostrar_menu(7)">
+            <i class="bi bi-file-earmark-bar-graph me-1"></i> Unidades Cercanas
+        </button>
+                <button class="btn-menu" (click)="mostrar_menu(8)">
+            <i class="bi bi-file-earmark-bar-graph me-1"></i> Unidades Resumen
+        </button>
+    </div>
+    
+
+    <div class="cuerpo">
+        <div class="oculto_documentos" id="oculto_documentos">
+            <app-cargue-insitop></app-cargue-insitop>
+        </div>
+        <div class="oculto_documentos_modificar" id="oculto_documentos_modificar">
+            <app-reporte-insitop></app-reporte-insitop>
+        </div>
+        <div class="oculto_documentos_planilla_firmas" id="oculto_documentos_planilla_firmas">
+            <app-subir-unidad></app-subir-unidad>
+        </div>
+        <div class="oculto_documentos_planilla_calcular" id="oculto_documentos_planilla_calcular">
+            <app-calcular-operaciones></app-calcular-operaciones>
+        </div>
+        <div class="oculto_documentos_unidades_sin_cargar" id="oculto_documentos_unidades_sin_cargar">
+            <app-unidades-sin-cargar></app-unidades-sin-cargar>
+        </div>
+        <div class="oculto_documentos_unidades_aisladas" id="oculto_documentos_unidades_aisladas">
+            <app-unidades-aisladas></app-unidades-aisladas>
+        </div>
+        <div class="oculto_documentos_unidades_cercanas" id="oculto_documentos_unidades_cercanas">
+            <app-unidades-cercanas></app-unidades-cercanas>
+        </div>
+        <div class="oculto_documentos_unidades_resumen" id="oculto_documentos_unidades_resumen">
+            <app-unidades-resumen></app-unidades-resumen>
+        </div>
+    </div>
+</div>

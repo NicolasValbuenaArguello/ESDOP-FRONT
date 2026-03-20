@@ -1,0 +1,49 @@
+<div class="listado_unidades">
+    <div class="row col-md-12">
+        <div class="col-md-4">
+            <div class="card" style="width: 18rem;">
+                <img src="../../../../../assets/img/logo.jpg" class="card-img-top" alt="..."
+                    style="width: 100px; height: auto; margin: auto;">
+                <div class="card-body">
+                    <h5 class="card-title">Fechas</h5>
+                    <div class="row col-md-12" style="margin: auto;">
+                        <label for="">Fecha Inicial</label>
+                        <input type="date" name="fecha_inicial" id="fecha_evento" class="form-control" ngModel>
+                    </div>
+                    <hr>
+                    <div class="row col-md-12" style="margin: auto;">
+                        <label for="">Fecha Final</label>
+                        <input type="date" name="fecha_final" id="fecha_evento" class="form-control" ngModel>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Filtro</h5>
+                    <div class="form-group col-md-12" style="margin: auto;">
+                        <label for="">Amenaza</label>
+                        <select name="enemigo" id="enemigo" class="form-control" ngModel>
+                            <option value="">---</option>
+                            <option [value]="item" *ngFor="let item of amenaza_select">{{item}}</option>
+                            <option value="POR ESTABLECER">POR ESTABLECER</option>
+                        </select>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Descargar</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                        card's content.</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

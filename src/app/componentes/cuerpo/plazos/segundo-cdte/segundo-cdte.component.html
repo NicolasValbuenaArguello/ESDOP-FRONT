@@ -1,0 +1,120 @@
+<app-menu></app-menu>
+<div class="cuerpo" ng-init="inicioAlgo()">
+    <div class="col-md-12">
+        <form class="form-group row tamanio" #personal="ngForm" autocomplete="off">
+            <div class="row contenedor">
+                <div class="col-md-12 ">
+                    <h2 class="titulo">Creación de Ordenes</h2>
+                    <div class="radios">
+                        <div class=" row col-md-12">
+                            <div class=" row col-md-3 imagen_query">
+                                <div class="imagen">
+                                    <img [src]="img" alt="" class="foto" id="foto">
+                                </div>
+                            </div>
+
+                            <div class=" col-md-8">
+                                <br>
+                                <div class=" row col-md-12">
+                                    <div class="form-group col-md-6" style="margin: auto;">
+                                        <label for="">Quien Emite la Orden: </label>
+                                        <select name="nivel_orden" id="nivel_orden" class="form-control" ngModel>
+                                            <option value=""></option>
+                                            <option value=" CDTE EJC">CDTE EJC</option>
+                                            <option value="SEGUNDO CDTE">SEGUNDO CDTE</option>
+                                            <option value="JEMOP">JEMOP</option>
+                                            <option value="DIROP">DIROP</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-6" style="margin: auto;">
+                                        <label for="">Unidad que Genera la Orden</label>
+                                        <input type="text" name="unidad_que_genera" id="unidad_que_genera" class="form-control" ngModel>
+                                    </div>
+                                </div>
+                                    <div class=" row col-md-12">
+                                        <div class="form-group col-md-6" style="margin: auto;">
+                                            <label for="">Clasificación </label>
+                                            <select name="clasificacion" id="clasificacion" class="form-control" ngModel>
+                                                <option value=""></option>
+                                                <option value="Publico">Publico</option>
+                                                <option value="Publico Reservada">Publico Reservada</option>
+                                                <option value="Publico Clasificada">Publico Clasificada</option>
+                                                <option value="Secreto">Secreto</option>
+                                            </select>
+                                        </div>
+    
+                                    <div class="form-group col-md-6" style="margin: auto;">
+                                        <label for="">ORDEN EJC - 2DO EJC</label>
+                                        <input type="text" name="orden_excel" id="orden_excel" class="form-control" ngModel>
+                                    </div>
+                                </div>
+                                    <div class=" row col-md-12">
+                                        <div class="form-group col-md-6" style="margin: auto;">
+                                            <label for="">ORFEO</label>
+                                            <input type="text" name="orfeo" id="orfeo" class="form-control" ngModel>
+                                        </div>
+                                    <div class="form-group col-md-6" style="margin: auto;">
+                                        <label for="">RAD. DOCUMENTO</label>
+                                        <input type="text" name="doc_radicado" id="doc_radicado" class="form-control" ngModel>
+                                    </div>
+
+                                </div>
+                                <div class=" row col-md-12">
+                                    <div class="form-group col-md-6" style="margin: auto;">
+                                        <label for="">FECHA CUMPLIMIENTO</label>
+                                        <input type="date" name="fecha_orden" id="fecha_orden" class="form-control" ngModel>
+                                    </div>
+                                    <div class="form-group col-md-6" style="margin: auto;">
+                                        <label for="">Asunto</label>
+                                        <input type="text" name="asunto" id="asunto" class="form-control" ngModel>
+                                    </div>
+ 
+                                </div>
+                                <div class=" row col-md-12 ordenes">
+                                    <div class="form-group col-md-8" style="margin: auto;">
+                                        <label for="">ORDENES EMITIDAS</label>
+                                        <div class="form-group col-md-11" >
+                                            <textarea rows="6" cols="80" name="orden" id="orden" ngModel></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-4" style="margin: auto;">
+                                        <label for="">OBSERVACIONES</label>
+                                        <div class="form-group col-md-11" >
+                                            <textarea rows="6" cols="40" name="obervaciones" id="obervaciones" ngModel></textarea>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <hr>
+                        <br><br>
+                        <div class=" row col-md-12">
+
+                            <div class="alert alert-success col-md-11" role="alert" *ngIf="inf_g"
+                                style="margin: auto !important;">
+                                {{inf_c_g}}!
+                            </div>
+                            <br *ngIf="inf_g">
+                            <div class="alert alert-danger col-md-11" role="alert" *ngIf="inf_a"
+                                style="margin: auto !important;">
+                                {{inf_c_g}}!
+                            </div>
+
+                            <br *ngIf="inf_a">
+                            <div class="posicion_btn">
+                                <button class="btn btn-success" (click)="guardar(personal)"
+                                    *ngIf="inf_btn">GUARDAR</button>
+                                <button class="btn btn-success" (click)="clear()" *ngIf="inf_btnuew">Nuevo</button>
+                            </div>
+                        </div>
+                        <hr>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<app-spiner></app-spiner>

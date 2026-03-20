@@ -1,0 +1,137 @@
+.contenedor {
+  padding: 20px;
+  background: #0a1e2d;
+  color: white;
+  border-radius: 10px;
+}
+
+/* barra */
+.barra {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.barra input,
+.barra select {
+  padding: 8px;
+  border-radius: 6px;
+  border: none;
+}
+
+/* tabla */
+.tabla-container {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 1000px;
+}
+
+th {
+  background: #1f3b57;
+  padding: 10px;
+}
+
+td {
+  padding: 8px;
+  border-bottom: 1px solid #2c4d6d;
+}
+
+tr:hover {
+  background: #16324a;
+}
+
+/* botón */
+button {
+  background: #00c853;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  color: white;
+}
+/* botón excel */
+.excel {
+  background: #2196f3;
+}
+
+/* MODAL */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background: #0a1e2d;
+  padding: 20px;
+  border-radius: 10px;
+  width: 400px;
+  color: white;
+}
+
+.modal-content input {
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 6px;
+  border-radius: 6px;
+  border: none;
+}
+
+.acciones {
+  display: flex;
+  justify-content: space-between;
+}
+
+.cancelar {
+  background: #ff4444;
+}
+.cargar {
+  background: #ff9800;
+  color: white;
+}
+/* 🔥 overlay */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(10, 30, 45, 0.85);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+/* 🔥 spinner */
+.spinner {
+  width: 60px;
+  height: 60px;
+  border: 6px solid rgba(255,255,255,0.2);
+  border-top: 6px solid #00c853;
+  border-radius: 50%;
+  animation: girar 1s linear infinite;
+  margin-bottom: 10px;
+}
+
+@keyframes girar {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.overlay p {
+  color: white;
+  font-size: 16px;
+}

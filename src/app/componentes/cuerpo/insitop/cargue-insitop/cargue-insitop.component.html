@@ -1,0 +1,49 @@
+<div class=" row col-md-12">
+    <h1 class="titulo" style="display: flex; align-items: center; justify-content: center;">Cargue del INSITOP
+    </h1>
+    <div class="row col-md-6" style="margin: auto;">
+        <div class="centrar">
+            <form action="" name="dataForm" #miformulario="ngForm" enctype="multipart/form-data">
+                <div class="card" style="width: 15rem;">
+                    <img src="../../../../../assets/img/colombia.png" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">INSITOP</h5>
+                        <p class="card-text">.....</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item boton" (click)="hechos()">Archivo</li>
+                        <input required id="archi_insitop" ngModel name="archi_insitop" hidden type="file"
+                            (change)="leer_hechos($event)">
+                        <li class="list-group-item" (click)="hechos()" *ngIf="inf_u">
+                            <div class="alert alert-danger" role="alert">
+                                {{inf_c}}!
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="card-body" *ngIf="inf_u">
+                        <button class="btn btn-primary" type="submit" (click)="guardar(miformulario)">Guardar</button>
+                        <div *ngIf="inf_i">
+                            <div class="alert alert-danger" role="alert">
+                                {{inf_i_g}}!
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </form>
+        </div>
+    </div>
+    <div class="row col-md-6" style="margin: auto;">
+        <div class="centrar">
+            <div class="card listados" style="width: 25rem;">
+                <ul class="list-group list-group-flush"
+                    *ngFor="let item of listado_insitop_app; index as i; first as isFirst">
+                    <li class="list-group-item">{{item}}</li>
+
+                </ul>
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,168 @@
+/* ====== MENÚ LATERAL ====== */
+.menu {
+  width: 20%;
+  height: 100vh;
+  background-color: rgb(43, 43, 43);
+  color: snow;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 1rem;
+  transition: transform 0.3s ease;
+  z-index: 10001;
+  position: fixed;
+  left: 0;
+  top: 0;
+}
+
+.menu.ocultar {
+  transform: translateX(-100%);
+}
+
+/* ====== BOTONES DEL MENÚ ====== */
+.menu_cerrar {
+  position: absolute;
+  width: 100px;
+  height: 35px;
+  top: 10px;
+  right: 10px;
+  border-radius: 7px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: snow;
+  z-index: 20000;
+}
+
+.boton {
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+
+.bg_menu_x,
+.bg_menu_2 {
+  background-color: darkred;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 65%;
+  border-radius: 7px;
+}
+
+.bg_menu_x {
+  background-image: url("../../../../../assets/iconos-menu/x.svg");
+}
+
+.bg_menu_2 {
+  background-image: url("../../../../../assets/iconos-menu/menu_2.svg");
+}
+
+/* ====== POSICIÓN DEL BOTÓN ====== */
+.derecha {
+  position: absolute;
+  top: 0.5%;
+  left: 16.5%;
+}
+.izquierda {
+  position: absolute;
+  top: 0.5%;
+  left: 0.1%;
+}
+
+/* ====== RESULTADOS ====== */
+.resultado_das_ejc,
+.resultado_das_ejc_2 {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  z-index: 10000;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+.resultado_das_ejc {
+  left: 20%;
+  width: 80%;
+}
+.resultado_das_ejc_2 {
+  left: 0%;
+}
+
+/* ====== CUADRO PRINCIPAL DE RESULTADOS ====== */
+.res_das {
+  width: 98%;
+  height: 100%;
+  border: solid 2px gray;
+  border-radius: 7px;
+  overflow-y: auto;
+  background-color: #1c1c1c;
+  padding: 1rem;
+}
+
+/* ====== CONTENEDOR DE CARDS ====== */
+.containeres {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: space-around;
+  align-content: flex-start;
+  overflow-y: auto;
+  padding: 0.5rem;
+}
+
+/* ====== TARJETAS DE CONFIGURACIÓN ====== */
+.configuaracion,
+.configuaracion_2 {
+  height: 17%;
+  border: 1px solid darkred;
+  border-radius: 7px;
+  padding: 0.5rem;
+  transition: all 0.3s ease;
+  background-color: #2a2a2a;
+  color: snow;
+}
+
+.configuaracion {
+  width: 25%;
+}
+.configuaracion_2 {
+  width: 20%;
+}
+
+.configuaracion:hover,
+.configuaracion_2:hover {
+  cursor: pointer;
+  transform: scale(1.03);
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(255, 0, 0, 0.5);
+}
+
+/* ====== CUERPO INTERNO ====== */
+.cuerpo_informacions,
+.cuerpo_informacions_2 {
+  width: 100%;
+}
+
+.cuerpo_informacions_2 {
+  height: 300px;
+  overflow-y: auto;
+}
+
+/* ====== CUADRO DE VISUALIZACIÓN ====== */
+.ejc {
+  width: 50%;
+  height: 50%;
+  border: 1px solid gray;
+  border-radius: 7px;
+  background-color: #1e1e1e;
+}
+
+/* ====== OCULTAR ELEMENTOS ====== */
+.ocultar,
+.oculto {
+  display: none !important;
+}
