@@ -13,7 +13,7 @@ import { ServiceConecionService } from 'src/app/service-conecion.service';
   styleUrls: ['./listado-eventos-cenm-diate.component.css']
 })
 export class ListadoEventosCenmDiateComponent implements OnInit {
- constructor(private selector: SelectoresService, private menu_service :  SelectoresService,  private cookie: CookieService, private api_serve: ServiceConecionService){}
+  constructor(private selector: SelectoresService, private menu_service: SelectoresService, private cookie: CookieService, private api_serve: ServiceConecionService) { }
   eventos: any[] = [];
   eventosFiltrados: any[] = [];
 
@@ -28,9 +28,9 @@ export class ListadoEventosCenmDiateComponent implements OnInit {
   fechaInicio: string = '';
   fechaFin: string = '';
   cargando: boolean = false;
-  
-departamentos: string[] = [];
-municipios: string[] = [];
+
+  departamentos: string[] = [];
+  municipios: string[] = [];
   ngOnInit(): void {
     this.cargarDatos();
   }
@@ -73,7 +73,8 @@ municipios: string[] = [];
 
   // 🔥 ABRIR MODAL
   editar(evento: any) {
-    this.eventoSeleccionado = { ...evento }; // copia
+    this.eventoSeleccionado = evento;
+    this.organizarEvento(evento); // 🔥 IMPORTANTE
     this.mostrarModal = true;
   }
 
@@ -108,49 +109,123 @@ municipios: string[] = [];
 
     saveAs(blob, 'eventos_filtrados.xlsx');
   }
-cargarDesdeBackend() {
+secciones: any[] = [];
 
-  const formData = new FormData();
-  formData.append('fecha_inicio', this.fechaInicio || '');
-  formData.append('fecha_fin', this.fechaFin || '');
+organizarEvento(e: any) {
 
-  this.cargando = true;
+  this.secciones = [
+    
 
-  this.api_serve.buscar_datos_cenam_diate(formData).subscribe({
-    next: (resp: any) => {
-
-      if (resp && resp.status === "ok") {
-
-        // 🔥 MAPEO AQUÍ
-        this.eventos = (resp.data || []).map((e: any, index: number) => ({
-          evento: index + 1,
-          boletin: e.res_boletin,
-          departamento: e.hop_depto,
-          municipio: e.hop_mpio,
-          tipo_explosivo: e.res_accion,
-          cantidad: e.cantidad,
-          fecha: e.hop_fecha_hecho,
-          hora: e.hop_hora_hecho,
-          enemigo: e.hop_enemigo,
-          unidad: e.hop_unidad
-        }));
-
-        this.eventosFiltrados = [...this.eventos];
-        this.departamentos = [...new Set(this.eventos.map(e => e.departamento))];
-this.municipios = [...new Set(this.eventos.map(e => e.municipio))];
-
-      } else {
-        this.eventos = [];
-        this.eventosFiltrados = [];
-      }
-
-      this.cargando = false;
+    {
+      titulo: '🧾 GENERAL',
+      data: [
+        { label: 'Boletín', value: e.res_boletin },
+        { label: 'Fecha', value: e.hop_fecha_hecho },
+        { label: 'Hora', value: e.hop_hora_hecho },
+        { label: 'HR', value: e.hr }
+      ]
     },
 
-    error: (err: HttpErrorResponse) => {
-      console.error("Error backend:", err);
-      this.cargando = false;
+    {
+      titulo: '⚔️ OPERACIÓN',
+      data: [
+        { label: 'Comandante', value: e.hop_comandante },
+        { label: 'Operación', value: e.hop_operacion },
+        { label: 'Orden', value: e.hop_ordop },
+        { label: 'Tipo Operación', value: e.tipo_operacion }
+      ]
+    },
+
+    {
+      titulo: '⚖️ JUDICIAL',
+      data: [
+        { label: 'Fecha Judicial', value: e.res_fecha_judic },
+        { label: 'Judicial', value: e.res_judic },
+        { label: 'SPOA', value: e.res_spoa }
+      ]
+    },
+
+    {
+      titulo: '👤 ACTORES',
+      data: [
+        { label: 'Enemigo', value: e.hop_enemigo },
+        { label: 'Estructura', value: e.hop_cuadrilla },
+        { label: 'Fenómeno', value: e.fenomeno_de_criminalidad }
+      ]
+    },
+
+    {
+      titulo: '💥 EVENTO',
+      data: [
+        { label: 'Acción', value: e.res_accion },
+        { label: 'Cantidad', value: e.cantidad },
+        { label: 'Clase', value: e.res_clase },
+        { label: 'Subtipo', value: e.res_subtipo },
+        { label: 'Tipo', value: e.res_tipo }
+      ]
+    },
+
+    {
+      titulo: '📍 UBICACIÓN',
+      data: [
+        { label: 'Departamento', value: e.hop_depto },
+        { label: 'Municipio', value: e.hop_mpio },
+        { label: 'Lugar', value: e.hop_lugar },
+        { label: 'Sitio', value: e.hop_sitio },
+        { label: 'Latitud', value: e.hop_lat },
+        { label: 'Longitud', value: e.hop_lon }
+      ]
+    },
+
+    {
+      titulo: '🛡️ APOYOS',
+      data: [
+        { label: 'Apoyo Aéreo', value: e.hop_apoyo_aereo },
+        { label: 'Apoyo Art', value: e.hop_apoyo_art },
+        { label: 'Apoyo BAFUR', value: e.hop_apoyo_bafur },
+        { label: 'Apoyo BRCMI', value: e.hop_apoyo_brcmi },
+        { label: 'Apoyo BRCOM', value: e.hop_apoyo_brcom },
+        { label: 'Apoyo DIVFE', value: e.hop_apoyo_divfe }
+      ]
     }
-  });
+
+  ];
 }
+  cargarDesdeBackend() {
+
+    const formData = new FormData();
+    formData.append('fecha_inicio', this.fechaInicio || '');
+    formData.append('fecha_fin', this.fechaFin || '');
+
+    this.cargando = true;
+
+    this.api_serve.buscar_datos_cenam_diate(formData).subscribe({
+      next: (resp: any) => {
+
+        if (resp && resp.status === "ok") {
+
+          // 🔥 MAPEO AQUÍ
+          this.eventos = (resp.data || []).map((e: any, index: number) => ({
+            evento: index + 1,
+            ...e   // 🔥 TRAE TODO AUTOMÁTICO
+          }));
+
+          this.eventosFiltrados = [...this.eventos];
+this.departamentos = [...new Set(this.eventos.map(e => e.hop_depto))];
+this.municipios = [...new Set(this.eventos.map(e => e.hop_mpio))];
+
+        } else {
+          this.eventos = [];
+          this.eventosFiltrados = [];
+        }
+
+        this.cargando = false;
+      },
+
+      error: (err: HttpErrorResponse) => {
+        console.error("Error backend:", err);
+        this.cargando = false;
+      }
+    });
+  }
 }

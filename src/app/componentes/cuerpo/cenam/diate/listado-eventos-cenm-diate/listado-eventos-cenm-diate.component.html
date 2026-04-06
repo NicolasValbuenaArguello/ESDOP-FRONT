@@ -76,30 +76,51 @@
     </div>
 
     <!-- 🔥 MODAL -->
+
     <div class="modal" *ngIf="mostrarModal">
         <div class="modal-content">
 
-            <h3>Editar Evento</h3>
+            <div class="modal-header">
+  <h2>📊 Detalle del Evento</h2>
+  <span class="cerrar-x" (click)="cerrarModal()">✖</span>
+</div>
 
-            <label>Departamento</label>
-            <input [(ngModel)]="eventoSeleccionado.departamento" />
+            <!-- 🔥 SECCIONES -->
+            <div *ngFor="let seccion of secciones">
 
-            <label>Municipio</label>
-            <input [(ngModel)]="eventoSeleccionado.municipio" />
+                <h3 class="titulo-seccion">{{seccion.titulo}}</h3>
 
-            <label>Explosivo</label>
-            <input [(ngModel)]="eventoSeleccionado.tipo_explosivo" />
+                <div class="detalle-grid">
 
-            <label>Cantidad</label>
-            <input type="number" [(ngModel)]="eventoSeleccionado.cantidad" />
+                    <div class="detalle-item" *ngFor="let item of seccion.data">
 
-            <div class="acciones">
-                <button (click)="guardarCambios()">💾 Guardar</button>
-                <button class="cancelar" (click)="cerrarModal()">❌ Cancelar</button>
+                        <label>{{item.label}}</label>
+
+                        <textarea *ngIf="(item.value + '').length > 80" readonly>
+{{item.value}}
+      </textarea>
+
+                        <span *ngIf="(item.value + '').length <= 80">
+                            {{item.value || '-'}}
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- 🔥 RESUMEN GRANDE -->
+            <div class="detalle-item full">
+                <label>🧠 Resumen</label>
+                <textarea readonly>
+{{eventoSeleccionado.hop_resumen_hechos}}
+      </textarea>
             </div>
 
         </div>
     </div>
+
 
 </div>
 

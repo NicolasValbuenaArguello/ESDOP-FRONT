@@ -363,6 +363,14 @@
                                 </option>
                             </select>
                         </div>
+                        <div class="form-group col-md-11" style="margin: auto;">
+                            <label for="">Filtro Especial</label>
+
+                            <select name="filtro_especial" id="" class="form-control" ngModel>
+                                <option [value]="item" *ngFor="let item of filtro_especial">{{item}}
+                                </option>
+                            </select>
+                        </div>
                         <br><br>
                     </div>
                 </div>
@@ -610,7 +618,8 @@
                                 </label>
                             </div>
                             <div class="form-check" *ngIf="com_div_mapa_per">
-                                <input class="form-check-input" type="radio" name="documento" id="resultados_comparativos_ejc_power_point"
+                                <input class="form-check-input" type="radio" name="documento"
+                                    id="resultados_comparativos_ejc_power_point"
                                     value="resultados_comparativos_ejc_power_point" [(ngModel)]="document_boletin">
                                 <label class="form-check-label" for="resultados_comparativos_ejc_power_point">
                                     Comp. power point

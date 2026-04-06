@@ -92,7 +92,7 @@ export class EstadisticaPdfComponent implements OnInit {
   completa_und:string='solodiv'
   ventanaApoyosVisible = false;
 
-
+filtro_especial:string[]=["---","SOBRE LA VÍA", "AFECTACIONES EN VEHICULOS"]
   
 
   tipoOperacionSeleccionada: string = '';
@@ -820,6 +820,7 @@ completa(): void {
     const documneto_requerido = form.value.documento
     const cdte = form.value.cdte
     const hechos = form.value.hechos
+    const filtro_especial = form.value.filtro_especial
 
     const com_metas_narcotrafico = form.value.com_metas_narcotrafico
 
@@ -884,6 +885,7 @@ completa(): void {
 
     this.formData.append("cdte", cdte);
     this.formData.append("hechos", hechos);
+    this.formData.append("filtro_especial", filtro_especial);
 
     var value_url = this.api_serve.buscar_url(documneto_requerido)
 
