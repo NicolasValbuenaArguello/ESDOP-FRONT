@@ -224,7 +224,7 @@ private urls:{}={
 
 
 
-//"comp_power_point_ayuda":":5167",// cambiar al terminio
+"res_linea_mapa_fronteras":":5167",// cambiar al terminio
 
 
 "resultados_resaltantes":":5152/b_c_resultados_resaltantes_token",

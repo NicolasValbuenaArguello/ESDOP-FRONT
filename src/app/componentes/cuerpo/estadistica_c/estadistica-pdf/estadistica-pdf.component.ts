@@ -88,12 +88,12 @@ export class EstadisticaPdfComponent implements OnInit {
   mensajeAfectacion: string = '';
   unidades_asc: string = 'desc';
   mensaje_asc: string = '<i class="bi bi-sort-numeric-up"></i> Las unidades se generarán de <strong>menor a mayor</strong> desempeño.';
-  mensaje_asc_completa:string='<i class="bi bi-sort-numeric-up"></i>Solo se muestran las divisiones.'
-  completa_und:string='solodiv'
+  mensaje_asc_completa: string = '<i class="bi bi-sort-numeric-up"></i>Solo se muestran las divisiones.'
+  completa_und: string = 'solodiv'
   ventanaApoyosVisible = false;
 
-filtro_especial:string[]=["---","SOBRE LA VÍA", "AFECTACIONES EN VEHICULOS"]
-  
+  filtro_especial: string[] = ["---", "SOBRE LA VÍA", "AFECTACIONES EN VEHICULOS", "EVENTOS EN FRONTERA"]
+
 
   tipoOperacionSeleccionada: string = '';
 
@@ -131,10 +131,34 @@ filtro_especial:string[]=["---","SOBRE LA VÍA", "AFECTACIONES EN VEHICULOS"]
 
   cerrarVentanaApoyos() {
     this.ventanaApoyosVisible = false;
-    console.log('Apoyo disponible seleccionado:', this.apoyoSeleccionado);
+    
 
   }
 
+  filtroSeleccionado: string = '';
+  mostrarModalFrontera = false;
+
+  fronteras = [
+    'TODO',
+    'VENEZUELA',
+    'BRASIL',
+    'PERU',
+    'ECUADOR',
+    'PANAMÁ'
+  ];
+
+  fronteraSeleccionada: string = '';
+
+  onFiltroChange() {
+    if (this.filtroSeleccionado === 'EVENTOS EN FRONTERA') {
+      this.mostrarModalFrontera = true;
+    }
+  }
+
+
+  cerrarModal() {
+    this.mostrarModalFrontera = false;
+  }
 
   getApoyosSeleccionados(): string[] {
     return Object.keys(this.apoyoSeleccionado).filter(key => this.apoyoSeleccionado[key]);
@@ -216,35 +240,35 @@ filtro_especial:string[]=["---","SOBRE LA VÍA", "AFECTACIONES EN VEHICULOS"]
       this.mensajeAfectacion = '';
     }
   }
-ascendete(): void {
-  const mensajes: Record<string, string> = {
-    asc: `
+  ascendete(): void {
+    const mensajes: Record<string, string> = {
+      asc: `
       <i class="bi bi-sort-numeric-down-alt"></i>
       Las unidades se generarán de <strong>mayor a menor</strong> desempeño.
     `,
-    desc: `
+      desc: `
       <i class="bi bi-sort-numeric-up"></i>
       Las unidades se generarán de <strong>menor a mayor</strong> desempeño.
     `
-  };
+    };
 
-  this.mensaje_asc = mensajes[this.unidades_asc] || '';
-}
-completa(): void {
+    this.mensaje_asc = mensajes[this.unidades_asc] || '';
+  }
+  completa(): void {
 
-  const mensajes: Record<string, string> = {
-    compl: `
+    const mensajes: Record<string, string> = {
+      compl: `
       <i class="bi bi-sort-numeric-down-alt"></i>
       Se generan todas las unidades del Ejército.
     `,
-    solodiv: `
+      solodiv: `
       <i class="bi bi-sort-numeric-up"></i>
       Solo se muestran las divisiones.
     `
-  };
+    };
 
-  this.mensaje_asc_completa = mensajes[this.completa_und] ?? '';
-}
+    this.mensaje_asc_completa = mensajes[this.completa_und] ?? '';
+  }
 
   division = this.selector.duplicados()
   departamentos_filtrados = this.selector.departamentos_unicos()
@@ -792,6 +816,43 @@ completa(): void {
     }
 
   }
+
+fronterasSeleccionadas: string[] = [];
+
+toggleFrontera(pais: string, event: any) {
+  const checked = event.target.checked;
+
+  // 🔥 SI ES "TODO"
+  if (pais === 'TODO') {
+    if (checked) {
+      // seleccionar todos menos "TODO"
+      this.fronterasSeleccionadas = this.fronteras.filter(p => p !== 'TODO');
+    } else {
+      // limpiar todo
+      this.fronterasSeleccionadas = [];
+    }
+    return;
+  }
+
+  // 🔹 comportamiento normal
+  if (checked) {
+    this.fronterasSeleccionadas.push(pais);
+  } else {
+    this.fronterasSeleccionadas = this.fronterasSeleccionadas.filter(p => p !== pais);
+  }
+
+  // 🔥 si selecciona manualmente todos → marcar TODO
+  const todosMenosTodo = this.fronteras.filter(p => p !== 'TODO');
+
+  const todosSeleccionados = todosMenosTodo.every(p =>
+    this.fronterasSeleccionadas.includes(p)
+  );
+
+  if (todosSeleccionados) {
+    // opcional: puedes agregar "TODO" visualmente si quieres
+  }
+}
+
   conecion_api(form: NgForm) {
 
     const fechal_primer_lapso_inicial = form.value.fecha_inicio_p
@@ -886,6 +947,7 @@ completa(): void {
     this.formData.append("cdte", cdte);
     this.formData.append("hechos", hechos);
     this.formData.append("filtro_especial", filtro_especial);
+    this.formData.append("fronterasSeleccionadas", String(this.fronterasSeleccionadas))
 
     var value_url = this.api_serve.buscar_url(documneto_requerido)
 

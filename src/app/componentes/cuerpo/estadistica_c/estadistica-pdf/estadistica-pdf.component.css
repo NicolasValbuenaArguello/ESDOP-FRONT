@@ -1383,3 +1383,82 @@ input.che_1[type="checkbox"]:checked::after {
     grid-template-columns: repeat(3, 1fr);
   }
 }
+
+.modal-box {
+  background: #1e293b;
+  padding: 20px;
+  border-radius: 15px;
+  width: 400px;
+  color: #fff;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+  animation: fadeIn 0.3s ease;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.close-btn {
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.radio-card {
+  display: block;
+  background: #334155;
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.radio-card:hover {
+  background: #475569;
+}
+
+.radio-card input {
+  margin-right: 10px;
+}
+
+.modal-footer {
+  text-align: right;
+  margin-top: 15px;
+}
+
+@keyframes fadeIn {
+  from {opacity: 0; transform: scale(0.9);}
+  to {opacity: 1; transform: scale(1);}
+}
+.radio-card {
+  display: block;
+  background: #334155;
+  margin: 10px 0;
+  padding: 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+  border: 2px solid transparent;
+}
+
+.radio-card:hover {
+  background: #475569;
+}
+
+/* 🔥 cuando está seleccionado */
+.radio-card .selected {
+  font-weight: bold;
+  color: #38bdf8;
+}
+
+.radio-card input:checked + span {
+  color: #38bdf8;
+}
+
+/* 🔥 borde cuando está activo */
+.radio-card:has(input:checked) {
+  border: 2px solid #38bdf8;
+  background: #1e40af;
+}
